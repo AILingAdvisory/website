@@ -6,16 +6,13 @@
   <title>AI LING ADVISORY | Where Thought Becomes Insight</title>
   <meta name="description" content="AI Ling Advisory provides world-class AI Governance, Risk, and Compliance (GRC) strategic consulting for financial institutions across Hong Kong and the Greater Bay Area." />
 
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS (CDN) --><script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Google Fonts: Inter --><link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Animate On Scroll (AOS) Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Animate On Scroll (AOS) Library --><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
     /* Base theme */
@@ -37,7 +34,6 @@
       z-index: 1;
     }
 
-    /* 1. 全局固定背景图片 (文件名已修正) */
     body::before {
       content: '';
       position: fixed;
@@ -46,7 +42,7 @@
       background-size: cover;
       background-position: center center;
       background-attachment: fixed;
-      opacity: 0.23; /* 透明度已调整 */
+      opacity: 0.1;
       z-index: -1;
     }
 
@@ -134,6 +130,39 @@
       transform: translateY(-2px);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
       background: rgba(25, 42, 86, 0.55);
+    }
+
+    /* Flip Card Effect */
+    .flip-card {
+      background-color: transparent;
+      perspective: 1000px;
+      min-height: 420px; /* Increased height for more content */
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem; /* Added padding for content */
+      text-align: center;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
     }
   
     /* Subscribe tiles */
@@ -237,7 +266,121 @@
           <div class="accent-bar" aria-hidden="true"></div>
         </div>
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="200">
-          <!-- Insights Cards Here... -->
+          
+          <!-- Insight 1: The Automation Paradox -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a6 6 0 100-12 6 6 0 000 12zM8.25 10.875a.375.375 0 11-.75 0 .375.375 0 01.75 0zM15.75 10.875a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 15.375a.375.375 0 110-.75.375.375 0 010 .75z" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15c-1.074 0-2.09.28-2.956.779a.25.25 0 00-.134.221v.9a.25.25 0 00.25.25h9.22a.25.25 0 00.25-.25v-.9a.25.25 0 00-.134-.221A11.964 11.964 0 0015.75 15H8.25z" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">The Automation Paradox</h3>
+                <p class="text-base font-light text-gray-300">The greatest danger in AI is not the system failing, but your team’s success in using it. As reliance grows, crucial human oversight diminishes, creating blind spots where small errors can escalate into systemic, reputational disasters.</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">In the age of AI, the most resilient firms will be those that view human judgement not as a failsafe to be minimised, but as the central asset to be amplified. True control is achieved through the calibration of trust between expert and machine.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight 2: The Spectre of Principle -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+                 <h3 class="text-2xl font-bold text-white mb-4">The Spectre of Principle</h3>
+                 <p class="text-base font-light text-gray-300">While you wait for new AI regulations, Hong Kong’s regulators are already applying timeless principles of fiduciary duty and accountability to your models. Can you prove to them that your algorithm’s logic truly serves a client’s best interests?</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">The future of AI regulation is not a matter of mastering new rules, but of demonstrating a mastery of old principles. Lasting competitive advantage will belong to those who can translate enduring ethical duties into auditable, algorithmic logic.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Insight 3: The Intelligent Attack Surface -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.339-.24-2.62-.676-3.836M12 2.25a11.96 11.96 0 00-3.324 1.514" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">The Intelligent Attack Surface</h3>
+                <p class="text-base font-light text-gray-300">Your cybersecurity strategy is built to defend a perimeter that no longer exists. By empowering AI agents within your systems, you have created a new, intelligent attack surface that can be manipulated from the inside.</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">The focus of cybersecurity has irrevocably shifted from defending a static perimeter to ensuring the integrity of a dynamic, intelligent core. An organisation's security is now a direct function of the loyalty and robustness of its autonomous agents.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight 4: The Innovation Debt -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0l.879-.659M12 6l3.75 3.75M12 6L8.25 9.75" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">The Innovation Debt</h3>
+                <p class="text-base font-light text-gray-300">Is your AI budget building a competitive advantage, or is it accumulating "innovation debt"? Many investments, driven by fear, result in a portfolio of costly tools disconnected from real business value.</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">AI is not a technology to be procured, but an organisational capability to be forged. Enduring market leadership will not be defined by the sophistication of the AI a firm buys, but by the discipline with which it is woven into the very fabric of the business.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Insight 5: The Currency of Trust -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">The Currency of Trust</h3>
+                <p class="text-base font-light text-gray-300">In the enterprise market, the conversation has shifted from algorithmic performance to institutional trust. An auditable GRC framework is no longer a feature—it is the core product.</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">For enterprise AI, the sales cycle and the due diligence cycle are now one and the same. Governance, Risk, and Compliance is no longer a check-box exercise; it has become the fundamental language through which institutional trust is established and high-value partnerships are won.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Insight 6: The Gilded Cage -->
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front glass-card">
+                <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">The Gilded Cage</h3>
+                <p class="text-base font-light text-gray-300">Building on a dominant AI ecosystem offers incredible speed, but this convenience comes at a hidden price: strategic dependency. You are placing your firm’s future inside a “gilded cage.”</p>
+              </div>
+              <div class="flip-card-back glass-card">
+                <h3 class="text-xl font-bold text-accent-green mb-4">Our Perspective</h3>
+                <p class="text-base font-light text-gray-300">In a world dominated by platforms, strategic architecture has become as critical as product architecture. A firm’s long-term freedom to operate is determined not by its speed of development today, but by the deliberate preservation of its strategic choices for tomorrow.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
