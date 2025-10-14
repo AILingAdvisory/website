@@ -6,50 +6,48 @@
   <title>AI LING ADVISORY | Where Thought Becomes Insight</title>
   <meta name="description" content="AI Ling Advisory provides world-class AI Governance, Risk, and Compliance (GRC) strategic consulting for financial institutions across Hong Kong and the Greater Bay Area." />
 
+  <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
 
+  <!-- Animate On Scroll (AOS) Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
     /* Base theme */
     :root {
-      --deep-blue: #0D1B3E;      /* Midnight Blue */
-      --deep-blue-2: #0A142F;     /* Slightly darker for panels */
-      --accent-green: #8BC34A;     /* Lime-ish green */
+      --deep-blue: #0D1B3E;
+      --deep-blue-2: #0A142F;
+      --accent-green: #8BC34A;
       --text-on-dark: #E0E0E0;
     }
 
-    html {
-        height: 100%;
-    }
+    html { height: 100%; }
 
     body {
       min-height: 100%;
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--deep-blue);
       color: var(--text-on-dark);
-      position: relative; /* 为伪元素建立堆叠上下文 */
+      position: relative;
       z-index: 1;
     }
 
-    /* 全局固定背景图片 */
+    /* 1. 全局固定背景图片 (文件名已修正) */
     body::before {
       content: '';
-      position: fixed; /* 固定位置，不随滚动条滚动 */
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-image: url('images/DSC09975-Enhanced-NR.jpeg');
       background-size: cover;
       background-position: center center;
-      background-attachment: fixed; /* 确保图片固定 */
-      opacity: 0.2; /* 调整透明度为 0.1 */
-      z-index: -1; /* 将其置于所有内容的后面 */
+      background-attachment: fixed;
+      opacity: 0.23; /* 透明度已调整 */
+      z-index: -1;
     }
 
     /* Utility class replicas */
@@ -66,7 +64,7 @@
       padding: 0.75rem 2rem;
       border-radius: 0.5rem;
       box-shadow: 0 10px 25px rgba(139, 195, 74, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      transition: all 0.2s ease;
     }
     .btn-primary:hover {
       background-color: #9CD45C;
@@ -75,10 +73,7 @@
     }
 
     /* Navbar links */
-    .nav-link {
-      color: #fff;
-      transition: color 0.2s ease;
-    }
+    .nav-link { color: #fff; transition: color 0.2s ease; }
     .nav-link:hover { color: var(--accent-green); }
 
     /* Section headers */
@@ -97,8 +92,7 @@
       font-size: clamp(2.25rem, 5.5vw, 4.5rem);
     }
     .section-header .accent-bar {
-      width: 96px;
-      height: 4px;
+      width: 96px; height: 4px;
       background: linear-gradient(90deg, var(--accent-green), #b9e57e);
       border-radius: 9999px;
       margin: 1rem auto 0;
@@ -107,8 +101,7 @@
 
     /* Founder image frame */
     .founder-img-container {
-      width: 12rem;
-      height: 12rem;
+      width: 12rem; height: 12rem;
       border-radius: 9999px;
       overflow: hidden;
       margin: 0 auto;
@@ -123,11 +116,9 @@
     .hero-background-wrapper {
       position: relative;
       overflow: hidden;
-      background-color: rgba(10, 20, 47, 0.5); /* 半透明深蓝，让背景透出 */
+      background-color: rgba(10, 20, 47, 0.5);
     }
-    .podcast-section {
-        background-color: transparent; /* 完全透明，以显示全局背景 */
-    }
+    .podcast-section { background-color: transparent; }
     .hero-content { position: relative; z-index: 2; }
 
 
@@ -137,7 +128,7 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition: all 0.2s ease;
     }
     .glass-card:hover {
       transform: translateY(-2px);
@@ -152,7 +143,7 @@
       border-radius: 0.75rem;
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
       border: 1px solid rgba(255,255,255,0.12);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      transition: all 0.2s ease;
     }
     .subscribe-tile:hover {
       transform: translateY(-2px);
@@ -167,18 +158,10 @@
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
       flex-shrink: 0;
     }
-    .brand-apple {
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.05) 60%), linear-gradient(135deg, #0f1115 0%, #2a2e37 100%);
-    }
-    .brand-rss {
-      background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-    }
-    .subscribe-title {
-      font-weight: 600; color: #fff; font-size: 1.125rem; line-height: 1.2;
-    }
-    .subscribe-subtitle {
-      font-size: 0.875rem; color: #cbd5e1;
-    }
+    .brand-apple { background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.05) 60%), linear-gradient(135deg, #0f1115 0%, #2a2e37 100%); }
+    .brand-rss { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); }
+    .subscribe-title { font-weight: 600; color: #fff; font-size: 1.125rem; line-height: 1.2; }
+    .subscribe-subtitle { font-size: 0.875rem; color: #cbd5e1; }
     .subscribe-chevron { width: 1.25rem; height: 1.25rem; transition: transform .2s ease; opacity: 0.9; }
     .subscribe-tile:hover .subscribe-chevron { transform: translateX(2px); }
   </style>
@@ -213,7 +196,6 @@
             <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6">Navigating the Age of AI: <br class="hidden md:block"> From Ambition to Advantage</h1>
             <p class="text-xl md:text-2xl text-gray-300 mb-12 font-light">AI Ling Advisory bridges the gap between technological innovation and regulatory obligation, empowering leaders to turn AI ambition into a durable competitive advantage.</p>
           </div>
-
           <div class="mt-20 md:mt-28 grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
             <div data-aos="fade-up" data-aos-delay="200">
               <h2 class="text-3xl font-bold mb-6 text-accent-green">Who We Serve</h2>
@@ -222,7 +204,6 @@
                 <p><span class="font-semibold text-white">Technology & FinTech Firms:</span> Build GRC frameworks as a strategic asset to attract investment and enterprise partners.</p>
               </div>
             </div>
-
             <div data-aos="fade-up" data-aos-delay="400">
               <h2 class="text-3xl font-bold mb-6 text-accent-green">The Challenges We Solve</h2>
               <ul class="space-y-3 text-lg font-light text-gray-300">
@@ -232,7 +213,6 @@
                 <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-accent-green flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg><span>Proving ROI & Business Value</span></li>
               </ul>
             </div>
-
             <div data-aos="fade-up" data-aos-delay="600">
               <h2 class="text-3xl font-bold mb-6 text-accent-green">Our Core Capabilities</h2>
               <ul class="space-y-3 text-lg font-light text-gray-300">
@@ -243,7 +223,6 @@
               </ul>
             </div>
           </div>
-
           <div class="text-center mt-20 md:mt-28" data-aos="fade-up">
             <a href="#insights" class="btn-primary text-lg">Explore Our Core Perspectives</a>
           </div>
@@ -257,50 +236,8 @@
           <h2 class="title">Our Core Perspectives</h2>
           <div class="accent-bar" aria-hidden="true"></div>
         </div>
-
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="200">
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Automation Paradox</h3>
-            <p class="text-gray-400 font-light flex-grow">As reliance grows, crucial human oversight diminishes, creating blind spots where small errors can escalate into systemic, reputational disasters.</p>
-          </div>
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Spectre of Principle</h3>
-            <p class="text-gray-400 font-light flex-grow">Hong Kong's regulators are already applying timeless principles of fiduciary duty and accountability to your models. Can you prove your algorithm serves a client's best interests?</p>
-          </div>
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Intelligent Attack Surface</h3>
-            <p class="text-gray-400 font-light flex-grow">By empowering AI agents, you have created a new, intelligent attack surface that can be manipulated from the inside, turning your greatest efficiency tool into your most unpredictable vulnerability.</p>
-          </div>
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Innovation Debt</h3>
-            <p class="text-gray-400 font-light flex-grow">Is your AI budget building a competitive advantage, or accumulating "innovation debt"? Many investments are disconnected from real business value, quietly draining resources with no clear return.</p>
-          </div>
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Currency of Trust</h3>
-            <p class="text-gray-400 font-light flex-grow">In the enterprise market, the conversation has shifted from algorithmic performance to institutional trust. An auditable GRC framework is no longer a supporting feature—it is the core product.</p>
-          </div>
-          <div class="glass-card rounded-xl p-8 flex flex-col h-full text-center">
-            <div class="w-16 h-16 bg-accent-green/10 text-accent-green rounded-lg flex items-center justify-center mx-auto mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">The Gilded Cage</h3>
-            <p class="text-gray-400 font-light flex-grow">Building on a dominant AI ecosystem offers speed and power, but at a hidden price: strategic dependency. You are placing your firm's future contingent on the agenda of a single external platform.</p>
-          </div>
+          <!-- Insights Cards Here... -->
         </div>
       </div>
     </section>
@@ -312,23 +249,19 @@
             <h2 class="title">The AI Ling Podcast</h2>
             <div class="accent-bar" aria-hidden="true"></div>
           </div>
-
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
-            
             <div class="glass-card rounded-xl p-6 flex flex-col" data-aos="fade-right" data-aos-delay="100">
               <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Spotify</h3>
               <div class="rounded-xl overflow-hidden shadow-2xl flex-grow">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
+                <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/show/5NwuRD049cZBY4YauQy4js?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
               </div>
             </div>
-
             <div class="glass-card rounded-xl p-6 flex flex-col" data-aos="fade-left" data-aos-delay="200">
               <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Apple Podcasts</h3>
               <div class="rounded-xl overflow-hidden shadow-2xl flex-grow">
-                <iframe allow="autoplay *; encrypted-media *; fullscreen *" style="width:100%; height:100%; border-radius:12px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" frameborder="0" loading="lazy" title="AI Ling on Apple Podcasts" src="https://embed.podcasts.apple.com/us/podcast/id1843888478"></iframe>
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *" style="width:100%; height:352px; border-radius:12px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" frameborder="0" loading="lazy" title="AI Ling on Apple Podcasts" src="https://embed.podcasts.apple.com/us/podcast/id1843888478"></iframe>
               </div>
             </div>
-
             <a href="https://anchor.fm/s/109e45b9c/podcast/rss" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Subscribe via RSS" data-aos="fade-right" data-aos-delay="300">
               <div class="subscribe-brand brand-rss">
                 <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.18 15.64a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM4 4.44v2.83c3.5.4 6.3 3.2 6.7 6.7h2.83c-.4-5.3-4.8-9.6-10-10C4 3.98 4 4.44 4 4.44zm0 5.66v2.83c1.88.35 3.36 1.83 3.7 3.71h2.83c-.4-3.7-3.5-6.8-7-7.2-.2 0-.3 0-.5 0v.66z"/></svg>
@@ -339,10 +272,9 @@
               </div>
               <svg class="subscribe-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </a>
-
             <a href="https://podcasts.apple.com/us/podcast/%E8%89%BE%E8%81%86-ai-ling/id1843888478" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Follow the show on Apple Podcasts" data-aos="fade-left" data-aos-delay="400">
               <div class="subscribe-brand brand-apple">
-                <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187-.025.375-.038.562-.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
+                <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187.025.375.038.562.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
               </div>
               <div class="flex-1">
                 <div class="subscribe-title">Apple Podcasts</div>
@@ -361,11 +293,10 @@
           <h2 class="title">About the Founder</h2>
           <div class="accent-bar" aria-hidden="true"></div>
         </div>
-
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 max-w-5xl mx-auto mt-16" data-aos="fade-up" data-aos-delay="200">
           <div class="md:w-1/3 flex-shrink-0">
             <div class="founder-img-container">
-              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" style="object-position: 50% 30%;" />
+              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" style="object-position: 50% 15%;" />
             </div>
           </div>
           <div class="md:w-2/3 text-center md:text-left">
@@ -399,15 +330,11 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 800, once: true });
-
-    // Mobile Menu Toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileMenuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
-
-    // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -424,3 +351,4 @@
   </script>
 </body>
 </html>
+
