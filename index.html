@@ -23,11 +23,33 @@
       --text-on-dark: #E0E0E0;
     }
 
-    html, body { height: 100%; }
+    html {
+        height: 100%;
+    }
+
     body {
+      min-height: 100%;
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--deep-blue);
       color: var(--text-on-dark);
+      position: relative; /* Establish stacking context for the pseudo-element */
+      z-index: 1;
+    }
+
+    /* 全局固定背景图片 */
+    body::before {
+      content: '';
+      position: fixed; /* Fixed position to stay in place during scroll */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('images/DSC09975-Ehnanced-NR.jpeg');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed; /* Ensures the image doesn't move with content */
+      opacity: 0.05; /* 近乎透明的效果 */
+      z-index: -1; /* Place it behind all content */
     }
 
     /* Utility class replicas (no @apply so they work with CDN) */
@@ -103,34 +125,28 @@
     .hero-background-wrapper {
       position: relative;
       overflow: hidden;
+      /* Background color now serves as a fallback */
       background-color: var(--deep-blue-2);
-    }
-    .hero-background-image {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.08; z-index: 1;
     }
     .hero-content { position: relative; z-index: 2; }
 
     /* Podcast section backdrop */
     .podcast-section {
-      background-color: var(--deep-blue-2);
-      background-image:
-        linear-gradient(rgba(10, 20, 47, 0.97), rgba(10, 20, 47, 0.97)),
-        url('https://images.unsplash.com/photo-1593322953932-8879b763de2f?q=80&w=2670&auto=format&fit=crop');
-      background-size: cover; background-position: center; background-repeat: no-repeat;
+      background-color: transparent; /* Make it transparent to see the global background */
     }
 
     /* Glass card */
     .glass-card {
-      background: rgba(25, 42, 86, 0.30);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(25, 42, 86, 0.45); /* Slightly increased opacity for better readability */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
     .glass-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
-      background: rgba(25, 42, 86, 0.38);
+      background: rgba(25, 42, 86, 0.55);
     }
   
     /* Subscribe tiles (lively but professional) */
@@ -198,7 +214,6 @@
 
   <main>
     <section class="hero-background-wrapper">
-      <img src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2670&auto=format&fit=crop" alt="Abstract technology network background" class="hero-background-image">
       <div class="hero-content text-white py-20 md:py-28">
         <div class="container mx-auto px-6">
           <div class="max-w-4xl mx-auto text-center" data-aos="fade-in" data-aos-duration="1500">
@@ -307,9 +322,9 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-16">
             <div data-aos="fade-right" data-aos-delay="200">
-              <h3 class="text-2xl font-semibold text-white mb-6 text-center lg:text-left">Listen to the Latest Episode</h3>
+              <h3 class="text-2xl font-semibold text-white mb-6 text-center lg:text-left">Listen on Spotify</h3>
               <div class="rounded-xl overflow-hidden shadow-2xl">
-                <iframe style="border-radius:12px" src="http://googleusercontent.com/spotify.com/3" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast on Spotify"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
               </div>
             </div>
             <div class="space-y-6" data-aos="fade-left" data-aos-delay="400">
@@ -350,7 +365,7 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 max-w-5xl mx-auto mt-16" data-aos="fade-up" data-aos-delay="200">
           <div class="md:w-1/3 flex-shrink-0">
             <div class="founder-img-container">
-              <img src="https://media.licdn.com/dms/image/v2/C4D03AQEYf29-M_pUNA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1516966726992?e=1762992000&v=beta&t=2iUDIDf3wA3xqyr6uG47YxsSB-AiznhqzoI79Teg8vA" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" />
+              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" />
             </div>
           </div>
           <div class="md:w-2/3 text-center md:text-left">
