@@ -44,11 +44,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: url('images/DSC09975-Enhanced-NR.jpeg');
+      background-image: url('images/DSC09975-Ehnanced-NR.jpeg');
       background-size: cover;
       background-position: center center;
       background-attachment: fixed; /* 确保图片固定 */
-      opacity: 0.05; /* 近乎透明的效果 */
+      opacity: 0.1; /* 调整透明度为 0.1 */
       z-index: -1; /* 将其置于所有内容的后面 */
     }
 
@@ -315,17 +315,17 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
             
-            <div class="glass-card rounded-xl p-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="glass-card rounded-xl p-6 flex flex-col" data-aos="fade-right" data-aos-delay="100">
               <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Spotify</h3>
-              <div class="rounded-xl overflow-hidden shadow-2xl">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
+              <div class="rounded-xl overflow-hidden shadow-2xl flex-grow">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/5" width="100%" height="100%" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
               </div>
             </div>
 
-            <div class="glass-card rounded-xl p-6" data-aos="fade-left" data-aos-delay="200">
+            <div class="glass-card rounded-xl p-6 flex flex-col" data-aos="fade-left" data-aos-delay="200">
               <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Apple Podcasts</h3>
-              <div class="rounded-xl overflow-hidden shadow-2xl">
-                <iframe allow="autoplay *; encrypted-media *; fullscreen *" style="width:100%; height:352px; border-radius:12px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" frameborder="0" loading="lazy" title="AI Ling on Apple Podcasts" src="https://embed.podcasts.apple.com/us/podcast/id1843888478"></iframe>
+              <div class="rounded-xl overflow-hidden shadow-2xl flex-grow">
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *" style="width:100%; height:100%; border-radius:12px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" frameborder="0" loading="lazy" title="AI Ling on Apple Podcasts" src="https://embed.podcasts.apple.com/us/podcast/id1843888478"></iframe>
               </div>
             </div>
 
@@ -342,7 +342,7 @@
 
             <a href="https://podcasts.apple.com/us/podcast/%E8%89%BE%E8%81%86-ai-ling/id1843888478" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Follow the show on Apple Podcasts" data-aos="fade-left" data-aos-delay="400">
               <div class="subscribe-brand brand-apple">
-                <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187.025.375.038.562.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
+                <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187-.025.375-.038.562-.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
               </div>
               <div class="flex-1">
                 <div class="subscribe-title">Apple Podcasts</div>
@@ -365,7 +365,7 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 max-w-5xl mx-auto mt-16" data-aos="fade-up" data-aos-delay="200">
           <div class="md:w-1/3 flex-shrink-0">
             <div class="founder-img-container">
-              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover object-top" />
+              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" style="object-position: 50% 30%;" />
             </div>
           </div>
           <div class="md:w-2/3 text-center md:text-left">
