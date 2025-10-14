@@ -32,14 +32,14 @@
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--deep-blue);
       color: var(--text-on-dark);
-      position: relative; /* Establish stacking context for the pseudo-element */
+      position: relative; /* 为伪元素建立堆叠上下文 */
       z-index: 1;
     }
 
     /* 全局固定背景图片 */
     body::before {
       content: '';
-      position: fixed; /* Fixed position to stay in place during scroll */
+      position: fixed; /* 固定位置，不随滚动条滚动 */
       top: 0;
       left: 0;
       right: 0;
@@ -47,12 +47,12 @@
       background-image: url('images/DSC09975-Ehnanced-NR.jpeg');
       background-size: cover;
       background-position: center center;
-      background-attachment: fixed; /* Ensures the image doesn't move with content */
+      background-attachment: fixed; /* 确保图片固定 */
       opacity: 0.05; /* 近乎透明的效果 */
-      z-index: -1; /* Place it behind all content */
+      z-index: -1; /* 将其置于所有内容的后面 */
     }
 
-    /* Utility class replicas (no @apply so they work with CDN) */
+    /* Utility class replicas */
     .bg-deep-blue { background-color: var(--deep-blue); }
     .text-accent-green { color: var(--accent-green); }
     .bg-accent-green { background-color: var(--accent-green); }
@@ -63,13 +63,13 @@
       background-color: var(--accent-green);
       color: #000;
       font-weight: 600;
-      padding: 0.75rem 2rem; /* py-3 px-8 */
-      border-radius: 0.5rem; /* rounded-lg */
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
       box-shadow: 0 10px 25px rgba(139, 195, 74, 0.35);
       transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
     .btn-primary:hover {
-      background-color: #9CD45C; /* hover: slightly brighter */
+      background-color: #9CD45C;
       transform: translateY(-1px) scale(1.02);
       box-shadow: 0 16px 40px rgba(156, 212, 92, 0.35);
     }
@@ -81,63 +81,59 @@
     }
     .nav-link:hover { color: var(--accent-green); }
 
-    /* Section headers — centered, big, elegant */
+    /* Section headers */
     .section-header {
-      margin: 0 auto 5rem;        /* generous breathing room below */
+      margin: 0 auto 5rem;
       text-align: center;
-      padding: 0 1rem;            /* safe padding on small screens */
-      max-width: 80rem;           /* prevent ultra-wide lines */
+      padding: 0 1rem;
+      max-width: 80rem;
     }
     .section-header .title {
       margin: 0;
-      font-weight: 800;           /* strong headline */
+      font-weight: 800;
       color: #fff;
-      letter-spacing: -0.02em;    /* subtle tracking */
+      letter-spacing: -0.02em;
       line-height: 1.1;
-      font-size: clamp(2.25rem, 5.5vw, 4.5rem); /* responsive scale */
+      font-size: clamp(2.25rem, 5.5vw, 4.5rem);
     }
-
-    /* Optional: subtle accent bar under titles for polish */
     .section-header .accent-bar {
       width: 96px;
       height: 4px;
       background: linear-gradient(90deg, var(--accent-green), #b9e57e);
       border-radius: 9999px;
-      margin: 1rem auto 0;        /* sits under the title */
+      margin: 1rem auto 0;
       opacity: 0.9;
     }
 
     /* Founder image frame */
     .founder-img-container {
-      width: 12rem;  /* w-48 */
-      height: 12rem; /* h-48 */
-      border-radius: 9999px;      /* rounded-full */
+      width: 12rem;
+      height: 12rem;
+      border-radius: 9999px;
       overflow: hidden;
-      margin: 0 auto;             /* mx-auto */
+      margin: 0 auto;
       box-shadow: 0 25px 50px rgba(0,0,0,0.45);
-      border: 4px solid rgba(148, 163, 184, 0.35); /* slate-400/35 */
+      border: 4px solid rgba(148, 163, 184, 0.35);
     }
     @media (min-width: 768px) {
-      .founder-img-container { width: 16rem; height: 16rem; } /* md:w-64 md:h-64 */
+      .founder-img-container { width: 16rem; height: 16rem; }
     }
 
-    /* Hero background */
+    /* Section Backgrounds */
     .hero-background-wrapper {
       position: relative;
       overflow: hidden;
-      /* Background color now serves as a fallback */
-      background-color: var(--deep-blue-2);
+      background-color: rgba(10, 20, 47, 0.5); /* 半透明深蓝，让背景透出 */
+    }
+    .podcast-section {
+        background-color: transparent; /* 完全透明，以显示全局背景 */
     }
     .hero-content { position: relative; z-index: 2; }
 
-    /* Podcast section backdrop */
-    .podcast-section {
-      background-color: transparent; /* Make it transparent to see the global background */
-    }
 
     /* Glass card */
     .glass-card {
-      background: rgba(25, 42, 86, 0.45); /* Slightly increased opacity for better readability */
+      background: rgba(25, 42, 86, 0.45);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -149,12 +145,11 @@
       background: rgba(25, 42, 86, 0.55);
     }
   
-    /* Subscribe tiles (lively but professional) */
+    /* Subscribe tiles */
     .subscribe-tile {
-      position: relative;
       display: flex; align-items: center; gap: 1rem;
-      padding: 1rem 1.25rem; /* p-4 */
-      border-radius: 0.75rem; /* rounded-lg */
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
       border: 1px solid rgba(255,255,255,0.12);
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
@@ -166,25 +161,23 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
     }
     .subscribe-brand {
-      width: 3rem; height: 3rem; /* w-12 h-12 */
+      width: 3rem; height: 3rem;
       border-radius: 0.75rem;
       display: flex; align-items: center; justify-content: center;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
       flex-shrink: 0;
     }
     .brand-apple {
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.05) 60%),
-        linear-gradient(135deg, #0f1115 0%, #2a2e37 100%);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.05) 60%), linear-gradient(135deg, #0f1115 0%, #2a2e37 100%);
     }
     .brand-rss {
       background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
     }
     .subscribe-title {
-      font-weight: 600; color: #fff; font-size: 1.125rem; line-height: 1.2; /* text-lg */
+      font-weight: 600; color: #fff; font-size: 1.125rem; line-height: 1.2;
     }
     .subscribe-subtitle {
-      font-size: 0.875rem; color: #cbd5e1; /* slate-300 */
+      font-size: 0.875rem; color: #cbd5e1;
     }
     .subscribe-chevron { width: 1.25rem; height: 1.25rem; transition: transform .2s ease; opacity: 0.9; }
     .subscribe-tile:hover .subscribe-chevron { transform: translateX(2px); }
@@ -320,36 +313,43 @@
             <div class="accent-bar" aria-hidden="true"></div>
           </div>
 
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-16">
-            <div data-aos="fade-right" data-aos-delay="200">
-              <h3 class="text-2xl font-semibold text-white mb-6 text-center lg:text-left">Listen on Spotify</h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
+            
+            <div class="glass-card rounded-xl p-6" data-aos="fade-right" data-aos-delay="100">
+              <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Spotify</h3>
               <div class="rounded-xl overflow-hidden shadow-2xl">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="AI Ling Podcast Playlist on Spotify"></iframe>
               </div>
             </div>
-            <div class="space-y-6" data-aos="fade-left" data-aos-delay="400">
-              <h3 class="text-2xl font-semibold text-white text-center lg:text-left">Subscribe & Follow</h3>
-              <a href="https://podcasts.apple.com/us/podcast/%E8%89%BE%E8%81%86-ai-ling/id1843888478" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Listen on Apple Podcasts">
-                <div class="subscribe-brand brand-apple">
-                  <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187.025.375.038.562.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
-                </div>
-                <div class="flex-1">
-                  <div class="subscribe-title">Apple Podcasts</div>
-                  <div class="subscribe-subtitle">Follow the show on Apple</div>
-                </div>
-                <svg class="subscribe-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-              </a>
-              <a href="https://anchor.fm/s/109e45b9c/podcast/rss" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Subscribe via RSS">
-                <div class="subscribe-brand brand-rss">
-                  <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.18 15.64a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM4 4.44v2.83c3.5.4 6.3 3.2 6.7 6.7h2.83c-.4-5.3-4.8-9.6-10-10C4 3.98 4 4.44 4 4.44zm0 5.66v2.83c1.88.35 3.36 1.83 3.7 3.71h2.83c-.4-3.7-3.5-6.8-7-7.2-.2 0-.3 0-.5 0v.66z"/></svg>
-                </div>
-                <div class="flex-1">
-                  <div class="subscribe-title">RSS Feed</div>
-                  <div class="subscribe-subtitle">Get new episodes via RSS</div>
-                </div>
-                <svg class="subscribe-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-              </a>
+
+            <div class="glass-card rounded-xl p-6" data-aos="fade-left" data-aos-delay="200">
+              <h3 class="text-2xl font-semibold text-white mb-4 text-center lg:text-left">Listen on Apple Podcasts</h3>
+              <div class="rounded-xl overflow-hidden shadow-2xl">
+                <iframe allow="autoplay *; encrypted-media *; fullscreen *" style="width:100%; height:352px; border-radius:12px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" frameborder="0" loading="lazy" title="AI Ling on Apple Podcasts" src="https://embed.podcasts.apple.com/us/podcast/id1843888478"></iframe>
+              </div>
             </div>
+
+            <a href="https://anchor.fm/s/109e45b9c/podcast/rss" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Subscribe via RSS" data-aos="fade-right" data-aos-delay="300">
+              <div class="subscribe-brand brand-rss">
+                <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.18 15.64a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM4 4.44v2.83c3.5.4 6.3 3.2 6.7 6.7h2.83c-.4-5.3-4.8-9.6-10-10C4 3.98 4 4.44 4 4.44zm0 5.66v2.83c1.88.35 3.36 1.83 3.7 3.71h2.83c-.4-3.7-3.5-6.8-7-7.2-.2 0-.3 0-.5 0v.66z"/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="subscribe-title">RSS Feed</div>
+                <div class="subscribe-subtitle">Get new episodes via RSS</div>
+              </div>
+              <svg class="subscribe-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+
+            <a href="https://podcasts.apple.com/us/podcast/%E8%89%BE%E8%81%86-ai-ling/id1843888478" target="_blank" rel="noopener noreferrer" class="subscribe-tile" aria-label="Follow the show on Apple Podcasts" data-aos="fade-left" data-aos-delay="400">
+              <div class="subscribe-brand brand-apple">
+                <svg class="w-7 h-7 text-white" role="img" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.803 8.412c-.24-.263-.532-.488-.82-.688-.29-.2-.607-.362-.924-.5-.317-.137-.64-.237-.962-.312-.323-.075-.646-.112-1.125-.112h-1.95c-.48 0-.825.038-1.125.112-.323.075-.646.2-.962.313-.317-.137-.634.3-.924.5-.289.2-.58.425-.82.687-.24.263-.45.563-.617.9-.168.337-.3.712-.383 1.125-.083.412-.125.862-.125 1.35 0 .712.1 1.362.312 1.95.213.587.525 1.125.925 1.612.4.488.9.9 1.488 1.238.587.337 1.237.525 1.95.562.188 0 .375-.013.563-.037.187-.025.375-.063.562-.113.213-.05.4-.112.588-.187.188-.075.362-.175.525-.288.063-.037.138-.087.225-.15.088-.062.15-.112.2-.15.05.038.113.088.2.15.075.062.15.112.225.15.162.112.337.212.525.287.187.075.375.138.587.188.188.05.375.087.563.112.187.025.375.038.562.038.713-.038 1.363-.225 1.95-.563.588-.337 1.088-.75 1.488-1.237.4-.488.712-1.025.925-1.613.212-.587.312-1.237.312-1.95 0-.488-.042-.938-.125-1.35-.083-.413-.215-.788-.383-1.125-.168-.337-.378-.637-.618-.9zM12 2.25c-5.37 0-9.75 4.38-9.75 9.75s4.38 9.75 9.75 9.75 9.75-4.38 9.75-9.75S17.37 2.25 12 2.25z"/></svg>
+              </div>
+              <div class="flex-1">
+                <div class="subscribe-title">Apple Podcasts</div>
+                <div class="subscribe-subtitle">Follow the show on Apple</div>
+              </div>
+              <svg class="subscribe-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -365,7 +365,7 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 max-w-5xl mx-auto mt-16" data-aos="fade-up" data-aos-delay="200">
           <div class="md:w-1/3 flex-shrink-0">
             <div class="founder-img-container">
-              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover" />
+              <img src="images/IMG_2062.png" alt="Portrait of Liu Ming, Founder of AI Ling Advisory" class="w-full h-full object-cover object-top" />
             </div>
           </div>
           <div class="md:w-2/3 text-center md:text-left">
