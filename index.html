@@ -99,11 +99,26 @@
     body {
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       
-      /* [--- 变更点 #1: 恢复 Body ---] */
-      /* 恢复为原始的深蓝色背景，移除错误的全局背景图 */
-      background-color: var(--deep-blue);
+      /* [--- 变更点 #1: Body 背景改为半透明 ---] */
+      /* 设为半透明，让 ::before 背景图能透过来 */
+      background-color: rgba(13, 27, 62, 0.95); /* var(--deep-blue) at 95% opacity */
       
       color: var(--text-on-dark);
+      position: relative; /* 确保 z-index 生效 */
+    }
+
+    /* [--- 变更点 #2: 全局固定水印背景 ---] */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('images/fixed-background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      opacity: 0.1; /* "浅浅的" (10% opacity) */
+      z-index: -1;  /* 放置在所有内容的后方 */
+      pointer-events: none;
     }
 
     /* Utility class replicas (no @apply so they work with CDN) */
@@ -176,17 +191,17 @@
     }
 
     /* Hero background */
+    .founder-img-container { width: 16rem; height: 16rem; } /* md:w-64 md:h-64 */
+    }
+
+    /* Hero background */
     .hero-background-wrapper {
       position: relative;
       overflow: hidden;
       
-      /* [--- 变更点 #2: Hero 背景 ---] */
-      /* 应用您指定的 "fixed-background.jpg" */
-      background-color: var(--deep-blue-2); /* Fallback */
-      background-image: url('images/fixed-background.jpg');
-      background-attachment: fixed; /* 按要求设置为 "固定" */
-      background-size: cover;
-      background-position: center center;
+      /* [--- 变更点 #3: Hero 背景 ---] */
+      /* 移除所有 bg-image 属性，改为半透明背景色 */
+      background-color: rgba(10, 20, 47, 0.95); /* var(--deep-blue-2) at 95% opacity */
     }
     .hero-background-image {
       position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.08; z-index: 1;
@@ -195,12 +210,9 @@
 
     /* Podcast section backdrop */
     .podcast-section {
-      background-color: var(--deep-blue-2);
-      /* [--- 变更点 #3: 恢复 Podcast ---] */
-      /* 恢复为原始的 Unsplash 背景图和渐变 */
-      background-image:
-        linear-gradient(rgba(10, 20, 47, 0.97), rgba(10, 20, 47, 0.97)),
-        url('https://images.unsplash.com/photo-1593322953932-8879b763de2f?q=80&w=2670&auto=format&fit=crop');
+      /* [--- 变更点 #4: Podcast 背景 ---] */
+      /* 移除 Unsplash 背景图和渐变，改为半透明背景色 */
+      background-color: rgba(10, 20, 47, 0.95); /* var(--deep-blue-2) at 95% opacity */
       background-size: cover; background-position: center; background-repeat: no-repeat;
     }
 
@@ -466,7 +478,9 @@
   </main>
 
   <!-- [ FOOTER ] -->
-  <footer class="bg-black text-gray-400 py-12">
+  <!-- [--- 变更点 #5: Footer 背景 ---] -->
+  <!-- 移除 bg-black class, 改为内联 style 实现半透明 -->
+  <footer class="text-gray-400 py-12" style="background-color: rgba(0, 0, 0, 0.9);">
     <div class="container mx-auto px-6 text-center">
       <h3 class="text-2xl font-bold text-white mb-6">Get in Touch</h3>
       <div class="max-w-3xl mx-auto">
