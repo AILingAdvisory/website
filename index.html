@@ -99,31 +99,12 @@
     body {
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       
-      /* [--- 变更点 #1: 网页固定背景 ---] */
-      /* 应用全局背景图，并设置为 fixed */
-      background-image: url('images/fixed-background.jpg');
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center center;
-      /* Fallback color，如果图片加载失败，显示深蓝色 */
+      /* [--- 变更点 #1: 恢复 Body ---] */
+      /* 恢复为原始的深蓝色背景，移除错误的全局背景图 */
       background-color: var(--deep-blue);
       
       color: var(--text-on-dark);
     }
-
-    /* [STRATEGIC NOTE]
-      为了让 body 的固定背景图可见，
-      其他具有 *不透明* 背景色的主要内容区域（如 Hero, Podcast, Footer）
-      会 *覆盖* 在这个背景之上。
-      
-      只有那些 *没有* 指定背景色的部分 (如 "Core Insights" 和 "About") 
-      会显示这个固定的背景图。
-      
-      如果您希望背景图在 *所有* 区域（包括Hero和Podcast）都可见，
-      我需要将这些区域的背景色（如 --deep-blue-2）改为 *半透明*。
-      
-      目前的实现是基于最直接的指令：将 body 背景替换。
-    */
 
     /* Utility class replicas (no @apply so they work with CDN) */
     .bg-deep-blue { background-color: var(--deep-blue); }
@@ -191,14 +172,21 @@
       border: 4px solid rgba(148, 163, 184, 0.35); /* slate-400/35 */
     }
     @media (min-width: 768px) {
-      .founder-img-container { width: 16rem; height: 16rem; } /* md:w-64 md:h-64 */
+      .founder-img-container { width: 16rem; height: 16rem; } /* md:w-64 md-h-64 */
     }
 
     /* Hero background */
     .hero-background-wrapper {
       position: relative;
       overflow: hidden;
-      background-color: var(--deep-blue-2);
+      
+      /* [--- 变更点 #2: Hero 背景 ---] */
+      /* 应用您指定的 "fixed-background.jpg" */
+      background-color: var(--deep-blue-2); /* Fallback */
+      background-image: url('images/fixed-background.jpg');
+      background-attachment: fixed; /* 按要求设置为 "固定" */
+      background-size: cover;
+      background-position: center center;
     }
     .hero-background-image {
       position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.08; z-index: 1;
@@ -208,7 +196,7 @@
     /* Podcast section backdrop */
     .podcast-section {
       background-color: var(--deep-blue-2);
-      /* [--- 变更点 #2: 恢复原始设置 ---] */
+      /* [--- 变更点 #3: 恢复 Podcast ---] */
       /* 恢复为原始的 Unsplash 背景图和渐变 */
       background-image:
         linear-gradient(rgba(10, 20, 47, 0.97), rgba(10, 20, 47, 0.97)),
@@ -458,7 +446,8 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 max-w-5xl mx-auto mt-16" data-aos="fade-up" data-aos-delay="200">
           <div class="md:w-1D3 flex-shrink-0">
             <div class="founder-img-container">
-              <!-- [--- 变更点 #3: 创始人肖像路径 ---] -->
+              <!-- [--- 变更点 #4: 创始人肖像路径 ---] -->
+              <!-- 确认路径为 "images/liu-ming-portrait.jpg" -->
               <img src="images/liu-ming-portrait.jpg" alt="Portrait of Liu Ming (柳溟), Founder of AI Ling Advisory" class="w-full h-full object-cover" />
             </div>
           </div>
