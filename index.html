@@ -382,7 +382,8 @@
                 </div>
             </section>
             
-            <section id="benchmark" class="section-panel py-20 md:py-28">
+            <!-- V39: Removed .section-panel for alternating background -->
+            <section id="benchmark" class="py-20 md:py-28">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="section-header">
@@ -666,8 +667,10 @@
                     
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" x-data="{ openPillar: 0 }">
                         
+                        <!-- Pillar I - Governance -->
                         <div class="glass-card p-8 flex flex-col">
                             <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
+                                <!-- V38: Reverted to original "Pillar" icon -->
                                 <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.242-6.75.72M18.75 4.97c.418.068.826.137 1.225.206m-.711 15.126c.364.069.72.136 1.066.197m-11.022 0c.346-.061.702-.128 1.066-.197M12 4.5v15.75m-3.75-15.75v15.75m3.75-15.75v15.75M4.5 4.5v15.75M19.5 4.5v15.75M8.25 4.5v15.75M15.75 4.5v15.75M5.25 4.5v15.75M18.75 4.5v15.75" />
                                 </svg>
@@ -823,7 +826,8 @@
                 </div>
             </section>
             
-            <section id="plugins" class="section-panel py-20 md:py-28" x-data="industryPlugins()">
+            <!-- V39: Removed .section-panel for alternating background -->
+            <section id="plugins" class="py-20 md:py-28" x-data="industryPlugins()">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="section-header">
                         <h2>Industry Plug-ins: Designed for Your Sector</h2>
@@ -873,6 +877,7 @@
                         <div x-show="tab === 'banking'" x-transition class="glass-card p-8 md:p-10">
                             <h3 class="text-2xl font-bold text-white mb-6">Banking</h3> <ul class="space-y-4">
                                 <li class="flex items-start gap-3">
+                                    <!-- V1: Updated color -->
                                     <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                     <span><strong class="text-white">Algorithmic Fair Lending:</strong> Managing "proxy discrimination" risk in credit models (e.g., digital redlining).</span>
                                 </li>
@@ -1103,14 +1108,16 @@
                                     <h4 class="text-lg font-bold text-white">Pre-Launch Approval Flow</h4>
                                     <p class="mt-3 text-sm text-gray-400">
                                         A unified approval process for model deployment.
-                                    </p> </div>
+                                    </p> <!-- V35: Fixed syntax error </Gbp> -> </p> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <section id="scan" class="section-panel py-20 md:py-28">
+            <!-- V39: Removed .section-panel for alternating background -->
+            <section id="scan" class="py-20 md:py-28">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -1125,7 +1132,6 @@
                                 A complimentary, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
                             </p>
                             
-                            <!-- LINK FIX: Changed href from #contact-form-placeholder to #scan -->
                             <a href="#scan" class="btn-primary mt-10 text-lg py-4 px-10">
                                 Book Your Free Scan →
                             </a>
@@ -1159,13 +1165,17 @@
         
         </main>
         
+        <!-- V34: Footer Update -->
         <footer style="background-color: var(--footer-bg);">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <!-- V23: Switched to 3-col grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
                     
+                    <!-- Col 1: Logo & Copyright -->
                     <div>
-                        <!-- SEO CHANGE (Point 'c' - A11y): Added aria-label for accessibility -->
-                        <a href="#" class="flex items-center gap-3 justify-center md:justify-start" aria-label="AI Ling Advisory Home">
+                        <!-- V36: Added Style 17 Logo to Footer -->
+                        <a href="#" class="flex items-center gap-3 justify-center md:justify-start">
+                            <!-- The SVG Logo -->
                             <svg class="w-8 h-8"
                                  viewBox="0 0 100 100" 
                                  xmlns="http://www.w3.org/2000/svg"
@@ -1176,28 +1186,33 @@
                                 <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
                                 <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
                             </svg>
+                            <!-- The Text -->
                             <span class="text-2xl font-extrabold text-white tracking-tight">
                                 AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
                             </span>
                         </a>
                         <p class="mt-2 text-gray-400">AI GRC for Financial Services</p>
+                        <!-- V25: Fixed copyright year and line break -->
                         <p class="mt-4 text-gray-500 text-sm">
                             © 2025 AI LING ADVISORY LIMITED.
                         </p>
                         <p class="text-gray-500 text-sm">
                             All rights reserved.
                         </p>
+                        <!-- V34: Added Registered Office Address -->
                         <p class="mt-4 text-gray-500 text-sm">
                             Registered Office Address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
                         </p>
                     </div>
                     
+                    <!-- Col 2: Founder Teaser -->
                     <div class="text-center md:text-left">
                         <h4 class="font-bold text-white">About the Founder</h4>
+                        <!-- V23: Added photo -->
                         <div class="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                            <!-- SEO CHANGE (Point 'e'): Updated alt text for better description -->
+                            <!-- V35: Corrected image path -->
                             <img src="images/liu-ming-portrait.jpg" 
-                                 alt="LIU Ming (柳溟), Founder of AI LING ADVISORY"
+                                 alt="Portrait of LIU Ming"
                                  class="w-24 h-24 object-cover rounded-lg border-2 flex-shrink-0" 
                                  style="border-color: var(--glass-border);"
                                  onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
@@ -1206,7 +1221,9 @@
                                 <p class="text-gray-400 text-sm">
                                     Founded by AI GRC expert LIU Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
                                 </p>
+                                <!-- V24: Replaced text links with icons -->
                                 <ul class="mt-4 flex gap-5 justify-center md:justify-start">
+                                    <!-- V34: Added Email Icon -->
                                     <li>
                                         <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary" aria-label="Company Email">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
@@ -1227,6 +1244,8 @@
                         </div>
                     </div>
                     
+                    <!-- Col 3: Company Nav -->
+                    <!-- V25: Removed "Navigate" and fixed alignment -->
                     <div class="text-center md:text-left">
                         <h4 class="font-bold text-white">Company</h4>
                         <ul class="mt-3 space-y-2">
