@@ -1,1211 +1,1245 @@
 <!DOCTYPE html>
 <html lang="en-GB" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    
-    <style>
-        :root {
-            /* 1. Color Palette (V1) */
-            --deep-blue: #0D1B3E;
-            /* V4: Made panel almost opaque for "stage" effect */
-            --deep-blue-panel: rgba(10, 20, 47, 0.95);
-            --deep-blue-nav: rgba(13, 27, 62, 0.8); /* Navbar glass */
-            
-            /* V1: Replaced green with digital teal */
-            --accent-primary: #2DD4BF; 
-            
-            --text-primary: #FFFFFF;
-            --text-secondary: #E0E0E0; /* text-gray-300 */
-            --text-tertiary: #a7a7a7; /* text-gray-400 */
-            --text-on-accent: #000000;
-            --glass-border: rgba(255, 255, 255, 0.10);
-            --glass-bg: rgba(25, 42, 86, 0.30);
-            --footer-bg: rgba(0, 0, 0, 0.75);
-            
-            /* V17: Radar/Plugin Colours (Final) */
-            --color-banking: #A3E635;      /* Lime Green (V16) */
-            --color-wealth: #3B82F6;       /* Blue (V17) */
-            --color-asset: #F59E0B;        /* Orange (V17) */
-            --color-insurance: #A855F7;    /* Purple (V17) */
-            --color-fintech: #E11D48;      /* Rose Red (V17) */
-            --color-capmarkets: #EC4899;   /* Pink (V17) */
-        }
-        
-        /* 2. Typography (Font: Inter) (V3) */
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--deep-blue);
-            color: var(--text-primary); /* V3: Changed from secondary for readability */
-            font-weight: 400; /* V3: Changed from 300 for readability */
-        }
-        
-        h1, h2, h3, h4 {
-            color: var(--text-primary);
-        }
-        
-        h1 { font-weight: 800; } /* extrabold */
-        h2 { font-weight: 800; } /* extrabold */
-        h3 { font-weight: 700; } /* bold */
-        h4 { font-weight: 700; } /* bold */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <!-- V50: Added x-cloak style to prevent flash of unstyled content (e.g., mobile close icon) -->
+    <style>
+        :root {
+            /* 1. Color Palette (V1) */
+            --deep-blue: #0D1B3E;
+            /* V4: Made panel almost opaque for "stage" effect */
+            --deep-blue-panel: rgba(10, 20, 47, 0.95);
+            --deep-blue-nav: rgba(13, 27, 62, 0.8); /* Navbar glass */
+            
+            /* V1: Replaced green with digital teal */
+            --accent-primary: #2DD4BF; 
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0; /* text-gray-300 */
+            --text-tertiary: #a7a7a7; /* text-gray-400 */
+            --text-on-accent: #000000;
+            --glass-border: rgba(255, 255, 255, 0.10);
+            --glass-bg: rgba(25, 42, 86, 0.30);
+            --footer-bg: rgba(0, 0, 0, 0.75);
+            
+            /* V17: Radar/Plugin Colours (Final) */
+            --color-banking: #A3E635;      /* Lime Green (V16) */
+            --color-wealth: #3B82F6;       /* Blue (V17) */
+            --color-asset: #F59E0B;        /* Orange (V17) */
+            --color-insurance: #A855F7;    /* Purple (V17) */
+            --color-fintech: #E11D48;      /* Rose Red (V17) */
+            --color-capmarkets: #EC4899;   /* Pink (V17) */
+        }
+        
+        /* 2. Typography (Font: Inter) (V3) */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--deep-blue);
+            color: var(--text-primary); /* V3: Changed from secondary for readability */
+            font-weight: 400; /* V3: Changed from 300 for readability */
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+        }
+        
+        h1 { font-weight: 800; } /* extrabold */
+        h2 { font-weight: 800; } /* extrabold */
+        h3 { font-weight: 700; } /* bold */
+        h4 { font-weight: 700; } /* bold */
 
-        /* 3. Core Mandate: The "Dark-Tech" Layering (V4) */
-        body::before {
-            content: "";
-            background-image: url('images/fixed-background.jpg');
-            background-size: cover;
-            background-position: center;
-            /* V4: Removed 'fixed' attachment to prevent vertigo */
-            background-attachment: scroll; 
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -1;
-            opacity: 0.15; /* Subtle background texture */
-        }
-        
-        /* 4. Component Library: Building Blocks */
-        
-        /* V4: Panel is now the "stage", not transparent */
-        .section-panel {
-            background-color: var(--deep-blue-panel);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-        }
-        
-        /* 1. Section Headers (.section-header) */
-        .section-header {
-            text-align: center;
-            max-width: 48rem; /* max-w-3xl */
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .section-header h2 {
-            font-size: 2.25rem; /* text-4xl */
-            line-height: 2.5rem;
-            letter-spacing: -0.025em; /* tracking-tight */
-        }
-        @media (min-width: 768px) {
-            .section-header h2 {
-                font-size: 3rem; /* md:text-5xl */
-                line-height: 1;
-            }
-        }
-        
-        /* Accent Bar (.accent-bar) (V1) */
-        .accent-bar {
-            width: 96px; /* w-24 */
-            height: 4px; /* h-1 */
-            background: linear-gradient(90deg, var(--accent-primary), #6ee7d0); /* V1: Updated color */
-            border-radius: 9999px;
-            margin: 1rem auto 0; /* mt-4 */
-        }
+        /* 3. Core Mandate: The "Dark-Tech" Layering (V4) */
+        /* REMOVED: body::before rule for fixed background image */
+        
+        /* 4. Component Library: Building Blocks */
+        
+        /* V4: Panel is now the "stage", not transparent */
+        .section-panel {
+            background-color: var(--deep-blue-panel);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+        
+        /* 1. Section Headers (.section-header) */
+        .section-header {
+            text-align: center;
+            max-width: 48rem; /* max-w-3xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-header h2 {
+            font-size: 2.25rem; /* text-4xl */
+            line-height: 2.5rem;
+            letter-spacing: -0.025em; /* tracking-tight */
+        }
+        @media (min-width: 768px) {
+            .section-header h2 {
+                font-size: 3rem; /* md:text-5xl */
+                line-height: 1;
+            }
+        }
+        
+        /* Accent Bar (.accent-bar) (V1) */
+        .accent-bar {
+            width: 96px; /* w-24 */
+            height: 4px; /* h-1 */
+            background: linear-gradient(90deg, var(--accent-primary), #6ee7d0); /* V1: Updated color */
+            border-radius: 9999px;
+            margin: 1rem auto 0; /* mt-4 */
+        }
 
-        /* 2. Primary Button (.btn-primary) (V1) */
-        .btn-primary {
-            display: inline-block;
-            background-color: var(--accent-primary);
-            color: var(--text-on-accent);
-            font-weight: 600; /* font-semibold */
-            padding: 0.75rem 2rem; /* py-3 px-8 */
-            border-radius: 0.5rem; /* rounded-lg */
-            /* V1: Updated shadow color */
-            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.35);
-            transition: all 0.2s ease-out;
-            transform-origin: center;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            /* V1: Updated shadow color */
-            box-shadow: 0 16px 40px rgba(45, 212, 191, 0.4);
-        }
-        
-        /* 3. Glass Cards (.glass-card) (V4) */
-        /* This is now the primary "glass" element, floating on the "stage" */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 0.75rem; /* rounded-xl */
-            transition: all 0.2s ease-out;
-        }
-        .glass-card:hover {
-            transform: translateY(-2px);
-            background: rgba(25, 42, 86, 0.38);
-        }
-        
-        /* 4. Tab Buttons (for Plug-ins & Radar) (V1) */
-        .tab-button {
-            padding: 0.75rem 1.5rem; /* py-3 px-6 */
-            font-weight: 600;
-            color: var(--text-tertiary);
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease-out;
-            white-space: nowrap;
-        }
-        .tab-button:hover {
-            color: var(--text-primary);
-        }
-        /* V1: Active state now handled dynamically by Alpine.js x-bind:style */
-    </style>
+        /* 2. Primary Button (.btn-primary) (V1) */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-primary);
+            color: var(--text-on-accent);
+            font-weight: 600; /* font-semibold */
+            padding: 0.75rem 2rem; /* py-3 px-8 */
+            border-radius: 0.5rem; /* rounded-lg */
+            /* V1: Updated shadow color */
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.35);
+            transition: all 0.2s ease-out;
+            transform-origin: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            /* V1: Updated shadow color */
+            box-shadow: 0 16px 40px rgba(45, 212, 191, 0.4);
+        }
+        
+        /* 3. Glass Cards (.glass-card) (V4) */
+        /* This is now the primary "glass" element, floating on the "stage" */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem; /* rounded-xl */
+            transition: all 0.2s ease-out;
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            background: rgba(25, 42, 86, 0.38);
+        }
+        
+        /* 4. Tab Buttons (for Plug-ins & Radar) (V1) */
+        .tab-button {
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            font-weight: 600;
+            color: var(--text-tertiary);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease-out;
+            white-space: nowrap;
+        }
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+        /* V1: Active state now handled dynamically by Alpine.js x-bind:style */
 
-    <title>AI LING ADVISORY | AI GRC for Financial Services</title>
-    <meta name="description" content="AI Ling Advisory is your expert Hong Kong partner for AI Governance, Risk, and Compliance (GRC). We build frameworks for financial services to turn AI risk into revenue. Contact us for AI GRC advisory and SaaS solutions.">
-    <meta name="keywords" content="AI GRC, AI Governance, AI Risk Management, AI Compliance, Responsible AI, Financial Services, FinTech, RegTech, Hong Kong, HKMA, SFC, AI GRC Hong Kong, LIU Ming, 柳溟">
+        /* V50: Alpine.js utility */
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
 
-    <script type="application/ld+json">
+    <title>AI LING ADVISORY | AI GRC for Financial Services</title>
+    <meta name="description" content="AI Ling Advisory is your expert Hong Kong partner for AI Governance, Risk, and Compliance (GRC). We build frameworks for financial services to turn AI risk into revenue. Contact us for AI GRC advisory and SaaS solutions.">
+    
+    <!-- SEO CHANGE (Point 'd'): Removed the obsolete meta keywords tag -->
+
+    <script type="application/ld+json">
 [
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://www.AILingAdvisory.com/#organization",
-    "name": "AI LING ADVISORY LIMITED",
-    "alternateName": "AI LING ADVISORY",
-    "description": "A Hong Kong-based expert advisory and technology firm specializing in AI Governance, Risk, and Compliance (GRC) for the financial services and technology sectors. We provide expert guidance, SaaS products, and digital content.",
-    
-    "url": "https://www.AILingAdvisory.com",
-    
-    "logo": "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E", 
-    
-    "telephone": "+86 15604081852",
-    "email": "AlLingAdvisory@outlook.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy",
-      "addressLocality": "Central",
-      "addressRegion": "Hong Kong S.A.R",
-      "addressCountry": "HK"
-    },
-    "areaServed": {
-      "@type": "Place",
-      "name": "Hong Kong"
-    },
-    "founder": {
-      "@type": "Person",
-      "name": "LIU Ming (柳溟)"
-    },
-    "knowsAbout": ["AI Governance", "AI Risk Management", "AI Compliance", "GRC", "FinTech", "RegTech", "SFC", "HKMA", "Responsible AI"],
-    "serviceType": [
-      "AI Governance, Risk, and Compliance (GRC) Advisory",
-      "Compliance Automation SaaS",
-      "Technology Risk Management",
-      "Digital Content & Podcast Production"
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "LIU Ming (柳溟)",
-    "jobTitle": "Founder & Sole Director",
-    
-    "worksFor": {
-      "@id": "https://www.AILingAdvisory.com/#organization"
-    },
-    
-    "sameAs": [
-      "http://linkedin.com/in/ailingadvisory"
-    ]
-  }
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://www.AILingAdvisory.com/#organization",
+    "name": "AI LING ADVISORY LIMITED",
+    "alternateName": "AI LING ADVISORY",
+    "description": "A Hong Kong-based expert advisory and technology firm specializing in AI Governance, Risk, and Compliance (GRC) for the financial services and technology sectors. We provide expert guidance, SaaS products, and digital content.",
+    
+    "url": "https://www.AILingAdvisory.com",
+    
+    "logo": "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E", 
+    
+    "telephone": "+86 15604081852",
+    "email": "AlLingAdvisory@outlook.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy",
+      "addressLocality": "Central",
+      "addressRegion": "Hong Kong S.A.R",
+      "addressCountry": "HK"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Hong Kong"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "LIU Ming (柳溟)"
+    },
+    <!-- SEO CHANGE (Point 'c' - Schema): Added sameAs to ProfessionalService to link company profiles -->
+    "sameAs": [
+      "http://linkedin.com/in/ailingadvisory",
+      "https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js"
+    ],
+    "knowsAbout": ["AI Governance", "AI Risk Management", "AI Compliance", "GRC", "FinTech", "RegTech", "SFC", "HKMA", "Responsible AI"],
+    "serviceType": [
+      "AI Governance, Risk, and Compliance (GRC) Advisory",
+      "Compliance Automation SaaS",
+      "Technology Risk Management",
+      "Digital Content & Podcast Production"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "LIU Ming (柳溟)",
+    "jobTitle": "Founder & Sole Director",
+    
+    "worksFor": {
+      "@id": "https://www.AILingAdvisory.com/#organization"
+    },
+    
+    "sameAs": [
+      "http://linkedin.com/in/ailingadvisory"
+    ]
+  }
 ]
 </script>
 
-    </head>
+    </head>
 
 <body class="antialiased">
 
-    <div class="relative min-h-screen">
-        
-        <header class="sticky top-0 z-50">
-            <nav class="backdrop-blur-md" style="background-color: var(--deep-blue-nav);">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between items-center h-20">
-                        <div class="flex-shrink-0">
-                            <a href="#" class="flex items-center gap-3">
-                                <svg class="w-8 h-8"
-                                     viewBox="0 0 100 100" 
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     fill="none"
-                                     stroke-width="8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
-                                    <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
-                                </svg>
-                                <span class="text-2xl font-extrabold text-white tracking-tight">
-                                    AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
-                                </span>
-                            </a>
-                        </div>
-                        
-                        <div class="hidden md:flex md:items-center md:space-x-8">
-                            <a href="#framework" class="text-white font-semibold hover:text-accent-primary transition-colors">Framework</a>
-                            <a href="#benchmark" class="text-white font-semibold hover:text-accent-primary transition-colors">Benchmark</a>
-                            <a href="#plugins" class="text-white font-semibold hover:text-accent-primary transition-colors">Plug-ins</a>
-                            <a href="#toolkit" class="text-white font-semibold hover:text-accent-primary transition-colors">Toolkit</a>
-                            <a href="about.html" class="text-white font-semibold hover:text-accent-primary transition-colors">About</a>
-                            <a href="podcast.html" class="text-white font-semibold hover:text-accent-primary transition-colors">Podcast</a>
-                        </div>
-                        
-                        <div class="hidden md:block">
-                            <a href="#scan" class="btn-primary py-2 px-6 text-sm">Book Free Scan</a>
-                        </div>
-                        
-                        <div class="md:hidden">
-                            <button class="text-white p-2 rounded-md">
-                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+    <div class="relative min-h-screen">
+        
+        <!-- SEO CHANGE (Point 'a'): Added Alpine.js x-data for mobile menu state -->
+        <header class="sticky top-0 z-50" x-data="{ isMobileMenuOpen: false }">
+            <nav class="backdrop-blur-md" style="background-color: var(--deep-blue-nav);">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-20">
+                        <div class="flex-shrink-0">
+                            <!-- SEO CHANGE (Point 'c' - A11y): Added aria-label for accessibility -->
+                            <a href="#" class="flex items-center gap-3" aria-label="AI Ling Advisory Home">
+                                <svg class="w-8 h-8"
+                                     viewBox="0 0 100 100" 
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     stroke-width="8"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
+                                    <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
+                                </svg>
+                                <span class="text-2xl font-extrabold text-white tracking-tight">
+                                    AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <div class="hidden md:flex md:items-center md:space-x-8">
+                            <a href="#framework" class="text-white font-semibold hover:text-accent-primary transition-colors">Framework</a>
+                            <a href="#benchmark" class="text-white font-semibold hover:text-accent-primary transition-colors">Benchmark</a>
+                            <a href="#plugins" class="text-white font-semibold hover:text-accent-primary transition-colors">Plug-ins</a>
+                            <a href="#toolkit" class="text-white font-semibold hover:text-accent-primary transition-colors">Toolkit</a>
+                            <a href="about.html" class="text-white font-semibold hover:text-accent-primary transition-colors">About</a>
+                            <a href="podcast.html" class="text-white font-semibold hover:text-accent-primary transition-colors">Podcast</a>
+                        </div>
+                        
+                        <div class="hidden md:block">
+                            <a href="#scan" class="btn-primary py-2 px-6 text-sm">Book Free Scan</a>
+                        </div>
+                        
+                        <!-- SEO CHANGE (Point 'a'): Mobile menu button toggle -->
+                        <div class="md:hidden">
+                            <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="text-white p-2 rounded-md" aria-controls="mobile-menu" :aria-expanded="isMobileMenuOpen.toString()">
+                                <span class="sr-only">Open main menu</span>
+                                <!-- Hamburger icon -->
+                                <svg x-show="!isMobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                                <!-- Close icon -->
+                                <svg x-show="isMobileMenuOpen" x-cloak class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SEO CHANGE (Point 'a'): Mobile menu panel -->
+                <div x-show="isMobileMenuOpen" 
+                     @click.away="isMobileMenuOpen = false" 
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 transform -translate-y-2"
+                     x-transition:enter-end="opacity-100 transform translate-y-0"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 transform translate-y-0"
+                     x-transition:leave-end="opacity-0 transform -translate-y-2"
+                     id="mobile-menu" 
+                     class="md:hidden absolute top-full left-0 right-0 py-4 shadow-lg" 
+                     style="background-color: var(--deep-blue-nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+                     x-cloak>
+                    <div class="px-5 space-y-2">
+                        <a href="#framework" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Framework</a>
+                        <a href="#benchmark" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Benchmark</a>
+                        <a href="#plugins" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Plug-ins</a>
+                        <a href="#toolkit" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Toolkit</a>
+                        <a href="about.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">About</a>
+                        <a href="podcast.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Podcast</a>
+                        <a href="#scan" @click="isMobileMenuOpen = false" class="block btn-primary py-2 px-6 text-sm w-full text-center mt-2">Book Free Scan</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-        <main>
-            
-            <section class="relative py-32 md:py-40 overflow-hidden section-panel">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                        
-                        <div class="text-center lg:text-left">
-                            
-                            <h2 class="text-lg font-semibold text-gray-300">
-                                AI GRC for Financial Services
-                            </h2>
-                            
-                            <h1 class="mt-4 text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter">
-                                We build AI GRC frameworks that turn AI from 
-                                <span style="color:var(--accent-primary);" class="whitespace-nowrap">Risk to Revenue.</span>
-                            </h1>
-                            
-                            <h2 class="mt-8 text-2xl font-bold text-white">
-                                AI is transforming your business faster than your governance can keep up.
-                            </h2>
+        <main>
+            
+            <section class="relative py-32 md:py-40 overflow-hidden section-panel">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        
+                        <div class="text-center lg:text-left">
+                            
+                            <h2 class="text-lg font-semibold text-gray-300">
+                                AI GRC for Financial Services
+                            </h2>
+                            
+                            <h1 class="mt-4 text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter">
+                                We build AI GRC frameworks that turn AI from 
+                                <span style="color:var(--accent-primary);" class="whitespace-nowrap">Risk to Revenue.</span>
+                            </h1>
+                            
+                            <h2 class="mt-8 text-2xl font-bold text-white">
+                                AI is transforming your business faster than your governance can keep up.
+                            </h2>
 
-                            <p class="mt-6 text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                                Most organisations lack AI governance talent, and large consultancies rarely offer practical solutions. We help you design and operationalise AI GRC — policies, controls, assurance, oversight and workflows — that work in your reality, not just in a slide deck.
-                            </p>
-                            
-                            <div class="mt-12">
-                                <a href="#scan" class="btn-primary text-lg py-4 px-10">
-                                    Book Free Scan
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-2xl font-bold text-white mb-8 text-center lg:text-left">
-                                The gaps are real, and the costs are accelerating:
-                            </h3>
-                            
-                            <div class="grid grid-cols-2 gap-4 md:gap-6">
-                                
-                                <div class="glass-card p-6 text-left">
-                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">95%</div>
-                                    <h4 class="text-xl font-bold text-white">of AI Pilots Fail</h4>
-                                    <p class="mt-2 text-base text-gray-300">
-                                        MIT research found 95% of enterprise generative AI pilots fail to produce measurable financial returns.
-                                    </p>
-                                </div>
-                                
-                                <div class="glass-card p-6 text-left">
-                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">2/3</div>
-                                    <h4 class="text-xl font-bold text-white">of Financial Firms Can't Hire</h4>
-                                    <p class="mt-2 text-base text-gray-300">
-                                        BCG research reveals two-thirds of financial institutions struggle to hire AI talent.
-                                    </p>
-                                </div>
-                                
-                                <div class="glass-card p-6 text-left">
-                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">$670K+</div>
-                                    <h4 class="text-xl font-bold text-white">Shadow AI Breach Cost</h4>
-                                    <p class="mt-2 text-base text-gray-300">
-                                        IBM reports breaches involving unauthorized "Shadow AI" cost organizations $670,000 more on average.
-                                    </p>
-                                </div>
-                                
-                                <div class="glass-card p-6 text-left">
-                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">1.6%</div>
-                                    <h4 class="text-xl font-bold text-white">Are Fully Integrated</h4>
-                                    <p class="mt-2 text-base text-gray-300">
-                                        A mere 1.6% of firms have fully integrated AI into their governance, risk, and compliance frameworks.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
-            
-            <section id="benchmark" class="section-panel py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="section-header">
-                        <h2>Where Does Your Organisation Sit on the AI GRC Maturity Curve?</h2>
-                        <div class="accent-bar"></div>
-                    </div>
+                            <p class="mt-6 text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                                Most organisations lack AI governance talent, and large consultancies rarely offer practical solutions. We help you design and operationalise AI GRC — policies, controls, assurance, oversight and workflows — that work in your reality, not just in a slide deck.
+                            </p>
+                            
+                            <div class="mt-12">
+                                <a href="#scan" class="btn-primary text-lg py-4 px-10">
+                                    Book Free Scan
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-8 text-center lg:text-left">
+                                The gaps are real, and the costs are accelerating:
+                            </h3>
+                            
+                            <div class="grid grid-cols-2 gap-4 md:gap-6">
+                                
+                                <div class="glass-card p-6 text-left">
+                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">95%</div>
+                                    <h4 class="text-xl font-bold text-white">of AI Pilots Fail</h4>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        MIT research found 95% of enterprise generative AI pilots fail to produce measurable financial returns.
+                                    </p>
+                                </div>
+                                
+                                <div class="glass-card p-6 text-left">
+                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">2/3</div>
+                                    <h4 class="text-xl font-bold text-white">of Financial Firms Can't Hire</h4>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        BCG research reveals two-thirds of financial institutions struggle to hire AI talent.
+                                    </p>
+                                </div>
+                                
+                                <div class="glass-card p-6 text-left">
+                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">$670K+</div>
+                                    <h4 class="text-xl font-bold text-white">Shadow AI Breach Cost</h4>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        IBM reports breaches involving unauthorized "Shadow AI" cost organizations $670,000 more on average.
+                                    </p>
+                                </div>
+                                
+                                <div class="glass-card p-6 text-left">
+                                    <div class="text-4xl font-extrabold text-accent-primary mb-3">1.6%</div>
+                                    <h4 class="text-xl font-bold text-white">Are Fully Integrated</h4>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        A mere 1.6% of firms have fully integrated AI into their governance, risk, and compliance frameworks.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <section id="benchmark" class="section-panel py-20 md:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="section-header">
+                        <h2>Where Does Your Organisation Sit on the AI GRC Maturity Curve?</h2>
+                        <div class="accent-bar"></div>
+                    </div>
 
-                    <div class="mt-16" x-data="benchmarkRadar()">
-                        
-                        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                            
-                            <div>
-                                <h3 class="text-3xl font-bold text-white mb-6">What we typically see</h3>
-                                <p class="text-lg text-gray-300">Most organisations — even the highly regulated ones — show:</p>
-                                <ul class="mt-6 space-y-3 text-gray-300">
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <strong class="text-white">2–4 hidden blind spots</strong>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span><strong class="text-white">Shadow AI exposure</strong> in unexpected areas</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span><strong class="text-white">Fairness & data controls</strong> weaker than leaders assume</span>
-                                    </li>
-                                </ul>
-                                <p class="mt-8 text-2xl font-semibold text-white tracking-tight">
-                                    Most leaders believe they sit around B-.<br>
-                                    Reality for the sector is closer to C+.
-                                </p>
-                            </div>
+                    <div class="mt-16" x-data="benchmarkRadar()">
+                        
+                        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                            
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-6">What we typically see</h3>
+                                <p class="text-lg text-gray-300">Most organisations — even the highly regulated ones — show:</p>
+                                <ul class="mt-6 space-y-3 text-gray-300">
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <strong class="text-white">2–4 hidden blind spots</strong>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span><strong class="text-white">Shadow AI exposure</strong> in unexpected areas</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span><strong class="text-white">Fairness & data controls</strong> weaker than leaders assume</span>
+                                    </li>
+                                </ul>
+                                <p class="mt-8 text-2xl font-semibold text-white tracking-tight">
+                                    Most leaders believe they sit around B-.<br>
+                                    Reality for the sector is closer to C+.
+                                </p>
+                            </div>
 
-                            <div class="glass-card p-4 md:p-8 min-h-[400px] md:min-h-[500px]">
-                                <canvas id="radarChart"></canvas>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                    <script>
-                        function benchmarkRadar() {
-                            return {
-                                chartInstance: null,
-                                // Init function called by x-data
-                                init() {
-                                    // Ensure chart is created on the next tick to guarantee canvas is ready
-                                    this.$nextTick(() => {
-                                        this.createChart();
-                                    });
-                                },
-                                // Function to create the single, multi-dataset chart
-                                createChart() {
-                                    const ctx = document.getElementById('radarChart').getContext('2d');
-                                    
-                                    // The 9 Dimensions (Labels for the chart)
-                                    const labels = [
-                                        'Accountability', 'Third-Party', 'Fairness', 'Security', 'Culture',
-                                        'Inventory', 'Data Governance', 'Model Lifecycle', 'Monitoring'
-                                    ];
-                                    
-                                    // Tooltip Definitions
-                                    const dimensionTooltips = {
-                                        'Accountability': 'Clear ownership, decision rights, and escalation paths for AI.',
-                                        'Third-Party': 'Oversight of external AI tools, vendors, and unapproved "Shadow AI" usage.',
-                                        'Fairness': 'Documented processes for bias testing, explainability, and ethical checks.',
-                                        'Security': 'AI-specific threat modelling, red-teaming, and resilience against new attack vectors.',
-                                        'Culture': 'Training, safe-use guidance, and change management for responsible AI adoption.',
-                                        'Inventory': 'A complete, real-time inventory and risk classification of all AI systems.',
-                                        'Data Governance': 'Controls for AI data lineage, quality, retention, and minimisation.',
-                                        'Model Lifecycle': 'End-to-end governance from design and validation to monitoring and retirement.',
-                                        'Monitoring': 'Continuous, automated tracking of model performance, drift, and compliance.'
-                                    };
-                                    
-                                    // V17: Hardcoded colours for JS reliability (Final Palette)
-                                    const datasets = [
-                                        {
-                                            label: 'Banking',
-                                            data: [3.5, 2, 2, 2.5, 2, 2.5, 2.5, 3.5, 3],
-                                            borderColor: '#A3E635', // Lime Green
-                                        },
-                                        {
-                                            label: 'Wealth Mgmt',
-                                            data: [3, 2, 2.5, 2.5, 2, 2, 2, 3, 2.5],
-                                            borderColor: '#3B82F6', // Blue
-                                        },
-                                        {
-                                            label: 'Asset Mgmt',
-                                            data: [3.5, 2.5, 3, 3, 2.5, 2.5, 2, 3.5, 3],
-                                            borderColor: '#F59E0B', // Orange
-                                        },
-                                        {
-                                            label: 'Insurance',
-                                            data: [3, 2, 2, 3, 2, 2, 2.5, 3, 2.5],
-                                            borderColor: '#A855F7', // Purple
-                                        },
-                                        {
-                                            label: 'FinTech',
-                                            data: [2.5, 1.5, 1.5, 1.5, 3, 2, 2, 2, 2],
-                                            borderColor: '#E11D48', // Rose Red
-                                        },
-                                        {
-                                            label: 'Capital Mkts',
-                                            data: [3.5, 2.5, 2.5, 3.5, 2.5, 3, 3, 3.5, 3],
-                                            borderColor: '#EC4899', // Pink
-                                        }
-                                    ];
+                            <div class="glass-card p-4 md:p-8 min-h-[400px] md:min-h-[500px]">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function benchmarkRadar() {
+                            return {
+                                chartInstance: null,
+                                // Init function called by x-data
+                                init() {
+                                    // Ensure chart is created on the next tick to guarantee canvas is ready
+                                    this.$nextTick(() => {
+                                        this.createChart();
+                                    });
+                                },
+                                // Function to create the single, multi-dataset chart
+                                createChart() {
+                                    const ctx = document.getElementById('radarChart').getContext('2d');
+                                    
+                                    // The 9 Dimensions (Labels for the chart)
+                                    const labels = [
+                                        'Accountability', 'Third-Party', 'Fairness', 'Security', 'Culture',
+                                        'Inventory', 'Data Governance', 'Model Lifecycle', 'Monitoring'
+                                    ];
+                                    
+                                    // Tooltip Definitions
+                                    const dimensionTooltips = {
+                                        'Accountability': 'Clear ownership, decision rights, and escalation paths for AI.',
+                                        'Third-Party': 'Oversight of external AI tools, vendors, and unapproved "Shadow AI" usage.',
+                                        'Fairness': 'Documented processes for bias testing, explainability, and ethical checks.',
+                                        'Security': 'AI-specific threat modelling, red-teaming, and resilience against new attack vectors.',
+                                        'Culture': 'Training, safe-use guidance, and change management for responsible AI adoption.',
+                                        'Inventory': 'A complete, real-time inventory and risk classification of all AI systems.',
+                                        'Data Governance': 'Controls for AI data lineage, quality, retention, and minimisation.',
+                                        'Model Lifecycle': 'End-to-end governance from design and validation to monitoring and retirement.',
+                                        'Monitoring': 'Continuous, automated tracking of model performance, drift, and compliance.'
+                                    };
+                                    
+                                    // V17: Hardcoded colours for JS reliability (Final Palette)
+                                    const datasets = [
+                                        {
+                                            label: 'Banking',
+                                            data: [3.5, 2, 2, 2.5, 2, 2.5, 2.5, 3.5, 3],
+                                            borderColor: '#A3E635', // Lime Green
+                                        },
+                                        {
+                                            label: 'Wealth Mgmt',
+                                            data: [3, 2, 2.5, 2.5, 2, 2, 2, 3, 2.5],
+                                            borderColor: '#3B82F6', // Blue
+                                        },
+                                        {
+                                            label: 'Asset Mgmt',
+                                            data: [3.5, 2.5, 3, 3, 2.5, 2.5, 2, 3.5, 3],
+                                            borderColor: '#F59E0B', // Orange
+                                        },
+                                        {
+                                            label: 'Insurance',
+                                            data: [3, 2, 2, 3, 2, 2, 2.5, 3, 2.5],
+                                            borderColor: '#A855F7', // Purple
+                                        },
+                                        {
+                                            label: 'FinTech',
+                                            data: [2.5, 1.5, 1.5, 1.5, 3, 2, 2, 2, 2],
+                                            borderColor: '#E11D48', // Rose Red
+                                        },
+                                        {
+                                            label: 'Capital Mkts',
+                                            data: [3.5, 2.5, 2.5, 3.5, 2.5, 3, 3, 3.5, 3],
+                                            borderColor: '#EC4899', // Pink
+                                        }
+                                    ];
 
-                                    // Map datasets to the format Chart.js expects
-                                    const chartDatasets = datasets.map(ds => ({
-                                        label: ds.label,
-                                        data: ds.data,
-                                        borderColor: ds.borderColor,
-                                        backgroundColor: 'transparent', // V16: Removed fill
-                                        borderWidth: 2.5, // Thicker lines
-                                        pointBackgroundColor: ds.borderColor,
-                                        pointBorderColor: '#fff',
-                                        pointRadius: 1, // Smaller points for less clutter
-                                        pointHoverRadius: 5,
-                                        tension: 0.1 // Slightly curved
-                                    }));
+                                    // Map datasets to the format Chart.js expects
+                                    const chartDatasets = datasets.map(ds => ({
+                                        label: ds.label,
+                                        data: ds.data,
+                                        borderColor: ds.borderColor,
+                                        backgroundColor: 'transparent', // V16: Removed fill
+                                        borderWidth: 2.5, // Thicker lines
+                                        pointBackgroundColor: ds.borderColor,
+                                        pointBorderColor: '#fff',
+                                        pointRadius: 1, // Smaller points for less clutter
+                                        pointHoverRadius: 5,
+                                        tension: 0.1 // Slightly curved
+                                    }));
 
-                                    if (this.chartInstance) {
-                                        this.chartInstance.destroy();
-                                    }
+                                    if (this.chartInstance) {
+                                        this.chartInstance.destroy();
+                                    }
 
-                                    this.chartInstance = new Chart(ctx, {
-                                        type: 'radar',
-                                        data: {
-                                            labels: labels,
-                                            datasets: chartDatasets // Pass the array of 6 datasets
-                                        },
-                                        options: {
-                                            responsive: true,
-                                            maintainAspectRatio: false,
-                                            plugins: {
-                                                legend: {
-                                                    display: true, // The legend is now critical
-                                                    position: 'bottom',
-                                                    onClick: null, // V16: Made legend static
-                                                    labels: {
-                                                        /* V37: Hardcoded white for reliability */
-                                                        color: '#FFFFFF', 
-                                                        font: { size: 12 },
-                                                        padding: 20
-                                                    }
-                                                },
-                                                // Custom Tooltip for Dimension Definitions
-                                                tooltip: {
-                                                    enabled: true,
-                                                    // This ensures tooltips are styled per the Dark-Tech theme
-                                                    backgroundColor: 'var(--deep-blue)',
-                                                    borderColor: 'var(--glass-border)',
-                                                    borderWidth: 1,
-                                                    padding: 12,
-                                                    titleFont: { weight: 'bold', size: 14 },
-                                                    bodyFont: { size: 12 },
-                                                    bodySpacing: 4,
-                                                    multiKeyBackground: 'transparent', // Removes color boxes
-                                                    callbacks: {
-                                                        // This formats the tooltip title (the dimension label)
-                                                        title: function(tooltipItems) {
-                                                            return tooltipItems[0].label;
-                                                        },
-                                                        // This adds the definition *after* the title
-                                                        afterTitle: function(tooltipItems) {
-                                                            const label = tooltipItems[0].label;
-                                                            // Split definition into lines if needed
-                                                            const definition = dimensionTooltips[label] || '';
-                                                            // Simple split logic (e.g., wrap at 40 chars)
-                                                            const wrapLength = 40;
-                                                            let lines = [];
-                                                            let currentLine = '';
-                                                            for (let word of definition.split(' ')) {
-                                                                if ((currentLine + word).length > wrapLength) {
-                                                                    lines.push(currentLine.trim());
-                                                                    currentLine = '';
-                                                                }
-                                                                currentLine += word + ' ';
-                                                            }
-                                                            lines.push(currentLine.trim());
-                                                            return lines;
-                                                        },
-                                                        // This formats the individual score lines
-                                                        label: function(context) {
-                                                            let label = context.dataset.label || '';
-                                                            if (label) {
-                                                                label += ': ';
-                                                            }
-                                                            if (context.parsed.r !== null) {
-                                                                // Find the text value (e.g., 'B-') for the numeric score
-                                                                const score = context.parsed.r;
-                                                                let grade = '';
-                                                                if (score === 5) grade = 'A';
-                                                                else if (score === 4.5) grade = 'A-';
-                                                                else if (score === 4) grade = 'B+';
-                                                                else if (score === 3.5) grade = 'B';
-                                                                else if (score === 3) grade = 'B-';
-                                                                else if (score === 2.5) grade = 'C+';
-                                                                else if (score === 2) grade = 'C';
-                                                                else if (score === 1.5) grade = 'C-';
-                                                                else grade = score;
-                                                                
-                                                                label += grade;
-                                                            }
-                                                            return label;
-                                                        },
-                                                        labelColor: function(context) {
-                                                            // Make the label-color box match the line color
-                                                            return {
-                                                                borderColor: context.dataset.borderColor,
-                                                                backgroundColor: context.dataset.borderColor,
-                                                                borderWidth: 2,
-                                                                borderRadius: 2,
-                                                            };
-                                                        },
-                                                    }
-                                                }
-                                            },
-                                            scales: {
-                                                r: {
-                                                    min: 0,
-                                                    max: 5, // A- is 4.5, so 5 is a good top
-                                                    beginAtZero: true,
-                                                    angleLines: {
-                                                        color: 'rgba(255, 255, 255, 0.1)' // --glass-border
-                                                    },
-                                                    grid: {
-                                                        color: 'rgba(255, 255, 255, 0.1)' // --glass-border
-                                                    },
-                                                    pointLabels: {
-                                                        color: '#FFFFFF', // FIXED: Hardcoded white
-                                                        font: {
-                                                            size: 11,
-                                                            weight: '600'
-                                                        },
-                                                        // Add padding to avoid overlap with chart
-                                                        padding: 15
-                                                    },
-                                                    ticks: {
-                                                        color: 'var(--text-tertiary)', // #a7a7a7
-                                                        backdropColor: 'transparent',
-                                                        stepSize: 0.5,
-                                                        // Custom tick labels per the brief
-                                                        callback: function(value) {
-                                                            if (value === 5) return 'A';
-                                                            if (value === 4.5) return 'A-';
-                                                            if (value === 4) return 'B+';
-                                                            if (value === 3.5) return 'B';
-                                                            if (value === 3) return 'B-';
-                                                            if (value === 2.5) return 'C+';
-                                                            if (value === 2) return 'C';
-                                                            if (value === 1.5) return 'C-';
-                                                            if (value === 0) return '0';
-                                                            return ''; // Hide other labels
-                                                        },
-                                                        padding: 5
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    </script>
-                </div>
-            </section>
-            
-            <section id="framework" class="section-panel py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="section-header">
-                        <h2>The AI GRC Accelerator Framework</h2>
-                        <div class="accent-bar"></div>
-                    </div>
-                    
-                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
-                        A structured, three-pillar model aligned to global regulatory expectations and internal audit standards, helping you embed responsible AI without slowing innovation.
-                    </p>
-                    
-                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" x-data="{ openPillar: 0 }">
-                        
-                        <div class="glass-card p-8 flex flex-col">
-                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.242-6.75.72M18.75 4.97c.418.068.826.137 1.225.206m-.711 15.126c.364.069.72.136 1.066.197m-11.022 0c.346-.061.702-.128 1.066-.197M12 4.5v15.75m-3.75-15.75v15.75m3.75-15.75v15.75M4.5 4.5v15.75M19.5 4.5v15.75M8.25 4.5v15.75M15.75 4.5v15.75M5.25 4.5v15.75M18.75 4.5v15.75" />
-                                </svg>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
-                                Pillar I – Governance
-                            </h3>
-                            
-                            <p class="mt-4 text-gray-300">
-                                <strong class="text-white">The Visibility & Accountability Gap</strong><br>
-                                Most firms run AI at scale without a clear line of sight on who owns the risk, which models truly exist (i.e., "Shadow AI"), or how decisions are escalated. This creates a fundamental accountability void and silent systemic risk that leadership often discovers too late.
-                            </p>
-                            
-                            <div x-show="openPillar === 1" x-transition class="overflow-hidden">
-                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
-                                    G — Know What AI Does
-                                </h4>
-                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
-                                    (Transparency • Visibility • Accountability)
-                                </p>
-                                
-                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
-                                <ul class="mt-4 space-y-3 text-gray-300">
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A fully operational <strong>AI Governance Charter</strong> aligned with MAS, HKMA, FCA, and EU AI Act expectations</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>production-ready Model Inventory</strong> with classification rules</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>decision and escalation matrix</strong> that removes ambiguity across the three lines of defence</span>
-                                    </li>
-                                </ul>
+                                    this.chartInstance = new Chart(ctx, {
+                                        type: 'radar',
+                                        data: {
+                                            labels: labels,
+                                            datasets: chartDatasets // Pass the array of 6 datasets
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            plugins: {
+                                                legend: {
+                                                    display: true, // The legend is now critical
+                                                    position: 'bottom',
+                                                    onClick: null, // V16: Made legend static
+                                                    labels: {
+                                                        /* V37: Hardcoded white for reliability */
+                                                        color: '#FFFFFF', 
+                                                        font: { size: 12 },
+                                                        padding: 20
+                                                    }
+                                                },
+                                                // Custom Tooltip for Dimension Definitions
+                                                tooltip: {
+                                                    enabled: true,
+                                                    // This ensures tooltips are styled per the Dark-Tech theme
+                                                    backgroundColor: 'var(--deep-blue)',
+                                                    borderColor: 'var(--glass-border)',
+                                                    borderWidth: 1,
+                                                    padding: 12,
+                                                    titleFont: { weight: 'bold', size: 14 },
+                                                    bodyFont: { size: 12 },
+                                                    bodySpacing: 4,
+                                                    multiKeyBackground: 'transparent', // Removes color boxes
+                                                    callbacks: {
+                                                        // This formats the tooltip title (the dimension label)
+                                                        title: function(tooltipItems) {
+                                                            return tooltipItems[0].label;
+                                                        },
+                                                        // This adds the definition *after* the title
+                                                        afterTitle: function(tooltipItems) {
+                                                            const label = tooltipItems[0].label;
+                                                            // Split definition into lines if needed
+                                                            const definition = dimensionTooltips[label] || '';
+                                                            // Simple split logic (e.g., wrap at 40 chars)
+                                                            const wrapLength = 40;
+                                                            let lines = [];
+                                                            let currentLine = '';
+                                                            for (let word of definition.split(' ')) {
+                                                                if ((currentLine + word).length > wrapLength) {
+                                                                    lines.push(currentLine.trim());
+                                                                    currentLine = '';
+                                                                }
+                                                                currentLine += word + ' ';
+                                                            }
+                                                            lines.push(currentLine.trim());
+                                                            return lines;
+                                                        },
+                                                        // This formats the individual score lines
+                                                        label: function(context) {
+                                                            let label = context.dataset.label || '';
+                                                            if (label) {
+                                                                label += ': ';
+                                                            }
+                                                            if (context.parsed.r !== null) {
+                                                                // Find the text value (e.g., 'B-') for the numeric score
+                                                                const score = context.parsed.r;
+                                                                let grade = '';
+                                                                if (score === 5) grade = 'A';
+                                                                else if (score === 4.5) grade = 'A-';
+                                                                else if (score === 4) grade = 'B+';
+                                                                else if (score === 3.5) grade = 'B';
+                                                                else if (score === 3) grade = 'B-';
+                                                                else if (score === 2.5) grade = 'C+';
+                                                                else if (score === 2) grade = 'C';
+                                                                else if (score === 1.5) grade = 'C-';
+                                                                else grade = score;
+                                                                
+                                                                label += grade;
+                                                            }
+                                                            return label;
+                                                        },
+                                                        labelColor: function(context) {
+                                                            // Make the label-color box match the line color
+                                                            return {
+                                                                borderColor: context.dataset.borderColor,
+                                                                backgroundColor: context.dataset.borderColor,
+                                                                borderWidth: 2,
+                                                                borderRadius: 2,
+                                                            };
+                                                        },
+                                                    }
+                                                }
+                                            },
+                                            scales: {
+                                                r: {
+                                                    min: 0,
+                                                    max: 5, // A- is 4.5, so 5 is a good top
+                                                    beginAtZero: true,
+                                                    angleLines: {
+                                                        color: 'rgba(255, 255, 255, 0.1)' // --glass-border
+                                                    },
+                                                    grid: {
+                                                        color: 'rgba(255, 255, 255, 0.1)' // --glass-border
+                                                    },
+                                                    pointLabels: {
+                                                        color: '#FFFFFF', // FIXED: Hardcoded white
+                                                        font: {
+                                                            size: 11,
+                                                            weight: '600'
+                                                        },
+                                                        // Add padding to avoid overlap with chart
+                                                        padding: 15
+                                                    },
+                                                    ticks: {
+                                                        color: 'var(--text-tertiary)', // #a7a7a7
+                                                        backdropColor: 'transparent',
+                                                        stepSize: 0.5,
+                                                        // Custom tick labels per the brief
+                                                        callback: function(value) {
+                                                            if (value === 5) return 'A';
+                                                            if (value === 4.5) return 'A-';
+                                                            if (value === 4) return 'B+';
+                                                            if (value === 3.5) return 'B';
+                                                            if (value === 3) return 'B-';
+                                                            if (value === 2.5) return 'C+';
+                                                            if (value === 2) return 'C';
+                                                            if (value === 1.5) return 'C-';
+                                                            if (value === 0) return '0';
+                                                            return ''; // Hide other labels
+                                                        },
+                                                        padding: 5
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    </script>
+                </div>
+            </section>
+            
+            <section id="framework" class="section-panel py-20 md:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="section-header">
+                        <h2>The AI GRC Accelerator Framework</h2>
+                        <div class="accent-bar"></div>
+                    </div>
+                    
+                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
+                        A structured, three-pillar model aligned to global regulatory expectations and internal audit standards, helping you embed responsible AI without slowing innovation.
+                    </p>
+                    
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" x-data="{ openPillar: 0 }">
+                        
+                        <div class="glass-card p-8 flex flex-col">
+                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
+                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.242-6.75.72M18.75 4.97c.418.068.826.137 1.225.206m-.711 15.126c.364.069.72.136 1.066.197m-11.022 0c.346-.061.702-.128 1.066-.197M12 4.5v15.75m-3.75-15.75v15.75m3.75-15.75v15.75M4.5 4.5v15.75M19.5 4.5v15.75M8.25 4.5v15.75M15.75 4.5v15.75M5.25 4.5v15.75M18.75 4.5v15.75" />
+                                </svg>
+                            </div>
+                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
+                                Pillar I – Governance
+                            </h3>
+                            
+                            <p class="mt-4 text-gray-300">
+                                <strong class="text-white">The Visibility & Accountability Gap</strong><br>
+                                Most firms run AI at scale without a clear line of sight on who owns the risk, which models truly exist (i.e., "Shadow AI"), or how decisions are escalated. This creates a fundamental accountability void and silent systemic risk that leadership often discovers too late.
+                            </p>
+                            
+                            <div x-show="openPillar === 1" x-transition class="overflow-hidden">
+                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
+                                    G — Know What AI Does
+                                </h4>
+                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
+                                    (Transparency • Visibility • Accountability)
+                                </p>
+                                
+                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
+                                <ul class="mt-4 space-y-3 text-gray-300">
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A fully operational <strong>AI Governance Charter</strong> aligned with MAS, HKMA, FCA, and EU AI Act expectations</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>production-ready Model Inventory</strong> with classification rules</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>decision and escalation matrix</strong> that removes ambiguity across the three lines of defence</span>
+                                    </li>
+                                </ul>
 
-                                <p class="mt-6 text-lg font-semibold text-accent-primary">
-                                    → You gain governance clarity in weeks, not months.
-                                </p>
-                            </div>
+                                <p class="mt-6 text-lg font-semibold text-accent-primary">
+                                    → You gain governance clarity in weeks, not months.
+                                </p>
+                            </div>
 
-                            <div class="flex-grow"></div>
-                            
-                            <button @click="openPillar = (openPillar === 1 ? 0 : 1)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
-                                <span x-text="openPillar === 1 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
-                            </button>
-                        </div>
-                        
-                        <div class="glass-card p-8 flex flex-col">
-                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                                </svg>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
-                                Pillar II – Risk Management
-                            </h3>
-                            
-                            <p class="mt-4 text-gray-300">
-                                <strong class="text-white">The Detection & Control Gap</strong><br>
-                                AI-native risks—such as model drift, proxy discrimination, and third-party data leakage—are invisible to traditional operational risk frameworks. Most firms lack the modern controls or testing methods to meaningfully detect, measure, and control these new, automated threats.
-                            </p>
-                            
-                            <div x-show="openPillar === 2" x-transition class="overflow-hidden">
-                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
-                                    R — Control What AI Can Do
-                                </h4>
-                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
-                                    (Defense • Risk Controls • Safe Operations)
-                                </p>
+                            <div class="flex-grow"></div>
+                            
+                            <button @click="openPillar = (openPillar === 1 ? 0 : 1)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
+                                <span x-text="openPillar === 1 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
+                            </button>
+                        </div>
+                        
+                        <div class="glass-card p-8 flex flex-col">
+                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
+                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                </svg>
+                            </div>
+                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
+                                Pillar II – Risk Management
+                            </h3>
+                            
+                            <p class="mt-4 text-gray-300">
+                                <strong class="text-white">The Detection & Control Gap</strong><br>
+                                AI-native risks—such as model drift, proxy discrimination, and third-party data leakage—are invisible to traditional operational risk frameworks. Most firms lack the modern controls or testing methods to meaningfully detect, measure, and control these new, automated threats.
+                            </p>
+                            
+                            <div x-show="openPillar === 2" x-transition class="overflow-hidden">
+                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
+                                    R — Control What AI Can Do
+                                </h4>
+                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
+                                    (Defense • Risk Controls • Safe Operations)
+                                </p>
 
-                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
-                                <ul class="mt-4 space-y-3 text-gray-300">
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>sector-tailored AI risk taxonomy</strong> covering 30–40 unique AI risks</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A library of <strong>AI-specific controls</strong>, including drift detection, explainability checks, and human oversight points</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>continuous monitoring pack</strong> deployable across all model families</span>
-                                    </li>
-                                </ul>
+                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
+                                <ul class="mt-4 space-y-3 text-gray-300">
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>sector-tailored AI risk taxonomy</strong> covering 30–40 unique AI risks</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A library of <strong>AI-specific controls</strong>, including drift detection, explainability checks, and human oversight points</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>continuous monitoring pack</strong> deployable across all model families</span>
+                                    </li>
+                                </ul>
 
-                                <p class="mt-6 text-lg font-semibold text-accent-primary">
-                                    → You move from compliance-driven risk activity to true, measurable risk control.
-                                </p>
-                            </div>
+                                <p class="mt-6 text-lg font-semibold text-accent-primary">
+                                    → You move from compliance-driven risk activity to true, measurable risk control.
+                                </p>
+                            </div>
 
-                            <div class="flex-grow"></div>
+                            <div class="flex-grow"></div>
 
-                            <button @click="openPillar = (openPillar === 2 ? 0 : 2)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
-                                <span x-text="openPillar === 2 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
-                            </button>
-                        </div>
-                        
-                        <div class="glass-card p-8 flex flex-col">
-                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
-                                Pillar III – Compliance
-                            </h3>
+                            <button @click="openPillar = (openPillar === 2 ? 0 : 2)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
+                                <span x-text="openPillar === 2 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
+                            </button>
+                        </div>
+                        
+                        <div class="glass-card p-8 flex flex-col">
+                            <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
+                                <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="mt-6 text-xl font-bold text-white text-center min-h-[4rem] md:min-h-0 lg:min-h-[4rem]">
+                                Pillar III – Compliance
+                            </h3>
 
-                            <p class="mt-4 text-gray-300">
-                                <strong class="text-white">The Assurance & Evidence Gap</strong><br>
-                                Regulators (EU, MAS, HKMA, FCA) no longer accept narrative explanations. They require firms to prove that AI is safe, fair, and auditable. Without a repeatable audit trail and robust validation evidence, firms cannot meet this burden of proof, failing both internal audits and external examinations.
-                            </p>
-                            
-                            <div x-show="openPillar === 3" x-transition class="overflow-hidden">
-                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
-                                    C — Prove You Can Trust It
-                                </h4>
-                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
-                                    (Assurance • Compliance • Validation)
-                                </p>
+                            <p class="mt-4 text-gray-300">
+                                <strong class="text-white">The Assurance & Evidence Gap</strong><br>
+                                Regulators (EU, MAS, HKMA, FCA) no longer accept narrative explanations. They require firms to prove that AI is safe, fair, and auditable. Without a repeatable audit trail and robust validation evidence, firms cannot meet this burden of proof, failing both internal audits and external examinations.
+                            </p>
+                            
+                            <div x-show="openPillar === 3" x-transition class="overflow-hidden">
+                                <h4 class="mt-6 text-2xl font-bold text-accent-primary text-center md:text-left">
+                                    C — Prove You Can Trust It
+                                </h4>
+                                <p class="mt-2 text-lg text-gray-400 text-center md:text-left">
+                                    (Assurance • Compliance • Validation)
+                                </p>
 
-                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
-                                <ul class="mt-4 space-y-3 text-gray-300">
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span><strong>Pre-audit checklists</strong> aligned with EU AI Act, MAS FEAT, FCA AI Guidance</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>compliance evidence pack</strong> for every model, eliminating last-minute documentation crises</span>
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                        <span>A <strong>lightweight audit workflow</strong> that supports ongoing supervision</span>
-                                    </li>
-                                </ul>
+                                <h4 class="mt-6 text-lg font-semibold text-white">What You Get</h4>
+                                <ul class="mt-4 space-y-3 text-gray-300">
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span><strong>Pre-audit checklists</strong> aligned with EU AI Act, MAS FEAT, FCA AI Guidance</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>compliance evidence pack</strong> for every model, eliminating last-minute documentation crises</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span>A <strong>lightweight audit workflow</strong> that supports ongoing supervision</span>
+                                    </li>
+                                </ul>
 
-                                <p class="mt-6 text-lg font-semibold text-accent-primary">
-                                    → You reduce regulatory exposure and eliminate surprise audit findings.
-                                </p>
-                            </div>
+                                <p class="mt-6 text-lg font-semibold text-accent-primary">
+                                    → You reduce regulatory exposure and eliminate surprise audit findings.
+                                </p>
+                            </div>
 
-                            <div class="flex-grow"></div>
-                            
-                            <button @click="openPillar = (openPillar === 3 ? 0 : 3)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
-                                <span x-text="openPillar === 3 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
-                            </button>
-                        </div>
+                            <div class="flex-grow"></div>
+                            
+                            <button @click="openPillar = (openPillar === 3 ? 0 : 3)" class="mt-6 font-semibold text-accent-primary hover:text-white transition-colors self-start">
+                                <span x-text="openPillar === 3 ? 'Show Less ↑' : 'Learn Our Approach →'">Learn Our Approach →</span>
+                            </button>
+                        </div>
 
-                    </div>
-                </div>
-            </section>
-            
-            <section id="plugins" class="section-panel py-20 md:py-28" x-data="industryPlugins()">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="section-header">
-                        <h2>Industry Plug-ins: Designed for Your Sector</h2>
-                        <div class="accent-bar"></div>
-                    </div>
-                    
-                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
-                        Financial subsectors face unique AI risk pressures.
-                        Our plug-ins provide tailored insights, controls, and risk considerations for your industry.
-                    </p>
-                    
-                    <div class="mt-12 border-b-2 border-white/10">
-                        <nav class="flex flex-wrap justify-center -mb-0.5" aria-label="Tabs">
-                            <button @click="tab = 'banking'"
-                                    class="tab-button"
-                                    :style="tab === 'banking' ? { color: industryColors.banking.border, borderColor: industryColors.banking.border } : {}">
-                                Banking </button>
-                            <button @click="tab = 'wealth'"
-                                    class="tab-button"
-                                    :style="tab === 'wealth' ? { color: industryColors.wealth.border, borderColor: industryColors.wealth.border } : {}">
-                                Wealth Management
-                            </button>
-                            <button @click="tab = 'asset'"
-                                    class="tab-button"
-                                    :style="tab === 'asset' ? { color: industryColors.asset.border, borderColor: industryColors.asset.border } : {}">
-                                Asset Management
-                            </button>
-                            <button @click="tab = 'insurance'"
-                                    class="tab-button"
-                                    :style="tab === 'insurance' ? { color: industryColors.insurance.border, borderColor: industryColors.insurance.border } : {}">
-                                Insurance
-                            </button>
-                            <button @click="tab = 'fintech'"
-                                    class="tab-button"
-                                    :style="tab === 'fintech' ? { color: industryColors.fintech.border, borderColor: industryColors.fintech.border } : {}">
-                                FinTech
-                            </button>
-                            <button @click="tab = 'capmarkets'"
-                                    class="tab-button"
-                                    :style="tab === 'capmarkets' ? { color: industryColors.capmarkets.border, borderColor: industryColors.capmarkets.border } : {}">
-                                Capital Markets
-                            </button>
-                        </nav>
-                    </div>
-                    
-                    <div class="mt-12 max-w-4xl mx-auto text-gray-300">
-                        <div x-show="tab === 'banking'" x-transition class="glass-card p-8 md:p-10">
-                            <h3 class="text-2xl font-bold text-white mb-6">Banking</h3> <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Algorithmic Fair Lending:</strong> Managing "proxy discrimination" risk in credit models (e.g., digital redlining).</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Legacy System Constraints:</strong> Fragmented data in silos cripples data governance and increases integration risk.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Strategic Deposit Disruption:</strong> Threat from agentic AI autonomously moving deposits, eroding net interest margin.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div x-show="tab === 'wealth'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
-                            <h3 class="text-2xl font-bold text-white mb-6">Wealth Management (incl. Robo-Advisors)</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">The "Fiduciary in the Machine":</strong> Proving algorithmic advice fulfils regulatory "Duty of Care" (suitability) and "Duty of Loyalty."</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Human-in-the-Loop (HITL) Liability:</strong> Risk of advisors "rubber-stamping" flawed AI advice, leading to scalable mis-selling.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Suitability from Incomplete Data:</strong> GRC failure from models basing advice on simplistic client questionnaires.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div x-show="tab === 'asset'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
-                            <h3 class="text-2xl font-bold text-white mb-6">Asset Management (Buy-Side / Quant)</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Model Epistemology ("Overfitting"):</strong> Existential risk of models learning historical "noise" vs. a true "signal."</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Alpha Decay & Non-Stationary Markets:</strong> GRC becomes a continuous monitoring function as models decay in shifting markets.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Alternative Data Governance:</strong> Managing compliance and ethical risks (provenance, privacy) of ingesting novel "alt-data."</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div x-show="tab === 'insurance'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
-                            <h3 class="text-2xl font-bold text-white mb-6">Insurance</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Actuarial vs. Unfair Discrimination:</strong> Preventing AI underwriting from using proxies for discriminatory pricing.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Claims Automation Explainability:</strong> Requirement to provide clear, auditable justifications for AI-driven claims denials.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Catastrophic Risk Modelling Failure:</strong> High risk of models failing to predict "black swan" events (e.g., climate-driven).</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div x-show="tab === 'fintech'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
-                            <h3 class="text-2xl font-bold text-white mb-6">FinTech</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Indirect Regulatory Scrutiny:</strong> Immense compliance burden from bank partners (e.g., OCC, FDIC) who are held accountable.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Multi-Jurisdictional Maze:</strong> Prohibitive cost of navigating fragmented, country-by-country licensing to scale.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Data Scarcity & Model Risk:</strong> High risk of model "overfitting" due to lack of deep, longitudinal historical data.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div x-show="tab === 'capmarkets'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
-                            <h3 class="text-2xl font-bold text-white mb-6">Capital Markets (Sell-Side)</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Algorithmic Conflicts of Interest:</strong> Proving AI-generated research is objective and not biased by investment banking.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Public Reputational Risk:</strong> High-stakes risk of AI "hallucinations" in public research, damaging brand credibility.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span><strong class="text-white">Information Barrier Integrity:</strong> Risk of GenAI breaching legal "information barriers" by aggregating private-side data.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <script>
-                        function industryPlugins() {
-                            return {
-                                tab: 'banking', // Default tab
-                                // V17: Hardcoded colours for JS reliability (Final Palette)
-                                industryColors: {
-                                    banking:    { border: 'var(--color-banking)' },
-                                    wealth:     { border: 'var(--color-wealth)' },
-                                    asset:      { border: 'var(--color-asset)' },
-                                    insurance:  { border: 'var(--color-insurance)' },
-                                    fintech:    { border: 'var(--color-fintech)' },
-                                    capmarkets: { border: 'var(--color-capmarkets)' }
-                                }
-                                // V35: Fixed syntax error by moving comment
-                            }
-                        }
-                    </script>
-                </div>
-            </section>
-            
-            <section id="toolkit" class="section-panel py-20 md:py-28" x-data="{ tab: 'governance' }">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="section-header">
-                        <h2>AI GRC Accelerator Toolkit</h2>
-                        <div class="accent-bar"></div>
-                    </div>
-                    
-                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
-                        A suite of practical micro-tools that help financial institutions operationalise AI governance, risk and compliance—within weeks.
-                    </p>
-                    
-                    <div class="mt-12 border-b-2 border-white/10">
-                        <nav class="flex flex-wrap justify-center -mb-0.5" aria-label="Tabs">
-                            <button @click="tab = 'governance'"
-                                    class="tab-button"
-                                    :style="tab === 'governance' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
-                                Governance Accelerators
-                            </button>
-                            <button @click="tab = 'risk'"
-                                    class="tab-button"
-                                    :style="tab === 'risk' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
-                                Risk Management Accelerators
-                            </button>
-                            <button @click="tab = 'compliance'"
-                                    class="tab-button"
-                                    :style="tab === 'compliance' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
-                                Compliance Accelerators
-                            </button>
-                        </nav>
-                    </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="plugins" class="section-panel py-20 md:py-28" x-data="industryPlugins()">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="section-header">
+                        <h2>Industry Plug-ins: Designed for Your Sector</h2>
+                        <div class="accent-bar"></div>
+                    </div>
+                    
+                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
+                        Financial subsectors face unique AI risk pressures.
+                        Our plug-ins provide tailored insights, controls, and risk considerations for your industry.
+                    </p>
+                    
+                    <div class="mt-12 border-b-2 border-white/10">
+                        <nav class="flex flex-wrap justify-center -mb-0.5" aria-label="Tabs">
+                            <button @click="tab = 'banking'"
+                                    class="tab-button"
+                                    :style="tab === 'banking' ? { color: industryColors.banking.border, borderColor: industryColors.banking.border } : {}">
+                                Banking </button>
+                            <button @click="tab = 'wealth'"
+                                    class="tab-button"
+                                    :style="tab === 'wealth' ? { color: industryColors.wealth.border, borderColor: industryColors.wealth.border } : {}">
+                                Wealth Management
+                            </button>
+                            <button @click="tab = 'asset'"
+                                    class="tab-button"
+                                    :style="tab === 'asset' ? { color: industryColors.asset.border, borderColor: industryColors.asset.border } : {}">
+                                Asset Management
+                            </button>
+                            <button @click="tab = 'insurance'"
+                                    class="tab-button"
+                                    :style="tab === 'insurance' ? { color: industryColors.insurance.border, borderColor: industryColors.insurance.border } : {}">
+                                Insurance
+                            </button>
+                            <button @click="tab = 'fintech'"
+                                    class="tab-button"
+                                    :style="tab === 'fintech' ? { color: industryColors.fintech.border, borderColor: industryColors.fintech.border } : {}">
+                                FinTech
+                            </button>
+                            <button @click="tab = 'capmarkets'"
+                                    class="tab-button"
+                                    :style="tab === 'capmarkets' ? { color: industryColors.capmarkets.border, borderColor: industryColors.capmarkets.border } : {}">
+                                Capital Markets
+                            </button>
+                        </nav>
+                    </div>
+                    
+                    <div class="mt-12 max-w-4xl mx-auto text-gray-300">
+                        <div x-show="tab === 'banking'" x-transition class="glass-card p-8 md:p-10">
+                            <h3 class="text-2xl font-bold text-white mb-6">Banking</h3> <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Algorithmic Fair Lending:</strong> Managing "proxy discrimination" risk in credit models (e.g., digital redlining).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Legacy System Constraints:</strong> Fragmented data in silos cripples data governance and increases integration risk.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Strategic Deposit Disruption:</strong> Threat from agentic AI autonomously moving deposits, eroding net interest margin.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div x-show="tab === 'wealth'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
+                            <h3 class="text-2xl font-bold text-white mb-6">Wealth Management (incl. Robo-Advisors)</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">The "Fiduciary in the Machine":</strong> Proving algorithmic advice fulfils regulatory "Duty of Care" (suitability) and "Duty of Loyalty."</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Human-in-the-Loop (HITL) Liability:</strong> Risk of advisors "rubber-stamping" flawed AI advice, leading to scalable mis-selling.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Suitability from Incomplete Data:</strong> GRC failure from models basing advice on simplistic client questionnaires.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div x-show="tab === 'asset'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
+                            <h3 class="text-2xl font-bold text-white mb-6">Asset Management (Buy-Side / Quant)</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Model Epistemology ("Overfitting"):</strong> Existential risk of models learning historical "noise" vs. a true "signal."</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Alpha Decay & Non-Stationary Markets:</strong> GRC becomes a continuous monitoring function as models decay in shifting markets.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Alternative Data Governance:</strong> Managing compliance and ethical risks (provenance, privacy) of ingesting novel "alt-data."</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div x-show="tab === 'insurance'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
+                            <h3 class="text-2xl font-bold text-white mb-6">Insurance</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Actuarial vs. Unfair Discrimination:</strong> Preventing AI underwriting from using proxies for discriminatory pricing.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Claims Automation Explainability:</strong> Requirement to provide clear, auditable justifications for AI-driven claims denials.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Catastrophic Risk Modelling Failure:</strong> High risk of models failing to predict "black swan" events (e.g., climate-driven).</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div x-show="tab === 'fintech'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
+                            <h3 class="text-2xl font-bold text-white mb-6">FinTech</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Indirect Regulatory Scrutiny:</strong> Immense compliance burden from bank partners (e.g., OCC, FDIC) who are held accountable.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Multi-Jurisdictional Maze:</strong> Prohibitive cost of navigating fragmented, country-by-country licensing to scale.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Data Scarcity & Model Risk:</strong> High risk of model "overfitting" due to lack of deep, longitudinal historical data.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div x-show="tab === 'capmarkets'" x-transition class="glass-card p-8 md:p-10" style="display: none;">
+                            <h3 class="text-2xl font-bold text-white mb-6">Capital Markets (Sell-Side)</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Algorithmic Conflicts of Interest:</strong> Proving AI-generated research is objective and not biased by investment banking.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Public Reputational Risk:</strong> High-stakes risk of AI "hallucinations" in public research, damaging brand credibility.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span><strong class="text-white">Information Barrier Integrity:</strong> Risk of GenAI breaching legal "information barriers" by aggregating private-side data.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function industryPlugins() {
+                            return {
+                                tab: 'banking', // Default tab
+                                // V17: Hardcoded colours for JS reliability (Final Palette)
+                                industryColors: {
+                                    banking:    { border: 'var(--color-banking)' },
+                                    wealth:     { border: 'var(--color-wealth)' },
+                                    asset:      { border: 'var(--color-asset)' },
+                                    insurance:  { border: 'var(--color-insurance)' },
+                                    fintech:    { border: 'var(--color-fintech)' },
+                                    capmarkets: { border: 'var(--color-capmarkets)' }
+                                }
+                                // V35: Fixed syntax error by moving comment
+                            }
+                        }
+                    </script>
+                </div>
+            </section>
+            
+            <section id="toolkit" class="section-panel py-20 md:py-28" x-data="{ tab: 'governance' }">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="section-header">
+                        <h2>AI GRC Accelerator Toolkit</h2>
+                        <div class="accent-bar"></div>
+                    </div>
+                    
+                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
+                        A suite of practical micro-tools that help financial institutions operationalise AI governance, risk and compliance—within weeks.
+                    </p>
+                    
+                    <div class="mt-12 border-b-2 border-white/10">
+                        <nav class="flex flex-wrap justify-center -mb-0.5" aria-label="Tabs">
+                            <button @click="tab = 'governance'"
+                                    class="tab-button"
+                                    :style="tab === 'governance' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
+                                Governance Accelerators
+                            </button>
+                            <button @click="tab = 'risk'"
+                                    class="tab-button"
+                                    :style="tab === 'risk' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
+                                Risk Management Accelerators
+                            </button>
+                            <button @click="tab = 'compliance'"
+                                    class="tab-button"
+                                    :style="tab === 'compliance' ? { color: 'var(--accent-primary)', borderColor: 'var(--accent-primary)' } : {}">
+                                Compliance Accelerators
+                            </button>
+                        </nav>
+                    </div>
 
-                    <div class="mt-12">
-                        <div x-show="tab === 'governance'" x-transition>
-                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
-                                A lightweight set of structures that bring clarity and accountability to AI adoption.
-                            </p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Model Inventory Lite</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        A fast, organisation-wide view of every AI system.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Governance Committee Pack</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        A ready-to-run executive decision body for AI oversight.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Risk Appetite Statements</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        Clear boundaries for acceptable and non-acceptable AI risks.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mt-12">
+                        <div x-show="tab === 'governance'" x-transition>
+                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
+                                A lightweight set of structures that bring clarity and accountability to AI adoption.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Model Inventory Lite</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        A fast, organisation-wide view of every AI system.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Governance Committee Pack</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        A ready-to-run executive decision body for AI oversight.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Risk Appetite Statements</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        Clear boundaries for acceptable and non-acceptable AI risks.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div x-show="tab === 'risk'" x-transition style="display: none;">
-                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
-                                Make AI risk measurable, explainable, and repeatable across business lines.
-                            </p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">AI Risk Classifier</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        Standardised risk scoring completed in minutes.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Lifecycle Control Library</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        A consistent control set applied across teams and vendors.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Shadow AI Scanner</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        Visibility into hidden AI usage and third-party dependencies.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <div x-show="tab === 'risk'" x-transition style="display: none;">
+                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
+                                Make AI risk measurable, explainable, and repeatable across business lines.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">AI Risk Classifier</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        Standardised risk scoring completed in minutes.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Lifecycle Control Library</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        A consistent control set applied across teams and vendors.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Shadow AI Scanner</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        Visibility into hidden AI usage and third-party dependencies.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <div x-show="tab === 'compliance'" x-transition style="display: none;">
-                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
-                                Reduce audit pressure with documentation and workflows aligned to regulation.
-                            </p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Regulatory Mapping Pack</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        Which models fall under which regulation—instantly visible.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Audit-Ready Evidence Pack</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        Fill-in templates designed to satisfy auditors’ expectations.
-                                    </p>
-                                </div>
-                                <div class="glass-card p-6 md:p-8">
-                                    <h4 class="text-lg font-bold text-white">Pre-Launch Approval Flow</h4>
-                                    <p class="mt-3 text-sm text-gray-400">
-                                        A unified approval process for model deployment.
-                                    </p> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="scan" class="section-panel py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        
-                        <div class="text-center lg:text-left">
-                            <div class="section-header text-center lg:text-left">
-                                <h2 class="!text-5xl !mx-0">Book Your Free 60-Minute AI Risk Readiness Scan</h2>
-                                <div class="accent-bar !mx-auto lg:!mx-0"></div>
-                            </div>
-                            
-                            <p class="mt-8 text-xl text-gray-300">
-                                A complimentary, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
-                            </p>
-                            
-                            <a href="#contact-form-placeholder" class="btn-primary mt-10 text-lg py-4 px-10">
-                                Book Your Free Scan →
-                            </a>
-                            
-                            <p class="mt-6 text-gray-400">
-                                No sales pitch. No obligation. <br class="hidden sm:block lg:hidden">
-                                Just clear, actionable insights for your industry.
-                            </p> </div>
-                        
-                        <div class="glass-card p-8 md:p-12">
-                            <h3 class="text-3xl font-bold text-white mb-6">What You Will Receive:</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">A C-Suite Ready Maturity Snapshot:</strong> Your custom 9-dimension radar, visually benchmarking your exact position against industry peers.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">An Immediate Threat Diagnostic:</strong> We identify your top 3 unaddressed risks (e.g., Fair Lending, Suitability) specific to your sub-sector.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">A "Day One" Action Plan:</strong> A clear summary of actionable quick wins you can implement immediately to reduce risk.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
-        
-        </main>
-        
-        <footer style="background-color: var(--footer-bg);">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
-                    
-                    <div>
-                        <a href="#" class="flex items-center gap-3 justify-center md:justify-start">
-                            <svg class="w-8 h-8"
-                                 viewBox="0 0 100 100" 
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 stroke-width="8"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round">
-                                <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
-                                <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
-                            </svg>
-                            <span class="text-2xl font-extrabold text-white tracking-tight">
-                                AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
-                            </span>
-                        </a>
-                        <p class="mt-2 text-gray-400">AI GRC for Financial Services</p>
-                        <p class="mt-4 text-gray-500 text-sm">
-                            © 2025 AI LING ADVISORY LIMITED.
-                        </p>
-                        <p class="text-gray-500 text-sm">
-                            All rights reserved.
-                        </p>
-                        <p class="mt-4 text-gray-500 text-sm">
-                            Registered Office Address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
-                        </p>
-                    </div>
-                    
-                    <div class="text-center md:text-left">
-                        <h4 class="font-bold text-white">About the Founder</h4>
-                        <div class="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                            <img src="images/liu-ming-portrait.jpg" 
-                                 alt="Portrait of LIU Ming"
-                                 class="w-24 h-24 object-cover rounded-lg border-2 flex-shrink-0" 
-                                 style="border-color: var(--glass-border);"
-                                 onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
-                            
-                            <div>
-                                <p class="text-gray-400 text-sm">
-                                    Founded by AI GRC expert LIU Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
-                                </p>
-                                <ul class="mt-4 flex gap-5 justify-center md:justify-start">
-                                    <li>
-                                        <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary" aria-label="Company Email">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="LinkedIn Profile">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="Spotify Podcast">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"/></svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center md:text-left">
-                        <h4 class="font-bold text-white">Company</h4>
-                        <ul class="mt-3 space-y-2">
-                            <li><a href="about.html" class="text-gray-400 hover:text-accent-primary">About</a></li>
-                            <li><a href="podcast.html" class="text-gray-400 hover:text-accent-primary">Podcast</a></li>
-                            <li><a href="#scan" class="text-gray-400 hover:text-accent-primary">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-        </footer>
-        
-    </div>
+                        <div x-show="tab === 'compliance'" x-transition style="display: none;">
+                            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">
+                                Reduce audit pressure with documentation and workflows aligned to regulation.
+                            </p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Regulatory Mapping Pack</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        Which models fall under which regulation—instantly visible.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Audit-Ready Evidence Pack</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        Fill-in templates designed to satisfy auditors’ expectations.
+                                    </p>
+                                </div>
+                                <div class="glass-card p-6 md:p-8">
+                                    <h4 class="text-lg font-bold text-white">Pre-Launch Approval Flow</h4>
+                                    <p class="mt-3 text-sm text-gray-400">
+                                        A unified approval process for model deployment.
+                                    </p> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="scan" class="section-panel py-20 md:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        
+                        <div class="text-center lg:text-left">
+                            <div class="section-header text-center lg:text-left">
+                                <h2 class="!text-5xl !mx-0">Book Your Free 60-Minute AI Risk Readiness Scan</h2>
+                                <div class="accent-bar !mx-auto lg:!mx-0"></div>
+                            </div>
+                            
+                            <p class="mt-8 text-xl text-gray-300">
+                                A complimentary, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
+                            </p>
+                            
+                            <a href="#contact-form-placeholder" class="btn-primary mt-10 text-lg py-4 px-10">
+                                Book Your Free Scan →
+                            </a>
+                            
+                            <p class="mt-6 text-gray-400">
+                                No sales pitch. No obligation. <br class="hidden sm:block lg:hidden">
+                                Just clear, actionable insights for your industry.
+                            </p> </div>
+                        
+                        <div class="glass-card p-8 md:p-12">
+                            <h3 class="text-3xl font-bold text-white mb-6">What You Will Receive:</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-4">
+                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="text-lg text-gray-300"><strong class="text-white">A C-Suite Ready Maturity Snapshot:</strong> Your custom 9-dimension radar, visually benchmarking your exact position against industry peers.</span>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="text-lg text-gray-300"><strong class="text-white">An Immediate Threat Diagnostic:</strong> We identify your top 3 unaddressed risks (e.g., Fair Lending, Suitability) specific to your sub-sector.</span>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                    <span class="text-lg text-gray-300"><strong class="text-white">A "Day One" Action Plan:</strong> A clear summary of actionable quick wins you can implement immediately to reduce risk.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+        
+        </main>
+        
+        <footer style="background-color: var(--footer-bg);">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
+                    
+                    <div>
+                        <!-- SEO CHANGE (Point 'c' - A11y): Added aria-label for accessibility -->
+                        <a href="#" class="flex items-center gap-3 justify-center md:justify-start" aria-label="AI Ling Advisory Home">
+                            <svg class="w-8 h-8"
+                                 viewBox="0 0 100 100" 
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 stroke-width="8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
+                                <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
+                            </svg>
+                            <span class="text-2xl font-extrabold text-white tracking-tight">
+                                AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
+                            </span>
+                        </a>
+                        <p class="mt-2 text-gray-400">AI GRC for Financial Services</p>
+                        <p class="mt-4 text-gray-500 text-sm">
+                            © 2025 AI LING ADVISORY LIMITED.
+                        </p>
+                        <p class="text-gray-500 text-sm">
+                            All rights reserved.
+                        </p>
+                        <p class="mt-4 text-gray-500 text-sm">
+                            Registered Office Address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
+                        </p>
+                    </div>
+                    
+                    <div class="text-center md:text-left">
+                        <h4 class="font-bold text-white">About the Founder</h4>
+                        <div class="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
+                            <!-- SEO CHANGE (Point 'e'): Updated alt text for better description -->
+                            <img src="images/liu-ming-portrait.jpg" 
+                                 alt="LIU Ming (柳溟), Founder of AI LING ADVISORY"
+                                 class="w-24 h-24 object-cover rounded-lg border-2 flex-shrink-0" 
+                                 style="border-color: var(--glass-border);"
+                                 onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
+                            
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Founded by AI GRC expert LIU Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
+                                </p>
+                                <ul class="mt-4 flex gap-5 justify-center md:justify-start">
+                                    <li>
+                                        <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary" aria-label="Company Email">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="LinkedIn Profile">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="Spotify Podcast">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"/></svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center md:text-left">
+                        <h4 class="font-bold text-white">Company</h4>
+                        <ul class="mt-3 space-y-2">
+                            <li><a href="about.html" class="text-gray-400 hover:text-accent-primary">About</a></li>
+                            <li><a href="podcast.html" class="text-gray-400 hover:text-accent-primary">Podcast</a></li>
+                            <li><a href="#scan" class="text-gray-400 hover:text-accent-primary">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+        
+    </div>
 
 </body>
 </html>
