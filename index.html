@@ -192,7 +192,7 @@
       "@type": "Person",
       "name": "LIU Ming (柳溟)"
     },
-    <!-- SEO CHANGE (Point 'c' - Schema): Added sameAs to ProfessionalService to link company profiles -->
+    /* SYNTAX FIX: Removed the invalid HTML comment from inside the JSON block */
     "sameAs": [
       "http://linkedin.com/in/ailingadvisory",
       "https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js"
@@ -1125,7 +1125,8 @@
                                 A complimentary, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
                             </p>
                             
-                            <a href="#contact-form-placeholder" class="btn-primary mt-10 text-lg py-4 px-10">
+                            <!-- LINK FIX: Changed href from #contact-form-placeholder to #scan -->
+                            <a href="#scan" class="btn-primary mt-10 text-lg py-4 px-10">
                                 Book Your Free Scan →
                             </a>
                             
