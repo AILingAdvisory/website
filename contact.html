@@ -1,0 +1,405 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page-specific Title -->
+    <!-- V44: Updated "Scan" terminology -->
+    <title>Contact AI LING ADVISORY | Book Your Exclusive Scan</title>
+    
+    <!-- Page-specific Description -->
+    <!-- V44: Updated "Scan" terminology -->
+    <meta name="description" content="Contact AI LING ADVISORY to book your exclusive 60-Minute AI Risk Readiness Scan or for general enquiries. We are based in Hong Kong S.A.R.">
+    
+    <!-- Favicon (Copied from index.html) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E">
+    
+    <!-- Stylesheets & Fonts (Copied from index.html) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Scripts (Copied from index.html) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- Design System CSS (Copied from index.html) -->
+    <style>
+        :root {
+            --deep-blue: #0D1B3E;
+            --deep-blue-panel: rgba(10, 20, 47, 0.95);
+            --deep-blue-nav: rgba(13, 27, 62, 0.8);
+            --accent-primary: #2DD4BF; 
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E0E0;
+            --text-tertiary: #a7a7a7;
+            --text-on-accent: #000000;
+            --glass-border: rgba(255, 255, 255, 0.10);
+            --glass-bg: rgba(25, 42, 86, 0.30);
+            --footer-bg: rgba(0, 0, 0, 0.75);
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--deep-blue);
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+        h1, h2, h3, h4 { color: var(--text-primary); }
+        h1 { font-weight: 800; }
+        h2 { font-weight: 800; }
+        h3 { font-weight: 700; }
+        h4 { font-weight: 700; }
+        .section-panel {
+            background-color: var(--deep-blue-panel);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+        .section-header {
+            text-align: center;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-header h2 {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            letter-spacing: -0.025em;
+        }
+        @media (min-width: 768px) {
+            .section-header h2 {
+                font-size: 3rem;
+                line-height: 1;
+            }
+        }
+        .accent-bar {
+            width: 96px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), #6ee7d0);
+            border-radius: 9999px;
+            margin: 1rem auto 0;
+        }
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-primary);
+            color: var(--text-on-accent);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.35);
+            transition: all 0.2s ease-out;
+            transform-origin: center;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(45, 212, 191, 0.4);
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
+            transition: all 0.2s ease-out;
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            background: rgba(25, 42, 86, 0.38);
+        }
+        [x-cloak] { display: none !important; }
+
+        /* Styles for the Calendly Placeholder */
+        .calendly-placeholder {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 2px dashed var(--glass-border);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px; /* Reduced height */
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <div class="relative min-h-screen">
+        
+        <!-- Reusable Header -->
+        <header class="sticky top-0 z-50" x-data="{ isMobileMenuOpen: false }">
+            <nav class="backdrop-blur-md" style="background-color: var(--deep-blue-nav);">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-20">
+                        <div class="flex-shrink-0">
+                            <a href="index.html" class="flex items-center gap-3" aria-label="AI Ling Advisory Home">
+                                <svg class="w-8 h-8"
+                                     viewBox="0 0 100 100" 
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     stroke-width="8"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
+                                    <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
+                                </svg>
+                                <span class="text-2xl font-extrabold text-white tracking-tight">
+                                    AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <div class="hidden md:flex md:items-center md:space-x-8">
+                            <a href="index.html#framework" class="text-white font-semibold hover:text-accent-primary transition-colors">Framework</a>
+                            <a href="index.html#benchmark" class="text-white font-semibold hover:text-accent-primary transition-colors">Benchmark</a>
+                            <a href="index.html#plugins" class="text-white font-semibold hover:text-accent-primary transition-colors">Plug-ins</a>
+                            <a href="index.html#toolkit" class="text-white font-semibold hover:text-accent-primary transition-colors">Toolkit</a>
+                            <a href="about.html" class="text-white font-semibold hover:text-accent-primary transition-colors">About</a>
+                            <a href="podcast.html" class="text-white font-semibold hover:text-accent-primary transition-colors">Podcast</a>
+                        </div>
+                        
+                        <div class="hidden md:block">
+                            <!-- Button now links to this page -->
+                            <!-- V44: Updated "Scan" terminology and href -->
+                            <a href="contact.html" class="btn-primary py-2 px-6 text-sm">Book Your Exclusive Scan</a>
+                        </div>
+                        
+                        <div class="md:hidden">
+                            <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="text-white p-2 rounded-md" aria-controls="mobile-menu" :aria-expanded="isMobileMenuOpen.toString()">
+                                <span class="sr-only">Open main menu</span>
+                                <svg x-show="!isMobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                                <svg x-show="isMobileMenuOpen" x-cloak class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu panel -->
+                <div x-show="isMobileMenuOpen" 
+                     @click.away="isMobileMenuOpen = false" 
+                     x-transition
+                     id="mobile-menu" 
+                     class="md:hidden absolute top-full left-0 right-0 py-4 shadow-lg" 
+                     style="background-color: var(--deep-blue-nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+                     x-cloak>
+                    <div class="px-5 space-y-2">
+                        <a href="index.html#framework" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Framework</a>
+                        <a href="index.html#benchmark" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Benchmark</a>
+                        <a href="index.html#plugins" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Plug-ins</a>
+                        <a href="index.html#toolkit" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Toolkit</a>
+                        <a href="about.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">About</a>
+                        <a href="podcast.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Podcast</a>
+                        <!-- V44: Updated "Scan" terminology and href -->
+                        <a href="contact.html" @click="isMobileMenuOpen = false" class="block btn-primary py-2 px-6 text-sm w-full text-center mt-2">Book Your Exclusive Scan</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            
+            <!-- Section 1: Hero (Odd number, .section-panel) -->
+            <section class="relative py-32 md:py-40 overflow-hidden section-panel text-center">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter">
+                        Contact Us
+                    </h1>
+                    <!-- V44: Updated "Scan" terminology -->
+                    <p class="mt-8 text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                        The first step is an exclusive 60-minute AI Risk Readiness Scan. Find a time that works for you below, or reach out for general enquiries.
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Section 2: Scan Booking (Even number, no .section-panel) -->
+            <section id="scan" class="py-20 md:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                        
+                        <!-- Left Column: Re-sell the value -->
+                        <div class="text-center lg:text-left">
+                            <div class="section-header text-center lg:text-left">
+                                <!-- V44: Updated "Scan" terminology -->
+                                <h2 class="!text-5xl !mx-0">Book Your Exclusive 60-Minute Scan</h2>
+                                <div class="accent-bar !mx-auto lg:!mx-0"></div>
+                            </div>
+                            
+                            <!-- V44: Updated "Scan" terminology -->
+                            <p class="mt-8 text-xl text-gray-300">
+                                This is an exclusive, no-obligation review of your AI operating environment to identify blind spots and provide immediate quick wins.
+                            </p>
+                            
+                            <!-- Re-used "What You Will Receive" list from index.html -->
+                            <div class="mt-10 p-8 glass-card">
+                                <h3 class="text-3xl font-bold text-white mb-6">What You Will Receive:</h3>
+                                <ul class="space-y-4 text-left">
+                                    <li class="flex items-start gap-4">
+                                        <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span class="text-lg text-gray-300"><strong class="text-white">A C-Suite Ready Maturity Snapshot</strong></span>
+                                    </li>
+                                    <li class="flex items-start gap-4">
+                                        <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span class="text-lg text-gray-300"><strong class="text-white">An Immediate Threat Diagnostic</strong></span>
+                                    </li>
+                                    <li class="flex items-start gap-4">
+                                        <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                                        <span class="text-lg text-gray-300"><strong class="text-white">A "Day One" Action Plan</strong></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column: The Action (Scheduler) -->
+                        <div class="glass-card p-8">
+                            <h3 class="text-3xl font-bold text-white mb-6 text-center">Select a Time</h3>
+                            
+                            <!-- V44: Replaced placeholder with your Calendly embed code -->
+                            <!-- Calendly inline widget begin -->
+                            <div class="calendly-inline-widget" data-url="https://calendly.com/ailingadvisory/exclusive-60-min-ai-scan?background_color=0d1b3e&text_color=ffffff&primary_color=2dd4bf" style="min-width:320px;height:700px;"></div>
+                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                            <!-- Calendly inline widget end -->
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 3: General Enquiries (Odd number, .section-panel) -->
+            <section id="general-enquiries" class="section-panel py-20 md:py-28">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="section-header">
+                        <h2>General Enquiries</h2>
+                        <div class="accent-bar"></div>
+                    </div>
+                    <p class="mt-6 text-lg text-gray-300 text-center max-w-3xl mx-auto">
+                        For media, partnerships, or other enquiries, please use the methods below.
+                    </p>
+                    
+                    <!-- Direct Contact Methods (No form) -->
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-4xl mx-auto">
+                        
+                        <!-- Email -->
+                        <div class="glass-card p-8 text-center">
+                            <a href="mailto:AlLingAdvisory@outlook.com" class="block group">
+                                <svg class="w-12 h-12 text-accent-primary mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                                <h4 class="mt-4 text-xl font-bold text-white">By Email</h4>
+                                <p class="mt-2 text-gray-400 group-hover:text-accent-primary transition-colors">AlLingAdvisory@outlook.com</p>
+                            </a>
+                        </div>
+                        
+                        <!-- LinkedIn -->
+                        <div class="glass-card p-8 text-center">
+                            <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="block group">
+                                <svg class="w-12 h-12 text-accent-primary mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                <h4 class="mt-4 text-xl font-bold text-white">On LinkedIn</h4>
+                                <p class="mt-2 text-gray-400 group-hover:text-accent-primary transition-colors">linkedin.com/in/ailingadvisory</p>
+                            </a>
+                        </div>
+                        
+                        <!-- Address -->
+                        <div class="glass-card p-8 text-center">
+                            <div class="block">
+                                <svg class="w-12 h-12 text-accent-primary mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                                <h4 class="mt-4 text-xl font-bold text-white">Our Office</h4>
+                                <p class="mt-2 text-sm text-gray-400">
+                                    Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </section>
+        
+        </main>
+        
+        <!-- Reusable Footer (Copied from index.html) -->
+        <footer style="background-color: var(--footer-bg);">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
+                    
+                    <!-- Col 1: Logo & Copyright -->
+                    <div>
+                        <a href="index.html" class="flex items-center gap-3 justify-center md:justify-start" aria-label="AI Ling Advisory Home">
+                            <svg class="w-8 h-8"
+                                 viewBox="0 0 100 100" 
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 stroke-width="8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
+                                <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
+                            </svg>
+                            <span class="text-2xl font-extrabold text-white tracking-tight">
+                                AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
+                            </span>
+                        </a>
+                        <p class="mt-2 text-gray-400">AI GRC for Financial Services</p>
+                        <p class="mt-4 text-gray-500 text-sm">
+                            © 2025 AI LING ADVISORY LIMITED.
+                        </p>
+                        <p class="text-gray-500 text-sm">
+                            All rights reserved.
+                        </p>
+                        <p class="mt-4 text-gray-500 text-sm">
+                            Registered Office Address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
+                        </p>
+                    </div>
+                    
+                    <!-- Col 2: Founder Teaser -->
+                    <div class="text-center md:text-left">
+                        <h4 class="font-bold text-white">About the Founder</h4>
+                        <div class="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
+                            <img src="images/liu-ming-portrait.jpg" 
+                                 alt="Portrait of Liu, Ming (柳溟), Founder of AI LING ADVISORY"
+                                 class="w-24 h-24 object-cover rounded-lg border-2 flex-shrink-0" 
+                                 style="border-color: var(--glass-border);"
+                                 onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
+                            
+                            <div>
+                                <p class="text-gray-400 text-sm">
+                                    Founded by AI GRC expert Liu, Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
+                                </p>
+                                <ul class="mt-4 flex gap-5 justify-center md:justify-start">
+                                    <li>
+                                        <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary" aria-label="Company Email">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="LinkedIn Profile">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary" aria-label="Spotify Podcast">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"/></svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Col 3: Company Nav -->
+                    <div class="text-center md:text-left">
+                        <h4 class="font-bold text-white">Company</h4>
+                        <ul class="mt-3 space-y-2">
+                            <li><a href="about.html" class="text-gray-400 hover:text-accent-primary">About</a></li>
+                            <li><a href="podcast.html" class="text-gray-400 hover:text-accent-primary">Podcast</a></li>
+                            <!-- Set current page ("Contact") as active -->
+                            <li><a href="#" class="font-semibold" style="color:var(--accent-primary)">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+</body>
+</html>
