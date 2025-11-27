@@ -16,7 +16,6 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     
-    <!-- V50: Added x-cloak style to prevent flash of unstyled content (e.g., mobile close icon) -->
     <style>
         :root {
             /* 1. Color Palette (V1) */
@@ -159,8 +158,6 @@
     <title>AI LING ADVISORY | AI GRC for Financial Services</title>
     <meta name="description" content="AI Ling Advisory is your expert Hong Kong partner for AI Governance, Risk, and Compliance (GRC). We build frameworks for financial services to turn AI risk into revenue. Contact us for AI GRC advisory and SaaS solutions.">
     
-    <!-- SEO CHANGE (Point 'd'): Removed the obsolete meta keywords tag -->
-
     <script type="application/ld+json">
 [
   {
@@ -175,7 +172,7 @@
     
     "logo": "data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E", 
     
-    "telephone": "+86 15604081852",
+    "telephone": "+852 6281 7144",
     "email": "AlLingAdvisory@outlook.com",
     "address": {
       "@type": "PostalAddress",
@@ -190,11 +187,10 @@
     },
     "founder": {
       "@type": "Person",
-      "name": "LIU Ming (柳溟)"
+      "name": "Liu Ming (柳溟)"
     },
-    /* SYNTAX FIX: Removed the invalid HTML comment from inside the JSON block */
     "sameAs": [
-      "http://linkedin.com/in/ailingadvisory",
+      "http://linkedin.com/company/ai-ling",
       "https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js"
     ],
     "knowsAbout": ["AI Governance", "AI Risk Management", "AI Compliance", "GRC", "FinTech", "RegTech", "SFC", "HKMA", "Responsible AI"],
@@ -228,13 +224,11 @@
 
     <div class="relative min-h-screen">
         
-        <!-- SEO CHANGE (Point 'a'): Added Alpine.js x-data for mobile menu state -->
         <header class="sticky top-0 z-50" x-data="{ isMobileMenuOpen: false }">
             <nav class="backdrop-blur-md" style="background-color: var(--deep-blue-nav);">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center h-20">
                         <div class="flex-shrink-0">
-                            <!-- SEO CHANGE (Point 'c' - A11y): Added aria-label for accessibility -->
                             <a href="#" class="flex items-center gap-3" aria-label="AI Ling Advisory Home">
                                 <svg class="w-8 h-8"
                                      viewBox="0 0 100 100" 
@@ -262,24 +256,19 @@
                         </div>
                         
                         <div class="hidden md:block">
-                            <!-- V43: Renamed Scan Button -->
                             <a href="contact.html" class="btn-primary py-2 px-6 text-sm">Book Your Exclusive Scan</a>
                         </div>
                         
-                        <!-- SEO CHANGE (Point 'a'): Mobile menu button toggle -->
                         <div class="md:hidden">
                             <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="text-white p-2 rounded-md" aria-controls="mobile-menu" :aria-expanded="isMobileMenuOpen.toString()">
                                 <span class="sr-only">Open main menu</span>
-                                <!-- Hamburger icon -->
                                 <svg x-show="!isMobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-                                <!-- Close icon -->
                                 <svg x-show="isMobileMenuOpen" x-cloak class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- SEO CHANGE (Point 'a'): Mobile menu panel -->
                 <div x-show="isMobileMenuOpen" 
                      @click.away="isMobileMenuOpen = false" 
                      x-transition:enter="transition ease-out duration-200"
@@ -299,7 +288,6 @@
                         <a href="#toolkit" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Toolkit</a>
                         <a href="about.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">About</a>
                         <a href="podcast.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Podcast</a>
-                        <!-- V43: Renamed Scan Button -->
                         <a href="contact.html" @click="isMobileMenuOpen = false" class="block btn-primary py-2 px-6 text-sm w-full text-center mt-2">Book Your Exclusive Scan</a>
                     </div>
                 </div>
@@ -330,9 +318,7 @@
 
                             <p class="mt-6 text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                                 Most organisations lack AI governance talent, and large consultancies rarely offer practical solutions. We help you design and operationalise AI GRC — policies, controls, assurance, oversight and workflows — that work in your reality, not just in a slide deck.
-                            </p> <!-- V29: Simplified CTA -->
-                            <div class="mt-12">
-                                <!-- V43: Renamed Scan Button -->
+                            </p> <div class="mt-12">
                                 <a href="contact.html" class="btn-primary text-lg py-4 px-10">
                                     Book Your Exclusive Scan
                                 </a>
@@ -384,7 +370,6 @@
                 </div>
             </section>
             
-            <!-- V39: Removed .section-panel for alternating background -->
             <section id="benchmark" class="py-20 md:py-28">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -669,10 +654,8 @@
                     
                     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" x-data="{ openPillar: 0 }">
                         
-                        <!-- Pillar I - Governance -->
                         <div class="glass-card p-8 flex flex-col">
                             <div class="flex items-center justify-center w-20 h-20 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <!-- V38: Reverted to original "Pillar" icon -->
                                 <svg class="w-10 h-10 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.242-6.75.72M18.75 4.97c.418.068.826.137 1.225.206m-.711 15.126c.364.069.72.136 1.066.197m-11.022 0c.346-.061.702-.128 1.066-.197M12 4.5v15.75m-3.75-15.75v15.75m3.75-15.75v15.75M4.5 4.5v15.75M19.5 4.5v15.75M8.25 4.5v15.75M15.75 4.5v15.75M5.25 4.5v15.75M18.75 4.5v15.75" />
                                 </svg>
@@ -828,7 +811,6 @@
                 </div>
             </section>
             
-            <!-- V39: Removed .section-panel for alternating background -->
             <section id="plugins" class="py-20 md:py-28" x-data="industryPlugins()">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="section-header">
@@ -879,7 +861,6 @@
                         <div x-show="tab === 'banking'" x-transition class="glass-card p-8 md:p-10">
                             <h3 class="text-2xl font-bold text-white mb-6">Banking</h3> <ul class="space-y-4">
                                 <li class="flex items-start gap-3">
-                                    <!-- V1: Updated color -->
                                     <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
                                     <span><strong class="text-white">Algorithmic Fair Lending:</strong> Managing "proxy discrimination" risk in credit models (e.g., digital redlining).</span>
                                 </li>
@@ -1110,15 +1091,13 @@
                                     <h4 class="text-lg font-bold text-white">Pre-Launch Approval Flow</h4>
                                     <p class="mt-3 text-sm text-gray-400">
                                         A unified approval process for model deployment.
-                                    </p> <!-- V35: Fixed syntax error </Gbp> -> </p> -->
-                                </div>
+                                    </p> </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <!-- V39: Removed .section-panel for alternating background -->
             <section id="scan" class="py-20 md:py-28">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
@@ -1126,7 +1105,6 @@
                         
                         <div class="text-center lg:text-left">
                             <div class="section-header text-center lg:text-left">
-                                <!-- V43: Renamed Scan Title -->
                                 <h2 class="!text-5xl !mx-0">Book Your Exclusive 60-Minute AI Risk Readiness Scan</h2>
                                 <div class="accent-bar !mx-auto lg:!mx-0"></div>
                             </div>
@@ -1135,12 +1113,10 @@
                                 An exclusive, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
                             </p>
                             
-                            <!-- V45: Updated href to contact.html -->
                             <a href="contact.html" class="btn-primary mt-10 text-lg py-4 px-10">
                                 Book Your Exclusive Scan →
                             </a>
                             
-                            <!-- V48: Final reassurance text update -->
                             <p class="mt-6 text-gray-400">
                                 Fully confidential, no-obligation, and no sales pitch. <br class="hidden sm:block lg:hidden">
                                 Just actionable insights tailored to your specific challenges.
@@ -1170,17 +1146,12 @@
         
         </main>
         
-        <!-- V34: Footer Update -->
         <footer style="background-color: var(--footer-bg);">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                <!-- V23: Switched to 3-col grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
                     
-                    <!-- Col 1: Logo & Copyright -->
                     <div>
-                        <!-- V36: Added Style 17 Logo to Footer -->
                         <a href="#" class="flex items-center gap-3 justify-center md:justify-start">
-                            <!-- The SVG Logo -->
                             <svg class="w-8 h-8"
                                  viewBox="0 0 100 100" 
                                  xmlns="http://www.w3.org/2000/svg"
@@ -1191,31 +1162,25 @@
                                 <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
                                 <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
                             </svg>
-                            <!-- The Text -->
                             <span class="text-2xl font-extrabold text-white tracking-tight">
                                 AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
                             </span>
                         </a>
                         <p class="mt-2 text-gray-400">AI GRC for Financial Services</p>
-                        <!-- V25: Fixed copyright year and line break -->
                         <p class="mt-4 text-gray-500 text-sm">
                             © 2025 AI LING ADVISORY LIMITED.
                         </p>
                         <p class="text-gray-500 text-sm">
                             All rights reserved.
                         </p>
-                        <!-- V34: Added Registered Office Address -->
                         <p class="mt-4 text-gray-500 text-sm">
                             Registered Office Address: Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy, Central, Hong Kong S.A.R
                         </p>
                     </div>
                     
-                    <!-- Col 2: Founder Teaser -->
                     <div class="text-center md:text-left">
                         <h4 class="font-bold text-white">About the Founder</h4>
-                        <!-- V23: Added photo -->
                         <div class="mt-4 flex flex-col md:flex-row items-center md:items-start gap-4">
-                            <!-- V35: Corrected image path -->
                             <img src="images/liu-ming-portrait.jpg" 
                                  alt="Portrait of LIU Ming"
                                  class="w-24 h-24 object-cover rounded-lg border-2 flex-shrink-0" 
@@ -1224,11 +1189,18 @@
                             
                             <div>
                                 <p class="text-gray-400 text-sm">
-                                    Founded by AI GRC expert LIU Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
+                                    Founded by AI GRC expert Liu Ming (柳溟), our firm bridges the gap between deep technology and complex financial regulation.
                                 </p>
-                                <!-- V24: Replaced text links with icons -->
                                 <ul class="mt-4 flex gap-5 justify-center md:justify-start">
-                                    <!-- V34: Added Email Icon -->
+                                    
+                                    <li>
+                                        <a href="tel:+85262817144" class="text-gray-400 hover:text-accent-primary" aria-label="Call Us">
+                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.12.44 2.33.68 3.58.68.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.39 21 3 14.61 3 5.5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 1.25 0 2.45.24 3.57.68.36.13.56.51.27 1.11l-2.2 2.2z"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+
                                     <li>
                                         <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary" aria-label="Company Email">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
@@ -1249,8 +1221,6 @@
                         </div>
                     </div>
                     
-                    <!-- Col 3: Company Nav -->
-                    <!-- V25: Removed "Navigate" and fixed alignment -->
                     <div class="text-center md:text-left">
                         <h4 class="font-bold text-white">Company</h4>
                         <ul class="mt-3 space-y-2">
