@@ -4,6 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- SEO & LLM Optimization Meta Tags -->
+    <meta name="description" content="AI LING ADVISORY presents ACTS (AI Compliance Testing Suite). The premier deterministic AI RegTech engine designed for Hong Kong licensed financial institutions to ensure SFC and HKMA compliance.">
+    <meta name="keywords" content="AI GRC, AI Compliance, RegTech, SFC AI Guidelines, HKMA AI, Hong Kong Financial Regulation, AI Testing, ACTS, AI LING ADVISORY">
+    <meta name="author" content="AI LING ADVISORY">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.ailingadvisory.com/">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="ACTS | AI Compliance Testing Suite by AI LING ADVISORY">
+    <meta property="og:description" content="Turn unpredictable AI into a 100% auditable digital asset. The deterministic RegTech standard for Hong Kong financial institutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI LING ADVISORY">
+    
+    <!-- JSON-LD Structured Data for Search Engines & LLMs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.ailingadvisory.com/#organization",
+          "name": "AI LING ADVISORY",
+          "url": "https://www.ailingadvisory.com/",
+          "description": "A Hong Kong-based AI Governance, Risk, and Compliance (GRC) firm and RegTech provider.",
+          "founder": {
+            "@type": "Person",
+            "name": "LIU Ming"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 2A, 17/F, Glenealy Tower, No.1 Glenealy",
+            "addressLocality": "Central",
+            "addressRegion": "Hong Kong"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.ailingadvisory.com/#acts",
+          "name": "AI Compliance Testing Suite (ACTS)",
+          "applicationCategory": "RegTech, Compliance Software",
+          "operatingSystem": "Web, Intranet, Docker",
+          "provider": {"@id": "https://www.ailingadvisory.com/#organization"},
+          "description": "An automated, deterministic AI rule engine executing objective Boolean logic to test and ensure Generative AI outputs comply with Hong Kong SFC and HKMA regulations.",
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "HKD",
+            "description": "Enterprise deployment and annual compliance content subscription available."
+          }
+        }
+      ]
+    }
+    </script>
+    
     <!-- Favicon updated to the dual-color brand logo (White + Teal) -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85' stroke='%23FFFFFF'/%3E%3Cpath d='M 50 25 L 25 85 H 53' stroke='%232DD4BF'/%3E%3C/svg%3E">
     
@@ -140,13 +193,13 @@
     <div class="relative min-h-screen flex flex-col">
         
         <!-- HEADER -->
-        <header class="sticky top-0 z-50 transition-all duration-300" x-data="{ isMobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
-            <nav :class="scrolled ? 'bg-[#0D1B3E]/95 shadow-lg border-b border-white/5 backdrop-blur-md' : 'bg-transparent border-b border-transparent'" class="transition-all duration-300">
+        <header role="banner" class="sticky top-0 z-50 transition-all duration-300" x-data="{ isMobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+            <nav aria-label="Main Navigation" :class="scrolled ? 'bg-[#0D1B3E]/95 shadow-lg border-b border-white/5 backdrop-blur-md' : 'bg-transparent border-b border-transparent'" class="transition-all duration-300">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center h-20">
                         <div class="flex-shrink-0">
                             <a href="/" class="flex items-center gap-3 group" aria-label="AI Ling Advisory Home">
-                                <svg class="w-8 h-8 transform group-hover:scale-105 transition-transform" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                                <svg aria-hidden="true" class="w-8 h-8 transform group-hover:scale-105 transition-transform" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
                                     <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
                                 </svg>
@@ -173,21 +226,22 @@
             </nav>
         </header>
 
-        <main class="flex-grow">
+        <main class="flex-grow" role="main">
             
             <!-- ========================================== -->
             <!-- BLOCK 1: HERO (The Wake-Up Call)           -->
             <!-- ========================================== -->
-            <section class="relative pt-24 pb-28 md:pt-32 md:pb-36 overflow-hidden section-panel border-t-0">
+            <!-- Reduced top padding from pt-24/md:pt-32 to pt-12/md:pt-16 -->
+            <section aria-label="Hero Introduction" class="relative pt-12 pb-28 md:pt-16 md:pb-36 overflow-hidden section-panel border-t-0">
                 <!-- Abstract "Code/Law" Background Pattern -->
-                <div class="absolute inset-0 bg-code-pattern z-0 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-code-pattern z-0 pointer-events-none" aria-hidden="true"></div>
                 <!-- Subtle Top Glow -->
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-accent-primary/5 blur-[100px] pointer-events-none"></div>
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-accent-primary/5 blur-[100px] pointer-events-none" aria-hidden="true"></div>
                 
                 <div class="relative z-10 max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
                     
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/10 text-xs md:text-sm font-semibold text-accent-primary tracking-widest mb-8 uppercase backdrop-blur-md shadow-[0_2px_10px_rgba(0,0,0,0.2)]">
-                        <span class="w-2 h-2 rounded-full bg-accent-primary animate-pulse"></span>
+                        <span class="w-2 h-2 rounded-full bg-accent-primary animate-pulse" aria-hidden="true"></span>
                         AI LING ADVISORY PRESENTS: THE AI COMPLIANCE TESTING SUITE (ACTS)
                     </div>
                     
@@ -199,23 +253,23 @@
                         <span class="text-accent-primary">Your AI Has Been Tested. <br> Your Compliance Hasn't.</span>
                     </h1>
 
-                    <!-- Fixed: Teal accent applied to the product name -->
+                    <!-- Teal accent applied to the product name -->
                     <p class="mt-8 text-lg md:text-xl text-gray-300 max-w-5xl mx-auto leading-relaxed font-light">
                         Every day your AI advisor operates without a formal compliance test, it's a conversation your CCO cannot defend. AI LING ADVISORY's flagship platform, the <strong class="text-accent-primary font-semibold tracking-wide">AI Compliance Testing Suite (ACTS)</strong>, changes that — in 30 minutes, fully automated.
                     </p> 
                     
                     <!-- Regulatory Authority Trust Anchor -->
                     <div class="mt-12 mx-auto max-w-5xl text-left border-l-[3px] border-accent-primary bg-[#060D1F]/80 backdrop-blur-sm p-6 md:p-10 rounded-r-xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-accent-primary/5 blur-[50px] pointer-events-none"></div>
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-accent-primary/5 blur-[50px] pointer-events-none" aria-hidden="true"></div>
                         
-                        <!-- Fixed: Teal accent applied to the key regulatory terms -->
-                        <p class="italic text-gray-200 text-base md:text-lg leading-relaxed relative z-10 font-serif">
+                        <!-- Teal accent applied to the key regulatory terms -->
+                        <blockquote class="italic text-gray-200 text-base md:text-lg leading-relaxed relative z-10 font-serif m-0">
                             "The SFC Circular (November 2024) requires licensed corporations to conduct <strong class="text-accent-primary">end-to-end testing</strong> and establish <strong class="text-accent-primary">continuous performance monitoring</strong> protocols for all AI advisory use cases. Non-compliance is not theoretical — it is immediate."
-                        </p>
-                        <p class="mt-5 text-xs md:text-sm font-bold text-accent-primary uppercase tracking-widest relative z-10 flex items-center gap-2">
-                            <span class="w-4 h-[1px] bg-accent-primary"></span>
+                        </blockquote>
+                        <cite class="mt-5 text-xs md:text-sm font-bold text-accent-primary uppercase tracking-widest relative z-10 flex items-center gap-2 not-italic">
+                            <span class="w-4 h-[1px] bg-accent-primary" aria-hidden="true"></span>
                             SFC Circular on Generative AI Language Models, Nov 2024
-                        </p>
+                        </cite>
                     </div>
 
                     <div class="mt-16 flex flex-col items-center gap-5">
@@ -223,12 +277,19 @@
                             Request Free Proof of Value (PoV)
                         </a>
                         <p class="text-sm text-gray-400 max-w-md font-medium tracking-wide text-center">
-                            We subject your AI to 10 core SFC-mapped risk scenarios and deliver a definitive compliance verdict — in 30 minutes.
+                            We subject your AI to 10 representative high-risk scenarios and deliver a definitive compliance verdict — in 30 minutes.
                         </p>
                         
-                        <a href="#whitepaper" class="mt-6 text-gray-500 hover:text-white text-sm transition-all border-b border-transparent hover:border-white/30 pb-1 flex items-center gap-2">
-                            Not ready? Download the Executive Guide to SFC AI Compliance Testing
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <!-- Redesigned High-Converting Lead Magnet Badge -->
+                        <a href="#whitepaper" class="group mt-4 inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#050A15]/80 border border-white/10 hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 shadow-lg backdrop-blur-md">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-accent-primary/10 text-accent-primary group-hover:scale-110 group-hover:bg-accent-primary/20 transition-all">
+                                <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <span class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                                <span class="text-gray-500 font-normal hidden sm:inline mr-1">Not ready for a PoV?</span> 
+                                Download a Sample ACTS Benchmark Report
+                            </span>
+                            <svg aria-hidden="true" class="w-4 h-4 text-gray-500 group-hover:text-accent-primary transition-colors transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                     </div>
                 </div>
@@ -237,14 +298,14 @@
             <!-- ========================================== -->
             <!-- BLOCK 2: THE COST OF INACTION - Deep Blue  -->
             <!-- ========================================== -->
-            <section id="roi" class="py-24 md:py-32">
+            <section id="roi" aria-labelledby="roi-heading" class="py-24 md:py-32">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="section-header mb-20">
-                        <h2 class="bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+                        <h2 id="roi-heading" class="bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
                             The SFC Made It Mandatory.<br>The Question Is No Longer Why — It's How Fast.
                         </h2>
-                        <div class="accent-bar"></div>
+                        <div class="accent-bar" aria-hidden="true"></div>
                     </div>
 
                     <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -268,7 +329,7 @@
                         <div class="lg:col-span-7">
                             <div class="glass-card p-8 md:p-14 lg:p-16 border border-white/10 shadow-2xl relative overflow-hidden bg-[#0A1228] w-full">
                                 <!-- Elegant subtle accent line at top -->
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500/40 via-red-500/10 to-transparent"></div>
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500/40 via-red-500/10 to-transparent" aria-hidden="true"></div>
                                 
                                 <h3 class="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">The Real Cost Calculation</h3>
                                 <p class="text-gray-400 mb-12 font-medium text-lg md:text-xl">The financial and reputational damage of non-compliance is irreversible.</p>
@@ -321,12 +382,12 @@
             <!-- ========================================== -->
             <!-- BLOCK 3: THE TRAP (Panel)                  -->
             <!-- ========================================== -->
-            <section id="the-trap" class="py-24 md:py-32 section-panel section-divider relative overflow-hidden">
+            <section id="the-trap" aria-labelledby="trap-heading" class="py-24 md:py-32 section-panel section-divider relative overflow-hidden">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     
                     <div class="section-header mb-20">
-                        <h2>The Regulatory Trap:<br>AI Judging AI</h2>
-                        <div class="accent-bar"></div>
+                        <h2 id="trap-heading">The Regulatory Trap:<br>AI Judging AI</h2>
+                        <div class="accent-bar" aria-hidden="true"></div>
                         <p class="mt-8 text-xl md:text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed font-light">
                             General safety guardrails provide subjective "scores", not legal defence. When the SFC audits your AI advisor, a probability score generated by another AI is inadmissible. <br><strong class="text-white font-medium mt-3 block">You cannot defend a black box with another black box.</strong>
                         </p>
@@ -339,18 +400,18 @@
                         <div class="glass-card p-10 md:p-14 lg:p-16 border border-white/5 border-t-4 border-t-red-500/60 bg-gradient-to-b from-[#1a0505]/40 to-transparent flex flex-col justify-between group">
                             <div>
                                 <div class="w-16 h-16 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center mb-10 border border-red-500/20 group-hover:scale-110 transition-transform">
-                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                 </div>
                                 <h3 class="text-3xl lg:text-4xl font-bold text-white mb-3">Traditional AI Testing</h3>
                                 <p class="text-red-400 font-bold tracking-[0.15em] uppercase text-sm mb-10">The Black Box</p>
                                 
                                 <ul class="space-y-8 text-gray-300 text-lg lg:text-xl leading-relaxed">
                                     <li class="flex items-start gap-5">
-                                        <span class="text-red-500 mt-1 opacity-70">■</span>
+                                        <span class="text-red-500 mt-1 opacity-70" aria-hidden="true">■</span>
                                         Relies on a subjective generative model to assign a generic "safety score".
                                     </li>
                                     <li class="flex items-start gap-5">
-                                        <span class="text-red-500 mt-1 opacity-70">■</span>
+                                        <span class="text-red-500 mt-1 opacity-70" aria-hidden="true">■</span>
                                         Prone to scoring hallucinations. Cannot be definitively mapped to statutory clauses.
                                     </li>
                                 </ul>
@@ -362,21 +423,21 @@
 
                         <!-- Right: ACTS Engine -->
                         <div class="glass-card p-10 md:p-14 lg:p-16 border border-white/5 border-t-4 border-t-accent-primary bg-gradient-to-b from-[#051515]/60 to-transparent flex flex-col justify-between shadow-[0_10px_40px_rgba(45,212,191,0.05)] relative overflow-hidden group">
-                            <div class="absolute inset-0 bg-accent-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="absolute inset-0 bg-accent-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true"></div>
                             <div class="relative z-10">
                                 <div class="w-16 h-16 rounded-xl bg-accent-primary/10 text-accent-primary flex items-center justify-center mb-10 border border-accent-primary/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(45,212,191,0.2)]">
-                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 </div>
                                 <h3 class="text-3xl lg:text-4xl font-bold text-white mb-3">The ACTS Engine</h3>
                                 <p class="text-accent-primary font-bold tracking-[0.15em] uppercase text-sm mb-10">The White Box</p>
                                 
                                 <ul class="space-y-8 text-gray-300 text-lg lg:text-xl leading-relaxed">
                                     <li class="flex items-start gap-5">
-                                        <span class="text-accent-primary mt-1 opacity-80">■</span>
+                                        <span class="text-accent-primary mt-1 opacity-80" aria-hidden="true">■</span>
                                         A pure deterministic rule engine executing objective Boolean logic.
                                     </li>
                                     <li class="flex items-start gap-5">
-                                        <span class="text-accent-primary mt-1 opacity-80">■</span>
+                                        <span class="text-accent-primary mt-1 opacity-80" aria-hidden="true">■</span>
                                         Every intercepted breach is precisely traceable to an exact SFC/HKMA clause.
                                     </li>
                                 </ul>
@@ -393,12 +454,12 @@
             <!-- ========================================== -->
             <!-- BLOCK 4: THE ENGINE (Deep Blue)            -->
             <!-- ========================================== -->
-            <section id="the-engine" class="py-24 md:py-32 section-divider relative">
+            <section id="the-engine" aria-labelledby="engine-heading" class="py-24 md:py-32 section-divider relative">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="section-header mb-20">
-                        <h2>Objective Rules.<br>Zero Subjectivity.</h2>
-                        <div class="accent-bar"></div>
+                        <h2 id="engine-heading">Objective Rules.<br>Zero Subjectivity.</h2>
+                        <div class="accent-bar" aria-hidden="true"></div>
                         <p class="mt-8 text-xl md:text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed font-light">
                             We replace subjective AI evaluation with deterministic code. From simulated adversarial dialogue to an immutable compliance artefact in 30 minutes.
                         </p>
@@ -410,9 +471,9 @@
                         <!-- Left: Clickable Steps -->
                         <div class="lg:col-span-5 flex flex-col justify-center space-y-4">
                             <!-- Wrap buttons in a dark container -->
-                            <div class="bg-[#050A15]/50 p-4 rounded-[2rem] border border-white/5 backdrop-blur-md space-y-3">
-                                <button @click="activeStep = 1" :class="activeStep === 1 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
-                                    <div x-show="activeStep === 1" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
+                            <div role="tablist" class="bg-[#050A15]/50 p-4 rounded-[2rem] border border-white/5 backdrop-blur-md space-y-3">
+                                <button role="tab" :aria-selected="activeStep === 1" @click="activeStep = 1" :class="activeStep === 1 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
+                                    <div x-show="activeStep === 1" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]" aria-hidden="true"></div>
                                     <div :class="activeStep === 1 ? 'text-accent-primary' : 'text-gray-600 group-hover:text-gray-400'" class="font-mono text-2xl font-bold mt-1 transition-colors">01</div>
                                     <div>
                                         <h4 class="font-bold text-xl md:text-2xl tracking-tight mb-2" :class="activeStep === 1 ? 'text-white' : ''">Simulate</h4>
@@ -420,8 +481,8 @@
                                     </div>
                                 </button>
 
-                                <button @click="activeStep = 2" :class="activeStep === 2 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
-                                    <div x-show="activeStep === 2" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
+                                <button role="tab" :aria-selected="activeStep === 2" @click="activeStep = 2" :class="activeStep === 2 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
+                                    <div x-show="activeStep === 2" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]" aria-hidden="true"></div>
                                     <div :class="activeStep === 2 ? 'text-accent-primary' : 'text-gray-600 group-hover:text-gray-400'" class="font-mono text-2xl font-bold mt-1 transition-colors">02</div>
                                     <div>
                                         <h4 class="font-bold text-xl md:text-2xl tracking-tight mb-2" :class="activeStep === 2 ? 'text-white' : ''">Trigger</h4>
@@ -429,8 +490,8 @@
                                     </div>
                                 </button>
 
-                                <button @click="activeStep = 3" :class="activeStep === 3 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
-                                    <div x-show="activeStep === 3" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
+                                <button role="tab" :aria-selected="activeStep === 3" @click="activeStep = 3" :class="activeStep === 3 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
+                                    <div x-show="activeStep === 3" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]" aria-hidden="true"></div>
                                     <div :class="activeStep === 3 ? 'text-accent-primary' : 'text-gray-600 group-hover:text-gray-400'" class="font-mono text-2xl font-bold mt-1 transition-colors">03</div>
                                     <div>
                                         <h4 class="font-bold text-xl md:text-2xl tracking-tight mb-2" :class="activeStep === 3 ? 'text-white' : ''">Extract</h4>
@@ -438,8 +499,8 @@
                                     </div>
                                 </button>
 
-                                <button @click="activeStep = 4" :class="activeStep === 4 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
-                                    <div x-show="activeStep === 4" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
+                                <button role="tab" :aria-selected="activeStep === 4" @click="activeStep = 4" :class="activeStep === 4 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
+                                    <div x-show="activeStep === 4" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]" aria-hidden="true"></div>
                                     <div :class="activeStep === 4 ? 'text-accent-primary' : 'text-gray-600 group-hover:text-gray-400'" class="font-mono text-2xl font-bold mt-1 transition-colors">04</div>
                                     <div>
                                         <h4 class="font-bold text-xl md:text-2xl tracking-tight mb-2" :class="activeStep === 4 ? 'text-white' : ''">Judge</h4>
@@ -447,8 +508,8 @@
                                     </div>
                                 </button>
 
-                                <button @click="activeStep = 5" :class="activeStep === 5 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
-                                    <div x-show="activeStep === 5" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
+                                <button role="tab" :aria-selected="activeStep === 5" @click="activeStep = 5" :class="activeStep === 5 ? 'bg-[#0a1525] border-accent-primary/50 text-white shadow-[0_0_20px_rgba(45,212,191,0.08)]' : 'border-transparent text-gray-500 hover:text-gray-300 hover:bg-white/5'" class="w-full text-left p-6 md:p-8 border rounded-2xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden group">
+                                    <div x-show="activeStep === 5" class="absolute left-0 top-0 bottom-0 w-1.5 bg-accent-primary shadow-[0_0_15px_rgba(45,212,191,0.8)]" aria-hidden="true"></div>
                                     <div :class="activeStep === 5 ? 'text-accent-primary' : 'text-gray-600 group-hover:text-gray-400'" class="font-mono text-2xl font-bold mt-1 transition-colors">05</div>
                                     <div>
                                         <h4 class="font-bold text-xl md:text-2xl tracking-tight mb-2" :class="activeStep === 5 ? 'text-white' : ''">Generate</h4>
@@ -462,10 +523,10 @@
                         <div class="lg:col-span-7 glass-card p-10 md:p-16 lg:p-20 min-h-[600px] flex flex-col justify-center bg-[#050A15]/80 backdrop-blur-xl border-white/5 relative overflow-hidden">
                             
                             <!-- Subtle Background Glow based on step -->
-                            <div class="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-transparent pointer-events-none transition-opacity duration-500" x-show="activeStep !== 4"></div>
-                            <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent pointer-events-none transition-opacity duration-500" x-show="activeStep === 4" x-cloak></div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-transparent pointer-events-none transition-opacity duration-500" x-show="activeStep !== 4" aria-hidden="true"></div>
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent pointer-events-none transition-opacity duration-500" x-show="activeStep === 4" x-cloak aria-hidden="true"></div>
                             
-                            <div class="relative z-10">
+                            <div class="relative z-10" role="tabpanel">
                                 <!-- Step 1 -->
                                 <div x-show="activeStep === 1" x-transition.opacity.duration.400ms>
                                     <h3 class="text-4xl lg:text-5xl font-extrabold text-white mb-8 tracking-tight">Simulate the Undesirable</h3>
@@ -489,7 +550,7 @@
                                     <p class="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed font-light">ACTS securely interfaces with your existing AI setup. No complex engineering, no structural changes required.</p>
                                     <div class="bg-[#03060C] border border-white/10 p-10 rounded-2xl shadow-inner">
                                         <p class="text-accent-primary font-bold mb-6 flex items-center gap-4 text-2xl">
-                                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                            <svg aria-hidden="true" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                             Frictionless Interaction
                                         </p>
                                         <p class="text-gray-300 text-xl leading-relaxed font-light">Your advisor simply answers the simulated queries in real-time, providing us the exact conversational output a real client would receive.</p>
@@ -573,12 +634,12 @@
             <!-- ========================================== -->
             <!-- BLOCK 5: THE BENCHMARK (Panel)             -->
             <!-- ========================================== -->
-            <section id="the-benchmark" class="py-24 md:py-32 section-panel section-divider">
+            <section id="the-benchmark" aria-labelledby="benchmark-heading" class="py-24 md:py-32 section-panel section-divider">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="section-header mb-20">
-                        <h2>The Defacto Hong Kong RegTech Benchmark</h2>
-                        <div class="accent-bar"></div>
+                        <h2 id="benchmark-heading">The Defacto Hong Kong RegTech Benchmark</h2>
+                        <div class="accent-bar" aria-hidden="true"></div>
                         <p class="mt-8 text-xl md:text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed font-light">
                             ACTS isn't a generic global tool. It is a highly calibrated compliance arsenal designed explicitly for SFC and HKMA regulated institutions.
                         </p>
@@ -588,7 +649,7 @@
                         
                         <!-- Pillar 1 -->
                         <div class="glass-card p-10 lg:p-14 flex flex-col hover:border-accent-primary/40 bg-[#050A15]/40 group">
-                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left">🇭🇰</div>
+                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left" aria-hidden="true">🇭🇰</div>
                             <h3 class="text-2xl lg:text-3xl font-bold text-white mb-5">Local Regulatory Alignment</h3>
                             <p class="text-gray-400 text-lg lg:text-xl leading-relaxed font-light">
                                 Natively encompasses core logic and direct statutory mapping from the Securities and Futures Commission (e.g., SFO Section 270), HKMA, IA, and MPFA.
@@ -597,7 +658,7 @@
 
                         <!-- Pillar 2 -->
                         <div class="glass-card p-10 lg:p-14 flex flex-col hover:border-accent-primary/40 bg-[#050A15]/40 group">
-                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left">💬</div>
+                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left" aria-hidden="true">💬</div>
                             <h3 class="text-2xl lg:text-3xl font-bold text-white mb-5">Complex Native Contexts</h3>
                             <p class="text-gray-400 text-lg lg:text-xl leading-relaxed font-light">
                                 Evaluates fluent Traditional Chinese (zh-HK), Jyutping, and English-Chinese code-switching. Calibrated to identify elderly scam prevention scenarios.
@@ -606,7 +667,7 @@
 
                         <!-- Pillar 3 -->
                         <div class="glass-card p-10 lg:p-14 flex flex-col hover:border-accent-primary/40 bg-[#050A15]/40 group">
-                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left">📁</div>
+                            <div class="text-5xl lg:text-6xl mb-10 group-hover:scale-110 transition-transform origin-left" aria-hidden="true">📁</div>
                             <h3 class="text-2xl lg:text-3xl font-bold text-white mb-5">100+ High-Risk Library</h3>
                             <p class="text-gray-400 text-lg lg:text-xl leading-relaxed font-light">
                                 An out-of-the-box, adversarial testing library covering AML/KYC vulnerabilities, rigorous product suitability assessments, and information barrier breaches.
@@ -620,11 +681,11 @@
             <!-- ========================================== -->
             <!-- BLOCK 6: THE ALIGNMENT (Deep Blue)         -->
             <!-- ========================================== -->
-            <section id="the-alignment" class="py-24 md:py-32 section-divider">
+            <section id="the-alignment" aria-labelledby="alignment-heading" class="py-24 md:py-32 section-divider">
                 <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
                     
                     <div class="text-center mb-24">
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 tracking-tight mb-8 leading-tight">
+                        <h2 id="alignment-heading" class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 tracking-tight mb-8 leading-tight">
                             Enterprise Alignment:<br>Unblocking Innovation
                         </h2>
                         <p class="text-xl md:text-2xl text-gray-300 max-w-5xl mx-auto leading-relaxed font-light">Resolving the inherent tension between absolute regulatory safety and rapid speed-to-market. One engine to align the executive triad.</p>
@@ -634,18 +695,18 @@
                     <div x-data="{ tab: 'cco' }" class="glass-card overflow-hidden bg-[#050A15]/60 border-white/5 shadow-2xl max-w-7xl mx-auto">
                         
                         <!-- Tab Navigation -->
-                        <div class="flex flex-col sm:flex-row border-b border-white/10 bg-black/40">
-                            <button @click="tab = 'cco'" 
+                        <div role="tablist" class="flex flex-col sm:flex-row border-b border-white/10 bg-black/40">
+                            <button role="tab" :aria-selected="tab === 'cco'" @click="tab = 'cco'" 
                                     :class="tab === 'cco' ? 'bg-white/[0.03] text-white shadow-[inset_0_-3px_0_var(--accent-primary)]' : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'"
                                     class="flex-1 py-8 px-6 text-center font-bold text-xl lg:text-2xl transition-all tracking-wide">
                                 🛡️ For the CCO
                             </button>
-                            <button @click="tab = 'cio'" 
+                            <button role="tab" :aria-selected="tab === 'cio'" @click="tab = 'cio'" 
                                     :class="tab === 'cio' ? 'bg-white/[0.03] text-white shadow-[inset_0_-3px_0_var(--accent-primary)]' : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'"
                                     class="flex-1 py-8 px-6 text-center font-bold text-xl lg:text-2xl transition-all border-l border-white/5 tracking-wide">
                                 ⚙️ For the CIO
                             </button>
-                            <button @click="tab = 'business'" 
+                            <button role="tab" :aria-selected="tab === 'business'" @click="tab = 'business'" 
                                     :class="tab === 'business' ? 'bg-white/[0.03] text-white shadow-[inset_0_-3px_0_var(--accent-primary)]' : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'"
                                     class="flex-1 py-8 px-6 text-center font-bold text-xl lg:text-2xl transition-all border-l border-white/5 tracking-wide">
                                 🚀 For the Business
@@ -656,10 +717,10 @@
                         <div class="p-12 md:p-20 lg:p-24 min-h-[500px] flex items-center relative">
                             
                             <!-- Subtle Background Accents -->
-                            <div class="absolute inset-0 bg-gradient-to-tr from-accent-primary/5 to-transparent pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-gradient-to-tr from-accent-primary/5 to-transparent pointer-events-none" aria-hidden="true"></div>
 
                             <!-- Compliance Content -->
-                            <div x-show="tab === 'cco'" x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
+                            <div role="tabpanel" x-show="tab === 'cco'" x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
                                 <h3 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">Indisputable Audit Trails</h3>
                                 <p class="text-2xl lg:text-3xl text-accent-primary font-medium mb-10 tracking-wide">Defensible proof, configured without code.</p>
                                 <p class="text-gray-300 text-xl lg:text-2xl leading-relaxed max-w-5xl font-light">
@@ -668,7 +729,7 @@
                             </div>
 
                             <!-- IT Content -->
-                            <div x-show="tab === 'cio'" x-cloak x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
+                            <div role="tabpanel" x-show="tab === 'cio'" x-cloak x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
                                 <h3 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">Zero Data Liability</h3>
                                 <p class="text-2xl lg:text-3xl text-accent-primary font-medium mb-10 tracking-wide">Deploys entirely within your intranet.</p>
                                 <p class="text-gray-300 text-xl lg:text-2xl leading-relaxed max-w-5xl font-light">
@@ -677,7 +738,7 @@
                             </div>
 
                             <!-- Business Content -->
-                            <div x-show="tab === 'business'" x-cloak x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
+                            <div role="tabpanel" x-show="tab === 'business'" x-cloak x-transition.opacity.duration.400ms class="w-full relative z-10 text-center md:text-left">
                                 <h3 class="text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight">Speed to Market</h3>
                                 <p class="text-2xl lg:text-3xl text-accent-primary font-medium mb-10 tracking-wide">Unleash productivity without the regulatory anchor.</p>
                                 <p class="text-gray-300 text-xl lg:text-2xl leading-relaxed max-w-5xl font-light">
@@ -693,15 +754,15 @@
             <!-- ========================================== -->
             <!-- BLOCK 7: PROOF & CONVERSION (Panel)        -->
             <!-- ========================================== -->
-            <section id="demo" class="py-32 md:py-48 section-panel section-divider relative overflow-hidden">
+            <section id="demo" aria-label="Book a Demo" class="py-32 md:py-48 section-panel section-divider relative overflow-hidden">
                 <!-- Deep glow effect for final CTA -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-accent-primary/5 blur-[150px] pointer-events-none rounded-full"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-accent-primary/5 blur-[150px] pointer-events-none rounded-full" aria-hidden="true"></div>
 
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                     
                     <!-- High Contrast Data Callout -->
                     <div class="glass-card p-12 md:p-20 border border-red-500/30 bg-gradient-to-b from-[#1a0505]/60 to-black/40 shadow-[0_30px_80px_rgba(220,38,38,0.15)] mb-28 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-2 bg-red-500"></div>
+                        <div class="absolute top-0 left-0 w-full h-2 bg-red-500" aria-hidden="true"></div>
                         <p class="text-3xl md:text-4xl text-white font-light leading-relaxed max-w-5xl mx-auto">
                             "In recent ACTS benchmarks by AI LING ADVISORY, flagship foundational models achieved an average compliance pass rate of merely <strong class="text-red-400 font-bold text-5xl mx-3 drop-shadow-lg">62.4%</strong> against complex Hong Kong financial contexts."
                         </p>
@@ -715,7 +776,7 @@
                         Don't Guess.<br>Verify.
                     </h2>
                     <p class="text-2xl md:text-3xl text-gray-300 mb-16 font-light max-w-4xl mx-auto leading-relaxed">
-                        Subject your AI to an automated stress test against 10 of the highest-risk regulatory scenarios today.
+                        Subject your AI to an automated stress test against 10 representative high-risk regulatory scenarios today.
                     </p>
                     
                     <a href="contact.html" class="btn-primary text-2xl md:text-3xl py-7 px-16 shadow-[0_0_50px_rgba(45,212,191,0.3)] hover:shadow-[0_0_80px_rgba(45,212,191,0.5)] transition-all transform hover:-translate-y-2 rounded-xl">
@@ -729,7 +790,7 @@
         <!-- ========================================== -->
         <!-- BLOCK 8: ABOUT US & FOOTER (Deep Black)    -->
         <!-- ========================================== -->
-        <footer style="background-color: var(--footer-bg);" class="border-t border-white/5 relative z-20">
+        <footer role="contentinfo" style="background-color: var(--footer-bg);" class="border-t border-white/5 relative z-20">
             <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-10">
                 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-16">
@@ -737,7 +798,7 @@
                     <!-- Brand & Contact (Left Col) -->
                     <div class="lg:col-span-4 space-y-6">
                         <a href="index.html" class="flex items-center gap-3 opacity-90 hover:opacity-100 transition-opacity">
-                            <svg class="w-10 h-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" class="w-10 h-10" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M 50 25 L 75 85" stroke="var(--text-primary)"></path>
                                 <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"></path>
                             </svg>
@@ -748,7 +809,7 @@
                         
                         <div class="space-y-4 pt-2">
                             <div class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-accent-primary flex-shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <svg aria-hidden="true" class="w-6 h-6 text-accent-primary flex-shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"></path>
                                 </svg>
                                 <p class="text-gray-400 text-base font-light leading-relaxed">
@@ -757,10 +818,10 @@
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <svg class="w-6 h-6 text-accent-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <svg aria-hidden="true" class="w-6 h-6 text-accent-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
                                 </svg>
-                                <a href="tel:+85262817144" class="text-base text-gray-400 font-light hover:text-accent-primary transition-colors">
+                                <a href="tel:+85262817144" class="text-base text-gray-400 font-light hover:text-accent-primary transition-colors" aria-label="Call AI Ling Advisory">
                                     +852 6281 7144
                                 </a>
                             </div>
@@ -771,7 +832,7 @@
                     <div class="lg:col-span-5">
                         <h4 class="font-bold text-white text-xl mb-6">About the Founder</h4>
                         <div class="flex flex-col sm:flex-row gap-6 items-start">
-                            <img src="images/liu-ming-portrait.jpg" alt="Portrait of LIU Ming" class="w-24 h-24 object-cover rounded-xl border-2 flex-shrink-0 shadow-lg" style="border-color: rgba(255,255,255,0.1);" onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
+                            <img src="images/liu-ming-portrait.jpg" alt="Portrait of Founder LIU Ming" class="w-24 h-24 object-cover rounded-xl border-2 flex-shrink-0 shadow-lg" style="border-color: rgba(255,255,255,0.1);" onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
                             
                             <div class="space-y-5">
                                 <p class="text-gray-400 text-base font-light leading-relaxed">
@@ -781,17 +842,17 @@
                                 <ul class="flex gap-5">
                                     <li>
                                         <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Email Us">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
+                                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"></path></svg>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Founder LinkedIn">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Founder LinkedIn Profile">
+                                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Spotify">
-                                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"></path></svg>
+                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="AI Ling Advisory Spotify Podcast">
+                                            <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"></path></svg>
                                         </a>
                                     </li>
                                 </ul>
@@ -800,7 +861,7 @@
                     </div>
                     
                     <!-- Company (Right Col) -->
-                    <div class="lg:col-span-3 lg:pl-10">
+                    <nav class="lg:col-span-3 lg:pl-10" aria-label="Footer Navigation">
                         <h4 class="font-bold text-white text-xl mb-6">Company</h4>
                         <ul class="space-y-4 text-base font-light">
                             <li><a href="about.html" class="font-semibold transition-colors" style="color:var(--accent-primary)">About Us</a></li>
@@ -808,7 +869,7 @@
                             <li><a href="contact.html" class="text-gray-400 hover:text-accent-primary transition-colors">Contact</a></li>
                             <li><a href="https://www.linkedin.com/company/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors">LinkedIn</a></li>
                         </ul>
-                    </div>
+                    </nav>
 
                 </div>
 
