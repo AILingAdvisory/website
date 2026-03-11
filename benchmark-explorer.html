@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Download the ACTS Benchmark Report. The premier compliance standard for GenAI in Hong Kong's financial sector by AI LING ADVISORY.">
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        :root {
+            --abyss-black: #03060C;
+            --deep-panel: #0A0F1D;
+            --accent-teal: #2DD4BF;
+            --terminal-red: #FF5F56;
+            --terminal-yellow: #FFBD2E;
+            --terminal-green: #27C93F;
+            --glass-border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--abyss-black);
+            color: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        .ide-panel {
+            background: var(--deep-panel);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .scenario-item {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .scenario-item.active {
+            background: rgba(45, 212, 191, 0.05);
+            border-left-color: var(--accent-teal);
+            color: white !important;
+        }
+
+        .terminal-window {
+            background: #000000;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .kill-shot-gradient {
+            background: linear-gradient(135deg, #0D1B3E 0%, #050A15 100%);
+            border: 1px solid rgba(45, 212, 191, 0.1);
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('explorer', () => ({
+                showModal: false,
+                intent: 'audit',
+                submitted: false,
+                form: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    company: '',
+                    jobTitle: '',
+                    industry: 'Asset Management'
+                },
+                get isValid() {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return this.form.firstName.trim() !== '' &&
+                        this.form.lastName.trim() !== '' &&
+                        emailRegex.test(this.form.email) &&
+                        this.form.company.trim() !== '' &&
+                        this.form.jobTitle.trim() !== '';
+                },
+                async submitForm() {
+                    try {
+                        const response = await fetch('http://localhost:8000/leads', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ ...this.form, intent: this.intent })
+                        });
+                        if (response.ok) { this.submitted = true; }
+                    } catch (e) {
+                        console.error('Submission failed');
+                    }
+                }
+            }))
+        })
+    </script>
+    <title>ACTS Benchmark Explorer | AI LING ADVISORY</title>
+</head>
+
+<body class="min-h-screen selection:bg-teal-500/30" x-data="explorer">
+
+    <nav class="p-8">
+        <div class="max-w-[1600px] mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none" stroke-width="8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M 50 25 L 75 85" stroke="white" />
+                    <path d="M 50 25 L 25 85 H 53" stroke="#2DD4BF" />
+                </svg>
+                <span class="text-xl font-extrabold tracking-tight">AI LING <span
+                        class="text-[#2DD4BF]">ADVISORY</span></span>
+            </a>
+            <div class="flex items-center gap-6">
+                <span class="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Diagnostic Mode:
+                    Active</span>
+                <a href="index.html" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">←
+                    Exit</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section (Intro) -->
+    <header class="max-w-7xl mx-auto px-6 pt-24 pb-20 text-center space-y-8">
+        <h1
+            class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight bg-gradient-to-br from-white to-gray-500 bg-clip-text text-transparent">
+            PoV Compliance <span class="text-teal-400">Report Archive.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-500 leading-relaxed font-light max-w-3xl mx-auto">
+            A 10-case diagnostic sample evaluating public Internet LLMs against real-world regulatory scenarios.
+            Discover the baseline performance of frontier models.
+        </p>
+
+        <!-- Coverage Blueprint: Explaining the 10 Cases -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div
+                class="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 text-left transition-all hover:bg-white/[0.04]">
+                <div class="w-12 h-12 rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-400">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="text-lg font-bold text-gray-200 leading-none">Native Multilingual</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">Context-aware testing in Cantonese, Mandarin, and
+                    English to detect subtle local bypasses.</p>
+            </div>
+            <div
+                class="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 text-left transition-all hover:bg-white/[0.04]">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="text-lg font-bold text-gray-200 leading-none">Regulatory Logic</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">Precise auditing against SFC & HKMA circulars for
+                    suitability, AML, and VA trading guidelines.</p>
+            </div>
+            <div
+                class="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 text-left transition-all hover:bg-white/[0.04]">
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                        </path>
+                    </svg>
+                </div>
+                <h4 class="text-lg font-bold text-gray-200 leading-none">Multi-Turn Traps</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">Evaluation of model memory and chronological logic
+                    across deep, multi-stage human inducements.</p>
+            </div>
+            <div
+                class="p-8 rounded-3xl bg-white/[0.02] border border-white/5 space-y-4 text-left transition-all hover:bg-white/[0.04]">
+                <div class="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-400">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h4 class="text-lg font-bold text-gray-200 leading-none">Adversarial Stress</h4>
+                <p class="text-sm text-gray-500 leading-relaxed">High-pressure testing against prompt injection,
+                    jailbreaking, and advanced social engineering.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+
+        <!-- IDE Workspace Container -->
+        <!-- Premium Report Reader Container -->
+        <div class="relative group">
+            <!-- Decorative Glow -->
+            <div
+                class="absolute -inset-1 bg-gradient-to-r from-teal-500/20 to-blue-500/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000">
+            </div>
+
+            <div class="relative bg-[#0A0F1D] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <!-- Reader Header/Toolbar -->
+                <div class="px-8 py-4 border-b border-white/5 bg-black/40 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                        </div>
+                        <span
+                            class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">ACTS_POV_REPORT_v1.0.pdf</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-[10px] font-mono text-gray-600">
+                        <span class="text-teal-500/50 uppercase tracking-widest">● LIVE_POX_PREVIEW</span>
+                    </div>
+                </div>
+
+                <!-- Iframe Reader -->
+                <div class="w-full h-[800px] bg-[#03060C]">
+                    <iframe src="poc_report.html" class="w-full h-full border-none"
+                        title="ACTS PoV Report Reader"></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Kill-Shot Banner Section -->
+    <section class="max-w-7xl mx-auto px-6 pb-32">
+        <div
+            class="kill-shot-gradient p-12 md:p-20 rounded-[2.5rem] flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden group">
+            <div class="space-y-6 relative z-10 max-w-2xl text-center md:text-left">
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                    How does your AI rank against the <span class="text-teal-400">full 100+ case</span> enterprise
+                    suite?
+                </h2>
+                <p class="text-gray-400 text-lg font-light leading-relaxed">
+                    You've seen the foundation. Deploy ACTS in your local environment to uncover deep chronological
+                    compliance traps hidden within your private production stack.
+                </p>
+            </div>
+            <div class="relative z-10">
+                <a href="contact.html"
+                    class="px-10 py-6 bg-teal-400 text-black font-extrabold rounded-2xl shadow-[0_0_50px_rgba(45,212,191,0.3)] hover:shadow-[0_0_80px_rgba(45,212,191,0.5)] hover:scale-105 transition-all duration-500 uppercase tracking-widest text-sm flex items-center gap-3 group">
+                    Request Your Exclusive Enterprise PoV
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Ambient Glow Decoration -->
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/10 blur-[100px] rounded-full group-hover:bg-teal-500/20 transition-colors duration-700">
+            </div>
+            <div
+                class="absolute -bottom-24 -left-24 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full group-hover:bg-blue-500/20 transition-colors duration-700">
+            </div>
+        </div>
+    </section>
+
+    <!-- High-Conversion Request Modal -->
+    <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/90 backdrop-blur-2xl" x-cloak>
+
+        <div @click.away="showModal = false"
+            class="ide-panel max-w-2xl w-full p-8 md:p-12 relative overflow-hidden bg-[#0A0F1D]/80 border-white/10">
+
+            <button @click="showModal = false"
+                class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <div x-show="!submitted">
+                <div class="space-y-2 mb-10">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded bg-teal-500/10 border border-teal-500/20 text-[9px] font-bold text-teal-400 uppercase tracking-widest">
+                        Enterprise Access Request</div>
+                    <h2 class="text-3xl font-bold">Secure Your Private PoV</h2>
+                    <p class="text-sm text-gray-400 font-light">Join the deterministic regulatory standard. Verification
+                        required for professional context.</p>
+                </div>
+
+                <form @submit.prevent="submitForm()" class="space-y-6">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-bold text-gray-600 uppercase tracking-widest ml-1">First
+                                Name</label>
+                            <input type="text" x-model="form.firstName" required
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 transition-all"
+                                placeholder="E.g. Alexander">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[9px] font-bold text-gray-600 uppercase tracking-widest ml-1">Last
+                                Name</label>
+                            <input type="text" x-model="form.lastName" required
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 transition-all"
+                                placeholder="E.g. Chen">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-bold text-gray-600 uppercase tracking-widest ml-1">Work
+                            Email</label>
+                        <input type="email" x-model="form.email" required
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 transition-all"
+                            placeholder="alex.c@financial-institution.com">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label
+                                class="text-[9px] font-bold text-gray-600 uppercase tracking-widest ml-1">Company</label>
+                            <input type="text" x-model="form.company" required
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 transition-all"
+                                placeholder="Institution Name">
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[9px] font-bold text-gray-600 uppercase tracking-widest ml-1">Role</label>
+                            <input type="text" x-model="form.jobTitle" required
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-teal-500 transition-all"
+                                placeholder="Head of Compliance / AI Ops">
+                        </div>
+                    </div>
+                    <button type="submit" :disabled="!isValid"
+                        class="w-full py-5 bg-teal-400 text-black font-extrabold rounded-xl hover:bg-teal-300 transition-colors mt-4 disabled:opacity-20 disabled:cursor-not-allowed">
+                        Submit Provisioning Request
+                    </button>
+                </form>
+            </div>
+
+            <div x-show="submitted" class="text-center py-10 space-y-6" x-transition>
+                <div
+                    class="w-20 h-20 bg-teal-500/10 border border-teal-500/30 rounded-full flex items-center justify-center mx-auto text-teal-400">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-bold">Request Provisioned</h2>
+                    <p class="text-gray-400 font-light leading-relaxed">
+                        Thank you. Our senior advisor will reach out to <span class="text-white font-medium"
+                            x-text="form.email"></span> within 24 hours to coordinate the secure environment handshake.
+                    </p>
+                </div>
+                <button @click="showModal = false; submitted = false;"
+                    class="text-teal-400 font-bold hover:text-white transition-colors text-sm underline underline-offset-8">Return
+                    to Explorer</button>
+            </div>
+
+            <!-- Ambient Glow Decoration -->
+            <div
+                class="absolute -top-24 -right-24 w-80 h-80 bg-teal-500/5 blur-[100px] rounded-full pointer-events-none">
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-12 border-t border-white/5 mt-20">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-xs text-gray-600 tracking-widest font-medium uppercase">
+                AI LING ADVISORY © 2026 — The Deterministic RegTech Standard
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
