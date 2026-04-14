@@ -1,452 +1,116 @@
 <!DOCTYPE html>
-<html lang="en-GB" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>About AI LING ADVISORY | Our Mission & Founder</title>
-    
-    <meta name="description" content="Learn about AI LING ADVISORY, our founder Liu, Ming (柳溟), and our mission to deliver practical, expert-led AI GRC frameworks for the financial services industry.">
-    
-    <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232DD4BF' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M 50 25 L 75 85'/%3E%3Cpath d='M 50 25 L 25 85 H 53'/%3E%3C/svg%3E">
-    
+    <title>About | AI LING ADVISORY - Institutional Authority in AI Compliance</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-
-    <style>
-        :root {
-            --deep-blue: #0D1B3E;
-            --deep-blue-panel: rgba(10, 20, 47, 0.95);
-            --deep-blue-nav: rgba(13, 27, 62, 0.8);
-            --accent-primary: #2DD4BF; 
-            --text-primary: #FFFFFF;
-            --text-secondary: #E0E0E0;
-            --text-tertiary: #a7a7a7;
-            --text-on-accent: #000000;
-            --glass-border: rgba(255, 255, 255, 0.10);
-            --glass-bg: rgba(25, 42, 86, 0.30);
-            --footer-bg: rgba(0, 0, 0, 0.75);
-            
-            --color-banking: #A3E635;
-            --color-wealth: #3B82F6;
-            --color-asset: #F59E0B;
-            --color-insurance: #A855F7;
-            --color-fintech: #E11D48;
-            --color-capmarkets: #EC4899;
-        }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--deep-blue);
-            color: var(--text-primary);
-            font-weight: 400;
-        }
-        h1, h2, h3, h4 { color: var(--text-primary); }
-        h1 { font-weight: 800; }
-        h2 { font-weight: 800; }
-        h3 { font-weight: 700; }
-        h4 { font-weight: 700; }
-        .section-panel {
-            background-color: var(--deep-blue-panel);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-        }
-        .section-header {
-            text-align: center;
-            max-width: 48rem;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .section-header h2 {
-            font-size: 2.25rem;
-            line-height: 2.5rem;
-            letter-spacing: -0.025em;
-        }
-        @media (min-width: 768px) {
-            .section-header h2 {
-                font-size: 3rem;
-                line-height: 1;
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#020617',
+                        bronze: { 500: '#94795E', 600: '#7A644D' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
             }
         }
-        .accent-bar {
-            width: 96px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), #6ee7d0);
-            border-radius: 9999px;
-            margin: 1rem auto 0;
+    </script>
+    <style>
+        body { background-color: #020617; color: #F8FAFC; -webkit-font-smoothing: antialiased; font-size: 14px; }
+        .pearl-h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.15; }
+        .pearl-h2 { font-size: clamp(1.875rem, 4vw, 2.25rem); line-height: 1.2; }
+        .pearl-h3 { font-size: 1.25rem; line-height: 1.4; }
+        .pearl-body { font-size: 1rem; line-height: 1.6; }
+        .pearl-label { font-size: 0.875rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+        
+        .section-py { padding-top: 5rem; padding-bottom: 5rem; }
+        @media (min-width: 768px) {
+            .section-py { padding-top: 8rem; padding-bottom: 8rem; }
         }
-        .btn-primary {
-            display: inline-block;
-            background-color: var(--accent-primary);
-            color: var(--text-on-accent);
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.35);
-            transition: all 0.2s ease-out;
-            transform-origin: center;
+        .btn-bronze {
+            background-color: #94795E;
+            color: #020617;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .btn-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 16px 40px rgba(45, 212, 191, 0.4);
-        }
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 0.75rem;
-            transition: all 0.2s ease-out;
-        }
-        .glass-card:hover {
-            transform: translateY(-2px);
-            background: rgba(25, 42, 86, 0.38);
-        }
-        .tab-button {
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s ease-out;
-            white-space: nowrap;
-        }
-        .tab-button:hover { color: var(--text-primary); }
-        [x-cloak] { display: none !important; }
     </style>
 </head>
-
-<body class="antialiased">
-
-    <div class="relative min-h-screen">
+<body class="selection:bg-bronze-500 selection:text-midnight overflow-x-hidden" x-data="{ mobileMenu: false }">
+    <div class="relative min-h-screen flex flex-col font-sans">
         
-        <header class="sticky top-0 z-50" x-data="{ isMobileMenuOpen: false }">
-            <nav class="backdrop-blur-md" style="background-color: var(--deep-blue-nav);">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between items-center h-20">
-                        <div class="flex-shrink-0">
-                            <a href="index.html" class="flex items-center gap-3" aria-label="AI Ling Advisory Home">
-                                <svg class="w-8 h-8"
-                                     viewBox="0 0 100 100" 
-                                     xmlns="http://www.w3.org/2000/svg"
-                                     fill="none"
-                                     stroke-width="8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
-                                    <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
-                                </svg>
-                                <span class="text-2xl font-extrabold text-white tracking-tight">
-                                    AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
-                                </span>
-                            </a>
+        <!-- Navigation -->
+        <header class="h-20 md:h-24 flex items-center hairline-b backdrop-blur-md sticky top-0 z-[100]">
+            <div class="max-w-[90rem] mx-auto w-full px-6 md:px-12 flex justify-between items-center">
+                <div class="flex items-center gap-4 md:gap-10">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-sm bg-bronze-500 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 bg-midnight rounded-full"></div>
                         </div>
-                        
-                        <div class="hidden md:flex md:items-center md:space-x-8">
-                            <a href="index.html#framework" class="text-white font-semibold hover:text-accent-primary transition-colors">Framework</a>
-                            <a href="index.html#benchmark" class="text-white font-semibold hover:text-accent-primary transition-colors">Benchmark</a>
-                            <a href="index.html#plugins" class="text-white font-semibold hover:text-accent-primary transition-colors">Plug-ins</a>
-                            <a href="index.html#toolkit" class="text-white font-semibold hover:text-accent-primary transition-colors">Toolkit</a>
-                            <a href="#" class="font-semibold transition-colors" style="color:var(--accent-primary)">About</a>
-                            <a href="podcast.html" class="text-white font-semibold hover:text-accent-primary transition-colors">Podcast</a>
-                        </div>
-                        
-                        <div class="hidden md:block">
-                            <a href="contact.html" class="btn-primary py-2 px-6 text-sm">Book Your Exclusive Scan</a>
-                        </div>
-                        
-                        <div class="md:hidden">
-                            <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="text-white p-2 rounded-md" aria-controls="mobile-menu" :aria-expanded="isMobileMenuOpen.toString()">
-                                <span class="sr-only">Open main menu</span>
-                                <svg x-show="!isMobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-                                <svg x-show="isMobileMenuOpen" x-cloak class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                            </button>
-                        </div>
-                    </div>
+                        <span class="text-sm font-black tracking-[0.2em] uppercase">PEARL <span class="text-gray-500 font-bold">CUSTODY</span></span>
+                    </a>
                 </div>
-                
-                <div x-show="isMobileMenuOpen" 
-                     @click.away="isMobileMenuOpen = false" 
-                     x-transition
-                     id="mobile-menu" 
-                     class="md:hidden absolute top-full left-0 right-0 py-4 shadow-lg" 
-                     style="background-color: var(--deep-blue-nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
-                     x-cloak>
-                    <div class="px-5 space-y-2">
-                        <a href="index.html#framework" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Framework</a>
-                        <a href="index.html#benchmark" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Benchmark</a>
-                        <a href="index.html#plugins" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Plug-ins</a>
-                        <a href="index.html#toolkit" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Toolkit</a>
-                        <a href="#" @click="isMobileMenuOpen = false" class="block font-semibold px-3 py-2 rounded-md" style="color:var(--accent-primary)">About</a>
-                        <a href="podcast.html" @click="isMobileMenuOpen = false" class="block text-white font-semibold hover:text-accent-primary transition-colors px-3 py-2 rounded-md">Podcast</a>
-                        <a href="contact.html" @click="isMobileMenuOpen = false" class="block btn-primary py-2 px-6 text-sm w-full text-center mt-2">Book Free Scan</a>
-                    </div>
+
+                <nav class="hidden lg:flex items-center gap-12 pearl-label text-gray-400">
+                    <a href="index.html#risk" class="hover:text-bronze-500 transition-colors">Risk Vectors</a>
+                    <a href="index.html#pillars" class="hover:text-bronze-500 transition-colors">The Protocol</a>
+                    <a href="index.html#dossier" class="hover:text-bronze-500 transition-colors">The Dossier</a>
+                    <a href="about.html" class="text-bronze-500">Methodology</a>
+                </nav>
+
+                <div class="flex items-center gap-6">
+                    <a href="index.html" class="pearl-label hover:text-white transition-all hidden sm:block text-gray-500">Back to Terminal</a>
+                    <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-white p-2">
+                        <svg x-show="!mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg x-show="mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
                 </div>
-            </nav>
+            </div>
         </header>
 
-        <main>
-            
-            <section class="relative py-32 md:py-40 overflow-hidden section-panel text-center">
-                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tighter">
-                        About AI LING ADVISORY
-                    </h1>
-                    <p class="mt-8 text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                        We are an expert advisory firm dedicated to bridging the critical gap between deep technology and complex financial regulation.
-                    </p>
-                </div>
-            </section>
-            
-            <section id="founder" class="py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                        
-                        <div class="glass-card p-8 flex flex-col items-center">
-                            <img src="images/liu-ming-portrait.jpg" 
-                                 alt="Portrait of Liu, Ming (柳溟), Founder of AI LING ADVISORY"
-                                 class="w-64 h-64 object-cover rounded-full border-4" 
-                                 style="border-color: var(--glass-border);"
-                                 onerror="this.src='https://placehold.co/256x256/0D1B3E/FFFFFF?text=Liu%2C+Ming'; this.onerror=null;">
-                            
-                            <h3 class="mt-6 text-3xl font-bold text-white">Liu, Ming (柳溟)</h3>
-                            <p class="mt-2 text-lg text-accent-primary font-semibold">Founder & Director</p>
-                            
-                            <ul class="mt-6 flex gap-6">
-                                <li>
-                                    <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Company Email">
-                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="LinkedIn Profile">
-                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Spotify Podcast">
-                                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"/></svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="text-center md:text-left">
-                            <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                                Expert-Led, Practitioner-Focused.
-                            </h2>
-                            <p class="mt-6 text-lg text-gray-300 leading-relaxed">
-                                AI LING ADVISORY was founded by Liu, Ming (柳溟) on a simple premise: most firms lack the specialist talent to govern AI, and most large consultancies offer theoretical advice that fails in practice.
-                            </p>
-                            <p class="mt-4 text-lg text-gray-300 leading-relaxed">
-                                As a dedicated AI GRC expert, Ming established the firm to provide a new model: a boutique advisory service that combines deep regulatory knowledge with practical, hands-on experience in operationalising AI controls.
-                            </p>
-                            <p class="mt-4 text-lg text-gray-300 leading-relaxed">
-                                Our guidance is built for your reality, not just a slide deck. We help you build frameworks that satisfy regulators, empower your teams, and turn your AI governance from a strategic "blocker" into a competitive "enabler."
-                            </p>
-                        </div>
-                        
+        <main class="flex-grow flex flex-col md:flex-row">
+            <!-- Left Pane (Dark) -->
+            <div class="w-full md:w-1/2 bg-midnight p-12 md:p-24 xl:p-32 flex flex-col justify-center border-r border-[#1a1f2e] min-h-[calc(100vh-6rem)]">
+                <div class="max-w-lg mx-auto w-full">
+                    <span class="text-[#94795E] mb-12 block tracking-[0.2em] text-[11px] font-bold uppercase">Institutional Genesis</span>
+                    <h2 class="font-serif font-bold italic text-white mb-10 leading-[1.1] text-4xl md:text-[3.5rem]">An Architect Who<br>Knows the Bottlenecks.</h2>
+                    <div class="space-y-6 text-gray-400 font-light mb-16 italic leading-relaxed text-[15px]">
+                        <p>Founder Ming Liu served as **Business Information Security Officer (BISO)** at Fidelity International and as a Senior Consultant at **Deloitte**. He knows how the "blockers" think because he was one of them.</p>
                     </div>
+                    <blockquote class="border-l border-[#94795E]/40 pl-6">
+                        <p class="text-xl font-serif italic text-white leading-relaxed mb-6">"I built exactly what I would have approved during my time as a regulator and blocker."</p>
+                        <cite class="text-gray-500 tracking-[0.15em] text-[10px] uppercase font-semibold font-sans">— Ming Liu, CISSP / CISM / CISA</cite>
+                    </blockquote>
                 </div>
-            </section>
+            </div>
             
-            <section id="philosophy" class="section-panel py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="section-header">
-                        <h2>Our Philosophy</h2>
-                        <div class="accent-bar"></div>
-                    </div>
-                    
-                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                        
-                        <div class="glass-card p-8 md:p-10">
-                            <div class="flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-8 h-8 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6.75L4.5 12.75M3 21H3.75m1.5-1.5L4.5 12.75m0 0L6 11.25m-1.5 1.5L6 11.25m0 0L6 15m0-3.75L7.5 12.75m0-1.5L9 9.75M9 9.75h1.5m1.5 0L12 11.25m3-1.5L13.5 9.75m0 0L12 11.25m0 0v2.25m0 0l1.5 1.5m0 0l1.5-1.5m-1.5 1.5v2.25m0 0l1.5 1.5m0 0l1.5 1.5m-3-3l1.5 1.5m0 0l1.5-1.5m0 0L21 11.25m-1.5 1.5L21 11.25m0 0v2.25m0 0l-1.5 1.5m0 0l-1.5-1.5m1.5 1.5l-1.5-1.5m0 0L18 9.75m-1.5-1.5L15 9.75m0 0h-3m0 0L9 9.75M3 15h1.5M4.5 15h1.5M6 15h1.5m1.5 0h3M13.5 15h1.5m1.5 0h1.5m1.5 0H21m-3.75-3.75L15 9.75m0 0h1.5m1.5 0h1.5M12 3v1.5m0 16.5v-1.5" /></svg>
-                            </div>
-                            <h3 class="mt-6 text-2xl font-bold text-white text-center">Our Mission</h3>
-                            <p class="mt-4 text-gray-300 text-center">
-                                To empower financial institutions to adopt AI responsibly and profitably. We build practical, operational AI GRC frameworks that work in your reality, not just in a slide deck.
-                            </p>
-                        </div>
-                        
-                        <div class="glass-card p-8 md:p-10">
-                            <div class="flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-8 h-8 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            </div>
-                            <h3 class="mt-6 text-2xl font-bold text-white text-center">Our Vision</h3>
-                            <p class="mt-4 text-gray-300 text-center">
-                                A financial services industry where AI is no longer a strategic 'blocker' but a trusted 'enabler', driving innovation with provable integrity and compliance.
-                            </p>
-                        </div>
-                        
-                        <div class="glass-card p-8 md:p-10">
-                            <div class="flex items-center justify-center w-16 h-16 bg-gray-800/50 rounded-xl mx-auto border border-gray-700 flex-shrink-0">
-                                <svg class="w-8 h-8 text-accent-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-                            </div>
-                            <h3 class="mt-6 text-2xl font-bold text-white text-center">Our Values</h3>
-                            <p class="mt-4 text-gray-300 text-center">
-                                <strong class="text-white">Precision:</strong> Bespoke controls, for your specific risks.<br><br>
-                                <strong class="text-white">Pragmatism:</strong> We deliver solutions, not papers.<br><br>
-                                <strong class="text-white">Partnership:</strong> Collaborate to grow and succeed.
-                            </p>
-                        </div>
-                        
-                    </div>
+            <!-- Right Pane (White) -->
+            <div class="w-full md:w-1/2 bg-white flex flex-col justify-center items-center p-12 md:p-24 min-h-[calc(100vh-6rem)]">
+                <div class="text-center font-sans mt-[-5rem]">
+                    <div class="text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-[0.4em] mb-6 text-[#020617] scale-110">MING LIU</div>
+                    <div class="text-gray-500 tracking-[0.3em] text-[11px] font-bold uppercase ml-3">Principal Architect</div>
                 </div>
-            </section>
-            
-            <section id="scan" class="py-20 md:py-28">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        
-                        <div class="text-center lg:text-left">
-                            <div class="section-header text-center lg:text-left">
-                                <h2 class="!text-5xl !mx-0">Book Your Exclusive 60-Minute AI Risk Readiness Scan</h2>
-                                <div class="accent-bar !mx-auto lg:!mx-0"></div>
-                            </div>
-                            
-                            <p class="mt-8 text-xl text-gray-300">
-                                A complimentary, high-level review of your AI operating environment to identify your top blind spots and provide immediate quick wins.
-                            </p>
-                            
-                            <a href="contact.html" class="btn-primary mt-10 text-lg py-4 px-10">
-                                Book Your Exclusive Scan →
-                            </a>
-                            
-                            <p class="mt-6 text-gray-400">
-                                No sales pitch. No obligation. <br class="hidden sm:block lg:hidden">
-                                Just clear, actionable insights for your industry.
-                            </p> </div>
-                        
-                        <div class="glass-card p-8 md:p-12">
-                            <h3 class="text-3xl font-bold text-white mb-6">What You Will Receive:</h3>
-                            <ul class="space-y-4">
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">A C-Suite Ready Maturity Snapshot:</strong> Your custom 9-dimension radar, visually benchmarking your exact position against industry peers.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">An Immediate Threat Diagnostic:</strong> We identify your top 3 unaddressed risks (e.g., Fair Lending, Suitability) specific to your sub-sector.</span>
-                                </li>
-                                <li class="flex items-start gap-4">
-                                    <svg class="w-7 h-7 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                                    <span class="text-lg text-gray-300"><strong class="text-white">A "Day One" Action Plan:</strong> A clear summary of actionable quick wins you can implement immediately to reduce risk.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
-        
+            </div>
         </main>
-        
-        <footer style="background-color: var(--footer-bg);">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-                
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
-                    
-                    <div class="lg:col-span-4 space-y-6">
-                        <a href="index.html" class="flex items-center gap-3">
-                            <svg class="w-10 h-10"
-                                 viewBox="0 0 100 100" 
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none"
-                                 stroke-width="8"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round">
-                                <path d="M 50 25 L 75 85" stroke="var(--text-primary)"/>
-                                <path d="M 50 25 L 25 85 H 53" stroke="var(--accent-primary)"/>
-                            </svg>
-                            <span class="text-2xl font-extrabold text-white tracking-tight">
-                                AI LING <span style="color:var(--accent-primary)">ADVISORY</span>
-                            </span>
-                        </a>
-                        
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3">
-                                <svg class="w-5 h-5 text-accent-primary flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd" />
-                                </svg>
-                                <p class="text-gray-400 text-sm leading-relaxed">
-                                    Unit 2A, 17/F, Glenealy Tower,<br>No.1 Glenealy, Central, Hong Kong
-                                </p>
-                            </div>
 
-                            <div class="flex items-center gap-3">
-                                <svg class="w-5 h-5 text-accent-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
-                                <a href="tel:+85262817144" class="text-sm text-gray-400 hover:text-accent-primary transition-colors">
-                                    +852 6281 7144
-                                </a>
-                            </div>
-                        </div>
+        <!-- Footer -->
+        <footer class="py-20 border-t border-white/5 bg-midnight pearl-label text-gray-700">
+            <div class="max-w-[90rem] mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
+                <div class="flex items-center gap-2">
+                    <div class="w-6 h-6 border border-bronze-500/20 flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 bg-bronze-500 rounded-full"></div>
                     </div>
-                    
-                    <div class="lg:col-span-5">
-                        <h4 class="font-bold text-white text-lg mb-4">About the Founder</h4>
-                        <div class="flex flex-col sm:flex-row gap-4 items-start">
-                            <img src="images/liu-ming-portrait.jpg" 
-                                 alt="Portrait of LIU Ming"
-                                 class="w-20 h-20 object-cover rounded-lg border-2 flex-shrink-0" 
-                                 style="border-color: var(--glass-border);"
-                                 onerror="this.src='https://placehold.co/96x96/0D1B3E/FFFFFF?text=LM'; this.onerror=null;">
-                            
-                            <div class="space-y-4">
-                                <p class="text-gray-400 text-sm leading-relaxed">
-                                    Founded by AI GRC expert LIU Ming (柳溟), bridging the gap between deep technology and complex financial regulation.
-                                </p>
-                                
-                                <ul class="flex gap-4">
-                                    <li>
-                                        <a href="mailto:AlLingAdvisory@outlook.com" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Email Us">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://linkedin.com/in/ailingadvisory" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Founder LinkedIn">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.785-1.75-1.75s.784-1.75 1.75-1.75 1.75.785 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://open.spotify.com/show/5NwuRD049cZBY4YauQy4js" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors" aria-label="Spotify">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.923 17.58c-.22.352-.64.48-1.002.253-2.9-1.76-6.52-2.15-10.778-1.18-.39.09-.77-.14-.86-.53-.09-.39.14-.77.53-.86 4.54-1.04 8.48-.6 11.66 1.33.36.22.48.64.25 1zM18.8 14.347c-.25.42-.78.57-1.2.32-3.23-1.96-7.34-2.52-11.83-1.38-.46.11-.9-.17-1.02-.63-.11-.46.17-.9.63-1.02 4.9-1.24 9.4- .6 13.02 1.5.42.25.57.78.32 1.2zm.8-3.38c-.29.5-1.02.66-1.52.37-3.6-2.2-8.22-2.8-12.83-1.53-.56.13-1.14-.2-1.27-.76-.13-.56.2-1.14.76-1.27C14.7-.6 19.9.1 24 2.6c.5.29.66 1.02.37 1.52z"/></svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="lg:col-span-3 lg:pl-12">
-                        <h4 class="font-bold text-white text-lg mb-4">Company</h4>
-                        <ul class="space-y-3 text-sm">
-                            <li><a href="#" class="font-semibold" style="color:var(--accent-primary)">About Us</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-accent-primary transition-colors">Insights</a></li>
-                            <li><a href="contact.html" class="text-gray-400 hover:text-accent-primary transition-colors">Contact</a></li>
-                            <li><a href="https://www.linkedin.com/company/ai-ling" target="_blank" rel="noopener" class="text-gray-400 hover:text-accent-primary transition-colors">LinkedIn</a></li>
-                        </ul>
-                    </div>
-
+                    <span class="text-white tracking-[0.2em] font-black">AI LING <span class="font-bold text-gray-500">ADVISORY</span></span>
                 </div>
-
-                <div class="border-t border-white/10 pt-8 text-center md:text-left">
-                    <p class="text-gray-500 text-sm">
-                        © 2025 AI LING ADVISORY LIMITED. All rights reserved.
-                    </p>
-                </div>
-
+                <p class="text-[10px] text-gray-800 uppercase tracking-widest text-center md:text-right">Institutional Governance System // 2026</p>
             </div>
         </footer>
-        
     </div>
-
 </body>
 </html>
