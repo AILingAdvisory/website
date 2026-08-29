@@ -1,114 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | AI LING ADVISORY - Institutional Authority in AI Compliance</title>
+    <title>Methodology & Genesis | AI LING ADVISORY — Institutional Authority in AI Compliance</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        midnight: '#020617',
-                        bronze: { 500: '#94795E', 600: '#7A644D' },
+                        midnight: '#070b14',
+                        'navy-card': '#0c1322',
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                        }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #020617; color: #F8FAFC; -webkit-font-smoothing: antialiased; font-size: 14px; }
-        .pearl-h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.15; }
-        .pearl-h2 { font-size: clamp(1.875rem, 4vw, 2.25rem); line-height: 1.2; }
-        .pearl-h3 { font-size: 1.25rem; line-height: 1.4; }
-        .pearl-body { font-size: 1rem; line-height: 1.6; }
-        .pearl-label { font-size: 0.875rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
-        
-        .section-py { padding-top: 5rem; padding-bottom: 5rem; }
-        @media (min-width: 768px) {
-            .section-py { padding-top: 8rem; padding-bottom: 8rem; }
+        body { background-color: #070b14; color: #F8FAFC; -webkit-font-smoothing: antialiased; }
+        .bg-regtech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-        .btn-bronze {
-            background-color: #94795E;
-            color: #020617;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        .btn-cyan {
+            background-color: #06b6d4;
+            color: #070b14;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 2px;
+            font-weight: 700;
+        }
+        .btn-cyan:hover {
+            background-color: #22d3ee;
+            transform: translateY(-2px);
         }
     </style>
 </head>
-<body class="selection:bg-bronze-500 selection:text-midnight overflow-x-hidden" x-data="{ mobileMenu: false }">
-    <div class="relative min-h-screen flex flex-col font-sans">
+<body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans" x-data="{ mobileMenu: false }">
+    <div class="relative min-h-screen flex flex-col justify-between">
         
-        <!-- Navigation -->
-        <header class="h-20 md:h-24 flex items-center hairline-b backdrop-blur-md sticky top-0 z-[100]">
+        <!-- Header -->
+        <header class="h-20 md:h-24 flex items-center border-b border-white/5 bg-midnight/85 backdrop-blur-md sticky top-0 z-[100]">
             <div class="max-w-[90rem] mx-auto w-full px-6 md:px-12 flex justify-between items-center">
-                <div class="flex items-center gap-4 md:gap-10">
-                    <a href="index.html" class="flex items-center gap-3">
-                        <div class="w-7 h-7 rounded-sm bg-bronze-500 flex items-center justify-center">
-                            <div class="w-1.5 h-1.5 bg-midnight rounded-full"></div>
-                        </div>
-                        <span class="text-sm font-black tracking-[0.2em] uppercase">PEARL <span class="text-gray-500 font-bold">CUSTODY</span></span>
-                    </a>
-                </div>
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-sm bg-cyan-500 flex items-center justify-center">
+                        <div class="w-2 h-2 bg-midnight rounded-full"></div>
+                    </div>
+                    <span class="text-sm font-black tracking-[0.2em] uppercase text-white">
+                        PEARL <span class="text-cyan-400 font-mono font-bold text-xs">Trust OS</span>
+                    </span>
+                </a>
 
-                <nav class="hidden lg:flex items-center gap-12 pearl-label text-gray-400">
-                    <a href="index.html#risk" class="hover:text-bronze-500 transition-colors">Risk Vectors</a>
-                    <a href="index.html#pillars" class="hover:text-bronze-500 transition-colors">The Protocol</a>
-                    <a href="index.html#dossier" class="hover:text-bronze-500 transition-colors">The Dossier</a>
-                    <a href="about.html" class="text-bronze-500">Methodology</a>
+                <nav class="hidden lg:flex items-center gap-10 text-[11px] font-mono tracking-widest uppercase text-slate-400">
+                    <a href="index.html#gap" class="hover:text-cyan-400 transition-colors">The Gap</a>
+                    <a href="index.html#foundation" class="hover:text-cyan-400 transition-colors">Foundation</a>
+                    <a href="index.html#engine" class="hover:text-cyan-400 transition-colors">Architecture</a>
+                    <a href="index.html#dossiers" class="hover:text-cyan-400 transition-colors">Dossiers</a>
+                    <a href="index.html#assurance" class="hover:text-cyan-400 transition-colors">Assurance</a>
+                    <a href="about.html" class="text-cyan-400">Genesis</a>
                 </nav>
 
-                <div class="flex items-center gap-6">
-                    <a href="index.html" class="pearl-label hover:text-white transition-all hidden sm:block text-gray-500">Back to Terminal</a>
-                    <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-white p-2">
-                        <svg x-show="!mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        <svg x-show="mobileMenu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
+                <div>
+                    <a href="index.html" class="px-6 py-2.5 text-xs font-mono font-bold text-slate-400 hover:text-white border border-white/10 rounded-sm transition-all uppercase tracking-wider">
+                        ← Back to Index
+                    </a>
                 </div>
             </div>
         </header>
 
+        <!-- Main Body -->
         <main class="flex-grow flex flex-col md:flex-row">
-            <!-- Left Pane (Dark) -->
-            <div class="w-full md:w-1/2 bg-midnight p-12 md:p-24 xl:p-32 flex flex-col justify-center border-r border-[#1a1f2e] min-h-[calc(100vh-6rem)]">
-                <div class="max-w-lg mx-auto w-full">
-                    <span class="text-[#94795E] mb-12 block tracking-[0.2em] text-[11px] font-bold uppercase">Institutional Genesis</span>
-                    <h2 class="font-serif font-bold italic text-white mb-10 leading-[1.1] text-4xl md:text-[3.5rem]">An Architect Who<br>Knows the Bottlenecks.</h2>
-                    <div class="space-y-6 text-gray-400 font-light mb-16 italic leading-relaxed text-[15px]">
-                        <p>Founder Ming Liu served as **Business Information Security Officer (BISO)** at Fidelity International and as a Senior Consultant at **Deloitte**. He knows how the "blockers" think because he was one of them.</p>
+            <!-- Left Pane -->
+            <div class="w-full md:w-1/2 bg-midnight p-12 md:p-20 xl:p-28 flex flex-col justify-center border-r border-white/5 min-h-[calc(100vh-6rem)]">
+                <div class="max-w-lg mx-auto w-full space-y-8">
+                    <span class="text-cyan-400 tracking-[0.2em] text-xs font-mono font-bold uppercase block">
+                        Institutional Genesis
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+                        An Architect Who Knows the Bottlenecks.
+                    </h1>
+                    <div class="space-y-4 text-slate-300 font-light leading-relaxed text-sm">
+                        <p>
+                            Founder <strong>Ming Liu</strong> served as <strong>Business Information Security Officer (BISO)</strong> at Fidelity International and as a Senior Consultant at <strong>Deloitte</strong>. He knows how the "blockers" think because he was one of them.
+                        </p>
+                        <p>
+                            PEARL was engineered to eliminate the endless cycles of friction between risk officers, regulators, and developers by codifying compliance into deterministic, mathematical truth.
+                        </p>
                     </div>
-                    <blockquote class="border-l border-[#94795E]/40 pl-6">
-                        <p class="text-xl font-serif italic text-white leading-relaxed mb-6">"I built exactly what I would have approved during my time as a regulator and blocker."</p>
-                        <cite class="text-gray-500 tracking-[0.15em] text-[10px] uppercase font-semibold font-sans">— Ming Liu, CISSP / CISM / CISA</cite>
+                    <blockquote class="border-l-2 border-cyan-500/60 pl-6 py-2">
+                        <p class="text-lg font-serif italic text-white leading-relaxed mb-4">
+                            "I built exactly what I would have approved during my time as a regulator and blocker."
+                        </p>
+                        <cite class="text-slate-400 tracking-widest text-xs uppercase font-mono block">
+                            — Ming Liu, CISSP / CISM / CISA
+                        </cite>
                     </blockquote>
                 </div>
             </div>
             
-            <!-- Right Pane (White) -->
-            <div class="w-full md:w-1/2 bg-white flex flex-col justify-center items-center p-12 md:p-24 min-h-[calc(100vh-6rem)]">
-                <div class="text-center font-sans mt-[-5rem]">
-                    <div class="text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-[0.4em] mb-6 text-[#020617] scale-110">MING LIU</div>
-                    <div class="text-gray-500 tracking-[0.3em] text-[11px] font-bold uppercase ml-3">Principal Architect</div>
+            <!-- Right Pane -->
+            <div class="w-full md:w-1/2 bg-[#0a0f1d] flex flex-col justify-center items-center p-12 md:p-24 min-h-[calc(100vh-6rem)]">
+                <div class="text-center">
+                    <div class="text-4xl md:text-6xl font-black uppercase tracking-[0.3em] mb-6 text-white">
+                        MING LIU
+                    </div>
+                    <div class="text-cyan-400 tracking-[0.3em] text-xs font-mono font-bold uppercase">
+                        Principal Architect & Founder
+                    </div>
+                    <div class="mt-8 text-slate-500 text-xs font-mono">
+                        AI LING ADVISORY • HONG KONG SAR
+                    </div>
                 </div>
             </div>
         </main>
 
         <!-- Footer -->
-        <footer class="py-20 border-t border-white/5 bg-midnight pearl-label text-gray-700">
-            <div class="max-w-[90rem] mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-12">
-                <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 border border-bronze-500/20 flex items-center justify-center">
-                        <div class="w-1.5 h-1.5 bg-bronze-500 rounded-full"></div>
-                    </div>
-                    <span class="text-white tracking-[0.2em] font-black">AI LING <span class="font-bold text-gray-500">ADVISORY</span></span>
+        <footer class="py-12 border-t border-white/5 bg-[#050811] font-mono text-[11px] text-slate-400 px-6 md:px-12">
+            <div class="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <div class="text-white font-bold tracking-wider">AI LING ADVISORY LIMITED</div>
+                    <div class="text-slate-500 text-[10px] mt-0.5">Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road, Central, Hong Kong</div>
                 </div>
-                <p class="text-[10px] text-gray-800 uppercase tracking-widest text-center md:text-right">Institutional Governance System // 2026</p>
+                <div class="flex items-center gap-6 text-slate-400">
+                    <a href="mailto:contact@ailingadvisory.com" class="hover:text-cyan-400 text-cyan-400 transition-colors">contact@ailingadvisory.com</a>
+                    <span>•</span>
+                    <a href="index.html" class="hover:text-white transition-colors">Back to Index</a>
+                </div>
             </div>
         </footer>
     </div>
