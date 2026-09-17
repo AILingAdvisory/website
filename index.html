@@ -26,7 +26,15 @@
       "operatingSystem": "Web, On-Premises, In-VPC",
       "provider": {
         "@type": "Organization",
-        "name": "AI LING ADVISORY",
+        "name": "AI LING ADVISORY LIMITED",
+        "telephone": "+852 6281 7144",
+        "email": "contact@AILingAdvisory.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road",
+          "addressLocality": "Central",
+          "addressRegion": "Hong Kong SAR"
+        },
         "founder": {
           "@type": "Person",
           "name": "Ming Liu",
@@ -444,8 +452,8 @@
 
                             <div class="space-y-6">
                                 <div class="flex justify-between items-end border-b border-white/5 pb-3 font-mono">
-                                    <span class="text-xs text-slate-400">Omni-Coverage Ratio</span>
-                                    <span class="text-xl font-bold text-cyan-400">100%</span>
+                                    <span class="text-xs text-slate-400">Mandate Traceability</span>
+                                    <span class="text-xl font-bold text-cyan-400">100% Verifiable</span>
                                 </div>
                                 <div class="flex justify-between items-end border-b border-white/5 pb-3 font-mono">
                                     <span class="text-xs text-slate-400">Regulatory Mandate Ingestion</span>
@@ -1303,10 +1311,17 @@
                             <div class="text-white font-bold font-sans">Principal Registered Office:</div>
                             <div class="text-slate-300">Unit 2904-05, 29/F, Universal Trade Centre</div>
                             <div class="text-slate-300">No.3 Arbuthnot Road, Central, Hong Kong SAR</div>
-                            <div class="text-cyan-400 pt-1">
-                                <a href="mailto:contact@ailingadvisory.com" class="hover:underline flex items-center gap-1.5">
-                                    <span>✉</span> contact@ailingadvisory.com
-                                </a>
+                            <div class="text-cyan-400 pt-1 space-y-1">
+                                <div>
+                                    <a href="mailto:contact@AILingAdvisory.com" class="hover:underline flex items-center gap-1.5">
+                                        <span>✉</span> contact@AILingAdvisory.com
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="tel:+85262817144" class="hover:underline flex items-center gap-1.5 text-slate-300 hover:text-cyan-400 transition-colors">
+                                        <span>📞</span> +852 6281 7144
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1467,19 +1482,19 @@
                     <form @submit.prevent="submitForm()" class="space-y-4 text-xs font-mono">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-slate-300 uppercase mb-1">Full Name</label>
-                                <input type="text" required x-model="formData.name" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Arthur Sterling">
+                                <label for="field-full-name" class="block text-slate-300 uppercase mb-1">Full Name</label>
+                                <input id="field-full-name" type="text" required x-model="formData.name" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Arthur Sterling">
                             </div>
                             <div>
-                                <label class="block text-slate-300 uppercase mb-1">Institutional Email</label>
-                                <input type="email" required x-model="formData.email" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="asterling@institution.com">
+                                <label for="field-email" class="block text-slate-300 uppercase mb-1">Institutional Email</label>
+                                <input id="field-email" type="email" required x-model="formData.email" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="asterling@institution.com">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-slate-300 uppercase mb-1">Your Role / Mandate</label>
-                                <select x-model="formData.role" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
+                                <label for="field-role" class="block text-slate-300 uppercase mb-1">Your Role / Mandate</label>
+                                <select id="field-role" x-model="formData.role" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
                                     <option>Chief Risk Officer / 2LoD</option>
                                     <option>Head of Compliance / MLRO</option>
                                     <option>CTO / Head of AI Engineering</option>
@@ -1488,8 +1503,8 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-slate-300 uppercase mb-1">License & Entity Type</label>
-                                <select x-model="formData.licenseType" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
+                                <label for="field-license-type" class="block text-slate-300 uppercase mb-1">License & Entity Type</label>
+                                <select id="field-license-type" x-model="formData.licenseType" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
                                     <option>HKMA Authorized Institution (Bank)</option>
                                     <option>SFC Licensed Corp (Type 1, 4, 9)</option>
                                     <option>Authorized Insurer / InsurTech</option>
@@ -1500,8 +1515,8 @@
                         </div>
 
                         <div>
-                            <label class="block text-slate-300 uppercase mb-1">Preferred Deployment Architecture</label>
-                            <select x-model="formData.deploymentModel" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
+                            <label for="field-deployment-model" class="block text-slate-300 uppercase mb-1">Preferred Deployment Architecture</label>
+                            <select id="field-deployment-model" x-model="formData.deploymentModel" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
                                 <option>In-VPC (AWS / Azure Hong Kong Region)</option>
                                 <option>Self-Hosted / On-Premises Air-Gapped</option>
                                 <option>Private Dedicated Managed Cloud</option>
@@ -1509,8 +1524,8 @@
                         </div>
 
                         <div>
-                            <label class="block text-slate-300 uppercase mb-1">Target AI Workload Scope</label>
-                            <textarea rows="3" x-model="formData.message" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Algorithmic smart order execution, customer-facing wealth GenAI chatbot, autonomous credit risk decisioning..."></textarea>
+                            <label for="field-scope" class="block text-slate-300 uppercase mb-1">Target AI Workload Scope</label>
+                            <textarea id="field-scope" rows="3" x-model="formData.message" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Algorithmic smart order execution, customer-facing wealth GenAI chatbot, autonomous credit risk decisioning..."></textarea>
                         </div>
 
                         <button type="submit" class="w-full py-3.5 btn-cyan uppercase tracking-widest rounded-sm transition-all mt-4 font-bold text-xs">
@@ -1715,7 +1730,7 @@
                         <p class="text-slate-300 font-sans">PEARL Trust OS executes locally In-VPC or On-Premises. We never ingest, retain, train upon, or expose proprietary financial models, trading algorithms, client prompts, or customer records.</p>
                         
                         <div class="text-white font-bold pt-2">3. Data Subject Access & Inquiries</div>
-                        <p class="text-slate-300 font-sans">To exercise data access or correction rights under PDPO, please contact our Data Protection Officer at <a href="mailto:contact@ailingadvisory.com" class="text-cyan-400 underline">contact@ailingadvisory.com</a>.</p>
+                        <p class="text-slate-300 font-sans">To exercise data access or correction rights under PDPO, please contact our Data Protection Officer at <a href="mailto:contact@AILingAdvisory.com" class="text-cyan-400 underline">contact@AILingAdvisory.com</a> or call <a href="tel:+85262817144" class="text-cyan-400 underline">+852 6281 7144</a>.</p>
                     </div>
                 </div>
 
