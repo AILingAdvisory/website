@@ -179,6 +179,37 @@
           },
           submitForm() {
               this.formSubmitted = true;
+              const leadPayload = {
+                  name: this.formData.name,
+                  email: this.formData.email,
+                  role: this.formData.role,
+                  institution: this.formData.institution,
+                  licenseType: this.formData.licenseType,
+                  deploymentModel: this.formData.deploymentModel,
+                  message: this.formData.message,
+                  timestamp: new Date().toISOString(),
+                  source: 'ailingadvisory-web-lead'
+              };
+
+              try {
+                  if (window.navigator && window.navigator.sendBeacon) {
+                      window.navigator.sendBeacon('/api/lead', JSON.stringify(leadPayload));
+                  } else {
+                      fetch('/api/lead', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify(leadPayload)
+                      }).catch(() => {});
+                  }
+                  try {
+                      const existing = JSON.parse(localStorage.getItem('pearl_institutional_leads') || '[]');
+                      existing.push(leadPayload);
+                      localStorage.setItem('pearl_institutional_leads', JSON.stringify(existing));
+                  } catch (storageErr) {}
+              } catch (e) {
+                  console.warn('Institutional lead recorded:', leadPayload);
+              }
+
               setTimeout(() => {
                   this.contactModal = false;
                   this.formSubmitted = false;
@@ -302,23 +333,26 @@
                     <!-- Security & Deployment Assurance Badges -->
                     <div class="mt-8 flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono">
                         <span class="px-3.5 py-1.5 rounded bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> In-VPC & Air-Gapped Deployment
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Zero External Dependencies
                         </span>
                         <span class="px-3.5 py-1.5 rounded bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Zero Client Data Retention
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Air-Gapped & In-VPC Deployment
                         </span>
                         <span class="px-3.5 py-1.5 rounded bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Mutual NDA Protected
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Zero Client Data Retention
+                        </span>
+                        <span class="px-3.5 py-1.5 rounded bg-white/[0.03] border border-white/10 text-slate-300 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Mutual NDA Protected
                         </span>
                     </div>
 
                     <!-- Regulatory Trust Bar -->
                     <div class="mt-14 pt-8 border-t border-white/10 flex flex-wrap justify-center items-center gap-6 md:gap-12 text-slate-400 text-xs font-mono">
-                        <span class="text-slate-500 uppercase tracking-widest font-semibold">Global Coverage:</span>
-                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Hong Kong">HKMA / SFC / PCPD</span>
-                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Europe">EU AI Act (Ready)</span>
-                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Singapore">MAS FEAT</span>
-                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="United States">US SEC AI Rules</span>
+                        <span class="text-slate-500 uppercase tracking-widest font-semibold">Supervisory Coverage:</span>
+                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Hong Kong Monetary Authority">HKMA (SPM TM-E-1 / GenAI)</span>
+                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Securities and Futures Commission">SFC (Code & Schedule 7)</span>
+                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Privacy Commissioner for Personal Data">PCPD (2024 AI Model)</span>
+                        <span class="text-slate-200 font-semibold hover:text-cyan-400 transition-colors" title="Insurance Authority">IA (GL20 / GL14)</span>
                     </div>
                 </div>
             </section>
@@ -418,7 +452,7 @@
                                     Proprietary Automated Ontology
                                 </div>
                                 <p class="text-slate-300 text-sm leading-relaxed font-light pt-2">
-                                    PEARL's core technological moat: an automated regulatory knowledge graph. We algorithmically parse global AI mandates (HKMA, SFC, EU AI Act, MAS) into structured, verifiable engineering control nodes with paragraph-level provenance.
+                                    PEARL's core technological moat: a deterministic, zero-dependency policy compiler. We algorithmically parse Hong Kong financial AI mandates (HKMA, SFC, PCPD, IA) into structured, verifiable engineering control nodes with paragraph-level provenance and machine-verifiable Negative Proof.
                                 </p>
                             </div>
 
@@ -1528,7 +1562,20 @@
                             <textarea id="field-scope" rows="3" x-model="formData.message" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Algorithmic smart order execution, customer-facing wealth GenAI chatbot, autonomous credit risk decisioning..."></textarea>
                         </div>
 
-                        <button type="submit" class="w-full py-3.5 btn-cyan uppercase tracking-widest rounded-sm transition-all mt-4 font-bold text-xs">
+                        <!-- 48-Hour Low-Friction Evaluation Commitment -->
+                        <div class="p-3 bg-cyan-950/40 border border-cyan-500/30 rounded text-[11px] font-mono space-y-1.5 text-slate-300">
+                            <div class="text-cyan-400 font-bold flex items-center gap-1.5 uppercase tracking-wider text-[10px]">
+                                <span>⚡</span> 48-Hour Low-Friction PoC Commitment
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] text-slate-300">
+                                <div><span class="text-emerald-400">✓</span> 零代码侵入 (Zero Code Access)</div>
+                                <div><span class="text-emerald-400">✓</span> 零敏感数据留存 (Zero Data Ingest)</div>
+                                <div><span class="text-emerald-400">✓</span> 仅需30分钟脱敏问卷</div>
+                                <div><span class="text-emerald-400">✓</span> 48小时交付基线诊断底稿</div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 btn-cyan uppercase tracking-widest rounded-sm transition-all mt-3 font-bold text-xs">
                             Request Confidential Evaluation & Audit Pack
                         </button>
                         <p class="text-[10px] text-center text-slate-400 mt-2">
@@ -1574,9 +1621,17 @@
 
                 <!-- Tab 1: Executive Audit Dossier Preview -->
                 <div x-show="dossierTab === 'exec'" class="bg-slate-950 border border-white/10 p-6 rounded space-y-4 font-sans text-xs">
-                    <div class="flex justify-between items-center border-b border-white/10 pb-3 font-mono text-[11px]">
-                        <span class="text-slate-300 font-bold uppercase">Document Ref: PEARL-AUDIT-2026-HK</span>
-                        <span class="text-emerald-400 font-bold">STATUS: VERIFIED BY RULE ENGINE</span>
+                    <div class="flex flex-wrap justify-between items-center gap-3 border-b border-white/10 pb-3 font-mono text-[11px]">
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-300 font-bold uppercase">Document Ref: PEARL-AUDIT-2026-HK</span>
+                            <span class="text-slate-500 hidden sm:inline">| SHA-256 Digest Verified</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-emerald-400 font-bold hidden md:inline text-[10px]">VERIFIED BY COMPILER</span>
+                            <a href="./pearl-sfc-audit-dossier-sample.pdf" target="_blank" download="PEARL-SFC-Audit-Dossier-Sample.pdf" class="btn-cyan px-3 py-1.5 rounded text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-sm shadow-cyan-500/20">
+                                <span>⬇</span> Download 29-Page Golden Dossier (PDF)
+                            </a>
+                        </div>
                     </div>
 
                     <template x-if="sampleModal === 'sfc'">
@@ -1599,6 +1654,15 @@
                                     <div class="text-emerald-300 font-bold">SFC-GOV-01: Algorithmic Governance Committee Sign-Off</div>
                                     <div class="text-slate-300 mt-1"><strong>Mandate:</strong> SFC Code Para 5.4 — Formal quarterly review of model drift and market impact.</div>
                                     <div class="text-slate-400 text-[11px] mt-1"><strong>Required Evidence:</strong> 2LoD Risk Committee charter, model change ticket logs.</div>
+                                </div>
+
+                                <div class="p-3 bg-white/[0.02] border-l-2 border-slate-600 text-xs">
+                                    <div class="text-slate-400 font-bold flex items-center justify-between">
+                                        <span>SFC-REC-04: Dark Pool Cross-Order Matching Exemption</span>
+                                        <span class="text-[10px] text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800">NEGATIVE PROOF (EXEMPT)</span>
+                                    </div>
+                                    <div class="text-slate-400 mt-1"><strong>Evaluated & Formally Excluded:</strong> System topology operates strictly single-broker agency DMA; dark pool crossing rules rejected with deterministic reason code.</div>
+                                    <div class="text-slate-500 text-[11px] mt-1"><strong>Audit Value:</strong> Eliminates regulatory ambiguity during SFC on-site inspections without external legal memo fees.</div>
                                 </div>
                             </div>
                         </div>
@@ -1624,6 +1688,15 @@
                                     <div class="text-emerald-300 font-bold">HKMA-MOD-01: Dual-Model Hallucination & Factuality Verification</div>
                                     <div class="text-slate-300 mt-1"><strong>Mandate:</strong> HKMA SPM TM-E-1 — Independent secondary model validation for advisory generation.</div>
                                     <div class="text-slate-400 text-[11px] mt-1"><strong>Required Evidence:</strong> Hallucination benchmark evaluation report, human-in-loop audit trail.</div>
+                                </div>
+
+                                <div class="p-3 bg-white/[0.02] border-l-2 border-slate-600 text-xs">
+                                    <div class="text-slate-400 font-bold flex items-center justify-between">
+                                        <span>HKMA-CRD-02: Credit Decisioning Autonomous Underwriting</span>
+                                        <span class="text-[10px] text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-800">NEGATIVE PROOF (EXEMPT)</span>
+                                    </div>
+                                    <div class="text-slate-400 mt-1"><strong>Evaluated & Formally Excluded:</strong> Workload classified as customer informational advisory only; high-risk autonomous credit scoring provisions provably non-applicable.</div>
+                                    <div class="text-slate-500 text-[11px] mt-1"><strong>Audit Value:</strong> Mathematical proof of supervisory boundary defense for HKMA Model Risk Review.</div>
                                 </div>
                             </div>
                         </div>
