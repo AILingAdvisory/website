@@ -185,11 +185,33 @@
           duration: 0,
           playbackRate: 1.0,
           audioEl: null,
+          selectedCategory: 'all',
+          stickyDismissed: false,
+          hasInteractedAudio: false,
 
           get currentEpisode() {
               return (this.intelligence && this.intelligence.episodes && this.intelligence.episodes.length > 0)
                   ? this.intelligence.episodes[this.activeEpIndex]
                   : null;
+          },
+
+          get filteredEpisodes() {
+              if (!this.intelligence || !this.intelligence.episodes) return [];
+              if (this.selectedCategory === 'all') return this.intelligence.episodes;
+              return this.intelligence.episodes.filter(ep => {
+                  const tagsStr = (ep.tags || []).join(' ').toLowerCase();
+                  const titleStr = (ep.title || '').toLowerCase();
+                  if (this.selectedCategory === 'adversarial') {
+                      return tagsStr.includes('adversarial') || tagsStr.includes('drift') || tagsStr.includes('jailbreak') || tagsStr.includes('sandbox') || tagsStr.includes('browser') || tagsStr.includes('client-side') || tagsStr.includes('coding');
+                  }
+                  if (this.selectedCategory === 'agentic') {
+                      return tagsStr.includes('agent') || tagsStr.includes('soc') || tagsStr.includes('swarm') || tagsStr.includes('mesh') || tagsStr.includes('identity');
+                  }
+                  if (this.selectedCategory === 'governance') {
+                      return tagsStr.includes('fca') || tagsStr.includes('resilience') || tagsStr.includes('collapse') || tagsStr.includes('alignment') || tagsStr.includes('flattery') || tagsStr.includes('synthetic') || tagsStr.includes('fincrime') || tagsStr.includes('aml');
+                  }
+                  return true;
+              });
           },
 
           initAudio() {
@@ -213,6 +235,8 @@
           },
 
           togglePlay() {
+              this.hasInteractedAudio = true;
+              this.stickyDismissed = false;
               this.initAudio();
               if (this.isPlaying) {
                   this.audioEl.pause();
@@ -227,6 +251,8 @@
           },
 
           selectEpisode(idx) {
+              this.hasInteractedAudio = true;
+              this.stickyDismissed = false;
               this.activeEpIndex = idx;
               this.initAudio();
               this.audioEl.src = this.currentEpisode.audioUrl;
@@ -425,13 +451,31 @@
                         </span>
                     </h1>
 
-                    <div class="max-w-3xl mx-auto mb-10 space-y-4">
+                    <div class="max-w-3xl mx-auto mb-8 space-y-4">
                         <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed">
                             PEARL translates fragmented HKMA, SFC, PCPD, and IA requirements into tailored control baselines, supervisory audit dossiers, and continuous evidence packs — so regulated institutions can deploy AI with absolute defensibility.
                         </p>
                         <p class="text-xs sm:text-sm text-cyan-400 font-medium font-mono">
                             Deterministic Control Compilation • Zero LLM Hallucinations • Audit-Ready from Day 1
                         </p>
+                    </div>
+
+                    <!-- Today's Frontier Research & Audio Dispatch Ticker -->
+                    <div class="mb-10 max-w-2xl mx-auto">
+                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-950/80 via-midnight to-cyan-950/80 border border-cyan-500/40 shadow-lg shadow-cyan-950/50 text-xs font-mono group hover:border-cyan-400 transition-all">
+                            <span class="flex items-center gap-1.5 text-cyan-300 font-bold uppercase tracking-wider text-[10px] flex-shrink-0">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                                <span>TODAY'S DISPATCH</span>
+                            </span>
+                            <span class="text-white/30 hidden sm:inline">|</span>
+                            <a href="#intelligence" class="text-slate-200 group-hover:text-cyan-300 transition-colors truncate max-w-[200px] sm:max-w-md font-sans text-xs text-left">
+                                <span x-text="intelligence.episodes && intelligence.episodes[0] ? intelligence.episodes[0].title : 'The 5-Turn Trap: Multi-Turn Jailbreaks Hit 97%'"></span>
+                            </a>
+                            <button @click.stop="selectEpisode(0)" class="w-6 h-6 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 ml-1" title="Play Today's Audio Dispatch">
+                                <svg x-show="!(activeEpIndex === 0 && isPlaying)" class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <svg x-show="activeEpIndex === 0 && isPlaying" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -1483,18 +1527,46 @@
 
                     <!-- Episode Grid / Archive (Season 2 Frontier Series) -->
                     <div>
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
-                            <h3 class="text-sm font-mono uppercase tracking-widest text-slate-300 font-bold flex items-center gap-2">
-                                <span>Recent Dispatches</span>
-                                <span class="text-cyan-400 font-normal">(Season 2 • 2026.09.13 — 2026.09.27)</span>
-                            </h3>
-                            <span class="text-xs font-mono text-slate-400" x-text="(intelligence.episodes ? intelligence.episodes.length : 0) + ' Episodes'"></span>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 mb-6 gap-4">
+                            <div>
+                                <h3 class="text-sm font-mono uppercase tracking-widest text-slate-300 font-bold flex items-center gap-2">
+                                    <span>Recent Dispatches</span>
+                                    <span class="text-cyan-400 font-normal">(Season 2 • 2026.09.13 — 2026.09.27)</span>
+                                </h3>
+                                <p class="text-xs text-slate-400 font-light mt-1">Filter dispatches by threat taxonomy and supervisory focus area</p>
+                            </div>
+                            <span class="text-xs font-mono text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-3 py-1 rounded self-start sm:self-auto" x-text="filteredEpisodes.length + ' Dispatches Shown'"></span>
+                        </div>
+
+                        <!-- Category Filter Tabs / Pills -->
+                        <div class="flex flex-wrap items-center gap-2 mb-8">
+                            <button @click="selectedCategory = 'all'" 
+                                    :class="selectedCategory === 'all' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all flex items-center gap-1.5">
+                                <span>All Topics</span>
+                                <span class="text-[10px] opacity-75" x-text="'(' + (intelligence.episodes ? intelligence.episodes.length : 0) + ')'"></span>
+                            </button>
+                            <button @click="selectedCategory = 'adversarial'" 
+                                    :class="selectedCategory === 'adversarial' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                Adversarial & Jailbreak (攻防越狱)
+                            </button>
+                            <button @click="selectedCategory = 'agentic'" 
+                                    :class="selectedCategory === 'agentic' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                Agentic Security & SOC (智能体安全)
+                            </button>
+                            <button @click="selectedCategory = 'governance'" 
+                                    :class="selectedCategory === 'governance' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                Model Risk & GRC (模型风险与监管)
+                            </button>
                         </div>
 
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <template x-for="(ep, idx) in (intelligence.episodes || [])" :key="ep.id">
+                            <template x-for="ep in filteredEpisodes" :key="ep.id">
                                 <div class="bg-navy-card/90 border transition-all duration-200 rounded-sm p-6 flex flex-col justify-between group hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-950/30"
-                                     :class="activeEpIndex === idx ? 'border-cyan-400/80 bg-cyan-950/20' : 'border-white/10'">
+                                     :class="currentEpisode && currentEpisode.id === ep.id ? 'border-cyan-400/80 bg-cyan-950/20' : 'border-white/10'">
                                     
                                     <div class="space-y-3">
                                         <!-- Card Top Meta -->
@@ -1505,7 +1577,7 @@
 
                                         <!-- Title -->
                                         <h4 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 leading-snug cursor-pointer"
-                                            @click="selectEpisode(idx)"
+                                            @click="selectEpisode(intelligence.episodes.findIndex(e => e.id === ep.id))"
                                             x-text="ep.title"></h4>
 
                                         <!-- Excerpt / Subtitle -->
@@ -1522,10 +1594,10 @@
 
                                     <!-- Bottom Action Bar -->
                                     <div class="pt-5 mt-5 border-t border-white/5 flex items-center justify-between">
-                                        <button @click="selectEpisode(idx)" 
+                                        <button @click="selectEpisode(intelligence.episodes.findIndex(e => e.id === ep.id))" 
                                                 class="text-xs font-mono flex items-center gap-1.5 transition-colors"
-                                                :class="activeEpIndex === idx && isPlaying ? 'text-emerald-400 font-bold' : 'text-cyan-400 hover:text-white'">
-                                            <template x-if="activeEpIndex === idx && isPlaying">
+                                                :class="currentEpisode && currentEpisode.id === ep.id && isPlaying ? 'text-emerald-400 font-bold' : 'text-cyan-400 hover:text-white'">
+                                            <template x-if="currentEpisode && currentEpisode.id === ep.id && isPlaying">
                                                 <span class="flex items-center gap-1">
                                                     <span class="w-1.5 h-3 bg-emerald-400 animate-pulse"></span>
                                                     <span class="w-1.5 h-2 bg-emerald-400 animate-pulse delay-75"></span>
@@ -1533,7 +1605,7 @@
                                                     <span>Playing</span>
                                                 </span>
                                             </template>
-                                            <template x-if="!(activeEpIndex === idx && isPlaying)">
+                                            <template x-if="!(currentEpisode && currentEpisode.id === ep.id && isPlaying)">
                                                 <span class="flex items-center gap-1">
                                                     <svg class="w-3.5 h-3.5 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                                     <span>Play Audio</span>
@@ -2197,6 +2269,65 @@
                     <button @click="closeWhitepaper()" class="text-cyan-400 hover:text-white transition-colors">Close ✕</button>
                 </div>
 
+            </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────────────── -->
+        <!-- PERSISTENT GLOBAL BOTTOM AUDIO PLAYER (TOP 1 UX) -->
+        <!-- ───────────────────────────────────────────────────────────── -->
+        <div x-show="hasInteractedAudio && !stickyDismissed && !whitepaperModal"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="translate-y-full opacity-0"
+             x-transition:enter-end="translate-y-0 opacity-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="translate-y-0 opacity-100"
+             x-transition:leave-end="translate-y-full opacity-0"
+             class="fixed bottom-0 left-0 right-0 z-[150] bg-midnight/95 backdrop-blur-lg border-t border-cyan-500/40 shadow-2xl px-4 sm:px-8 py-2.5 font-sans"
+             style="display: none;">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <!-- Left: Track info & Play/Pause -->
+                <div class="flex items-center gap-3 min-w-0 flex-1 sm:flex-initial">
+                    <button @click="togglePlay()" class="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 shadow-md shadow-cyan-500/30">
+                        <svg x-show="!isPlaying" class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg x-show="isPlaying" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-bold uppercase tracking-wider hidden sm:inline" x-text="currentEpisode?.date"></span>
+                            <span class="text-xs font-bold text-white truncate max-w-[180px] sm:max-w-md block" x-text="currentEpisode?.title"></span>
+                        </div>
+                        <div class="text-[10px] font-mono text-slate-400 flex items-center gap-2">
+                            <span x-text="formatTime(currentTime) + ' / ' + (duration ? formatTime(duration) : currentEpisode?.durationFormatted)"></span>
+                            <span class="text-white/20 hidden md:inline">•</span>
+                            <span class="text-slate-400 hidden md:inline" x-text="currentEpisode?.readTimeMin + ' min read'"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Middle: Progress scrubber & Quick Skips -->
+                <div class="hidden md:flex flex-col items-center flex-1 max-w-md px-4 space-y-1">
+                    <div class="flex items-center gap-4 text-slate-400">
+                        <button @click="skipTime(-15)" class="hover:text-white transition-colors" title="Rewind 15s">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.334 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z"/></svg>
+                        </button>
+                        <div @click="seekAudio($event)" class="h-1.5 w-64 bg-slate-800 rounded-full cursor-pointer relative overflow-hidden group">
+                            <div class="h-full bg-gradient-to-r from-cyan-500 to-teal-400 transition-all duration-100" 
+                                 :style="'width: ' + ((duration > 0 ? (currentTime / duration) : 0) * 100) + '%'"></div>
+                        </div>
+                        <button @click="skipTime(30)" class="hover:text-white transition-colors" title="Forward 30s">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- Right: Speed, Paper Link, Jump to Think Tank, Close -->
+                <div class="flex items-center gap-2.5 flex-shrink-0">
+                    <button @click="cycleSpeed()" class="text-[10px] font-mono font-bold text-cyan-300 px-2 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 transition-colors" x-text="playbackRate + 'x'"></button>
+                    <button @click="openWhitepaper(currentEpisode)" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 text-white font-mono text-[11px] rounded-sm border border-white/20 hover:border-cyan-400 transition-colors">
+                        <span>Read Paper</span>
+                        <span class="text-cyan-400">↗</span>
+                    </button>
+                    <a href="#intelligence" class="text-slate-400 hover:text-cyan-400 text-[11px] font-mono hidden lg:inline px-2 py-1">Think Tank ↑</a>
+                    <button @click="stickyDismissed = true; if (isPlaying) togglePlay();" class="text-slate-400 hover:text-white p-1 text-sm transition-colors" title="Dismiss Player">✕</button>
+                </div>
             </div>
         </div>
 
