@@ -159,7 +159,12 @@
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
     <!-- AI LING Think Tank & Intelligence Data -->
-    <script src="./data/intelligence.js"></script>
+    <script src="./data/intelligence.js" onerror="this.onerror=null;this.src='./intelligence.js';"></script>
+    <script>
+      if (typeof window.PEARL_INTELLIGENCE === 'undefined') {
+        document.write('<script src="./intelligence.js"><\/script>');
+      }
+    </script>
 </head>
 
 <body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans text-slate-100" 
