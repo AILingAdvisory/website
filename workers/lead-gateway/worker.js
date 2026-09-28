@@ -39,11 +39,11 @@ export default {
         email = 'No Email Provided',
         role = 'Unspecified',
         institution = 'Unspecified',
-        licenseType = 'Unspecified',
-        deploymentModel = 'Unspecified',
-        message = 'No notes provided',
+        focus = [],
+        message = '',
       } = data;
 
+      const focusSummary = Array.isArray(focus) && focus.length > 0 ? focus.join(', ') : (focus || 'General AI Governance');
       const leadId = 'PEARL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
       const timestamp = new Date().toISOString();
       const country = request.cf?.country || request.headers.get('cf-ipcountry') || 'Unknown';
@@ -122,17 +122,10 @@ export default {
                       }
                     },
                     {
-                      is_short: true,
+                      is_short: false,
                       text: {
                         tag: 'lark_md',
-                        content: `**📜 监管牌照:**\n${licenseType}`
-                      }
-                    },
-                    {
-                      is_short: true,
-                      text: {
-                        tag: 'lark_md',
-                        content: `**☁️ 部署架构:**\n${deploymentModel}`
+                        content: `**🎯 关注重点:**\n${focusSummary}`
                       }
                     }
                   ]
@@ -196,9 +189,8 @@ export default {
               `Institution:      ${institution}`,
               `Role:             ${role}`,
               `Institutional Em: ${email}`,
-              `License / Entity: ${licenseType}`,
-              `Deployment Model: ${deploymentModel}`,
-              `Target Workload:  ${message}`,
+              `Primary Focus:    ${focusSummary}`,
+              `Specific Notes:   ${message || 'Standard Technical Briefing'}`,
               '================================================================',
               `Audit Reference:  ${leadId}`,
               `Timestamp:        ${timestamp}`,
@@ -239,8 +231,7 @@ export default {
               institution,
               role,
               email,
-              licenseType,
-              deploymentModel,
+              focus: focusSummary,
               message,
               timestamp,
               country,
