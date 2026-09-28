@@ -295,15 +295,43 @@
               this.whitepaperModal = null;
           },
 
+          availableFocusAreas: [
+              'HKMA GenAI Compliance',
+              'SFC Schedule 7 (Algo & Risk)',
+              'PCPD 2024 AI Privacy Framework',
+              'Agentic AI / LLM Guardrails',
+              'Deterministic Audit Dossiers'
+          ],
+
           formData: { 
               name: '', 
               email: '', 
-              role: 'Chief Risk Officer / 2LoD',
+              role: 'Risk & Compliance (CRO, Legal, 2LoD)',
               institution: '', 
-              licenseType: 'HKMA Authorized Institution (Bank)', 
-              deploymentModel: 'In-VPC (AWS / Azure HK)',
+              focus: ['HKMA GenAI Compliance'], 
               message: '' 
           },
+
+          toggleFocus(item) {
+              const idx = this.formData.focus.indexOf(item);
+              if (idx > -1) {
+                  if (this.formData.focus.length > 1) {
+                      this.formData.focus.splice(idx, 1);
+                  }
+              } else {
+                  this.formData.focus.push(item);
+              }
+          },
+
+          openContactWithFocus(focusTag) {
+              if (focusTag) {
+                  if (!this.formData.focus.includes(focusTag)) {
+                      this.formData.focus = [focusTag];
+                  }
+              }
+              this.contactModal = true;
+          },
+
           async submitForm() {
               this.submittingForm = true;
               const leadPayload = {
@@ -311,8 +339,7 @@
                   email: this.formData.email,
                   role: this.formData.role,
                   institution: this.formData.institution,
-                  licenseType: this.formData.licenseType,
-                  deploymentModel: this.formData.deploymentModel,
+                  focus: this.formData.focus,
                   message: this.formData.message,
                   timestamp: new Date().toISOString(),
                   source: "ailingadvisory-web-lead"
@@ -333,11 +360,17 @@
                   console.warn("Worker dispatch fallback:", e);
                   fetch("https://formsubmit.co/ajax/contact@AILingAdvisory.com", {
                       method: "POST",
-                      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                      headers: { 
+                          "Content-Type": "application/json", 
+                          "Accept": "application/json",
+                          "Origin": "https://www.ailingadvisory.com",
+                          "Referer": "https://www.ailingadvisory.com/"
+                      },
                       body: JSON.stringify({
                           _subject: "[Institutional Lead] " + leadPayload.name + " - " + leadPayload.institution,
                           _cc: "ailingadvisory@outlook.com",
-                          ...leadPayload
+                          ...leadPayload,
+                          focus: leadPayload.focus.join(", ")
                       })
                   }).catch(() => {});
                   this.leadConfirmationId = "PEARL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -1389,52 +1422,68 @@
 
                 <template x-if="!formSubmitted">
                     <form @submit.prevent="submitForm()" class="space-y-4 text-xs font-mono">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Row 1: Identity & Contact -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div>
-                                <label for="field-full-name" class="block text-slate-300 uppercase mb-1">Full Name</label>
-                                <input id="field-full-name" type="text" required x-model="formData.name" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Arthur Sterling">
+                                <label for="field-full-name" class="block text-slate-300 uppercase mb-1 text-[11px] font-semibold">
+                                    Full Name <span class="text-cyan-400">*</span>
+                                </label>
+                                <input id="field-full-name" type="text" required x-model="formData.name" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400 transition-colors" placeholder="e.g. Arthur Sterling">
                             </div>
                             <div>
-                                <label for="field-email" class="block text-slate-300 uppercase mb-1">Institutional Email</label>
-                                <input id="field-email" type="email" required x-model="formData.email" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="asterling@institution.com">
+                                <label for="field-email" class="block text-slate-300 uppercase mb-1 text-[11px] font-semibold">
+                                    Institutional Email <span class="text-cyan-400">*</span>
+                                </label>
+                                <input id="field-email" type="email" required x-model="formData.email" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400 transition-colors" placeholder="asterling@institution.com">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Row 2: Institution & Role -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                             <div>
-                                <label for="field-role" class="block text-slate-300 uppercase mb-1">Your Role / Mandate</label>
-                                <select id="field-role" x-model="formData.role" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
-                                    <option>Chief Risk Officer / 2LoD</option>
-                                    <option>Head of Compliance / MLRO</option>
-                                    <option>CTO / Head of AI Engineering</option>
-                                    <option>General Counsel / Legal</option>
-                                    <option>Head of Algorithmic Trading</option>
+                                <label for="field-institution" class="block text-slate-300 uppercase mb-1 text-[11px] font-semibold">
+                                    Company / Institution <span class="text-cyan-400">*</span>
+                                </label>
+                                <input id="field-institution" type="text" required x-model="formData.institution" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400 transition-colors" placeholder="e.g. Standard Chartered / BOCI">
+                            </div>
+                            <div>
+                                <label for="field-role" class="block text-slate-300 uppercase mb-1 text-[11px] font-semibold">
+                                    Your Mandate / Role
+                                </label>
+                                <select id="field-role" x-model="formData.role" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400 transition-colors">
+                                    <option>Risk & Compliance (CRO, Legal, 2LoD)</option>
+                                    <option>Technology & AI Engineering (CTO, Architect)</option>
+                                    <option>Executive Leadership (MD, CEO, Founder)</option>
+                                    <option>Trading & Quantitative Strategies</option>
+                                    <option>Advisory / Audit / Other</option>
                                 </select>
                             </div>
-                            <div>
-                                <label for="field-license-type" class="block text-slate-300 uppercase mb-1">License & Entity Type</label>
-                                <select id="field-license-type" x-model="formData.licenseType" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
-                                    <option>HKMA Authorized Institution (Bank)</option>
-                                    <option>SFC Licensed Corp (Type 1, 4, 9)</option>
-                                    <option>Authorized Insurer / InsurTech</option>
-                                    <option>MPF Trustee / Wealth Manager</option>
-                                    <option>AI / FinTech Infrastructure</option>
-                                </select>
+                        </div>
+
+                        <!-- Row 3: Primary Focus Areas (Low-friction 1-click select pills) -->
+                        <div>
+                            <label class="block text-slate-300 uppercase mb-1.5 text-[11px] font-semibold">
+                                Primary Focus Areas <span class="text-slate-500 font-normal lowercase">(select all that apply)</span>
+                            </label>
+                            <div class="flex flex-wrap gap-2 pt-0.5">
+                                <template x-for="item in availableFocusAreas" :key="item">
+                                    <button type="button" 
+                                            @click="toggleFocus(item)"
+                                            :class="formData.focus.includes(item) ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-sm shadow-cyan-500/20' : 'bg-slate-900/70 border-white/10 text-slate-300 hover:border-white/25'"
+                                            class="px-3 py-1.5 rounded-sm border text-[11px] font-mono transition-all flex items-center gap-1.5">
+                                        <span x-show="formData.focus.includes(item)" class="text-cyan-400 text-[10px] font-bold">✓</span>
+                                        <span x-text="item"></span>
+                                    </button>
+                                </template>
                             </div>
                         </div>
 
+                        <!-- Row 4: Specific Objectives / Notes (Non-intimidating single line) -->
                         <div>
-                            <label for="field-deployment-model" class="block text-slate-300 uppercase mb-1">Preferred Deployment Architecture</label>
-                            <select id="field-deployment-model" x-model="formData.deploymentModel" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400">
-                                <option>In-VPC (AWS / Azure Hong Kong Region)</option>
-                                <option>Self-Hosted / On-Premises Air-Gapped</option>
-                                <option>Private Dedicated Managed Cloud</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="field-scope" class="block text-slate-300 uppercase mb-1">Target AI Workload Scope</label>
-                            <textarea id="field-scope" rows="3" x-model="formData.message" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400" placeholder="e.g. Algorithmic smart order execution, customer-facing wealth GenAI chatbot, autonomous credit risk decisioning..."></textarea>
+                            <label for="field-notes" class="block text-slate-300 uppercase mb-1 text-[11px] font-semibold">
+                                Specific Objectives or Timeline <span class="text-slate-500 font-normal lowercase">(optional)</span>
+                            </label>
+                            <input id="field-notes" type="text" x-model="formData.message" class="w-full bg-slate-900/90 border border-slate-700 p-2.5 rounded text-white focus:outline-none focus:border-cyan-400 text-xs transition-colors" placeholder="e.g. Preparing for upcoming supervisory assessment, or evaluating GenAI chatbot controls...">
                         </div>
 
                         <!-- 48-Hour Low-Friction Evaluation Commitment -->
@@ -1451,7 +1500,7 @@
                         </div>
 
                         <button type="submit" :disabled="submittingForm" class="w-full py-3.5 btn-cyan uppercase tracking-widest rounded-sm transition-all mt-3 font-bold text-xs flex items-center justify-center gap-2">
-                            <span x-show="!submittingForm">Request Confidential Evaluation & Audit Pack</span>
+                            <span x-show="!submittingForm">Schedule Confidential Briefing & Get Audit Pack →</span>
                             <span x-show="submittingForm" class="flex items-center gap-2" style="display: none;">
                                 <svg class="animate-spin h-4 w-4 text-midnight" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                 <span>Logging Confidential Request...</span>
@@ -1624,7 +1673,7 @@
                     <button @click="sampleModal = null" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-sm">
                         Close
                     </button>
-                    <button @click="sampleModal = null; contactModal = true;" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold">
+                    <button @click="openContactWithFocus(sampleModal === 'hkma' ? 'HKMA GenAI Compliance' : 'SFC Schedule 7 (Algo & Risk)'); sampleModal = null;" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold">
                         Request Institutional Evaluation Pack
                     </button>
                 </div>
@@ -1749,7 +1798,7 @@
                                 Frontier compliance cannot be solved by reading PDFs or manual consulting retainers. PEARL Trust OS compiles supervisory boundaries (HKMA SPM TM-E-1, SFC Schedule 7, PCPD Ethical AI, EU AI Act) into deterministic DevSecOps controls and negative-proof audit dossiers.
                             </p>
                             <div class="flex flex-wrap items-center gap-4 pt-2">
-                                <button @click="closeWhitepaper(); contactModal = true;" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
+                                <button @click="openContactWithFocus(whitepaperModal?.category === 'adversarial' ? 'Deterministic Audit Dossiers' : (whitepaperModal?.category === 'governance' ? 'HKMA GenAI Compliance' : 'Agentic AI / LLM Guardrails')); closeWhitepaper();" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
                                     Request Institutional Evaluation Pack
                                 </button>
                                 <button @click="closeWhitepaper()" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider rounded-sm transition-colors">
