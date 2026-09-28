@@ -139,10 +139,10 @@
         document.write('<script src="./intelligence.js"><\/script>');
       }
     </script>
-</head>
-
-<body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans text-slate-100" 
-      x-data="{ 
+    <!-- Alpine Component Registration -->
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('pearlApp', () => ({ 
           mobileMenu: false, 
           contactModal: false, 
           sampleModal: null,
@@ -346,7 +346,13 @@
                   this.formSubmitted = true;
               }
           }
-      }">
+
+        }));
+      });
+    </script>
+</head>
+
+<body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans text-slate-100" x-data="pearlApp()">
 
     <div class="relative min-h-screen flex flex-col">
         
@@ -441,7 +447,7 @@
 
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <button @click="contactModal = true" class="w-full sm:w-auto btn-cyan px-9 py-4 font-mono text-xs uppercase tracking-widest rounded-sm shadow-xl shadow-cyan-500/25">
-                            Request Confidential Assessment
+                            Request Institutional Access
                         </button>
                         <a href="#dossiers" class="w-full sm:w-auto px-9 py-4 font-mono font-semibold text-xs uppercase tracking-widest rounded-sm border border-white/20 hover:border-cyan-500/60 hover:bg-white/5 text-white transition-all">
                             Inspect Sample Dossiers
@@ -1165,7 +1171,7 @@
                             Request Institutional Access
                         </button>
                         <a href="#dossiers" class="w-full sm:w-auto px-12 py-5 font-mono font-semibold text-xs uppercase tracking-widest rounded-sm border border-white/20 hover:border-cyan-500/60 hover:bg-white/5 text-white transition-all">
-                            Inspect Sample Packs
+                            Inspect Sample Dossiers
                         </a>
                     </div>
                     <div class="pt-2">
