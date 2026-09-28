@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cyan-grad-full" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Logo Icon Container (100x100 at x=10, y=10) -->
+  <g transform="translate(10, 10)">
+    <rect width="100" height="100" rx="22" fill="#070b14" />
+    <rect width="98" height="98" x="1" y="1" rx="21" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+    
+    <!-- Scaled Monogram -->
+    <g transform="translate(100, 100) scale(0.39) translate(-128, -128)" transform-origin="50 50">
+      <!-- Cyan L-stroke -->
+      <path d="M 128 42 L 52 204 L 144 204" 
+            fill="none" 
+            stroke="url(#cyan-grad-full)" 
+            stroke-width="28" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" />
+
+      <!-- White Right Leg of 'A' -->
+      <path d="M 136 56 L 204 204" 
+            fill="none" 
+            stroke="#ffffff" 
+            stroke-width="28" 
+            stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- Typography -->
+  <!-- Main Company Name -->
+  <text x="135" y="58" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" 
+        font-size="28" 
+        font-weight="900" 
+        letter-spacing="0.18em" 
+        fill="#ffffff">AI LING</text>
+  
+  <text x="295" y="58" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" 
+        font-size="28" 
+        font-weight="800" 
+        letter-spacing="0.18em" 
+        fill="#06b6d4">ADVISORY</text>
+
+  <!-- Subtitle Tagline -->
+  <text x="136" y="85" 
+        font-family="'JetBrains Mono', 'SF Mono', Consolas, monospace" 
+        font-size="11" 
+        font-weight="600" 
+        letter-spacing="0.25em" 
+        fill="#94a3b8">PEARL TRUST OS // REGULATORY COMPLIANCE</text>
+</svg>

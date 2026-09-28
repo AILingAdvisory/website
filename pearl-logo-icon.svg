@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="PEARL by AI Ling Advisory logo">
+  <defs>
+    <linearGradient id="pearl-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9" />
+      <stop offset="55%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+  </defs>
+
+  <!--
+    PEARL — Policy Engine of AI Regulatory Landscape
+    Mark: stylized "A" monogram, fully transparent background.
+    Both legs use the brand cyan gradient so the icon reads on any surface
+    (light or dark) with no background plate.
+  -->
+
+  <!-- Left leg + baseline of "A" -->
+  <path d="M 128 42 L 52 204 L 144 204"
+        fill="none"
+        stroke="url(#pearl-cyan)"
+        stroke-width="28"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+
+  <!-- Right leg of "A" -->
+  <path d="M 136 56 L 204 204"
+        fill="none"
+        stroke="url(#pearl-cyan)"
+        stroke-width="28"
+        stroke-linecap="round" />
+
+  <!-- Crossbar: the "compilation" node — where regulation resolves into one deterministic output -->
+  <circle cx="150" cy="150" r="13" fill="#ffffff" />
+</svg>
