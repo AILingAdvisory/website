@@ -1,5 +1,7 @@
+import { EmailMessage } from 'cloudflare:email';
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -19,7 +21,12 @@ export default {
     }
 
     if (request.method !== 'POST') {
-      return new Response(JSON.stringify({ status: 'ok', service: 'PEARL Institutional Lead Gateway', version: '2026.1' }), {
+      return new Response(JSON.stringify({ 
+        status: 'ok', 
+        service: 'PEARL Institutional Lead Gateway', 
+        version: '2026.2',
+        channels: ['feishu-bot', 'cloudflare-email', 'formsubmit-fallback']
+      }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -43,67 +50,219 @@ export default {
       const city = request.cf?.city || 'Unknown';
       const ip = request.headers.get('cf-connecting-ip') || 'Unknown';
 
-      // 1. Dispatch Real-time Telegram Alert to Ming Liu
-      const botToken = env.TELEGRAM_BOT_TOKEN || '8707874074:AAFtXZ6ysfzqLnmXEyipczHlS0VQqPKMnTQ';
-      const chatId = env.TELEGRAM_CHAT_ID || '8535832231';
+      const dispatchResults = {
+        feishu: false,
+        email: false,
+        fallback: false
+      };
 
-      const tgMessage = `🚨 *NEW INSTITUTIONAL ACCESS REQUEST* [${leadId}]\n` +
-        `━━━━━━━━━━━━━━━━━━━━\n` +
-        `👤 *Name:* ${name}\n` +
-        `🏢 *Institution:* ${institution}\n` +
-        `💼 *Role:* ${role}\n` +
-        `✉️ *Work Email:* \`${email}\`\n` +
-        `📜 *License:* ${licenseType}\n` +
-        `☁️ *Deployment:* ${deploymentModel}\n` +
-        `💬 *Message:* ${message}\n` +
-        `━━━━━━━━━━━━━━━━━━━━\n` +
-        `⏱️ *Time:* \`${timestamp}\`\n` +
-        `📍 *Location:* ${city}, ${country} (IP: \`${ip}\`)`;
+      // 1. Dispatch Real-time Feishu Interactive Card to Ming Liu (Hermes Bot)
+      const feishuAppId = env.FEISHU_APP_ID || 'cli_aa005288d9389d16';
+      const feishuAppSecret = env.FEISHU_SECRET_KEY || env.FEISHU_APP_SECRET;
+      const feishuChatId = env.FEISHU_CHAT_ID || 'oc_9f7e0a91aa2fcbe3555d99a27293eaa1';
 
-      const tgPromise = fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: tgMessage,
-          parse_mode: 'Markdown',
-        }),
-      }).catch(err => {
-        console.error('Telegram dispatch error:', err);
-      });
+      const feishuPromise = (async () => {
+        try {
+          const authRes = await fetch('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: JSON.stringify({
+              app_id: feishuAppId,
+              app_secret: feishuAppSecret
+            })
+          });
+          const authData = await authRes.json();
+          if (!authData.tenant_access_token) {
+            console.error('Feishu token error:', authData);
+            return;
+          }
 
-      // 2. Email Forwarding via FormSubmit / Webhook / Mailchannels
-      const emailPromise = fetch('https://formsubmit.co/ajax/contact@AILingAdvisory.com', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          _subject: `[Institutional Lead] ${name} from ${institution} (${leadId})`,
-          _cc: 'ailingadvisory@outlook.com',
-          leadId,
-          name,
-          institution,
-          role,
-          email,
-          licenseType,
-          deploymentModel,
-          message,
-          timestamp,
-          country,
-          city
-        })
-      }).catch(err => {
-        console.error('Email forward error:', err);
-      });
+          const cardPayload = {
+            receive_id: feishuChatId,
+            msg_type: 'interactive',
+            content: JSON.stringify({
+              config: { wide_screen_mode: true },
+              header: {
+                title: {
+                  tag: 'plain_text',
+                  content: `🚨 PEARL 机构客户留资通知 [${leadId}]`
+                },
+                template: 'turquoise'
+              },
+              elements: [
+                {
+                  tag: 'div',
+                  fields: [
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**👤 客户姓名:**\n${name}`
+                      }
+                    },
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**🏢 所属机构:**\n${institution}`
+                      }
+                    },
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**💼 职务角色:**\n${role}`
+                      }
+                    },
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**✉️ 企业邮箱:**\n[${email}](mailto:${email})`
+                      }
+                    },
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**📜 监管牌照:**\n${licenseType}`
+                      }
+                    },
+                    {
+                      is_short: true,
+                      text: {
+                        tag: 'lark_md',
+                        content: `**☁️ 部署架构:**\n${deploymentModel}`
+                      }
+                    }
+                  ]
+                },
+                {
+                  tag: 'hr'
+                },
+                {
+                  tag: 'div',
+                  text: {
+                    tag: 'lark_md',
+                    content: `**💬 目标 AI 场景 / 业务诉求:**\n${message || '未提供附加说明'}`
+                  }
+                },
+                {
+                  tag: 'note',
+                  elements: [
+                    {
+                      tag: 'plain_text',
+                      content: `审计编号: ${leadId} | 来源: www.ailingadvisory.com | 协议: Mutual NDA Protected | 地理: ${city}, ${country} (${ip}) | 时间: ${timestamp}`
+                    }
+                  ]
+                }
+              ]
+            })
+          };
 
-      await Promise.allSettled([tgPromise, emailPromise]);
+          const sendRes = await fetch('https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Authorization': `Bearer ${authData.tenant_access_token}`
+            },
+            body: JSON.stringify(cardPayload)
+          });
+          const sendData = await sendRes.json();
+          if (sendData.code === 0) {
+            dispatchResults.feishu = true;
+          } else {
+            console.error('Feishu send message error:', sendData);
+          }
+        } catch (err) {
+          console.error('Feishu exception:', err);
+        }
+      })();
 
-      return new Response(JSON.stringify({ 
-        success: true, 
-        leadId, 
+      // 2. Dispatch Email via Native Cloudflare Send Email Binding
+      const emailPromise = (async () => {
+        if (env.SEND_EMAIL) {
+          try {
+            const rawEmail = [
+              'From: "PEARL Trust OS" <contact@ailingadvisory.com>',
+              'To: "Ming Liu" <ailingadvisory@outlook.com>',
+              `Subject: [Institutional Lead] ${name} - ${institution} (${leadId})`,
+              'MIME-Version: 1.0',
+              'Content-Type: text/plain; charset=UTF-8',
+              '',
+              `NEW INSTITUTIONAL ACCESS REQUEST [${leadId}]`,
+              '================================================================',
+              `Name:             ${name}`,
+              `Institution:      ${institution}`,
+              `Role:             ${role}`,
+              `Institutional Em: ${email}`,
+              `License / Entity: ${licenseType}`,
+              `Deployment Model: ${deploymentModel}`,
+              `Target Workload:  ${message}`,
+              '================================================================',
+              `Audit Reference:  ${leadId}`,
+              `Timestamp:        ${timestamp}`,
+              `Visitor Origin:   ${city}, ${country} (IP: ${ip})`,
+              'Delivery:         Direct Cloudflare Edge -> ailingadvisory@outlook.com',
+              '================================================================'
+            ].join('\r\n');
+
+            const emailMsg = new EmailMessage(
+              'contact@ailingadvisory.com',
+              'ailingadvisory@outlook.com',
+              rawEmail
+            );
+            await env.SEND_EMAIL.send(emailMsg);
+            dispatchResults.email = true;
+          } catch (err) {
+            console.error('Native Send Email failed:', err);
+          }
+        }
+      })();
+
+      // 3. Fallback FormSubmit with proper Origin & Referer headers
+      const fallbackPromise = (async () => {
+        try {
+          await fetch('https://formsubmit.co/ajax/contact@AILingAdvisory.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Origin': 'https://www.ailingadvisory.com',
+              'Referer': 'https://www.ailingadvisory.com/'
+            },
+            body: JSON.stringify({
+              _subject: `[Institutional Lead] ${name} - ${institution} (${leadId})`,
+              _cc: 'ailingadvisory@outlook.com',
+              leadId,
+              name,
+              institution,
+              role,
+              email,
+              licenseType,
+              deploymentModel,
+              message,
+              timestamp,
+              country,
+              city
+            })
+          });
+          dispatchResults.fallback = true;
+        } catch (e) {
+          console.error('FormSubmit fallback error:', e);
+        }
+      })();
+
+      await Promise.allSettled([feishuPromise, emailPromise]);
+      if (ctx && typeof ctx.waitUntil === 'function') {
+        ctx.waitUntil(fallbackPromise);
+      }
+
+      return new Response(JSON.stringify({
+        success: true,
+        leadId,
         timestamp,
+        dispatchResults,
         status: 'DISPATCHED_TO_EXECUTIVE_DESK'
       }), {
         status: 200,
