@@ -1,0 +1,9 @@
+name = "pearl-lead-gateway"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+TELEGRAM_BOT_TOKEN = "8707874074:AAFtXZ6ysfzqLnmXEyipczHlS0VQqPKMnTQ"
+TELEGRAM_CHAT_ID = "8535832231"
+TARGET_EMAIL_PRIMARY = "contact@AILingAdvisory.com"
+TARGET_EMAIL_SECONDARY = "ailingadvisory@outlook.com"
