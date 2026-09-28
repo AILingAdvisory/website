@@ -188,6 +188,7 @@
           selectedCategory: 'all',
           stickyDismissed: false,
           hasInteractedAudio: false,
+          showAllArchive: false,
 
           get currentEpisode() {
               return (this.intelligence && this.intelligence.episodes && this.intelligence.episodes.length > 0)
@@ -212,6 +213,19 @@
                   }
                   return true;
               });
+          },
+
+          get recentCards() {
+              return this.filteredEpisodes.slice(1, 4);
+          },
+
+          get archiveEpisodes() {
+              const remaining = this.filteredEpisodes.slice(4);
+              return this.showAllArchive ? remaining : remaining.slice(0, 5);
+          },
+
+          get hasMoreArchive() {
+              return this.filteredEpisodes.slice(4).length > 5;
           },
 
           initAudio() {
@@ -460,31 +474,31 @@
                         </p>
                     </div>
 
-                    <!-- Today's Frontier Research & Audio Dispatch Ticker -->
-                    <div class="mb-10 max-w-2xl mx-auto">
-                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-950/80 via-midnight to-cyan-950/80 border border-cyan-500/40 shadow-lg shadow-cyan-950/50 text-xs font-mono group hover:border-cyan-400 transition-all">
-                            <span class="flex items-center gap-1.5 text-cyan-300 font-bold uppercase tracking-wider text-[10px] flex-shrink-0">
-                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                                <span>TODAY'S DISPATCH</span>
-                            </span>
-                            <span class="text-white/30 hidden sm:inline">|</span>
-                            <a href="#intelligence" class="text-slate-200 group-hover:text-cyan-300 transition-colors truncate max-w-[200px] sm:max-w-md font-sans text-xs text-left">
-                                <span x-text="intelligence.episodes && intelligence.episodes[0] ? intelligence.episodes[0].title : 'The 5-Turn Trap: Multi-Turn Jailbreaks Hit 97%'"></span>
-                            </a>
-                            <button @click.stop="selectEpisode(0)" class="w-6 h-6 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 ml-1" title="Play Today's Audio Dispatch">
-                                <svg x-show="!(activeEpIndex === 0 && isPlaying)" class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                <svg x-show="activeEpIndex === 0 && isPlaying" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                         <button @click="contactModal = true" class="w-full sm:w-auto btn-cyan px-9 py-4 font-mono text-xs uppercase tracking-widest rounded-sm shadow-xl shadow-cyan-500/25">
                             Request Confidential Assessment
                         </button>
                         <a href="#dossiers" class="w-full sm:w-auto px-9 py-4 font-mono font-semibold text-xs uppercase tracking-widest rounded-sm border border-white/20 hover:border-cyan-500/60 hover:bg-white/5 text-white transition-all">
                             Inspect Sample Dossiers
                         </a>
+                    </div>
+
+                    <!-- Today's Frontier Research & Audio Dispatch Ticker -->
+                    <div class="max-w-2xl mx-auto">
+                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-midnight/90 border border-white/10 hover:border-cyan-500/40 text-xs font-mono group transition-all">
+                            <span class="flex items-center gap-1.5 text-cyan-400 font-bold uppercase tracking-wider text-[10px] flex-shrink-0">
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                <span>LATEST DISPATCH</span>
+                            </span>
+                            <span class="text-white/20 hidden sm:inline">|</span>
+                            <a href="#intelligence" class="text-slate-300 group-hover:text-cyan-300 transition-colors truncate max-w-[200px] sm:max-w-md font-sans text-xs text-left">
+                                <span x-text="intelligence.episodes && intelligence.episodes[0] ? intelligence.episodes[0].title : ''"></span>
+                            </a>
+                            <button @click.stop="selectEpisode(0)" class="w-6 h-6 rounded-full bg-white/10 hover:bg-cyan-500 text-slate-300 hover:text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 ml-1" title="Play Today's Audio Dispatch">
+                                <svg x-show="!(activeEpIndex === 0 && isPlaying)" class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <svg x-show="activeEpIndex === 0 && isPlaying" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Security & Deployment Assurance Badges -->
@@ -1412,11 +1426,11 @@
                 <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
                     
                     <!-- Section Header -->
-                    <div class="max-w-3xl mb-14">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-cyan-950/50 border border-cyan-500/30 rounded-sm mb-4">
-                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <div class="max-w-3xl mb-12">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-sm mb-4">
+                            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                             <span class="text-[11px] font-mono font-bold uppercase tracking-widest text-cyan-300">
-                                AI LING Sovereign Think Tank • Daily Audio Dispatches
+                                AI LING Think Tank • Executive Dispatches
                             </span>
                         </div>
                         <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
@@ -1426,25 +1440,25 @@
                             </span>
                         </h2>
                         <p class="text-slate-300 text-sm sm:text-base font-light mt-4 leading-relaxed">
-                            Deep-dive whitepapers and executive audio briefings synthesized from real-world supervisory horizons, adversarial jailbreak benchmarks, and cross-border regulatory topologies. Authored daily for CROs, CISOs, and General Counsel.
+                            Deep-dive research whitepapers and executive audio briefings synthesized from live supervisory horizons, adversarial jailbreak benchmarks, and cross-border regulatory topologies. Authored daily for CROs, CISOs, and General Counsel.
                         </p>
-                        <div class="flex flex-wrap items-center gap-4 mt-4 text-xs font-mono text-slate-400">
-                            <span class="flex items-center gap-1.5"><span class="text-cyan-400">●</span> Season 2: Frontier Series</span>
-                            <span class="text-white/20">|</span>
-                            <span class="flex items-center gap-1.5"><span class="text-emerald-400">●</span> 12 Institutional Dispatches</span>
-                            <span class="text-white/20">|</span>
-                            <span class="flex items-center gap-1.5 text-slate-300"><svg class="w-3.5 h-3.5 text-cyan-400 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Cloudflare R2 Lossless Edge Stream</span>
+                        <div class="flex flex-wrap items-center gap-3 mt-4 text-xs font-mono text-slate-400">
+                            <span class="text-slate-300">Daily Executive Audio Briefings</span>
+                            <span class="text-white/20">•</span>
+                            <span class="text-slate-300">In-Depth Research Papers</span>
+                            <span class="text-white/20">•</span>
+                            <span class="text-cyan-400" x-text="(intelligence.episodes ? intelligence.episodes.length : 0) + ' Published Dispatches'"></span>
                         </div>
                     </div>
 
                     <!-- Sovereign Player Unit (Featured Dispatch) -->
                     <template x-if="currentEpisode">
-                        <div class="bg-gradient-to-br from-navy-card via-midnight to-navy-card border border-cyan-500/40 p-6 md:p-10 rounded-sm shadow-2xl relative mb-16 overflow-hidden">
+                        <div class="bg-gradient-to-br from-navy-card via-midnight to-navy-card border border-cyan-500/30 p-6 md:p-10 rounded-sm shadow-xl relative mb-14 overflow-hidden">
                             <!-- Top Bar of Player -->
                             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5 mb-6">
                                 <div class="flex items-center gap-3">
-                                    <span class="px-2.5 py-1 bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 rounded text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400" :class="isPlaying ? 'animate-ping' : ''"></span>
+                                    <span class="px-2.5 py-1 bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 rounded text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                                         <span x-text="isPlaying ? 'Now Playing' : 'Selected Dispatch'"></span>
                                     </span>
                                     <span class="text-slate-400 text-xs font-mono" x-text="currentEpisode.date"></span>
@@ -1461,7 +1475,9 @@
                             <!-- Main Player Content -->
                             <div class="grid lg:grid-cols-12 gap-8 items-center">
                                 <div class="lg:col-span-7 space-y-4">
-                                    <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug" x-text="currentEpisode.title"></h3>
+                                    <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug cursor-pointer hover:text-cyan-300 transition-colors" 
+                                        @click="openWhitepaper(currentEpisode)"
+                                        x-text="currentEpisode.title"></h3>
                                     <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed line-clamp-3" x-text="currentEpisode.subtitle || currentEpisode.summary"></p>
                                     
                                     <div class="pt-2 flex flex-wrap items-center gap-3">
@@ -1498,11 +1514,11 @@
                                         </button>
 
                                         <!-- Play/Pause Primary Button -->
-                                        <button @click="togglePlay()" class="w-14 h-14 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-transform active:scale-95">
+                                        <button @click="togglePlay()" class="w-12 h-12 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center shadow-md shadow-cyan-500/20 transition-transform active:scale-95">
                                             <!-- Play Icon -->
-                                            <svg x-show="!isPlaying" class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                            <svg x-show="!isPlaying" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                             <!-- Pause Icon -->
-                                            <svg x-show="isPlaying" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                                            <svg x-show="isPlaying" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                                         </button>
 
                                         <!-- Skip +30s -->
@@ -1515,57 +1531,45 @@
                                             <span x-text="playbackRate + 'x'">1.0x</span>
                                         </button>
                                     </div>
-                                    
-                                    <div class="text-[10px] font-mono text-center text-slate-500 pt-1 flex items-center justify-center gap-1">
-                                        <svg class="w-3 h-3 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clip-rule="evenodd"/></svg>
-                                        <span>R2 CDN Stream • Audio format: m4a (AAC-LC)</span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </template>
 
-                    <!-- Episode Grid / Archive (Season 2 Frontier Series) -->
+                    <!-- Scalable Episode Archive Section -->
                     <div>
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-4 mb-6 gap-4">
-                            <div>
-                                <h3 class="text-sm font-mono uppercase tracking-widest text-slate-300 font-bold flex items-center gap-2">
-                                    <span>Recent Dispatches</span>
-                                    <span class="text-cyan-400 font-normal">(Season 2 • 2026.09.13 — 2026.09.27)</span>
-                                </h3>
-                                <p class="text-xs text-slate-400 font-light mt-1">Filter dispatches by threat taxonomy and supervisory focus area</p>
-                            </div>
-                            <span class="text-xs font-mono text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-3 py-1 rounded self-start sm:self-auto" x-text="filteredEpisodes.length + ' Dispatches Shown'"></span>
-                        </div>
-
                         <!-- Category Filter Tabs / Pills -->
-                        <div class="flex flex-wrap items-center gap-2 mb-8">
-                            <button @click="selectedCategory = 'all'" 
-                                    :class="selectedCategory === 'all' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
-                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all flex items-center gap-1.5">
-                                <span>All Topics</span>
-                                <span class="text-[10px] opacity-75" x-text="'(' + (intelligence.episodes ? intelligence.episodes.length : 0) + ')'"></span>
-                            </button>
-                            <button @click="selectedCategory = 'adversarial'" 
-                                    :class="selectedCategory === 'adversarial' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
-                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
-                                Adversarial & Jailbreak (攻防越狱)
-                            </button>
-                            <button @click="selectedCategory = 'agentic'" 
-                                    :class="selectedCategory === 'agentic' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
-                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
-                                Agentic Security & SOC (智能体安全)
-                            </button>
-                            <button @click="selectedCategory = 'governance'" 
-                                    :class="selectedCategory === 'governance' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-md shadow-cyan-500/20' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
-                                    class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
-                                Model Risk & GRC (模型风险与监管)
-                            </button>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-5 mb-8 gap-4">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button @click="selectedCategory = 'all'" 
+                                        :class="selectedCategory === 'all' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-sm' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                        class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all flex items-center gap-1.5">
+                                    <span>All Research</span>
+                                    <span class="text-[10px] opacity-75" x-text="'(' + (intelligence.episodes ? intelligence.episodes.length : 0) + ')'"></span>
+                                </button>
+                                <button @click="selectedCategory = 'adversarial'" 
+                                        :class="selectedCategory === 'adversarial' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-sm' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                        class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                    Adversarial AI & Drift
+                                </button>
+                                <button @click="selectedCategory = 'agentic'" 
+                                        :class="selectedCategory === 'agentic' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-sm' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                        class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                    Autonomous Agents & SOC
+                                </button>
+                                <button @click="selectedCategory = 'governance'" 
+                                        :class="selectedCategory === 'governance' ? 'bg-cyan-500 text-midnight font-bold border-cyan-400 shadow-sm' : 'bg-white/5 text-slate-300 border-white/10 hover:border-cyan-500/40 hover:text-white'"
+                                        class="px-4 py-1.5 rounded-full text-xs font-mono border transition-all">
+                                    Supervisory & Model Risk
+                                </button>
+                            </div>
+                            <span class="text-xs font-mono text-cyan-400 bg-white/5 border border-white/10 px-3 py-1 rounded self-start sm:self-auto" x-text="filteredEpisodes.length + ' Dispatches In Horizon'"></span>
                         </div>
 
-                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <template x-for="ep in filteredEpisodes" :key="ep.id">
-                                <div class="bg-navy-card/90 border transition-all duration-200 rounded-sm p-6 flex flex-col justify-between group hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-950/30"
+                        <!-- 1. Curated Recent Cards (Top 3 Dispatches) -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                            <template x-for="ep in recentCards" :key="ep.id">
+                                <div class="bg-navy-card/80 border transition-all duration-200 rounded-sm p-6 flex flex-col justify-between group hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-950/30"
                                      :class="currentEpisode && currentEpisode.id === ep.id ? 'border-cyan-400/80 bg-cyan-950/20' : 'border-white/10'">
                                     
                                     <div class="space-y-3">
@@ -1621,6 +1625,66 @@
                                     </div>
                                 </div>
                             </template>
+                        </div>
+
+                        <!-- 2. Scalable Institutional Briefing Register (The Compact Archive Table) -->
+                        <div x-show="archiveEpisodes.length > 0" class="border border-white/10 bg-navy-card/40 rounded-sm overflow-hidden mb-6">
+                            <div class="px-6 py-4 border-b border-white/10 bg-midnight/90 flex flex-wrap items-center justify-between gap-4">
+                                <div class="text-xs font-mono uppercase tracking-widest text-slate-300 font-bold flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                    <span>Archival Briefings Register</span>
+                                </div>
+                                <div class="text-[11px] font-mono text-slate-400" x-text="'Showing ' + (archiveEpisodes.length + (recentCards.length + 1)) + ' of ' + filteredEpisodes.length + ' Dispatches'"></div>
+                            </div>
+
+                            <!-- Table Rows -->
+                            <div class="divide-y divide-white/5 font-mono text-xs">
+                                <template x-for="ep in archiveEpisodes" :key="ep.id">
+                                    <div class="px-6 py-3.5 hover:bg-white/[0.03] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
+                                        <!-- Left: Date & Title -->
+                                        <div class="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                                            <span class="text-cyan-400 text-[11px] font-bold shrink-0 w-24" x-text="ep.date"></span>
+                                            <span class="text-white/20 hidden sm:inline">|</span>
+                                            <span class="text-slate-200 group-hover:text-cyan-300 transition-colors truncate font-sans text-xs cursor-pointer font-medium"
+                                                  @click="openWhitepaper(ep)"
+                                                  x-text="ep.title"></span>
+                                        </div>
+
+                                        <!-- Right: Meta & Actions -->
+                                        <div class="flex items-center gap-4 shrink-0 text-[11px] text-slate-400 self-end sm:self-auto">
+                                            <span class="hidden md:inline" x-text="ep.durationFormatted"></span>
+                                            <span class="text-white/20 hidden md:inline">•</span>
+                                            <span class="hidden md:inline" x-text="ep.readTimeMin + ' min read'"></span>
+                                            
+                                            <!-- Play -->
+                                            <button @click="selectEpisode(intelligence.episodes.findIndex(e => e.id === ep.id))" 
+                                                    class="text-cyan-400 hover:text-white flex items-center gap-1 transition-colors">
+                                                <template x-if="currentEpisode && currentEpisode.id === ep.id && isPlaying">
+                                                    <span class="text-emerald-400 font-bold">Playing</span>
+                                                </template>
+                                                <template x-if="!(currentEpisode && currentEpisode.id === ep.id && isPlaying)">
+                                                    <span>Play</span>
+                                                </template>
+                                            </button>
+
+                                            <!-- Whitepaper -->
+                                            <button @click="openWhitepaper(ep)" 
+                                                    class="text-slate-300 hover:text-cyan-300 flex items-center gap-0.5 transition-colors">
+                                                <span>Paper</span>
+                                                <span class="text-cyan-400 text-xs">↗</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Expand / Collapse Archive Toggle -->
+                            <div x-show="hasMoreArchive" class="p-3.5 border-t border-white/5 bg-midnight/50 text-center">
+                                <button @click="showAllArchive = !showAllArchive" 
+                                        class="px-5 py-2 text-xs font-mono text-cyan-400 hover:text-white border border-white/10 hover:border-cyan-500/40 rounded-sm bg-white/5 transition-all">
+                                    <span x-text="showAllArchive ? 'Collapse Register ↑' : 'View Full Register (' + filteredEpisodes.length + ' Dispatches) ↓'"></span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1949,10 +2013,10 @@
                                 <span>⚡</span> 48-Hour Low-Friction PoC Commitment
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-[10px] text-slate-300">
-                                <div><span class="text-emerald-400">✓</span> 零代码侵入 (Zero Code Access)</div>
-                                <div><span class="text-emerald-400">✓</span> 零敏感数据留存 (Zero Data Ingest)</div>
-                                <div><span class="text-emerald-400">✓</span> 仅需30分钟脱敏问卷</div>
-                                <div><span class="text-emerald-400">✓</span> 48小时交付基线诊断底稿</div>
+                                <div><span class="text-emerald-400">✓</span> Zero Code Access (Architecture-Only)</div>
+                                <div><span class="text-emerald-400">✓</span> Zero Data Ingest (No Client PII)</div>
+                                <div><span class="text-emerald-400">✓</span> 30-Min Scoping Factsheet</div>
+                                <div><span class="text-emerald-400">✓</span> 48-Hour Deterministic Baseline</div>
                             </div>
                         </div>
 
@@ -2199,10 +2263,10 @@
                         </div>
 
                         <div class="pt-6 border-t border-white/10 text-[10px] font-mono text-slate-400 space-y-2">
-                            <div class="text-slate-300 font-bold uppercase tracking-wider">Archival Provenance</div>
-                            <div>Source: AI LING Research Vault</div>
-                            <div>Audio: Cloudflare R2 Lossless Edge</div>
-                            <div>Format: Executable Semantic HTML</div>
+                            <div class="text-slate-300 font-bold uppercase tracking-wider">Briefing Metadata</div>
+                            <div>Classification: Institutional Research</div>
+                            <div>Distribution: Global Leadership & 2LoD</div>
+                            <div>Format: Executive Paper & Audio</div>
                         </div>
                     </div>
 
@@ -2235,7 +2299,7 @@
                                         <span class="text-xs font-mono font-bold text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-500/30" x-text="'§ ' + (sIdx + 1)"></span>
                                         <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight" x-text="sec.title"></h2>
                                     </div>
-                                    <div class="text-slate-300 text-xs sm:text-sm leading-relaxed space-y-3" x-html="sec.contentHtml"></div>
+                                    <div class="text-slate-200 text-sm sm:text-base leading-7 space-y-4 font-light" x-html="sec.contentHtml"></div>
                                 </div>
                             </template>
                         </div>
@@ -2243,7 +2307,7 @@
                         <!-- Bottom Institutional Bridge (Action CTA) -->
                         <div class="mt-14 p-8 bg-gradient-to-br from-cyan-950/40 via-midnight to-navy-card border border-cyan-500/40 rounded-sm space-y-4">
                             <div class="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-wider font-bold">
-                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                                 <span>Operationalize with PEARL Trust OS</span>
                             </div>
                             <h3 class="text-lg sm:text-xl font-bold text-white">Translate Regulatory Analysis into Defensible Machine Code</h3>
@@ -2282,12 +2346,12 @@
              x-transition:leave="transition ease-in duration-200 transform"
              x-transition:leave-start="translate-y-0 opacity-100"
              x-transition:leave-end="translate-y-full opacity-0"
-             class="fixed bottom-0 left-0 right-0 z-[150] bg-midnight/95 backdrop-blur-lg border-t border-cyan-500/40 shadow-2xl px-4 sm:px-8 py-2.5 font-sans"
+             class="fixed bottom-0 left-0 right-0 z-[150] bg-midnight/95 backdrop-blur-lg border-t border-white/10 shadow-2xl px-4 sm:px-8 py-2.5 font-sans"
              style="display: none;">
             <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
                 <!-- Left: Track info & Play/Pause -->
                 <div class="flex items-center gap-3 min-w-0 flex-1 sm:flex-initial">
-                    <button @click="togglePlay()" class="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 shadow-md shadow-cyan-500/30">
+                    <button @click="togglePlay()" class="w-8 h-8 rounded-full bg-cyan-500 hover:bg-cyan-400 text-midnight flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 shadow-sm">
                         <svg x-show="!isPlaying" class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <svg x-show="isPlaying" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                     </button>
