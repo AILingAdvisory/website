@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Regulatory Baseline &amp; Readiness Specification · Alpha Co-Pilot (GenAI Investment Research) · AI LING ADVISORY</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --bg-midnight: #060A14;
+      --bg-navy: #0B1221;
+      --bg-card: #111C35;
+      --bg-surface: #162544;
+      --border-subtle: rgba(6, 182, 212, 0.22);
+      --border-strong: #06b6d4;
+      --gold-primary: #06b6d4;
+      --gold-light: #22d3ee;
+      --gold-glow: rgba(6, 182, 212, 0.15);
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.18);
+      --blue-hkma: #6366F1;
+      --cyan-pcpd: #06B6D4;
+      --text-primary: #F8FAFC;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --font-serif: "Playfair Display", "Cinzel", "Georgia", "Charter", serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-midnight);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.32;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .memo-toolbar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 6px 14px;
+      background: var(--bg-navy);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+    }
+
+    .memo-toolbar .brand-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .btn-action {
+      background: var(--bg-surface);
+      color: var(--gold-light);
+      border: 1px solid var(--border-subtle);
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-action:hover {
+      background: var(--gold-primary);
+      color: var(--bg-midnight);
+      border-color: var(--gold-primary);
+    }
+
+    /* Strict A4 Board Page Layout */
+    .memo-page {
+      width: 100%;
+      max-width: 900px;
+      background: var(--bg-navy);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(184, 145, 80, 0.25);
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      position: relative;
+    }
+
+    /* Top Security Strip */
+    .security-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 1.2px;
+      color: var(--gold-light);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Header & Crest (Anchor 1) */
+    .memo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-crest {
+      font-size: 15px;
+      color: var(--gold-primary);
+      line-height: 1;
+    }
+
+    .brand-firm-name {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      color: var(--text-primary);
+    }
+
+    .brand-firm-name span {
+      color: var(--gold-primary);
+    }
+
+    .brand-practice-sub {
+      font-size: 8px;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .auth-badge-matrix {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .auth-badge {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      padding: 2.5px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .badge-sfc {
+      background: rgba(184, 145, 80, 0.15);
+      border: 1px solid #B89150;
+      color: #CBA365;
+    }
+
+    .badge-ia {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #10B981;
+    }
+
+    .badge-hkma {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid #6366F1;
+      color: #818CF8;
+    }
+
+    .badge-pcpd {
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid #06B6D4;
+      color: #22D3EE;
+    }
+
+    .memo-meta-box {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .memo-meta-box .val-gold {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    /* Document Main Title Row */
+    .memo-doc-title-row {
+      text-align: center;
+      padding: 4px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(17, 28, 53, 0.45);
+    }
+
+    .memo-doc-title {
+      font-family: var(--font-serif);
+      font-size: 14.5px;
+      letter-spacing: 1.4px;
+      color: var(--gold-light);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .memo-doc-sub {
+      font-size: 8.5px;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Compact 2-Column Profile Grid */
+    .profile-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .profile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 5px;
+      padding: 5px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .profile-head {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(184, 145, 80, 0.15);
+      padding-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      line-height: 1.25;
+    }
+
+    .profile-label {
+      color: var(--text-muted);
+    }
+
+    .profile-value {
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    /* 3-Second Verdict Banner (Anchor 2) */
+    .status-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(11, 18, 33, 0.95) 100%);
+      border: 1.5px solid var(--emerald);
+      border-radius: 5px;
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-seal {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: #060A14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 0 10px var(--emerald-glow);
+      flex-shrink: 0;
+    }
+
+    .status-badge-text {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--emerald);
+      text-transform: uppercase;
+    }
+
+    .status-badge-sub {
+      font-size: 8px;
+      color: var(--text-secondary);
+    }
+
+    .status-right-badge {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* 4-Metric Executive KPI Strip */
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 5px;
+      padding: 5px 8px;
+      text-align: center;
+    }
+
+    .metric-cell .num {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.15;
+    }
+
+    .metric-cell .lbl {
+      font-size: 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+    }
+
+    /* Anchor 3: Five Operational Action Thrusts & Acceptance Evidence Checklist */
+    .thrusts-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 5px;
+      padding: 6px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .thrusts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(184, 145, 80, 0.18);
+      padding-bottom: 3px;
+    }
+
+    .thrusts-title {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.9px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .thrusts-subtitle {
+      font-size: 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+
+    .badge-thrusts-count {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      background: rgba(184, 145, 80, 0.15);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      padding: 1.5px 6px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    .thrusts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8px;
+    }
+
+    .thrusts-table th {
+      background: rgba(22, 37, 68, 0.7);
+      color: var(--gold-light);
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3.5px 6px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+
+    .thrusts-table td {
+      padding: 4px 6px;
+      border: 1px solid var(--border-subtle);
+      vertical-align: top;
+      background: rgba(11, 18, 33, 0.45);
+    }
+
+    .thrust-row:nth-child(even) td {
+      background: rgba(17, 28, 53, 0.4);
+    }
+
+    .thrust-title {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .thrust-owner {
+      font-size: 7px;
+      color: var(--text-muted);
+      margin-top: 2.5px;
+      line-height: 1.2;
+    }
+
+    .thrust-ctrls {
+      font-family: var(--font-mono);
+      font-size: 6.8px;
+      color: var(--gold-primary);
+      margin-top: 2px;
+      font-weight: 600;
+    }
+
+    .statutory-hook {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      font-weight: 700;
+      color: var(--gold-light);
+      background: rgba(184, 145, 80, 0.12);
+      border-left: 2px solid var(--gold-primary);
+      padding: 1.5px 5px;
+      margin-bottom: 2.5px;
+      display: inline-block;
+      letter-spacing: 0.2px;
+    }
+
+    .mandate-narrative {
+      font-size: 7.8px;
+      line-height: 1.3;
+      color: var(--text-secondary);
+    }
+
+    .evidence-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .evidence-list li {
+      font-size: 7.5px;
+      line-height: 1.22;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 3.5px;
+    }
+
+    .ev-bullet {
+      color: var(--emerald);
+      font-size: 6.5px;
+      line-height: 1.22;
+      flex-shrink: 0;
+    }
+
+    /* Anchor 4: Evaluated Non-Applicable Controls (Negative Scope Boundary) */
+    .defensive-card {
+      background: rgba(11, 18, 33, 0.8);
+      border: 1px solid rgba(184, 145, 80, 0.28);
+      border-radius: 5px;
+      padding: 5px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .defensive-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(184, 145, 80, 0.15);
+      padding-bottom: 2.5px;
+    }
+
+    .defensive-title {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .defensive-sub {
+      font-size: 7.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-left: 6px;
+    }
+
+    .badge-negative-proof {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--emerald);
+      color: var(--emerald);
+      padding: 1px 5px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .exclusions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
+    }
+
+    .exclusion-card {
+      background: rgba(17, 28, 53, 0.5);
+      border: 1px solid rgba(184, 145, 80, 0.15);
+      border-radius: 4px;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .exclusion-title {
+      font-size: 7.8px;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1.2;
+    }
+
+    .exclusion-desc {
+      font-size: 7.2px;
+      line-height: 1.25;
+      color: var(--text-muted);
+    }
+
+    .defensive-disclaimer {
+      font-size: 6.8px;
+      line-height: 1.25;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(184, 145, 80, 0.1);
+      padding-top: 2px;
+    }
+
+    /* Anchor 5: Modern Legal Demarcation & Provenance */
+    .provenance-section {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .provenance-line-issuance {
+      font-size: 7.5px;
+      color: var(--gold-light);
+      line-height: 1.25;
+      letter-spacing: 0.2px;
+    }
+
+    .provenance-line-issuance strong {
+      color: var(--text-primary);
+    }
+
+    .provenance-line-issuance code {
+      font-family: var(--font-mono);
+      color: var(--gold-primary);
+    }
+
+    .provenance-line-legal {
+      font-size: 6.8px;
+      color: var(--text-muted);
+      line-height: 1.25;
+    }
+
+    /* Bottom Verification Footer */
+    .memo-footer {
+      border-top: 1px solid rgba(184, 145, 80, 0.15);
+      padding-top: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 7px;
+      color: var(--text-muted);
+    }
+
+    /* Print Optimization: Pristine Pure-White 1-Page A4 Mode */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 7mm 9mm;
+      }
+
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body {
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .memo-toolbar {
+        display: none !important;
+      }
+
+      .memo-page {
+        box-shadow: none !important;
+        border: 1px solid #CBD5E1 !important;
+        background: #FFFFFF !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 3mm 4mm !important;
+        gap: 4px !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+        break-inside: avoid !important;
+        max-height: 275mm !important;
+        overflow: hidden !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .security-strip {
+        color: #0F172A !important;
+        border-color: #CBD5E1 !important;
+      }
+
+      .brand-firm-name, .memo-doc-title {
+        color: #0F172A !important;
+        font-family: var(--font-serif) !important;
+      }
+
+      .memo-doc-sub, .brand-practice-sub {
+        color: #475569 !important;
+      }
+
+      .brand-firm-name span {
+        color: #8C6D38 !important;
+      }
+
+      .status-banner {
+        background: #F0FDF4 !important;
+        border: 1.5px solid #059669 !important;
+      }
+
+      .status-seal {
+        background: #059669 !important;
+        color: #FFFFFF !important;
+      }
+
+      .status-badge-text, .status-right-badge {
+        color: #059669 !important;
+      }
+
+      .status-badge-sub {
+        color: #334155 !important;
+      }
+
+      .profile-card, .metrics-bar, .thrusts-section, .defensive-card {
+        background: #F8FAFC !important;
+        border: 1px solid #CBD5E1 !important;
+      }
+
+      .thrusts-table th {
+        background: #E2E8F0 !important;
+        color: #0F172A !important;
+        border-color: #CBD5E1 !important;
+      }
+
+      .thrusts-table td {
+        background: #FFFFFF !important;
+        border-color: #CBD5E1 !important;
+      }
+
+      .thrust-row:nth-child(even) td {
+        background: #F8FAFC !important;
+      }
+
+      .profile-head, .thrusts-title, .defensive-title {
+        color: #8C6D38 !important;
+      }
+
+      .profile-label, .metric-cell .lbl, .memo-footer, .thrusts-subtitle, .defensive-sub, .defensive-disclaimer {
+        color: #475569 !important;
+      }
+
+      .profile-value, .thrust-title, .mandate-narrative, .evidence-list li {
+        color: #0F172A !important;
+      }
+
+      .metric-cell .num, .memo-meta-box .val-gold, .statutory-hook {
+        color: #8C6D38 !important;
+      }
+
+      .statutory-hook {
+        background: #FEF3C7 !important;
+        border-left-color: #B89150 !important;
+      }
+
+      .ev-bullet {
+        color: #059669 !important;
+      }
+
+      .exclusion-card {
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+      }
+
+      .exclusion-title {
+        color: #8C6D38 !important;
+      }
+
+      .exclusion-desc {
+        color: #334155 !important;
+      }
+
+      .provenance-line-issuance {
+        color: #8C6D38 !important;
+      }
+
+      .provenance-line-legal {
+        color: #475569 !important;
+      }
+
+      .badge-sfc {
+        background: #FEF3C7 !important;
+        border-color: #B89150 !important;
+        color: #92400E !important;
+      }
+
+      .badge-ia {
+        background: #D1FAE5 !important;
+        border-color: #10B981 !important;
+        color: #065F46 !important;
+      }
+
+      .badge-hkma {
+        background: #E0E7FF !important;
+        border-color: #6366F1 !important;
+        color: #3730A3 !important;
+      }
+
+      .badge-pcpd {
+        background: #CFFAFE !important;
+        border-color: #06B6D4 !important;
+        color: #155E75 !important;
+      }
+
+      .badge-negative-proof {
+        background: #D1FAE5 !important;
+        border-color: #10B981 !important;
+        color: #065F46 !important;
+      }
+
+      .badge-thrusts-count {
+        background: #FEF3C7 !important;
+        border-color: #B89150 !important;
+        color: #92400E !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Toolbar -->
+  <div class="memo-toolbar">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="/" class="btn-action" style="text-decoration: none;">
+        <span>←</span> AILingAdvisory.com
+      </a>
+      <div class="brand-tag">EXECUTIVE BASELINE SPECIFICATION · HONG KONG FINANCIAL AI</div>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+      <a href="./sample-executive-summary.pdf" download="PEARL-Sample-Executive-Summary-SFC-GenAI.pdf" class="btn-action" style="text-decoration: none; background: rgba(6, 182, 212, 0.25); border-color: var(--border-strong); color: #fff;">
+        <span>⬇</span> Download 1-Page PDF
+      </a>
+      <button class="btn-action" onclick="window.print()">
+        <span>🖨️</span> Print (A4)
+      </button>
+      <button class="btn-action" id="copyJsonBtn" onclick="downloadMemoJson()">
+        <span>{ }</span> Export JSON
+      </button>
+      <a href="/#contact" class="btn-action" style="text-decoration: none; background: #06b6d4; color: #060a14; font-weight: 700; border-color: #06b6d4;">
+        <span>⚡</span> Request Free 48-Hr PoC
+      </a>
+    </div>
+  </div>
+
+  <!-- Board Page Container (Strict Single A4 Fit) -->
+  <div class="memo-page" id="memoContainer">
+    
+    <!-- Security Strip -->
+    <div class="security-strip">
+      <span>STRICTLY_CONFIDENTIAL // BOARD &amp; SENIOR MANAGEMENT DISTRIBUTION ONLY</span>
+      <span>REF: SPEC-BL-DEMO-SFC-FUND-RUN-001 · AS-OF HORIZON: 2026-09-09</span>
+    </div>
+
+    <!-- Institutional Header (Anchor 1) -->
+    <div class="memo-header">
+      <div class="brand-title-wrap">
+        <div class="brand-crest">✦</div>
+        <div class="brand-firm-name">AI LING <span>ADVISORY</span></div>
+        <div class="brand-practice-sub">Financial AI Regulatory Practice · Independent Policy Assurance</div>
+      </div>
+      <div class="auth-badge-matrix">
+        <span class="auth-badge badge-sfc">SFC</span>
+      </div>
+      <div class="memo-meta-box">
+        <div>BASELINE REF: <span class="val-gold">BL-86313E588458F5EB9902</span></div>
+        <div>AS-OF HORIZON: <span class="val-gold">2026-09-09</span></div>
+        <div>JURISDICTION: <span class="val-gold">HONG KONG SAR</span></div>
+      </div>
+    </div>
+
+    <!-- Document Title Row -->
+    <div class="memo-doc-title-row">
+      <div class="memo-doc-title">Executive Regulatory Baseline &amp; Readiness Specification</div>
+      <div class="memo-doc-sub">Deterministic Policy Architecture Baseline &amp; Board Acceptance Blueprint</div>
+    </div>
+
+    <!-- 2-Column Compact Profile Strip -->
+    <div class="profile-strip">
+      <!-- Client Profile -->
+      <div class="profile-card">
+        <div class="profile-head">
+          <span>Target Institution</span>
+          <span style="font-family: var(--font-mono); font-size: 7.5px;">LICENSED_CORPORATION</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Entity Name:</span>
+          <span class="profile-value">Horizon Capital Management (HK) Limited</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Licensed Scope:</span>
+          <span class="profile-value">SFC Type 4 (Advising) &amp; Type 9 (Asset Management)</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Client Officer:</span>
+          <span class="profile-value">Chief Compliance Officer &amp; MLRO</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Admitted Authorities:</span>
+          <span class="profile-value" style="color: var(--gold-light);">SFC</span>
+        </div>
+      </div>
+
+      <!-- AI System Profile -->
+      <div class="profile-card">
+        <div class="profile-head">
+          <span>AI System Scope</span>
+          <span style="font-family: var(--font-mono); font-size: 7.5px;">GENERATIVE_AI</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">System Identity:</span>
+          <span class="profile-value">Alpha Co-Pilot (GenAI Investment Research)</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Human Oversight:</span>
+          <span class="profile-value" style="color: var(--emerald);">Active (HITL Enforced)</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Confidential Info:</span>
+          <span class="profile-value" style="color: var(--gold-light);">Active (MNPI Safeguards)</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Personal Data (PCPD):</span>
+          <span class="profile-value">Exempt (Non-Personal Data)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3-Second Verdict Banner (Anchor 2) -->
+    <div class="status-banner">
+      <div class="status-left">
+        <div class="status-seal">✓</div>
+        <div>
+          <div class="status-badge-text">STATUTORY BASELINE COMPILED // ACTION REQUIRED FOR BOARD ACCEPTANCE</div>
+          <div class="status-badge-sub">Closed Statutory Specification across 20 Applicable Controls · Internal Operational Verification Required · Horizon Capped (2026-09-09)</div>
+        </div>
+      </div>
+      <div class="status-right-badge">STATUTORY BASELINE CLOSED · DETERMINISTIC REGULATORY BASELINE COMPILED</div>
+    </div>
+
+    <!-- 4-Metric Executive KPI Strip -->
+    <div class="metrics-bar">
+      <div class="metric-cell">
+        <div class="num">20</div>
+        <div class="lbl">Applicable Controls</div>
+      </div>
+      <div class="metric-cell">
+        <div class="num">29</div>
+        <div class="lbl">Non-Applicable Exclusions</div>
+      </div>
+      <div class="metric-cell">
+        <div class="num" style="font-size: 11.5px; font-weight: 700; color: var(--gold-light);">SFC</div>
+        <div class="lbl">Admitted Authorities</div>
+      </div>
+      <div class="metric-cell">
+        <div class="num">100%</div>
+        <div class="lbl">Deterministic Closure</div>
+      </div>
+    </div>
+
+    <!-- Anchor 3: Five Operational Action Thrusts & Acceptance Evidence Checklist -->
+    <div class="thrusts-section">
+      <div class="thrusts-header">
+        <div>
+          <span class="thrusts-title">Five Operational Action Thrusts &amp; Acceptance Evidence Checklist</span>
+          <span class="thrusts-subtitle">Executive 3-Point Baseline Takeaways · Institutional Operational Roadmap</span>
+        </div>
+        <span class="badge-thrusts-count">20 Controls Mapped</span>
+      </div>
+      <table class="thrusts-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Operational Thrust &amp; Accountability</th>
+            <th style="width: 45%;">Statutory Hook &amp; Operational Mandate</th>
+            <th style="width: 30%;">Acceptance Evidence Checklist</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr class="thrust-row">
+              <td>
+                <div class="thrust-title">1. Governance &amp; Accountability (MIC-IT &amp; Tripartite Leadership)</div>
+                <div class="thrust-owner">Owner: Board of Directors / Senior Management (MIC-IT, MIC-KBL, MIC-RM) / Head of Compliance</div>
+                <div class="thrust-ctrls">GOV-001, GOV-002, GOV-003, GOV-004, GOV-005</div>
+              </td>
+              <td>
+                <div class="statutory-hook"><span style="color: var(--gold-primary); margin-right: 2px;">§</span>SFC Circular 24EC55 §9-12 · SFC 26EC32 §3</div>
+                <div class="mandate-narrative">Formally assign Senior Management Tripartite Leadership via Board resolution: MIC-IT (Cyber/Tech Infrastructure), MIC-KBL (Overall Business Oversight &amp; Client Suitability), and MIC-RM (Model Risk Limits &amp; Controls) under SFC Circular 24EC55 §3.1. Promulgate Board-approved AI Lifecycle Policy and operationalize cross-functional AI Steering Committee (Legal, Risk, Tech).</div>
+              </td>
+              <td>
+                <ul class="evidence-list">
+                  
+                    <li><span class="ev-bullet">▸</span><span>Accountability appointment</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Governance charter</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Completed AI risk assessment</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Role-to-competence matrix</span></li>
+                  
+                </ul>
+              </td>
+            </tr>
+          
+            <tr class="thrust-row">
+              <td>
+                <div class="thrust-title">2. Model Risk &amp; HITL Oversight (Type 4/9)</div>
+                <div class="thrust-owner">Owner: Investment Research Team / Type 4/9 Licensed Representatives</div>
+                <div class="thrust-ctrls">MOD-001, MOD-002, MOD-003, MOD-004</div>
+              </td>
+              <td>
+                <div class="statutory-hook"><span style="color: var(--gold-primary); margin-right: 2px;">§</span>SFC 24EC55 §13-17 · SFC Code of Conduct Para 4.3</div>
+                <div class="mandate-narrative">Mandate substantive independent review by licensed representatives (Type 4/9) prior to research dispatch; strictly bar autonomous order dispatch or unverified trade execution. Anchor RAG pipeline to verified financial databases and conduct periodic automated anti-hallucination stress testing.</div>
+              </td>
+              <td>
+                <ul class="evidence-list">
+                  
+                    <li><span class="ev-bullet">▸</span><span>Validation plan</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>End-to-end test report</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Accuracy control design</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Human-review standard</span></li>
+                  
+                </ul>
+              </td>
+            </tr>
+          
+            <tr class="thrust-row">
+              <td>
+                <div class="thrust-title">3. Data Boundary &amp; Confidentiality (MNPI &amp; PII)</div>
+                <div class="thrust-owner">Owner: Data Protection Officer (DPO) / Information Security</div>
+                <div class="thrust-ctrls">DATA-002</div>
+              </td>
+              <td>
+                <div class="statutory-hook"><span style="color: var(--gold-primary); margin-right: 2px;">§</span>PCPD PDPO DPP 1-6 · SFC 24EC55 §18-20</div>
+                <div class="mandate-narrative">Configure dual-layer input boundary and automated DLP filters to prevent leakage of client Personally Identifiable Information (PII), Material Non-Public Information (MNPI), and restricted securities trading lists. Deliver mandatory analyst safe prompting compliance training.</div>
+              </td>
+              <td>
+                <ul class="evidence-list">
+                  
+                    <li><span class="ev-bullet">▸</span><span>Acceptable-input standard</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Technical control configuration</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Data-loss tests</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Exception and incident records</span></li>
+                  
+                </ul>
+              </td>
+            </tr>
+          
+            <tr class="thrust-row">
+              <td>
+                <div class="thrust-title">4. Third-Party LLM Supply Chain Governance</div>
+                <div class="thrust-owner">Owner: Procurement / Legal &amp; Compliance / IT Infrastructure</div>
+                <div class="thrust-ctrls">TECH-003</div>
+              </td>
+              <td>
+                <div class="statutory-hook"><span style="color: var(--gold-primary); margin-right: 2px;">§</span>SFC Cloud Circular · SFC 24EC55 §21-24</div>
+                <div class="mandate-narrative">Execute enterprise commercial agreement legally binding Zero Data Retention (ZDR) and prohibiting vendor training on firm prompts/data. Preserve statutory regulator inspection and audit rights; document fallback models and exit handover protocol.</div>
+              </td>
+              <td>
+                <ul class="evidence-list">
+                  
+                    <li><span class="ev-bullet">▸</span><span>Provider assessment</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Contract and responsibility matrix</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Component inventory</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Ongoing monitoring records</span></li>
+                  
+                </ul>
+              </td>
+            </tr>
+          
+            <tr class="thrust-row">
+              <td>
+                <div class="thrust-title">5. Cyber Defence, Audit Trail &amp; Kill-Switch</div>
+                <div class="thrust-owner">Owner: IT Operations / Cyber Security Team / MIC-IT</div>
+                <div class="thrust-ctrls">TECH-001, TECH-002, TECH-005, TECH-009, TECH-010, TECH-011, TECH-012, TECH-004, TECH-013</div>
+              </td>
+              <td>
+                <div class="statutory-hook"><span style="color: var(--gold-primary); margin-right: 2px;">§</span>SFC 26EC32 §4-7 · SFO S.114 Record Keeping (7 Years)</div>
+                <div class="mandate-narrative">Conduct recurring adversarial red-team penetration testing against prompt injection and jailbreaking. Maintain immutable 7-year audit logs of prompts, model completions, and reviewer approvals under SFO S.114. Deploy an immediate emergency kill-switch to isolate external API links within seconds during anomalies.</div>
+              </td>
+              <td>
+                <ul class="evidence-list">
+                  
+                    <li><span class="ev-bullet">▸</span><span>AI threat model</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Adversarial test plan</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Logging specification</span></li>
+                  
+                    <li><span class="ev-bullet">▸</span><span>Technology asset inventory</span></li>
+                  
+                </ul>
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Anchor 4: Evaluated Non-Applicable Controls (Negative Scope Boundary) -->
+    <div class="defensive-card">
+      <div class="defensive-head">
+        <div>
+          <span class="defensive-title">Evaluated Non-Applicable Controls (Negative Scope Boundary)</span>
+          <span class="defensive-sub">Regulatory Scope Demarcation · Formal Negative Proof Perimeter</span>
+        </div>
+        <span class="badge-negative-proof">29 Formally Excluded</span>
+      </div>
+      <div class="exclusions-grid">
+        
+          <div class="exclusion-card">
+            <div class="exclusion-title">Schedule 7 Algorithmic &amp; High-Frequency Trading (SFC SFO Schedule 7)</div>
+            <div class="exclusion-desc">System operates purely as an internal investment research assistant with no automated order routing or direct exchange market execution interfaces; excluded from algorithmic trading regulatory perimeter.</div>
+          </div>
+        
+          <div class="exclusion-card">
+            <div class="exclusion-title">Retail Automated Investment Advice (Robo-Advisory)</div>
+            <div class="exclusion-desc">System is strictly restricted to internal professional buy-side analysts with zero retail client-facing interactive touchpoints; exempt from retail suitability evaluation and automated client profiling.</div>
+          </div>
+        
+          <div class="exclusion-card">
+            <div class="exclusion-title">Banking Personal Credit Scoring &amp; Lending Assessment (HKMA SPM)</div>
+            <div class="exclusion-desc">Target entity is an asset manager / licensed corporation, not an authorized lending institution under HKMA retail credit supervision, with no automated credit underwriting or loan approval functionality.</div>
+          </div>
+        
+      </div>
+      <div class="defensive-disclaimer">
+        <strong>Technical Architecture Assessment:</strong> Technical Architecture Assessment: Negative proof evaluations represent deterministic technical condition resolutions based on declared architectural scope. This assessment does not constitute statutory legal exemptions or formal supervisory clearance opinions. Material operational changes require re-evaluation.
+      </div>
+    </div>
+
+    <!-- Anchor 5: Modern Legal Demarcation & Provenance (2 Compact Lines) -->
+    <div class="provenance-section">
+      <div class="provenance-line-issuance">
+        Issued by AI LING ADVISORY · Financial AI Regulatory Practice · Ref: SPEC-BL-DEMO-SFC-FUND-RUN-001 · Baseline: BL-86313E588458F5EB9902 · As-Of Horizon: 2026-09-09 · Jurisdiction: Hong Kong SAR
+      </div>
+      <div class="provenance-line-legal">
+        This specification establishes an objective deterministic baseline compiled from declared system architecture under effective HK regulatory instruments. It does not constitute legal opinion or formal supervisory pre-clearance. Operational implementation and regulatory responsibility remain with the regulated entity.
+      </div>
+    </div>
+
+    <!-- Verification Footer -->
+    <div class="memo-footer">
+      <div>BASELINE: BL-86313E588458F5EB9902 · JURISDICTION: HONG KONG SAR</div>
+      <div>ZERO EXTERNAL DEPENDENCIES · ZERO CLOCK LEAKAGE · DETERMINISTIC CLOSURE</div>
+      <div>PAGE 1 OF 1</div>
+    </div>
+
+  </div>
+
+
+  <!-- Bottom Context Banner -->
+  <div style="width: 100%; max-width: 900px; margin-top: 16px; margin-bottom: 24px; padding: 14px 20px; background: var(--bg-navy); border: 1px solid var(--border-subtle); border-radius: 6px; display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); text-align: center;">
+    <div>
+      <span style="color: var(--gold-light); font-weight: 700;">Sample Context:</span> Authentic compilation for a Hong Kong SFC Type 4 & 9 Asset Manager deploying an internal GenAI Investment Research Co-Pilot under SFC Circular 24EC55.
+    </div>
+    <a href="/#contact" style="color: #06b6d4; text-decoration: none; font-weight: 700; white-space: nowrap;">
+      Request Your Firm&apos;s Free 48-Hour PoC Baseline →
+    </a>
+  </div>
+
+  <script>
+    const memoData = {
+  "documentType": "EXECUTIVE_REGULATORY_BASELINE_SPECIFICATION",
+  "documentCategory": "REGULATORY_BASELINE_AND_READINESS_SPECIFICATION",
+  "schemaVersion": "2026.12-baseline-readiness-v2",
+  "classification": "STRICTLY_CONFIDENTIAL // BOARD & SENIOR MANAGEMENT DISTRIBUTION ONLY",
+  "specificationReference": "SPEC-BL-DEMO-SFC-FUND-RUN-001",
+  "memoReference": "SPEC-BL-DEMO-SFC-FUND-RUN-001",
+  "legacyMemoReference": "MEMO-CLR-DEMO-SFC-FUND-RUN-001",
+  "milestoneLabel": "v1.0 · Initial SFC Baseline",
+  "publishedAt": "2026-09-09T08:00:00.000Z",
+  "asOfDate": "2026-09-09",
+  "reviewHorizon": "2026-09-09",
+  "baselineStatus": "STATUTORY_BASELINE_COMPILED",
+  "acceptanceVerdict": "STATUTORY BASELINE COMPILED // ACTION REQUIRED FOR BOARD ACCEPTANCE (DETERMINISTIC_REGULATORY_BASELINE_COMPILED)",
+  "clearanceStatus": "DETERMINISTIC_REGULATORY_BASELINE_COMPILED",
+  "clearanceVerdict": "DETERMINISTIC_REGULATORY_BASELINE_COMPILED // ACTION REQUIRED FOR BOARD ACCEPTANCE",
+  "verdictStatus": "STATUTORY_BASELINE_CLOSED",
+  "executiveSummary": "The deterministic regulatory baseline for the designated AI architecture (\"Alpha Co-Pilot (GenAI Investment Research)\") has been formally compiled against the Hong Kong Financial AI Regulatory Core (SFC). Exactly 20 applicable statutory controls and 29 negative proof exclusions have been mathematically resolved with zero clock leakage. This specification defines the mandatory statutory requirements and operational acceptance criteria required for Senior Management sign-off prior to live production activation.",
+  "executiveTakeaways": {
+    "regulatoryAlignment": "100% deterministic statutory condition closure across evaluated Hong Kong Financial AI Core instruments (SFC). Exactly 20 mandatory controls identified with zero ambiguity, defining the closed universe of WHAT must be satisfied.",
+    "operationalSafeguards": "Conclusively excludes 29 statutory rules (including Algorithmic High-Frequency Trading under SFC Code of Conduct Schedule 7 and Retail Robo-Advisory Advice) via formal negative proof, defending the institution against regulatory scope creep.",
+    "actionRequired": "Operational activation is strictly contingent upon client Senior Management (Senior Management Tripartite Leadership (MIC-IT for Cyber/Tech, MIC-KBL for Business Oversight, MIC-RM for Model Risk Limits)) completing internal technical verification and evidence collection against compiled acceptance criteria.",
+    "negativeProofDemarcation": "Conclusively excludes 29 statutory rules (including Algorithmic High-Frequency Trading under SFC Code of Conduct Schedule 7 and Retail Robo-Advisory Advice) via formal negative proof, defending the institution against regulatory scope creep.",
+    "operationalAcceptanceMandate": "Operational activation is strictly contingent upon client Senior Management (Senior Management Tripartite Leadership (MIC-IT for Cyber/Tech, MIC-KBL for Business Oversight, MIC-RM for Model Risk Limits)) completing internal technical verification and evidence collection against compiled acceptance criteria."
+  },
+  "executiveKpis": {
+    "applicableControls": 20,
+    "triggeredRules": 14,
+    "negativeProofExclusions": 29,
+    "admittedAuthorities": "SFC",
+    "deterministicClosure": "100%"
+  },
+  "operationalActionThrusts": [
+    {
+      "thrustId": "THRUST_1_GOVERNANCE",
+      "title": "Governance & Accountability (MIC-IT & Tripartite Leadership)",
+      "statutoryHook": "SFC Circular 24EC55 §9-12 · SFC 26EC32 §3",
+      "internalOwner": "Board of Directors / Senior Management (MIC-IT, MIC-KBL, MIC-RM) / Head of Compliance",
+      "operationalMandate": "Formally assign Senior Management Tripartite Leadership via Board resolution: MIC-IT (Cyber/Tech Infrastructure), MIC-KBL (Overall Business Oversight & Client Suitability), and MIC-RM (Model Risk Limits & Controls) under SFC Circular 24EC55 §3.1. Promulgate Board-approved AI Lifecycle Policy and operationalize cross-functional AI Steering Committee (Legal, Risk, Tech).",
+      "coveredControls": [
+        "GOV-001",
+        "GOV-002",
+        "GOV-003",
+        "GOV-004",
+        "GOV-005"
+      ],
+      "evidenceChecklist": [
+        "Accountability appointment",
+        "Governance charter",
+        "Completed AI risk assessment",
+        "Role-to-competence matrix"
+      ]
+    },
+    {
+      "thrustId": "THRUST_2_MODEL_RISK",
+      "title": "Model Risk & HITL Oversight (Type 4/9)",
+      "statutoryHook": "SFC 24EC55 §13-17 · SFC Code of Conduct Para 4.3",
+      "internalOwner": "Investment Research Team / Type 4/9 Licensed Representatives",
+      "operationalMandate": "Mandate substantive independent review by licensed representatives (Type 4/9) prior to research dispatch; strictly bar autonomous order dispatch or unverified trade execution. Anchor RAG pipeline to verified financial databases and conduct periodic automated anti-hallucination stress testing.",
+      "coveredControls": [
+        "MOD-001",
+        "MOD-002",
+        "MOD-003",
+        "MOD-004"
+      ],
+      "evidenceChecklist": [
+        "Validation plan",
+        "End-to-end test report",
+        "Accuracy control design",
+        "Human-review standard"
+      ]
+    },
+    {
+      "thrustId": "THRUST_3_DATA_BOUNDARY",
+      "title": "Data Boundary & Confidentiality (MNPI & PII)",
+      "statutoryHook": "PCPD PDPO DPP 1-6 · SFC 24EC55 §18-20",
+      "internalOwner": "Data Protection Officer (DPO) / Information Security",
+      "operationalMandate": "Configure dual-layer input boundary and automated DLP filters to prevent leakage of client Personally Identifiable Information (PII), Material Non-Public Information (MNPI), and restricted securities trading lists. Deliver mandatory analyst safe prompting compliance training.",
+      "coveredControls": [
+        "DATA-002"
+      ],
+      "evidenceChecklist": [
+        "Acceptable-input standard",
+        "Technical control configuration",
+        "Data-loss tests",
+        "Exception and incident records"
+      ]
+    },
+    {
+      "thrustId": "THRUST_4_THIRD_PARTY_SUPPLY_CHAIN",
+      "title": "Third-Party LLM Supply Chain Governance",
+      "statutoryHook": "SFC Cloud Circular · SFC 24EC55 §21-24",
+      "internalOwner": "Procurement / Legal & Compliance / IT Infrastructure",
+      "operationalMandate": "Execute enterprise commercial agreement legally binding Zero Data Retention (ZDR) and prohibiting vendor training on firm prompts/data. Preserve statutory regulator inspection and audit rights; document fallback models and exit handover protocol.",
+      "coveredControls": [
+        "TECH-003"
+      ],
+      "evidenceChecklist": [
+        "Provider assessment",
+        "Contract and responsibility matrix",
+        "Component inventory",
+        "Ongoing monitoring records"
+      ]
+    },
+    {
+      "thrustId": "THRUST_5_CYBER_DEFENCE_KILL_SWITCH",
+      "title": "Cyber Defence, Audit Trail & Kill-Switch",
+      "statutoryHook": "SFC 26EC32 §4-7 · SFO S.114 Record Keeping (7 Years)",
+      "internalOwner": "IT Operations / Cyber Security Team / MIC-IT",
+      "operationalMandate": "Conduct recurring adversarial red-team penetration testing against prompt injection and jailbreaking. Maintain immutable 7-year audit logs of prompts, model completions, and reviewer approvals under SFO S.114. Deploy an immediate emergency kill-switch to isolate external API links within seconds during anomalies.",
+      "coveredControls": [
+        "TECH-001",
+        "TECH-002",
+        "TECH-005",
+        "TECH-009",
+        "TECH-010",
+        "TECH-011",
+        "TECH-012",
+        "TECH-004",
+        "TECH-013"
+      ],
+      "evidenceChecklist": [
+        "AI threat model",
+        "Adversarial test plan",
+        "Logging specification",
+        "Technology asset inventory"
+      ]
+    }
+  ],
+  "nonApplicableBoundary": {
+    "excludedRuleCount": 29,
+    "boundaryStatement": "Conclusively verified that 29 statutory rules (including Algorithmic High-Frequency Trading under SFC Code of Conduct Schedule 7 and Retail Robo-Advisory Advice) are formally excluded via negative proof due to verified non-applicability of client licensing scope and absence of autonomous execution capabilities. This establishes a definitive regulatory defence perimeter against scope creep.",
+    "evaluatedExclusions": [
+      {
+        "regime": "SFC SFO Schedule 7",
+        "domain": "Algorithmic & High-Frequency Trading",
+        "title": "Schedule 7 Algorithmic & High-Frequency Trading (SFC SFO Schedule 7)",
+        "technicalReasoning": "System operates purely as an internal investment research assistant with no automated order routing or direct exchange market execution interfaces; excluded from algorithmic trading regulatory perimeter.",
+        "applicableStatus": "NOT_APPLICABLE"
+      },
+      {
+        "regime": "SFC Robo-Advice Circular",
+        "domain": "Retail Automated Investment Advice",
+        "title": "Retail Automated Investment Advice (Robo-Advisory)",
+        "technicalReasoning": "System is strictly restricted to internal professional buy-side analysts with zero retail client-facing interactive touchpoints; exempt from retail suitability evaluation and automated client profiling.",
+        "applicableStatus": "NOT_APPLICABLE"
+      },
+      {
+        "regime": "HKMA SPM OR-1 / Credit Decisioning",
+        "domain": "Banking Personal Credit Scoring & Lending Assessment",
+        "title": "Banking Personal Credit Scoring & Lending Assessment (HKMA SPM)",
+        "technicalReasoning": "Target entity is an asset manager / licensed corporation, not an authorized lending institution under HKMA retail credit supervision, with no automated credit underwriting or loan approval functionality.",
+        "applicableStatus": "NOT_APPLICABLE"
+      }
+    ],
+    "technicalDisclaimer": "Technical Architecture Assessment: Negative proof evaluations represent deterministic technical condition resolutions based on declared architectural scope. This assessment does not constitute statutory legal exemptions or formal supervisory clearance opinions. Material operational changes require re-evaluation."
+  },
+  "modernProvenance": {
+    "issuanceLine": "Issued by AI LING ADVISORY · Financial AI Regulatory Practice · Ref: SPEC-BL-DEMO-SFC-FUND-RUN-001 · Baseline: BL-86313E588458F5EB9902 · As-Of Horizon: 2026-09-09 · Jurisdiction: Hong Kong SAR",
+    "legalDemarcationLine": "This specification establishes an objective deterministic baseline compiled from declared system architecture under effective HK regulatory instruments. It does not constitute legal opinion or formal supervisory pre-clearance. Operational implementation and regulatory responsibility remain with the regulated entity.",
+    "footerNotice": "Page 1 of 1 · Strictly Confidential · For Horizon Capital Management (HK) Limited Board & Senior Management Distribution Only · Zero External Dependencies · ZERO CLOCK LEAKAGE"
+  },
+  "negativeProofSummary": {
+    "excludedRuleCount": 29,
+    "boundaryStatement": "Conclusively verified that 29 statutory rules (including Algorithmic High-Frequency Trading under SFC Code of Conduct Schedule 7 and Retail Robo-Advisory Advice) are formally excluded via negative proof due to verified non-applicability of client licensing scope and absence of autonomous execution capabilities. This establishes a definitive regulatory defence perimeter against scope creep.",
+    "excludedDomains": [
+      "ALGORITHMIC_HFT_SCHEDULE_7",
+      "RETAIL_AUTOMATED_ADVICE_CIRCULAR",
+      "BANKING_CREDIT_SCORING_SPM"
+    ],
+    "evaluatedExclusions": [
+      {
+        "regime": "SFC SFO Schedule 7",
+        "domain": "Algorithmic & High-Frequency Trading",
+        "title": "Schedule 7 Algorithmic & High-Frequency Trading (SFC SFO Schedule 7)",
+        "technicalReasoning": "System operates purely as an internal investment research assistant with no automated order routing or direct exchange market execution interfaces; excluded from algorithmic trading regulatory perimeter.",
+        "applicableStatus": "NOT_APPLICABLE"
+      },
+      {
+        "regime": "SFC Robo-Advice Circular",
+        "domain": "Retail Automated Investment Advice",
+        "title": "Retail Automated Investment Advice (Robo-Advisory)",
+        "technicalReasoning": "System is strictly restricted to internal professional buy-side analysts with zero retail client-facing interactive touchpoints; exempt from retail suitability evaluation and automated client profiling.",
+        "applicableStatus": "NOT_APPLICABLE"
+      },
+      {
+        "regime": "HKMA SPM OR-1 / Credit Decisioning",
+        "domain": "Banking Personal Credit Scoring & Lending Assessment",
+        "title": "Banking Personal Credit Scoring & Lending Assessment (HKMA SPM)",
+        "technicalReasoning": "Target entity is an asset manager / licensed corporation, not an authorized lending institution under HKMA retail credit supervision, with no automated credit underwriting or loan approval functionality.",
+        "applicableStatus": "NOT_APPLICABLE"
+      }
+    ]
+  },
+  "statutoryDisclaimer": "Statutory Assurance & Liability Allocation Disclaimer: This Executive Regulatory Baseline & Readiness Specification is deterministically compiled by the PEARL engine from canonical policy baseline BL-86313E588458F5EB9902 based strictly on client-provided architectural facts. It establishes the mandatory statutory requirements and operational acceptance criteria under admitted Hong Kong regulatory instruments as of 2026-09-09. AI LING ADVISORY warrants the mathematical determinism of the compilation against the pinned regulatory rules. AI LING ADVISORY does not conduct operational implementation, code auditing, or regulatory pre-approval. Senior Management of the client entity retains sole legal responsibility for internal operational execution, evidence veracity, and final business deployment decisions.",
+  "liabilityAllocation": {
+    "advisoryResponsibility": "AI LING ADVISORY warrants the deterministic mathematical compilation of statutory rules and citation accuracy based upon client-provided factual representations.",
+    "clientResponsibility": "Client Senior Management (MIC-IT / CCO) retains sole legal responsibility for truthfulness of declared architectural facts, internal operational implementation of controls, and final go-live authorization.",
+    "factualContingencyClause": "The compiled regulatory baseline is mathematically contingent upon client factual representations. Any material operational variance (e.g. bypass of human oversight gates or unapproved API endpoints) voids the applicability of this baseline ab initio."
+  },
+  "advisoryFirm": {
+    "name": "AI LING ADVISORY",
+    "practice": "Financial AI Governance & Regulatory Engineering",
+    "jurisdiction": "Hong Kong SAR",
+    "contact": "governance@ailingadvisory.com"
+  },
+  "institutionProfile": {
+    "clientId": "demo-sfc-fund",
+    "institutionName": "Horizon Capital Management (HK) Limited",
+    "entityType": "LICENSED_CORPORATION",
+    "regulatoryLicense": "SFC Type 4 (Advising) & Type 9 (Asset Management)",
+    "centralEntityId": "BKT892",
+    "contactPerson": "Chief Compliance Officer & MLRO",
+    "contactEmail": "compliance@horizoncap.hk"
+  },
+  "systemProfile": {
+    "systemId": "alpha-copilot",
+    "systemName": "Alpha Co-Pilot (GenAI Investment Research)",
+    "description": "Generative AI research synthesis assistant evaluating earnings calls, SFC disclosures, and macro research for licensed portfolio managers.",
+    "modelType": "GENERATIVE_AI",
+    "customerFacing": false,
+    "hasHumanInLoop": true,
+    "isAutonomous": false,
+    "usesExternalProvider": true,
+    "handlesConfidentialInformation": true,
+    "processesPersonalData": false
+  },
+  "cryptographicProvenance": {
+    "baselineId": "BL-86313E588458F5EB9902",
+    "runtimeDependencies": 0,
+    "systemClockIndependence": true,
+    "reviewHorizonBound": "2026-09-09",
+    "deterministicAssuranceSeal": "✦ HONG KONG FINANCIAL AI CORE · AS-OF DETERMINISTIC SEAL · ZERO CLOCK LEAKAGE"
+  },
+  "regulatoryScopeSummary": {
+    "applicableControlsCount": 20,
+    "triggeredRulesCount": 14,
+    "negativeProofExclusionsCount": 29,
+    "authoritiesInScope": [
+      "SFC"
+    ],
+    "byClassification": {
+      "ADVISORY": 0,
+      "RECOMMENDED": 0,
+      "RISK-BASED-REQUIRED": 20,
+      "REQUIRED": 0
+    },
+    "byDomain": {
+      "GOVERNANCE": 5,
+      "MODEL_RISK": 4,
+      "CLIENT_PROTECTION": 0,
+      "DATA_PRIVACY": 1,
+      "SECURITY": 7,
+      "OPERATIONAL_RESILIENCE": 2,
+      "THIRD_PARTY_RISK": 1
+    }
+  },
+  "acceptanceCriteria": [
+    {
+      "mandate": "Senior Management AI Governance & Tripartite Accountability",
+      "regulatoryBasis": "SFC Circular 24EC55 (Section 3.1) & MIC Regime",
+      "specification": "Named Senior Management (MIC-IT for infrastructure, MIC-KBL for business suitability, MIC-RM for model risk) retain non-delegable individual and collective accountability.",
+      "status": "MANDATORY_ASSIGNED"
+    },
+    {
+      "mandate": "Human-in-the-Loop Supervision Protocol",
+      "regulatoryBasis": "SFC Code of Conduct GP2/GP3 & PCPD Model AI Framework",
+      "specification": "Qualified licensed personnel (Type 4 / 9 Representatives) must actively supervise and review all model outputs prior to external dispatch or trade execution. Autonomous unverified execution is barred.",
+      "status": "VERIFIED_ENFORCED"
+    },
+    {
+      "mandate": "Third-Party Cloud & API Governance SLA",
+      "regulatoryBasis": "SFC Circular on External Electronic Data Storage Providers (EDSP, Oct 2019)",
+      "specification": "Vendor agreements must stipulate confidential data isolation, prohibition of client data for model retraining, and prompt incident notification (<24h).",
+      "status": "CONDITIONAL_ACTIVE"
+    },
+    {
+      "mandate": "Audit Trail & Deterministic Dossier Archival",
+      "regulatoryBasis": "SFC Securities and Futures (Keeping of Records) Rules (Cap. 571V)",
+      "specification": "Complete prompt-response telemetry, versioned model weights/APIs, and this immutable PEARL audit dossier must be preserved for statutory period (minimum 7 years).",
+      "status": "COMPLIANT"
+    }
+  ],
+  "governanceMandates": [
+    {
+      "mandate": "Senior Management AI Governance & Tripartite Accountability",
+      "regulatoryBasis": "SFC Circular 24EC55 (Section 3.1) & MIC Regime",
+      "specification": "Named Senior Management (MIC-IT for infrastructure, MIC-KBL for business suitability, MIC-RM for model risk) retain non-delegable individual and collective accountability.",
+      "status": "MANDATORY_ASSIGNED"
+    },
+    {
+      "mandate": "Human-in-the-Loop Supervision Protocol",
+      "regulatoryBasis": "SFC Code of Conduct GP2/GP3 & PCPD Model AI Framework",
+      "specification": "Qualified licensed personnel (Type 4 / 9 Representatives) must actively supervise and review all model outputs prior to external dispatch or trade execution. Autonomous unverified execution is barred.",
+      "status": "VERIFIED_ENFORCED"
+    },
+    {
+      "mandate": "Third-Party Cloud & API Governance SLA",
+      "regulatoryBasis": "SFC Circular on External Electronic Data Storage Providers (EDSP, Oct 2019)",
+      "specification": "Vendor agreements must stipulate confidential data isolation, prohibition of client data for model retraining, and prompt incident notification (<24h).",
+      "status": "CONDITIONAL_ACTIVE"
+    },
+    {
+      "mandate": "Audit Trail & Deterministic Dossier Archival",
+      "regulatoryBasis": "SFC Securities and Futures (Keeping of Records) Rules (Cap. 571V)",
+      "specification": "Complete prompt-response telemetry, versioned model weights/APIs, and this immutable PEARL audit dossier must be preserved for statutory period (minimum 7 years).",
+      "status": "COMPLIANT"
+    }
+  ],
+  "residualOperationalConditions": [
+    "Conduct quarterly model drift and hallucination audits against established benchmark datasets.",
+    "Any architectural alteration or change in external LLM API endpoints requires immediate PEARL baseline re-compilation.",
+    "Maintain active automated red-teaming against prompt injection and jailbreaking threats."
+  ]
+};
+    function downloadMemoJson() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(memoData, null, 2));
+      const downloadAnchor = document.createElement("a");
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "SPEC-BL-DEMO-SFC-FUND-RUN-001.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+  </script>
+</body>
+</html>
