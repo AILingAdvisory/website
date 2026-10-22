@@ -1,12 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-GB" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leadership & Institutional Genesis | AI LING ADVISORY — PEARL Trust OS</title>
+    <title>Institutional Genesis & Architecture | AI LING ADVISORY — PEARL Compliance Engine</title>
+    <meta name="description" content="Discover the institutional genesis and deterministic architecture of AI LING ADVISORY LIMITED. Bridging Hong Kong regulatory circulars and engineering controls.">
+    <link rel="canonical" href="https://www.ailingadvisory.com/about.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ailingadvisory.com/about.html">
+    <meta property="og:title" content="Institutional Genesis & Architecture | AI LING ADVISORY — PEARL Compliance Engine">
+    <meta property="og:description" content="Discover the institutional genesis and deterministic architecture of AI LING ADVISORY LIMITED. Bridging Hong Kong regulatory circulars and engineering controls.">
+    <meta property="og:image" content="https://www.ailingadvisory.com/logo-full.svg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.ailingadvisory.com/about.html">
+    <meta name="twitter:title" content="Institutional Genesis & Architecture | AI LING ADVISORY — PEARL Compliance Engine">
+    <meta name="twitter:description" content="Discover the institutional genesis and deterministic architecture of AI LING ADVISORY LIMITED. Bridging Hong Kong regulatory circulars and engineering controls.">
+    <meta name="twitter:image" content="https://www.ailingadvisory.com/logo-full.svg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.ailingadvisory.com/#organization",
+          "name": "AI LING ADVISORY LIMITED",
+          "alternateName": "AI LING ADVISORY",
+          "url": "https://www.ailingadvisory.com/",
+          "logo": "https://www.ailingadvisory.com/logo-full.svg",
+          "telephone": "+852 6281 7144",
+          "email": "contact@AILingAdvisory.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road",
+            "addressLocality": "Central",
+            "addressRegion": "Hong Kong SAR",
+            "addressCountry": "HK"
+          }
+        },
+        {
+          "@type": "AboutPage",
+          "@id": "https://www.ailingadvisory.com/about.html#webpage",
+          "url": "https://www.ailingadvisory.com/about.html",
+          "name": "Institutional Genesis & Architecture | AI LING ADVISORY",
+          "isPartOf": {
+            "@id": "https://www.ailingadvisory.com/#organization"
+          }
+        }
+      ]
+    }
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
@@ -20,6 +74,10 @@
                             400: '#22d3ee',
                             500: '#06b6d4',
                             600: '#0891b2',
+                        },
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
                         }
                     },
                     fontFamily: {
@@ -66,21 +124,21 @@
                     </svg>
                     <div class="flex flex-col">
                         <span class="text-sm font-black tracking-[0.2em] uppercase text-white leading-none">
-                            PEARL <span class="text-cyan-400 font-mono font-bold text-xs">TRUST OS</span>
+                            AI LING <span class="text-cyan-400 font-bold">ADVISORY</span>
                         </span>
                         <span class="text-[9px] font-mono tracking-widest uppercase text-slate-400 mt-1">
-                            AI LING ADVISORY
+                            PEARL COMPLIANCE ENGINE
                         </span>
                     </div>
                 </a>
 
                 <nav class="hidden lg:flex items-center gap-8 xl:gap-10 text-[11px] font-mono tracking-widest uppercase text-slate-300">
-                    <a href="index.html#gap" class="hover:text-cyan-400 transition-colors">The Dilemma</a>
-                    <a href="index.html#architecture" class="hover:text-cyan-400 transition-colors">Architecture</a>
-                    <a href="index.html#dossiers" class="hover:text-cyan-400 transition-colors">Audit Dossiers</a>
+                    <a href="index.html#dilemma" class="hover:text-cyan-400 transition-colors">The Dilemma</a>
+                    <a href="index.html#deliverables" class="hover:text-cyan-400 transition-colors">Deliverables</a>
+                    <a href="index.html#comparison" class="hover:text-cyan-400 transition-colors">Comparison</a>
                     <a href="index.html#assurance" class="hover:text-cyan-400 transition-colors">Assurance</a>
                     <a href="index.html#intelligence" class="hover:text-cyan-400 transition-colors">Think Tank</a>
-                    <a href="about.html" class="text-cyan-400 font-bold border-b border-cyan-400 pb-0.5">Leadership & Genesis</a>
+                    <a href="about.html" class="text-cyan-400 font-bold border-b border-cyan-400 pb-0.5">Genesis & Methodology</a>
                 </nav>
 
                 <div class="flex items-center gap-4">
@@ -97,12 +155,12 @@
 
             <!-- Mobile Dropdown Menu -->
             <div x-show="mobileMenu" x-transition.opacity class="lg:hidden fixed top-20 left-0 right-0 bg-midnight border-b border-white/10 p-6 z-50 space-y-4 font-mono text-xs uppercase tracking-widest" style="display: none;">
-                <a @click="mobileMenu = false" href="index.html#gap" class="block text-slate-200 hover:text-cyan-400 py-2">The Dilemma</a>
-                <a @click="mobileMenu = false" href="index.html#architecture" class="block text-slate-200 hover:text-cyan-400 py-2">Architecture</a>
-                <a @click="mobileMenu = false" href="index.html#dossiers" class="block text-slate-200 hover:text-cyan-400 py-2">Audit Dossiers</a>
+                <a @click="mobileMenu = false" href="index.html#dilemma" class="block text-slate-200 hover:text-cyan-400 py-2">The Dilemma</a>
+                <a @click="mobileMenu = false" href="index.html#deliverables" class="block text-slate-200 hover:text-cyan-400 py-2">Deliverables</a>
+                <a @click="mobileMenu = false" href="index.html#comparison" class="block text-slate-200 hover:text-cyan-400 py-2">Comparison</a>
                 <a @click="mobileMenu = false" href="index.html#assurance" class="block text-slate-200 hover:text-cyan-400 py-2">Assurance</a>
                 <a @click="mobileMenu = false" href="index.html#intelligence" class="block text-slate-200 hover:text-cyan-400 py-2">Think Tank</a>
-                <a @click="mobileMenu = false" href="about.html" class="block text-cyan-400 font-bold py-2">Leadership & Genesis</a>
+                <a @click="mobileMenu = false" href="about.html" class="block text-cyan-400 font-bold py-2">Genesis & Methodology</a>
                 <a href="index.html" class="w-full btn-cyan py-3 text-center block mt-4">
                     ← Back to Platform Index
                 </a>
@@ -127,23 +185,23 @@
 
                         <div class="space-y-5 text-slate-300 font-light leading-relaxed text-sm sm:text-base">
                             <p>
-                                Financial institutions in Hong Kong operate under strict regulatory scrutiny from the Hong Kong Monetary Authority (HKMA), Securities and Futures Commission (SFC), Privacy Commissioner for Personal Data (PCPD), and Insurance Authority (IA). While engineering teams move rapidly to adopt generative AI and algorithmic models, Second Line of Defence (2LoD) Risk and Compliance functions face a fundamental translation dilemma: <em class="text-white">how to map high-level regulatory circulars into concrete, verifiable technical controls.</em>
+                                Financial institutions in Hong Kong SAR operate under strict regulatory scrutiny from the Hong Kong Monetary Authority (HKMA), Securities and Futures Commission (SFC), Privacy Commissioner for Personal Data (PCPD), and Insurance Authority (IA). While engineering teams move rapidly to adopt generative AI and algorithmic models, Second Line of Defence (2LoD) Risk and Compliance functions face a fundamental translation dilemma: <em class="text-white">how to map high-level regulatory circulars into concrete, verifiable technical controls.</em>
                             </p>
                             <p>
-                                Founder <strong>Ming Liu</strong> established AI LING Advisory to solve this translation gap with mathematical determinism rather than narrative consulting.
+                                <strong>AI LING ADVISORY LIMITED</strong> was established to solve this translation gap with mathematical determinism rather than narrative consulting.
                             </p>
                             <p>
-                                Having served as <strong>Business Information Security Officer (BISO)</strong> at <strong>Fidelity International</strong> and as a Senior Consultant at <strong>Deloitte</strong>, Ming chaired institutional risk committees and managed complex supervisory audits. He understands the exact evidence standards that internal audit committees and regulatory inspection panels demand.
+                                Founded by veteran institutional risk gatekeepers and security architects who chaired institutional risk committees and managed complex supervisory examinations across tier-1 financial institutions and global advisory firms, our leadership understands the exact evidentiary standards that internal Model Risk Committees and regulatory inspection panels demand.
                             </p>
                         </div>
 
                         <!-- Quote Banner -->
                         <blockquote class="border-l-2 border-cyan-400 pl-6 py-3 my-8 bg-white/[0.02]">
                             <p class="text-base sm:text-lg font-serif italic text-white leading-relaxed">
-                                "I built the exact deterministic control compiler I would have required during my time as an institutional risk gatekeeper. 2LoD defence cannot rely on consultant subjectivity or probabilistic LLM hallucinations."
+                                "Institutional 2LoD defence cannot rely on consultant subjectivity or probabilistic LLM hallucinations. We built the exact deterministic control compiler required by institutional risk committees."
                             </p>
                             <cite class="text-slate-400 tracking-widest text-xs uppercase font-mono block mt-3 font-semibold">
-                                — Ming Liu, CISSP / CISM / CISA
+                                — AI LING ADVISORY LIMITED • Central, Hong Kong SAR
                             </cite>
                         </blockquote>
 
@@ -162,7 +220,7 @@
                                 <div class="p-4 bg-midnight border border-white/10 rounded-sm">
                                     <div class="text-white font-bold mb-1">02 / Dual-Track Executable Deliverables</div>
                                     <p class="text-slate-400 font-sans font-light text-xs leading-relaxed">
-                                        Compliance intent is simultaneously outputted as Executive Supervisory Memoranda for Board/Regulators and Jira-ready DevSecOps control matrices for Engineering squads.
+                                        Compliance intent is simultaneously outputted as Executive Supervisory Memoranda for Board/Regulators and Jira-ready DevSecOps control matrices (RFC 4180 CSV + Markdown) for Engineering squads.
                                     </p>
                                 </div>
                                 <div class="p-4 bg-midnight border border-white/10 rounded-sm">
@@ -175,54 +233,54 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Executive Credentials & Profile Card (5 cols) -->
+                    <!-- Right Column: Institutional Profile & Credentials Card (5 cols) -->
                     <div class="lg:col-span-5 space-y-6">
                         <!-- Profile Card -->
                         <div class="p-8 md:p-10 bg-navy-card border border-white/15 rounded-sm shadow-2xl space-y-6">
                             <div class="border-b border-white/10 pb-6 text-center">
-                                <div class="text-3xl sm:text-4xl font-black uppercase tracking-[0.25em] text-white">
-                                    MING LIU
+                                <div class="text-2xl sm:text-3xl font-black uppercase tracking-[0.2em] text-white">
+                                    AI LING ADVISORY
                                 </div>
                                 <div class="text-cyan-400 tracking-[0.2em] text-xs font-mono font-bold uppercase mt-2">
-                                    Principal Architect & Founder
+                                    PEARL Compliance Engine
                                 </div>
                                 <div class="text-slate-400 text-xs font-mono mt-1">
-                                    AI LING ADVISORY • HONG KONG SAR
+                                    INSTITUTIONAL FIRM PROFILE • HONG KONG SAR
                                 </div>
                             </div>
 
                             <div class="space-y-4 font-mono text-xs">
                                 <div>
                                     <span class="text-slate-500 uppercase tracking-widest text-[10px] block mb-1">Institutional Pedigree</span>
-                                    <div class="text-white font-semibold">Ex-BISO, Fidelity International</div>
-                                    <div class="text-slate-400 text-[11px]">Business Information Security Officer • APAC 2LoD Oversight</div>
-                                    <div class="text-white font-semibold mt-2">Ex-Senior Consultant, Deloitte</div>
-                                    <div class="text-slate-400 text-[11px]">Financial Services Risk Advisory • Regulatory Compliance</div>
+                                    <div class="text-white font-semibold">Institutional 2LoD Risk & Governance Oversight</div>
+                                    <div class="text-slate-400 text-[11px]">Specialised in Hong Kong SFC, HKMA, PCPD, and IA supervisory frameworks</div>
+                                    <div class="text-white font-semibold mt-2">Deterministic Policy-as-Code Compilation</div>
+                                    <div class="text-slate-400 text-[11px]">Translating legal prose into machine-verifiable controls in sub-seconds</div>
                                 </div>
 
                                 <div class="pt-4 border-t border-white/10">
-                                    <span class="text-slate-500 uppercase tracking-widest text-[10px] block mb-1">Professional Certifications</span>
+                                    <span class="text-slate-500 uppercase tracking-widest text-[10px] block mb-1">Professional Assurance Standards</span>
                                     <div class="flex flex-wrap gap-2 pt-1">
-                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISSP</span>
-                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISM</span>
-                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISA</span>
+                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISSP Standards</span>
+                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISM Governance</span>
+                                        <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-cyan-300 text-[11px]">CISA Audit Rigour</span>
                                     </div>
                                 </div>
 
                                 <div class="pt-4 border-t border-white/10">
-                                    <span class="text-slate-500 uppercase tracking-widest text-[10px] block mb-1">Engineering Leadership DNA</span>
+                                    <span class="text-slate-500 uppercase tracking-widest text-[10px] block mb-1">Zero-Dependency Architecture</span>
                                     <div class="text-slate-300 text-[11px] leading-relaxed font-sans">
-                                        Engineered alongside distributed systems architects with operational backgrounds from <strong>Palantir</strong>, <strong>Stripe</strong>, and tier-1 quantitative trading platforms.
+                                        Engineered with zero external runtime dependencies, absolute determinism, and SHA-256 cryptographic attestation. Designed for sovereign In-VPC and Air-Gapped banking deployment.
                                     </div>
                                 </div>
                             </div>
 
                             <div class="pt-6 border-t border-white/10 space-y-3">
-                                <a href="mailto:contact@AILingAdvisory.com" class="w-full btn-cyan py-3 text-xs uppercase tracking-wider font-mono text-center block">
-                                    Request Bilateral NDA Briefing
+                                <a href="contact.html" class="w-full btn-cyan py-3 text-xs uppercase tracking-wider font-mono text-center block">
+                                    Request 48-Hour PoC Baseline
                                 </a>
                                 <p class="text-[10px] font-mono text-slate-500 text-center">
-                                    Direct Executive Line • 24-Hour SLA
+                                    Direct Executive Line • 24-Hour Mutual NDA SLA
                                 </p>
                             </div>
                         </div>
@@ -230,8 +288,8 @@
                         <!-- Corporate Identity Card -->
                         <div class="p-6 bg-midnight/80 border border-white/10 rounded-sm font-mono text-xs space-y-2 text-slate-400">
                             <div class="text-white font-bold uppercase tracking-wider text-[11px]">AI LING ADVISORY LIMITED</div>
-                            <div>Hong Kong Registered Business</div>
-                            <div class="text-[11px] text-slate-500">Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road, Central, Hong Kong</div>
+                            <div>Hong Kong Registered Corporation</div>
+                            <div class="text-[11px] text-slate-500">Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road, Central, Hong Kong SAR</div>
                             <div class="pt-2 text-[11px] text-cyan-400">
                                 <a href="mailto:contact@AILingAdvisory.com" class="hover:underline">contact@AILingAdvisory.com</a> • <a href="tel:+85262817144" class="hover:underline">+852 6281 7144</a>
                             </div>
@@ -247,7 +305,7 @@
             <div class="max-w-[90rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div>
                     <div class="text-white font-bold tracking-wider">AI LING ADVISORY LIMITED</div>
-                    <div class="text-slate-500 text-[10px] mt-0.5">Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road, Central, Hong Kong</div>
+                    <div class="text-slate-500 text-[10px] mt-0.5">Unit 2904-05, 29/F, Universal Trade Centre, No.3 Arbuthnot Road, Central, Hong Kong SAR</div>
                 </div>
                 <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-slate-400">
                     <a href="mailto:contact@AILingAdvisory.com" class="hover:text-cyan-400 text-cyan-400 transition-colors">contact@AILingAdvisory.com</a>

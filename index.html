@@ -9,22 +9,22 @@
     <meta name="title" content="AI LING ADVISORY — Institutional Financial AI Compliance & Model Risk (PEARL)">
     <meta name="description" content="Transform fragmented SFC, HKMA, PCPD, and IA rules into board-ready specifications and Jira-ready engineering controls in 48 hours. Zero client data retention. 100% deterministic.">
     <meta name="keywords" content="AI compliance Hong Kong, Model Risk Management, SFC GenAI Circular 24EC55, HKMA SPM TM-E-1, PCPD AI Framework, RegTech Hong Kong, deterministic AI governance, PEARL AI LING ADVISORY">
-    <link rel="canonical" href="https://ailingadvisory.com/">
+    <link rel="canonical" href="https://www.ailingadvisory.com/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ailingadvisory.com/">
+    <meta property="og:url" content="https://www.ailingadvisory.com/">
     <meta property="og:title" content="AI LING ADVISORY — Institutional Financial AI Compliance & Model Risk (PEARL)">
     <meta property="og:description" content="Transform fragmented SFC, HKMA, PCPD, and IA rules into board-ready specifications and Jira-ready engineering controls in 48 hours. Zero client data retention. 100% deterministic.">
-    <meta property="og:image" content="https://ailingadvisory.com/logo-full.svg">
+    <meta property="og:image" content="https://www.ailingadvisory.com/logo-full.svg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://ailingadvisory.com/">
+    <meta name="twitter:url" content="https://www.ailingadvisory.com/">
     <meta name="twitter:title" content="AI LING ADVISORY — Institutional Financial AI Compliance & Model Risk (PEARL)">
     <meta name="twitter:description" content="Transform fragmented SFC, HKMA, PCPD, and IA rules into board-ready specifications and Jira-ready engineering controls in 48 hours. Zero client data retention. 100% deterministic.">
-    <meta name="twitter:image" content="https://ailingadvisory.com/logo-full.svg">
+    <meta name="twitter:image" content="https://www.ailingadvisory.com/logo-full.svg">
 
     <!-- Rich Structured Data (JSON-LD) for Search Engines & GEO (Perplexity / SearchGPT / Claude) -->
     <script type="application/ld+json">
@@ -33,11 +33,11 @@
       "@graph": [
         {
           "@type": "Organization",
-          "@id": "https://ailingadvisory.com/#organization",
+          "@id": "https://www.ailingadvisory.com/#organization",
           "name": "AI LING ADVISORY LIMITED",
           "alternateName": "AI LING ADVISORY",
-          "url": "https://ailingadvisory.com/",
-          "logo": "https://ailingadvisory.com/logo-full.svg",
+          "url": "https://www.ailingadvisory.com/",
+          "logo": "https://www.ailingadvisory.com/logo-full.svg",
           "telephone": "+852 6281 7144",
           "email": "contact@AILingAdvisory.com",
           "address": {
@@ -51,7 +51,7 @@
         },
         {
           "@type": "SoftwareApplication",
-          "@id": "https://ailingadvisory.com/#pearl-engine",
+          "@id": "https://www.ailingadvisory.com/#pearl-engine",
           "name": "PEARL Compliance Engine",
           "alternateName": "PEARL Trust OS",
           "applicationCategory": "BusinessApplication",
@@ -64,22 +64,22 @@
             "description": "Free 48-Hour AI Use Case Proof of Concept (PoC) Baseline"
           },
           "provider": {
-            "@id": "https://ailingadvisory.com/#organization"
+            "@id": "https://www.ailingadvisory.com/#organization"
           }
         },
         {
           "@type": "PodcastSeries",
-          "@id": "https://ailingadvisory.com/#think-tank",
+          "@id": "https://www.ailingadvisory.com/#think-tank",
           "name": "AI LING Think Tank",
           "description": "Frontier AI governance, adversarial jailbreak benchmarks, and supervisory intelligence briefings for financial risk and engineering leaders.",
-          "url": "https://ailingadvisory.com/#intelligence",
+          "url": "https://www.ailingadvisory.com/#intelligence",
           "author": {
-            "@id": "https://ailingadvisory.com/#organization"
+            "@id": "https://www.ailingadvisory.com/#organization"
           }
         },
         {
           "@type": "FAQPage",
-          "@id": "https://ailingadvisory.com/#faq",
+          "@id": "https://www.ailingadvisory.com/#faq",
           "mainEntity": [
             {
               "@type": "Question",
@@ -237,6 +237,7 @@
           formSubmitted: false,
           submittingForm: false,
           leadConfirmationId: null,
+          leadDispatchStatus: 'success', // 'success', 'fallback', or 'manual'
 
           // Think Tank Intelligence & Audio State (Protected)
           intelligence: window.PEARL_INTELLIGENCE || { episodes: [] },
@@ -429,6 +430,9 @@
                   source: "ailingadvisory-web-lead"
               };
 
+              let dispatched = false;
+              let generatedLeadId = null;
+
               try {
                   const workerEndpoint = "https://pearl-lead-gateway.ailingadvisory.workers.dev/api/lead";
                   const res = await fetch(workerEndpoint, {
@@ -436,16 +440,23 @@
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify(leadPayload)
                   });
-                  const json = await res.json();
-                  if (json && json.leadId) {
-                      this.leadConfirmationId = json.leadId;
-                  } else {
-                      this.leadConfirmationId = "PEARL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+                  if (res.ok) {
+                      const json = await res.json();
+                      if (json && json.leadId) {
+                          generatedLeadId = json.leadId;
+                          dispatched = true;
+                          this.leadDispatchStatus = 'success';
+                      }
                   }
               } catch (e) {
-                  console.warn("Worker dispatch fallback:", e);
+                  console.warn("Worker dispatch fallback triggered:", e);
+              }
+
+              if (!dispatched) {
+                  const fallbackLeadId = "PEARL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+                  generatedLeadId = fallbackLeadId;
                   try {
-                      await fetch("https://formsubmit.co/ajax/contact@AILingAdvisory.com", {
+                      const fbRes = await fetch("https://formsubmit.co/ajax/contact@AILingAdvisory.com", {
                           method: "POST",
                           headers: { 
                               "Content-Type": "application/json", 
@@ -454,18 +465,26 @@
                               "Referer": "https://www.ailingadvisory.com/"
                           },
                           body: JSON.stringify({
-                              _subject: "[Institutional PoC Lead] " + leadPayload.name + " - " + leadPayload.institution,
+                              _subject: "[Institutional PoC Lead] " + leadPayload.name + " - " + leadPayload.institution + " (" + fallbackLeadId + ")",
                               _cc: "ailingadvisory@outlook.com",
                               ...leadPayload,
                               focus: Array.isArray(leadPayload.focus) ? leadPayload.focus.join(", ") : leadPayload.focus
                           })
                       });
-                  } catch (err) {}
-                  this.leadConfirmationId = "PEARL-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-              } finally {
-                  this.submittingForm = false;
-                  this.formSubmitted = true;
+                      if (fbRes.ok) {
+                          this.leadDispatchStatus = 'fallback';
+                      } else {
+                          this.leadDispatchStatus = 'manual';
+                      }
+                  } catch (err) {
+                      console.warn("FormSubmit fallback error:", err);
+                      this.leadDispatchStatus = 'manual';
+                  }
               }
+
+              this.leadConfirmationId = generatedLeadId;
+              this.submittingForm = false;
+              this.formSubmitted = true;
           }
         }));
       });
@@ -1070,7 +1089,7 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-white font-mono">Real-Time Regulatory Delta.</h3>
                                 <p class="text-sm text-slate-200 font-light leading-relaxed">
-                                    Every new circular issued by HKMA, SFC, or PCPD triggers an instantaneous recalculation against your active control baseline. Automatically identify coverage gaps before supervisory inquiries arrive.
+                                    Every new circular issued by HKMA, SFC, or PCPD triggers an instantaneous recalculation against your active control baseline. Automatically identify coverage gaps before supervisory enquiries arrive.
                                 </p>
                             </div>
                             <div class="pt-6 mt-6 border-t border-white/5 font-mono text-xs text-slate-400 flex items-center justify-between">
@@ -1734,14 +1753,20 @@
                 <template x-if="formSubmitted">
                     <div class="p-8 bg-emerald-950/60 border border-emerald-800 rounded text-center space-y-4">
                         <svg class="w-12 h-12 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <h4 class="text-lg font-bold text-emerald-300 font-mono">PoC Request Dispatched</h4>
-                        <p class="text-xs text-emerald-300/90 leading-relaxed max-w-md mx-auto">
+                        <h4 class="text-lg font-bold text-emerald-300 font-mono" x-text="leadDispatchStatus === 'manual' ? 'PoC Reference Generated' : 'PoC Request Dispatched'"></h4>
+                        <p class="text-xs text-emerald-300/90 leading-relaxed max-w-md mx-auto" x-show="leadDispatchStatus !== 'manual'">
                             Thank you. Your institutional PoC request has been securely dispatched to our Principal Executive Desk. Our team will reach out within 24 hours with our standard bilateral Mutual NDA.
+                        </p>
+                        <p class="text-xs text-amber-300/90 leading-relaxed max-w-md mx-auto" x-show="leadDispatchStatus === 'manual'" style="display: none;">
+                            Thank you. Your audit reference has been created. To ensure immediate priority handling, please email our Executive Desk directly at <a href="mailto:contact@AILingAdvisory.com" class="underline text-cyan-300 font-mono font-bold">contact@AILingAdvisory.com</a> or telephone <a href="tel:+85262817144" class="underline text-cyan-300 font-mono font-bold">+852 6281 7144</a> citing this reference code.
                         </p>
                         <div x-show="leadConfirmationId" class="pt-2">
                             <span class="font-mono text-xs text-slate-300 bg-black/40 py-2 px-4 rounded border border-white/10 inline-block">
                                 Audit Reference: <span class="font-bold text-cyan-400" x-text="leadConfirmationId"></span>
                             </span>
+                        </div>
+                        <div class="pt-2 text-[11px] font-mono text-slate-400 border-t border-white/10">
+                            Direct Executive Desk: <a href="mailto:contact@AILingAdvisory.com" class="text-cyan-400 hover:underline">contact@AILingAdvisory.com</a> • <a href="tel:+85262817144" class="text-cyan-400 hover:underline">+852 6281 7144</a>
                         </div>
                         <div class="pt-3">
                             <button @click="contactModal = false; formSubmitted = false;" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-mono rounded transition-colors">
@@ -2257,7 +2282,7 @@
                         <div class="text-white font-bold pt-2">3. Zero Client Model Data Ingestion</div>
                         <p class="text-slate-300 font-sans">PEARL executes locally In-VPC or On-Premises. We never ingest, retain, train upon, or expose proprietary financial models, trading algorithms, client prompts, or customer records.</p>
                         
-                        <div class="text-white font-bold pt-2">4. Data Subject Access & Inquiries</div>
+                        <div class="text-white font-bold pt-2">4. Data Subject Access & Enquiries</div>
                         <p class="text-slate-300 font-sans">To exercise data access or correction rights under PDPO, please contact our Data Protection Officer at <a href="mailto:contact@AILingAdvisory.com" class="text-cyan-400 underline">contact@AILingAdvisory.com</a> or call <a href="tel:+85262817144" class="text-cyan-400 underline">+852 6281 7144</a>.</p>
                     </div>
                 </div>

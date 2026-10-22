@@ -17,4 +17,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://ailingadvisory.com/sitemap.xml
+Sitemap: https://www.ailingadvisory.com/sitemap.xml
