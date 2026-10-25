@@ -17,4 +17,10 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
+# LLM Discovery Standards
+# Reference https://www.ailingadvisory.com/llms.txt for model context
+
 Sitemap: https://www.ailingadvisory.com/sitemap.xml

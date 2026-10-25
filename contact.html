@@ -461,6 +461,14 @@
               message: '' 
           },
 
+          init() {
+              const params = new URLSearchParams(window.location.search);
+              const ref = params.get('ref') || params.get('focus');
+              if (ref) {
+                  this.formData.message = `Inquiry regarding Think Tank research: ${ref}. Requesting 48-Hour PoC evaluation.`;
+              }
+          },
+
           toggleFocus(item) {
               const idx = this.formData.focus.indexOf(item);
               if (idx > -1) {

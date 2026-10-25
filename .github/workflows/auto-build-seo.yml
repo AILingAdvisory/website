@@ -1,0 +1,43 @@
+name: Auto-Compile SEO & LLM Engine
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'intelligence.json'
+      - 'data/intelligence.json'
+      - 'scripts/build-seo-engine.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run SEO & LLM Discovery Engine
+        run: node scripts/build-seo-engine.mjs
+
+      - name: Commit and Push Changes If Updated
+        run: |
+          git config --global user.name "AILingAdvisory-SEO-Bot"
+          git config --global user.email "bot@ailingadvisory.com"
+          git add dispatches/ sitemap.xml robots.txt llms.txt llms-full.txt
+          if git diff --staged --quiet; then
+            echo "No SEO changes to commit."
+          else
+            git commit -m "ci(seo): auto-compile dispatch pages, llms.txt, and sitemap [skip ci]"
+            git push origin main
+          fi

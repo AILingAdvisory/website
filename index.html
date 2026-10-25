@@ -1210,10 +1210,10 @@
                                     <p class="text-xs sm:text-sm text-slate-300 font-light leading-relaxed line-clamp-3" x-text="currentEpisode.subtitle || currentEpisode.summary"></p>
                                     
                                     <div class="pt-2 flex flex-wrap items-center gap-3">
-                                        <button @click="openWhitepaper(currentEpisode)" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider rounded-sm border border-white/20 hover:border-cyan-400 transition-colors">
+                                        <a :href="'./dispatches/' + currentEpisode.id + '.html'" @click.prevent="openWhitepaper(currentEpisode)" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/15 text-white font-mono text-xs uppercase tracking-wider rounded-sm border border-white/20 hover:border-cyan-400 transition-colors">
                                             <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                             Read Full Whitepaper
-                                        </button>
+                                        </a>
                                         <button @click="contactModal = true" class="inline-flex items-center gap-2 px-4 py-2.5 text-slate-300 hover:text-white font-mono text-xs uppercase tracking-wider">
                                             <span>Operationalise in PEARL</span>
                                             <span class="text-cyan-400">→</span>
@@ -1356,11 +1356,11 @@
                                             </template>
                                         </button>
 
-                                        <button @click="openWhitepaper(ep)" 
+                                        <a :href="'./dispatches/' + ep.id + '.html'" @click.prevent="openWhitepaper(ep)" 
                                                 class="text-xs font-mono text-slate-300 hover:text-cyan-300 flex items-center gap-1 transition-colors">
                                             <span>Whitepaper</span>
                                             <span class="text-cyan-400">↗</span>
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </template>
@@ -1373,7 +1373,11 @@
                                     <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                                     <span>Archival Briefings Register</span>
                                 </div>
-                                <div class="text-[11px] font-mono text-slate-400" x-text="'Showing ' + (archiveEpisodes.length + (recentCards.length + 1)) + ' of ' + filteredEpisodes.length + ' Dispatches'"></div>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-[11px] font-mono text-slate-400" x-text="'Showing ' + (archiveEpisodes.length + (recentCards.length + 1)) + ' of ' + filteredEpisodes.length + ' Dispatches'"></div>
+                                    <span class="text-white/20 hidden sm:inline">•</span>
+                                    <a href="./dispatches/index.html" class="text-[11px] font-mono text-cyan-400 hover:text-white transition-colors">Full Vault Directory →</a>
+                                </div>
                             </div>
 
                             <!-- Table Rows -->
@@ -1407,11 +1411,11 @@
                                             </button>
 
                                             <!-- Whitepaper -->
-                                            <button @click="openWhitepaper(ep)" 
+                                            <a :href="'./dispatches/' + ep.id + '.html'" @click.prevent="openWhitepaper(ep)" 
                                                     class="text-slate-300 hover:text-cyan-300 flex items-center gap-0.5 transition-colors">
                                                 <span>Paper</span>
                                                 <span class="text-cyan-400 text-xs">↗</span>
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </template>
@@ -1603,7 +1607,7 @@
                             <li><a href="#deliverables" class="hover:text-cyan-300 transition-colors">Deliverables Showcase</a></li>
                             <li><a href="#comparison" class="hover:text-cyan-300 transition-colors">Comparison Benchmark</a></li>
                             <li><a href="#assurance" class="hover:text-cyan-300 transition-colors">Model Assurance</a></li>
-                            <li><a href="#intelligence" class="hover:text-cyan-300 transition-colors">Think Tank Dispatches</a></li>
+                            <li><a href="./dispatches/index.html" class="hover:text-cyan-300 transition-colors">Think Tank Research Vault →</a></li>
                             <li><a href="#faq" class="hover:text-cyan-300 transition-colors">Institutional FAQ</a></li>
                             <li><a href="about.html" class="hover:text-cyan-300 transition-colors">Genesis & Methodology →</a></li>
                         </ul>
