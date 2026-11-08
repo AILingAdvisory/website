@@ -342,6 +342,43 @@
           hasInteractedAudio: false,
           showAllArchive: false,
 
+          flagshipBrief: {
+              id: "alt-2026-11-08-hkma-art",
+              date: "November 2026",
+              title: "HKMA Generative AI Sandbox & A.R.T. Framework: Technical Compliance Guide",
+              subtitle: "Deconstructing HKMA Circular B1/15C across Principles 1–9 (Accountability, Resiliency, Trust): operationalising 3LoD model risk governance, automated drift telemetry, and sovereign in-VPC containment before sandbox graduation.",
+              audioUrl: "https://audio.ailingadvisory.com/episodes/2026-11-08_JFrog-AI-Software-Supply-Chain-Security-ML-BOM-Surge.m4a",
+              duration: 1319,
+              durationFormatted: "21:59",
+              wordCount: 2850,
+              readTimeMin: 12,
+              tags: ["HKMA B1/15C", "A.R.T. Framework", "GenAI Sandbox", "Model Risk Governance"],
+              hasFullReport: true,
+              summary: "The Hong Kong Monetary Authority (HKMA) Circular B1/15C establishes a comprehensive supervisory framework for Generative AI adoption across Authorised Institutions. This briefing details the architectural requirements for 3LoD governance, real-time drift telemetry, and sovereign containment.",
+              sections: [
+                  {
+                      id: "sec-1",
+                      title: "Executive Supervisory Context & Circular B1/15C",
+                      content: "The Hong Kong Monetary Authority (HKMA), in collaboration with Cyberport, has inaugurated its Generative AI Sandbox alongside supervisory Circular B1/15C. The circular establishes nine binding supervisory principles grouped under Accountability, Resiliency, and Trust (A.R.T.). Authorised Institutions (AIs) deploying generative models must prove continuous algorithmic compliance before sandbox graduation."
+                  },
+                  {
+                      id: "sec-2",
+                      title: "Accountability: 3LoD Model Risk Governance & Board Oversight",
+                      content: "Principles 1–3 require explicit allocation of senior management accountability. Board and designated executive committees retain non-delegable oversight. First Line business owners, Second Line Model Risk Management (MRM), and Third Line Internal Audit must execute independent, verifiable sign-offs for all deployed AI architectures."
+                  },
+                  {
+                      id: "sec-3",
+                      title: "Resiliency: Continuous Telemetry, Model Drift & In-VPC Containment",
+                      content: "Principles 4–6 mandate continuous operational and cyber resilience. Models must operate in sovereign, air-gapped or In-VPC environments with telemetry actively detecting concept drift, data shifts, and hallucination rates. Automated fail-safes and circuit breakers must contain degraded model behaviors without compromising core banking systems."
+                  },
+                  {
+                      id: "sec-4",
+                      title: "Trust: Data Privacy, Synthetic Disclosures & Customer Recourse",
+                      content: "Principles 7–9 govern transparency, privacy, and customer ethics. Enforcing strict adherence to PCPD PDPO Cap. 486 requirements, Authorised Institutions must provide transparent synthetic AI disclosures and maintain accessible human-in-the-loop intervention channels for all customer-facing AI interactions."
+                  }
+              ]
+          },
+
           get currentEpisode() {
               return (this.intelligence && this.intelligence.episodes && this.intelligence.episodes.length > 0)
                   ? this.intelligence.episodes[this.activeEpIndex]
@@ -385,17 +422,18 @@
                   this.audioEl.preload = 'metadata';
                   this.audioEl.addEventListener('timeupdate', () => {
                       this.currentTime = this.audioEl.currentTime;
-                      this.duration = this.audioEl.duration || (this.currentEpisode ? this.currentEpisode.duration : 0);
+                      this.duration = this.audioEl.duration || (this.currentEpisode ? this.currentEpisode.duration : (this.flagshipBrief ? this.flagshipBrief.duration : 0));
                   });
                   this.audioEl.addEventListener('ended', () => {
                       this.isPlaying = false;
                   });
                   this.audioEl.addEventListener('loadedmetadata', () => {
-                      this.duration = this.audioEl.duration || (this.currentEpisode ? this.currentEpisode.duration : 0);
+                      this.duration = this.audioEl.duration || (this.currentEpisode ? this.currentEpisode.duration : (this.flagshipBrief ? this.flagshipBrief.duration : 0));
                   });
               }
-              if (this.currentEpisode && (!this.audioEl.src || !this.audioEl.src.includes(this.currentEpisode.audioUrl))) {
-                  this.audioEl.src = this.currentEpisode.audioUrl;
+              const targetUrl = (this.currentEpisode && this.currentEpisode.audioUrl) || (this.flagshipBrief && this.flagshipBrief.audioUrl);
+              if (targetUrl && (!this.audioEl.src || !this.audioEl.src.includes(targetUrl))) {
+                  this.audioEl.src = targetUrl;
               }
           },
 
@@ -1401,12 +1439,12 @@
                                 type="button"
                                 class="inline-flex items-center gap-3 px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-cyan-500/40 hover:border-cyan-400 rounded-sm text-cyan-300 hover:text-white font-mono text-xs uppercase tracking-wider transition-all duration-200 shadow-lg shadow-cyan-950/30 active:scale-[0.99] cursor-pointer group">
                             <span class="w-2 h-2 rounded-full bg-cyan-400 group-hover:animate-ping"></span>
-                            <span x-text="openMatrix ? 'Hide Technical Specification Matrix ↑' : 'Inspect Full 4-Way Technical Specification Matrix ↓'"></span>
+                            <span x-text="openMatrix ? 'Hide Technical Specification Matrix ↑' : 'Inspect Full 4-Way Technical Specification Matrix ↓'">Inspect Full 4-Way Technical Specification Matrix ↓</span>
                         </button>
                     </div>
 
                     <!-- 4-Way Structured Comparison Table inside Expandable Drawer -->
-                    <div x-show="openMatrix" x-collapse class="transition-all duration-300 overflow-hidden">
+                    <div x-show="openMatrix" x-collapse style="display: none;" class="transition-all duration-300 overflow-hidden">
                         <div class="border border-white/10 rounded-sm overflow-x-auto shadow-2xl bg-navy-card/40 mt-2">
                             <table class="w-full text-left text-xs font-sans">
                                 <thead class="bg-midnight/90 text-slate-400 font-mono text-[11px] uppercase tracking-wider border-b border-white/10">
@@ -1590,7 +1628,7 @@
                                 </ul>
                             </div>
                             <div class="pt-6 mt-6 border-t border-white/10">
-                                <button @click="openContactWithFocus('Departmental Fast-Start')" class="w-full block text-center py-3 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white border border-white/15 hover:border-cyan-400 rounded-sm transition-colors">
+                                <button @click="openContactWithFocus('Team-Lead Rapid Compilation')" class="w-full block text-center py-3 text-xs font-mono uppercase tracking-wider text-slate-300 hover:text-white border border-white/15 hover:border-cyan-400 rounded-sm transition-colors">
                                     Enquire on Team Access →
                                 </button>
                             </div>
@@ -1680,7 +1718,7 @@
                                 <!-- Flagship Title & Summary -->
                                 <div>
                                     <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug hover:text-cyan-300 transition-colors cursor-pointer"
-                                        @click="openWhitepaper(currentEpisode || (intelligence.episodes && intelligence.episodes[0]))">
+                                        @click="openWhitepaper(flagshipBrief)">
                                         HKMA Generative AI Sandbox &amp; A.R.T. Framework: Technical Compliance Guide
                                     </h3>
                                     <p class="text-xs sm:text-sm text-slate-300 font-light mt-3 leading-relaxed">
@@ -1730,8 +1768,8 @@
 
                             <!-- Flagship Actions -->
                             <div class="pt-5 mt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                                <a :href="'./dispatches/' + (currentEpisode ? currentEpisode.id : 'alt-2026-11-08') + '.html'" 
-                                   @click.prevent="openWhitepaper(currentEpisode || (intelligence.episodes && intelligence.episodes[0]))" 
+                                <a :href="'./dispatches/' + (flagshipBrief ? flagshipBrief.id : 'alt-2026-11-08') + '.html'" 
+                                   @click.prevent="openWhitepaper(flagshipBrief)" 
                                    class="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors">
                                     <span>Read Full Whitepaper</span>
                                     <span>→</span>
@@ -1903,7 +1941,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </button>
-                            <div x-show="activeFaq === 2" x-collapse class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5">
+                            <div x-show="activeFaq === 2" x-collapse style="display: none;" class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5">
                                 Existing options fail on three fronts: <strong>(1) Consulting firms</strong> take 2 months and charge HK$300,000+ for a static PDF memo that becomes obsolete the moment your AI pipeline evolves; <strong>(2) Big enterprise GRC platforms</strong> require 6 months of system integration and Information Security Review while lacking native Hong Kong supervisory rules; and <strong>(3) General-purpose LLMs like ChatGPT</strong> are probabilistic and hallucinate foreign laws such as the EU AI Act that do not apply in Hong Kong. PEARL solves all three by executing deterministically in milliseconds with zero hallucination and zero system integration.
                             </div>
                         </div>
@@ -1929,7 +1967,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </button>
-                            <div x-show="activeFaq === 3" x-collapse class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5 space-y-2">
+                            <div x-show="activeFaq === 3" x-collapse style="display: none;" class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5 space-y-2">
                                 <p>In AI, compliance drifts on two fronts:</p>
                                 <ul class="list-disc pl-5 space-y-1 text-slate-400">
                                     <li><strong class="text-white">External Supervisory Velocity:</strong> Regulators move fast to match technological innovation &mdash; such as the HKMA’s <em>Accountability, Resiliency and Trust (A.R.T.) Framework</em> (Circular B1/15C), which is already compiled and live in the PEARL engine alongside SFC Circulars 24EC55 / 26EC32, IA GL20, and PCPD PDPO guidelines.</li>
@@ -1959,7 +1997,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </button>
-                            <div x-show="activeFaq === 4" x-collapse class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5">
+                            <div x-show="activeFaq === 4" x-collapse style="display: none;" class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5">
                                 <strong class="text-white">No.</strong> PEARL runs 100% locally with zero network connectivity, zero external API calls, and zero ingestion of client data, source code, or model weights. Nothing ever leaves your perimeter. Because there is no system integration or cloud data exchange, teams bypass 6-month Information Security reviews &mdash; a team lead can onboard via corporate card or start immediately with a complimentary first regulatory compilation under a bilateral Mutual NDA.
                             </div>
                         </div>
@@ -1985,7 +2023,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </button>
-                            <div x-show="activeFaq === 5" x-collapse class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5 space-y-2">
+                            <div x-show="activeFaq === 5" x-collapse style="display: none;" class="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-300 font-light leading-relaxed border-t border-white/5 space-y-2">
                                 <p>From a single deterministic source of truth, PEARL outputs three tailored deliverables to keep every stakeholder aligned across every iteration:</p>
                                 <ol class="list-decimal pl-5 space-y-1 text-slate-400">
                                     <li><strong class="text-white">Senior Leadership (1-Page Executive Memo):</strong> Board &amp; MIC accountability sign-off specification with official compiler verification seal.</li>
@@ -2655,7 +2693,7 @@
                                 AI LING ADVISORY compiles these frontier regulatory principles into machine-verifiable In-VPC control baselines within 48 hours.
                             </p>
                             <div class="flex flex-wrap items-center gap-4 pt-2">
-                                <button @click="openContactWithFocus('SFC Type 4/9 Research Copilot'); closeWhitepaper();" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
+                                <button @click="openContactWithFocus(whitepaperModal?.tags?.includes('HKMA B1/15C') ? 'HKMA A.R.T. Framework (B1/15C) Baseline' : 'SFC Type 4/9 Research Copilot'); closeWhitepaper();" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
                                     Get First Compilation Free
                                 </button>
                                 <button @click="closeWhitepaper()" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider rounded-sm transition-colors">
@@ -2697,13 +2735,13 @@
                     </button>
                     <div class="min-w-0">
                         <div class="flex items-center gap-2">
-                            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-bold uppercase tracking-wider hidden sm:inline" x-text="currentEpisode?.date"></span>
-                            <span class="text-xs font-bold text-white truncate max-w-[180px] sm:max-w-md block" x-text="currentEpisode?.title"></span>
+                            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/30 font-bold uppercase tracking-wider hidden sm:inline" x-text="currentEpisode?.date || flagshipBrief.date"></span>
+                            <span class="text-xs font-bold text-white truncate max-w-[180px] sm:max-w-md block" x-text="currentEpisode?.title || flagshipBrief.title"></span>
                         </div>
                         <div class="text-[10px] font-mono text-slate-400 flex items-center gap-2">
-                            <span x-text="formatTime(currentTime) + ' / ' + (duration ? formatTime(duration) : currentEpisode?.durationFormatted)"></span>
+                            <span x-text="formatTime(currentTime) + ' / ' + (duration ? formatTime(duration) : (currentEpisode?.durationFormatted || flagshipBrief.durationFormatted))"></span>
                             <span class="text-white/20 hidden md:inline">•</span>
-                            <span class="text-slate-400 hidden md:inline" x-text="currentEpisode?.readTimeMin + ' min read'"></span>
+                            <span class="text-slate-400 hidden md:inline" x-text="(currentEpisode?.readTimeMin || flagshipBrief.readTimeMin) + ' min read'"></span>
                         </div>
                     </div>
                 </div>
@@ -2725,7 +2763,7 @@
                 <!-- Right: Speed, Paper Link, Jump to Think Tank, Close -->
                 <div class="flex items-center gap-2.5 flex-shrink-0">
                     <button @click="cycleSpeed()" class="text-[10px] font-mono font-bold text-cyan-300 px-2 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 transition-colors" x-text="playbackRate + 'x'"></button>
-                    <button @click="openWhitepaper(currentEpisode)" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 text-white font-mono text-[11px] rounded-sm border border-white/20 hover:border-cyan-400 transition-colors">
+                    <button @click="openWhitepaper(currentEpisode || flagshipBrief)" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 text-white font-mono text-[11px] rounded-sm border border-white/20 hover:border-cyan-400 transition-colors">
                         <span>Read Paper</span>
                         <span class="text-cyan-400">↗</span>
                     </button>
