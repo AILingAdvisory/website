@@ -529,7 +529,7 @@
                               "Referer": "https://www.ailingadvisory.com/"
                           },
                           body: JSON.stringify({
-                              _subject: "[Institutional PoC Lead] " + leadPayload.name + " - " + leadPayload.institution + " (" + fallbackLeadId + ")",
+                              _subject: "[Complimentary Compilation Request] " + leadPayload.name + " - " + leadPayload.institution + " (" + fallbackLeadId + ")",
                               _cc: "ailingadvisory@outlook.com",
                               ...leadPayload,
                               focus: Array.isArray(leadPayload.focus) ? leadPayload.focus.join(", ") : leadPayload.focus

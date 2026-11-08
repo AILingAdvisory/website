@@ -469,11 +469,11 @@
           },
 
           availableFocusAreas: [
-              'SFC Investment Research Copilot',
-              'Customer-Facing GenAI Advisory',
-              'Algorithmic Execution & Order Slicing',
-              'Automated Credit Decisioning',
-              'Internal Staff Productivity & Coding LLM'
+              'SFC Type 4/9 Research Copilot',
+              'HKMA A.R.T. Framework (B1/15C) Baseline',
+              'CRM / Personal Data Drift Check (PCPD)',
+              'Team-Lead Rapid Compilation',
+              'Continuous Assurance Retainer'
           ],
 
           formData: { 
@@ -481,7 +481,7 @@
               email: '', 
               role: 'Risk & Compliance (CRO, Legal, 2LoD)',
               institution: '', 
-              focus: ['SFC Investment Research Copilot'], 
+              focus: ['SFC Type 4/9 Research Copilot'], 
               message: '' 
           },
 
@@ -553,7 +553,7 @@
                               "Referer": "https://www.ailingadvisory.com/"
                           },
                           body: JSON.stringify({
-                              _subject: "[Institutional PoC Lead] " + leadPayload.name + " - " + leadPayload.institution + " (" + fallbackLeadId + ")",
+                              _subject: "[Complimentary Compilation Request] " + leadPayload.name + " - " + leadPayload.institution + " (" + fallbackLeadId + ")",
                               _cc: "ailingadvisory@outlook.com",
                               ...leadPayload,
                               focus: Array.isArray(leadPayload.focus) ? leadPayload.focus.join(", ") : leadPayload.focus
@@ -1104,7 +1104,7 @@
                                     Want this exact compilation run on <strong class="text-white font-medium">your planned AI workload</strong>?
                                 </div>
                                 <button type="button"
-                                        @click="openContactWithFocus(simPreset === 'hkma_bank' ? 'Customer-Facing GenAI Advisory' : 'SFC Investment Research Copilot')"
+                                        @click="openContactWithFocus(simPreset === 'hkma_bank' ? 'HKMA A.R.T. Framework (B1/15C) Baseline' : 'SFC Type 4/9 Research Copilot')"
                                         class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0">
                                     Get First Compilation Free →
                                 </button>
