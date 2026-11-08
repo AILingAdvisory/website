@@ -518,6 +518,21 @@
               this.whitepaperModal = null;
           },
 
+          getWhitepaperFocus(wp) {
+              if (!wp) return "SFC Type 4/9 Research Copilot";
+              const text = `${wp.id || ""} ${wp.title || ""} ${(wp.tags || []).join(" ")}`.toLowerCase();
+              if (text.includes("hkma") || text.includes("b1/15c") || text.includes("a.r.t.")) {
+                  return "HKMA A.R.T. Framework (B1/15C) Baseline";
+              }
+              if (text.includes("schedule 7") || text.includes("negative proof") || text.includes("algorithmic trading")) {
+                  return "Negative Proof (Schedule 7 Exemption)";
+              }
+              if (text.includes("pcpd") || text.includes("cap. 486") || text.includes("data drift") || text.includes("personal data") || text.includes("pii")) {
+                  return "CRM / Personal Data Drift Check (PCPD)";
+              }
+              return "SFC Type 4/9 Research Copilot";
+          },
+
           availableFocusAreas: [
               'SFC Type 4/9 Research Copilot',
               'HKMA A.R.T. Framework (B1/15C) Baseline',
@@ -1781,7 +1796,6 @@
                             <!-- Flagship Actions -->
                             <div class="pt-5 mt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
                                 <a href="./dispatches/alt-2026-hkma-art.html" 
-                                   @click.prevent="openWhitepaper(flagshipBrief)" 
                                    class="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors">
                                     <span>Read Full Whitepaper</span>
                                     <span>→</span>
@@ -2664,6 +2678,10 @@
                                   x-text="currentEpisode?.id === whitepaperModal?.id ? formatTime(currentTime) + ' / ' + (duration ? formatTime(duration) : whitepaperModal.durationFormatted) : (whitepaperModal ? whitepaperModal.durationFormatted : '')"></span>
                         </button>
                         
+                        <a :href="'./dispatches/' + whitepaperModal?.id + '.html'" class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded border border-white/15 hover:border-cyan-400 text-slate-300 hover:text-white text-xs font-bold transition-colors" title="Open full whitepaper in new page">
+                            <span>Full Page</span>
+                            <span class="text-cyan-400">↗</span>
+                        </a>
                         <button @click="closeWhitepaper()" class="p-1.5 text-slate-400 hover:text-white transition-colors" title="Close (Esc)">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
@@ -2741,7 +2759,7 @@
                                 AI LING ADVISORY compiles these frontier regulatory principles into machine-verifiable In-VPC control baselines within 48 hours.
                             </p>
                             <div class="flex flex-wrap items-center gap-4 pt-2">
-                                <button @click="openContactWithFocus(whitepaperModal?.tags?.includes('HKMA B1/15C') ? 'HKMA A.R.T. Framework (B1/15C) Baseline' : 'SFC Type 4/9 Research Copilot'); closeWhitepaper();" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
+                                <button @click="openContactWithFocus(getWhitepaperFocus(whitepaperModal)); closeWhitepaper();" class="btn-cyan px-7 py-3 text-xs font-mono uppercase tracking-wider font-bold">
                                     Get First Compilation Free
                                 </button>
                                 <button @click="closeWhitepaper()" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono uppercase tracking-wider rounded-sm transition-colors">

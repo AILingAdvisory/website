@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" class="scroll-smooth">
+<html lang="en-GB" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -180,6 +180,9 @@
             transform: translateY(-1px);
             box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3);
         }
+        html, body { overflow-x: hidden; }
+        .min-w-0 { min-width: 0 !important; }
+        .max-w-full { max-width: 100% !important; }
     </style>
 </head>
 <body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans text-slate-100">
@@ -231,7 +234,7 @@
             <span class="text-cyan-400">2026-10-16</span>
         </nav>
 
-        <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="grid lg:grid-cols-12 gap-12 items-start min-w-0 w-full">
             <!-- Left Column: Table of Contents & Sticky Intake Widget (3 cols) -->
             <aside class="hidden lg:block lg:col-span-3 sticky top-28 space-y-6">
                 <!-- TOC -->
@@ -292,7 +295,7 @@
             </aside>
 
             <!-- Main Content Area (9 cols) -->
-            <article class="lg:col-span-9 space-y-8">
+            <article class="lg:col-span-9 space-y-8 min-w-0 w-full">
                 <!-- Article Header -->
                 <header class="space-y-4 border-b border-white/10 pb-8">
                     <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
@@ -378,11 +381,11 @@
             <p class="text-xs text-slate-300 font-light leading-relaxed">
                 Deploying agentic pipelines, MCP firewalls, or LLM copilots in Hong Kong requires mandatory compliance across SFC Circulars 24EC55 &amp; 26EC32, HKMA B1/15C (A.R.T. Framework), and PCPD Model Data Protection rules.
             </p>
-            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <span class="text-[11px] font-mono text-emerald-400">
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 min-w-0 w-full">
+                <span class="text-[11px] font-mono text-emerald-400 text-center sm:text-left break-words">
                     ✓ 100% Local In-VPC Compilation • Zero Cloud Egress • Sub-10ms
                 </span>
-                <a href="../contact.html?ref=alt-2026-10-16&focus=SFC%20Type%204%2F9%20Research%20Copilot" class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0 shadow-md">
+                <a href="../contact.html?ref=alt-2026-10-16&focus=SFC%20Type%204%2F9%20Research%20Copilot" class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0 shadow-md w-full sm:w-auto text-center">
                     Get Your First Compilation Free →
                 </a>
             </div>
@@ -485,8 +488,8 @@ SneakPeek (Oct 2026)
                 </div>
 
                 <!-- Bottom Conversion Intake Strip -->
-                <div class="my-8 p-6 bg-navy-card/80 border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs shadow-lg">
-                    <div class="space-y-1 text-center sm:text-left">
+                <div class="my-8 p-6 bg-navy-card/80 border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs shadow-lg min-w-0 w-full">
+                    <div class="space-y-1 text-center sm:text-left min-w-0">
                         <div class="text-cyan-400 font-bold flex items-center justify-center sm:justify-start gap-2">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                             <span>Ready to deploy this architecture under Hong Kong supervision?</span>
@@ -495,7 +498,7 @@ SneakPeek (Oct 2026)
                             Request a complimentary first regulatory compilation for your team under bilateral Mutual NDA.
                         </p>
                     </div>
-                    <a href="../contact.html?ref=alt-2026-10-16&focus=SFC%20Type%204%2F9%20Research%20Copilot" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold shrink-0 shadow-md">
+                    <a href="../contact.html?ref=alt-2026-10-16&focus=SFC%20Type%204%2F9%20Research%20Copilot" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold shrink-0 shadow-md w-full sm:w-auto text-center">
                         Request Free Compilation →
                     </a>
                 </div>
@@ -542,15 +545,15 @@ SneakPeek (Oct 2026)
                 </section>
 
                 <!-- Next / Prev Article Navigation -->
-                <nav class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs">
+                <nav class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs w-full min-w-0">
                     
-                    <a href="./alt-2026-10-15.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 text-left group transition-colors">
+                    <a href="./alt-2026-10-15.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 min-w-0 max-w-full text-left group transition-colors">
                         <span class="text-slate-500 text-[10px] uppercase block mb-1">← Previous Briefing</span>
                         <span class="text-slate-200 group-hover:text-cyan-300 font-bold block truncate">Escaping the Lab: Inside the UK AISI Agent Breach</span>
                     </a>
 
                     
-                    <a href="./alt-2026-10-17.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 text-right group transition-colors">
+                    <a href="./alt-2026-10-17.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 min-w-0 max-w-full text-right group transition-colors">
                         <span class="text-slate-500 text-[10px] uppercase block mb-1">Next Briefing →</span>
                         <span class="text-slate-200 group-hover:text-cyan-300 font-bold block truncate">The Six-Day Zero-Day: How AI Hacked Chrome</span>
                     </a>
