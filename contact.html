@@ -448,6 +448,7 @@
           availableFocusAreas: [
               'SFC Type 4/9 Research Copilot',
               'HKMA A.R.T. Framework (B1/15C) Baseline',
+              'Negative Proof (Schedule 7 Exemption)',
               'CRM / Personal Data Drift Check (PCPD)',
               'Team-Lead Rapid Compilation',
               'Continuous Assurance Retainer'
@@ -464,9 +465,18 @@
 
           init() {
               const params = new URLSearchParams(window.location.search);
-              const ref = params.get('ref') || params.get('focus');
+              const ref = params.get('ref');
+              const focusParam = params.get('focus');
+              if (focusParam) {
+                  if (!this.availableFocusAreas.includes(focusParam)) {
+                      this.availableFocusAreas.splice(3, 0, focusParam);
+                  }
+                  this.formData.focus = [focusParam];
+              }
               if (ref) {
-                  this.formData.message = `Inquiry regarding Think Tank research: ${ref}. Requesting complimentary first PEARL compilation.`;
+                  this.formData.message = `Inquiry regarding Think Tank research dispatch: ${ref}. Requesting complimentary first PEARL compilation.`;
+              } else if (focusParam) {
+                  this.formData.message = `Inquiry regarding supervisory focus: ${focusParam}. Requesting complimentary first PEARL compilation.`;
               }
           },
 

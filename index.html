@@ -343,38 +343,48 @@
           showAllArchive: false,
 
           flagshipBrief: {
-              id: "alt-2026-11-08-hkma-art",
+              id: "alt-2026-hkma-art",
               date: "November 2026",
-              title: "HKMA Generative AI Sandbox & A.R.T. Framework: Technical Compliance Guide",
+              title: "HKMA Circular B1/15C & A.R.T. Framework: Technical Compliance Guide (Principles 1–9)",
               subtitle: "Deconstructing HKMA Circular B1/15C across Principles 1–9 (Accountability, Resiliency, Trust): operationalising 3LoD model risk governance, automated drift telemetry, and sovereign in-VPC containment before sandbox graduation.",
               audioUrl: "https://audio.ailingadvisory.com/episodes/2026-11-08_JFrog-AI-Software-Supply-Chain-Security-ML-BOM-Surge.m4a",
-              duration: 1319,
-              durationFormatted: "21:59",
-              wordCount: 2850,
-              readTimeMin: 12,
-              tags: ["HKMA B1/15C", "A.R.T. Framework", "GenAI Sandbox", "Model Risk Governance"],
+              duration: 1380,
+              durationFormatted: "23:00",
+              wordCount: 2950,
+              readTimeMin: 13,
+              tags: ["HKMA B1/15C", "A.R.T. Framework", "GenAI Sandbox", "Model Risk Management"],
               hasFullReport: true,
               summary: "The Hong Kong Monetary Authority (HKMA) Circular B1/15C establishes a comprehensive supervisory framework for Generative AI adoption across Authorised Institutions. This briefing details the architectural requirements for 3LoD governance, real-time drift telemetry, and sovereign containment.",
               sections: [
                   {
                       id: "sec-1",
-                      title: "Executive Supervisory Context & Circular B1/15C",
+                      title: "Executive Supervisory Context: Circular B1/15C & The GenAI Sandbox Graduation Gate",
                       content: "The Hong Kong Monetary Authority (HKMA), in collaboration with Cyberport, has inaugurated its Generative AI Sandbox alongside supervisory Circular B1/15C. The circular establishes nine binding supervisory principles grouped under Accountability, Resiliency, and Trust (A.R.T.). Authorised Institutions (AIs) deploying generative models must prove continuous algorithmic compliance before sandbox graduation."
                   },
                   {
                       id: "sec-2",
-                      title: "Accountability: 3LoD Model Risk Governance & Board Oversight",
+                      title: "Accountability (Principles 1–3): Three Lines of Defence (3LoD) & Board Governance",
                       content: "Principles 1–3 require explicit allocation of senior management accountability. Board and designated executive committees retain non-delegable oversight. First Line business owners, Second Line Model Risk Management (MRM), and Third Line Internal Audit must execute independent, verifiable sign-offs for all deployed AI architectures."
                   },
                   {
                       id: "sec-3",
-                      title: "Resiliency: Continuous Telemetry, Model Drift & In-VPC Containment",
+                      title: "Resiliency (Principles 4–6): Continuous Drift Telemetry, Cybersecurity & In-VPC Containment",
                       content: "Principles 4–6 mandate continuous operational and cyber resilience. Models must operate in sovereign, air-gapped or In-VPC environments with telemetry actively detecting concept drift, data shifts, and hallucination rates. Automated fail-safes and circuit breakers must contain degraded model behaviors without compromising core banking systems."
                   },
                   {
                       id: "sec-4",
-                      title: "Trust: Data Privacy, Synthetic Disclosures & Customer Recourse",
+                      title: "Trust (Principles 7–9): Data Privacy, Synthetic Disclosures & Customer Recourse",
                       content: "Principles 7–9 govern transparency, privacy, and customer ethics. Enforcing strict adherence to PCPD PDPO Cap. 486 requirements, Authorised Institutions must provide transparent synthetic AI disclosures and maintain accessible human-in-the-loop intervention channels for all customer-facing AI interactions."
+                  },
+                  {
+                      id: "sec-5",
+                      title: "Technical Architecture: Zero-Cloud-Egress In-VPC Deployment Model",
+                      content: "Private In-VPC containerization with zero public internet egress. Sub-10ms deterministic regulatory compilation replaces probabilistic prompt boundaries."
+                  },
+                  {
+                      id: "sec-6",
+                      title: "Sandbox Graduation Checklist & Supervisory Audit Matrix",
+                      content: "Structured 5-gate audit checklist verifying board governance, 2LoD MRM validation, continuous telemetry, zero-cloud egress, and PCPD PIA sign-off."
                   }
               ]
           },
@@ -511,6 +521,7 @@
           availableFocusAreas: [
               'SFC Type 4/9 Research Copilot',
               'HKMA A.R.T. Framework (B1/15C) Baseline',
+              'Negative Proof (Schedule 7 Exemption)',
               'CRM / Personal Data Drift Check (PCPD)',
               'Team-Lead Rapid Compilation',
               'Continuous Assurance Retainer'
@@ -538,9 +549,10 @@
 
           openContactWithFocus(focusTag) {
               if (focusTag) {
-                  if (!this.formData.focus.includes(focusTag)) {
-                      this.formData.focus = [focusTag];
+                  if (!this.availableFocusAreas.includes(focusTag)) {
+                      this.availableFocusAreas.splice(3, 0, focusTag);
                   }
+                  this.formData.focus = [focusTag];
               }
               this.contactModal = true;
           },
@@ -1691,7 +1703,7 @@
                             <span class="text-white/20">•</span>
                             <span class="text-slate-300">In-Depth Research Papers</span>
                             <span class="text-white/20">•</span>
-                            <span class="text-cyan-400">52 Dispatches in Vault</span>
+                            <span class="text-cyan-400">56 Dispatches in Vault</span>
                         </div>
                     </div>
 
@@ -1719,7 +1731,7 @@
                                 <div>
                                     <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug hover:text-cyan-300 transition-colors cursor-pointer"
                                         @click="openWhitepaper(flagshipBrief)">
-                                        HKMA Generative AI Sandbox &amp; A.R.T. Framework: Technical Compliance Guide
+                                        HKMA Circular B1/15C &amp; A.R.T. Framework: Technical Compliance Guide (Principles 1–9)
                                     </h3>
                                     <p class="text-xs sm:text-sm text-slate-300 font-light mt-3 leading-relaxed">
                                         Deconstructing HKMA Circular B1/15C across Principles 1–9 (Accountability, Resiliency, Trust): operationalising 3LoD model risk governance, automated drift telemetry, and sovereign in-VPC containment before sandbox graduation.
@@ -1768,7 +1780,7 @@
 
                             <!-- Flagship Actions -->
                             <div class="pt-5 mt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                                <a :href="'./dispatches/' + (flagshipBrief ? flagshipBrief.id : 'alt-2026-11-08') + '.html'" 
+                                <a href="./dispatches/alt-2026-hkma-art.html" 
                                    @click.prevent="openWhitepaper(flagshipBrief)" 
                                    class="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors">
                                     <span>Read Full Whitepaper</span>
@@ -1783,60 +1795,96 @@
                             </div>
                         </div>
 
-                        <!-- 2. Two Compact Research Pills (5 cols) -->
-                        <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+                        <!-- 2. Three Compact Research Pills (5 cols) -->
+                        <div class="lg:col-span-5 flex flex-col justify-between gap-4">
                             
-                            <!-- Research Pill 1: SFC Schedule 7 -->
-                            <div class="p-6 bg-navy-card/60 border border-white/10 hover:border-cyan-500/40 rounded-sm space-y-3 transition-all flex-1 flex flex-col justify-between group">
-                                <div class="space-y-2.5">
+                            <!-- Research Pill 1: SFC Schedule 7 Negative Proof -->
+                            <div class="p-5 bg-navy-card/60 border border-white/10 hover:border-cyan-500/40 rounded-sm space-y-2.5 transition-all flex flex-col justify-between group">
+                                <div class="space-y-1.5">
                                     <div class="flex items-center justify-between">
                                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-bold uppercase tracking-wider">
-                                            SFC 24EC55 &bull; Schedule 7
+                                            SFC Schedule 7 &bull; DMA
                                         </span>
-                                        <span class="text-[11px] font-mono text-emerald-400">Negative Proof</span>
+                                        <span class="text-[11px] font-mono text-emerald-400 font-bold">Negative Proof</span>
                                     </div>
-                                    <h4 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
-                                        SFC Algorithmic Trading &amp; Schedule 7 Boundary Proof
+                                    <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                                        <a href="./dispatches/alt-2026-sfc-schedule7.html">SFC Schedule 7: Negative Proof Exemption for Research Copilots</a>
                                     </h4>
-                                    <p class="text-xs text-slate-300 font-light leading-relaxed">
-                                        Mathematical negative proof establishing that internal research copilots fall outside algorithmic order routing and DMA requirements, eliminating unwarranted pre-trade containment obligations.
+                                    <p class="text-xs text-slate-300 font-light leading-relaxed line-clamp-2">
+                                        Mathematical negative proof establishing that internal research copilots fall outside algorithmic order routing and DMA requirements, eliminating Day-1 scope creep.
                                     </p>
                                 </div>
-                                <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
-                                    <button @click="openContactWithFocus('SFC Type 4/9 Research Copilot')" 
-                                            type="button"
-                                            class="text-cyan-400 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
-                                        <span>Operationalise in PEARL</span>
+                                <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                                    <a href="./dispatches/alt-2026-sfc-schedule7.html" class="text-cyan-400 hover:text-white transition-colors flex items-center gap-1">
+                                        <span>Read Paper</span>
                                         <span>→</span>
+                                    </a>
+                                    <button @click="openContactWithFocus('Negative Proof (Schedule 7 Exemption)')" 
+                                            type="button"
+                                            class="text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                                        <span>Operationalise</span>
+                                        <span class="text-cyan-400">↗</span>
                                     </button>
-                                    <span class="text-slate-500">Audit-Certified</span>
                                 </div>
                             </div>
 
-                            <!-- Research Pill 2: PCPD Data Drift -->
-                            <div class="p-6 bg-navy-card/60 border border-white/10 hover:border-cyan-500/40 rounded-sm space-y-3 transition-all flex-1 flex flex-col justify-between group">
-                                <div class="space-y-2.5">
+                            <!-- Research Pill 2: PCPD Data Drift & CRM Ingestion -->
+                            <div class="p-5 bg-navy-card/60 border border-white/10 hover:border-cyan-500/40 rounded-sm space-y-2.5 transition-all flex flex-col justify-between group">
+                                <div class="space-y-1.5">
                                     <div class="flex items-center justify-between">
                                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 font-bold uppercase tracking-wider">
                                             PCPD &bull; PDPO Cap. 486
                                         </span>
-                                        <span class="text-[11px] font-mono text-cyan-400">Day-2 Drift</span>
+                                        <span class="text-[11px] font-mono text-cyan-400 font-bold">Day-2 Drift</span>
                                     </div>
-                                    <h4 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
-                                        PCPD Data Drift, CRM Ingestion &amp; Cross-Border Guardrails
+                                    <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                                        <a href="./dispatches/alt-2026-pcpd-data-drift.html">PCPD Model Framework: Mitigating Day-2 CRM Data Drift</a>
                                     </h4>
-                                    <p class="text-xs text-slate-300 font-light leading-relaxed">
-                                        Detecting and mitigating Day-2 compliance drift when research agents connect to client CRM records. Enforces DPP 1–4 purpose limitation, automated PII tokenisation, and pre-launch Privacy Impact Assessments.
+                                    <p class="text-xs text-slate-300 font-light leading-relaxed line-clamp-2">
+                                        Detecting and mitigating Day-2 compliance drift when research agents connect to client CRM records. Enforces DPP 1–6 controls and sub-2ms PII tokenisation.
                                     </p>
                                 </div>
-                                <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                                <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                                    <a href="./dispatches/alt-2026-pcpd-data-drift.html" class="text-cyan-400 hover:text-white transition-colors flex items-center gap-1">
+                                        <span>Read Paper</span>
+                                        <span>→</span>
+                                    </a>
                                     <button @click="openContactWithFocus('CRM / Personal Data Drift Check (PCPD)')" 
                                             type="button"
-                                            class="text-cyan-400 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
-                                        <span>Operationalise in PEARL</span>
-                                        <span>→</span>
+                                            class="text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                                        <span>Operationalise</span>
+                                        <span class="text-cyan-400">↗</span>
                                     </button>
-                                    <span class="text-slate-500">Privacy By Design</span>
+                                </div>
+                            </div>
+
+                            <!-- Research Pill 3: SFC 24EC55 / 26EC32 GenAI & Cyber -->
+                            <div class="p-5 bg-navy-card/60 border border-white/10 hover:border-cyan-500/40 rounded-sm space-y-2.5 transition-all flex flex-col justify-between group">
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30 font-bold uppercase tracking-wider">
+                                            SFC 24EC55 &bull; 26EC32
+                                        </span>
+                                        <span class="text-[11px] font-mono text-purple-300 font-bold">MIC &amp; Cyber</span>
+                                    </div>
+                                    <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
+                                        <a href="./dispatches/alt-2026-sfc-genai-cyber.html">SFC GenAI Governance, MIC Accountability &amp; Cyber Guardrails</a>
+                                    </h4>
+                                    <p class="text-xs text-slate-300 font-light leading-relaxed line-clamp-2">
+                                        Manager-in-Charge non-delegable oversight, human-in-the-loop citation pinning, MNPI DLP boundary, and MCP adversarial cyber containment.
+                                    </p>
+                                </div>
+                                <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono">
+                                    <a href="./dispatches/alt-2026-sfc-genai-cyber.html" class="text-cyan-400 hover:text-white transition-colors flex items-center gap-1">
+                                        <span>Read Paper</span>
+                                        <span>→</span>
+                                    </a>
+                                    <button @click="openContactWithFocus('SFC Type 4/9 Research Copilot')" 
+                                            type="button"
+                                            class="text-slate-300 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
+                                        <span>Operationalise</span>
+                                        <span class="text-cyan-400">↗</span>
+                                    </button>
                                 </div>
                             </div>
 
@@ -1848,7 +1896,7 @@
                         <div class="space-y-1.5 text-center md:text-left">
                             <div class="inline-flex items-center gap-2 text-[11px] font-mono text-cyan-400 uppercase tracking-widest font-bold">
                                 <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                                <span>52+ Supervisory Dispatches &amp; Analytical Papers in Archive</span>
+                                <span>56+ Supervisory Dispatches &amp; Analytical Papers in Archive</span>
                             </div>
                             <h3 class="text-lg sm:text-xl font-bold text-white font-mono">
                                 Explore the Full AI LING Think Tank Intelligence Vault

@@ -5,7 +5,7 @@
  * 
  * Zero external dependencies (pure Node.js 20+).
  * Automatically reads intelligence.json and builds:
- * 1. /dispatches/[id].html (Static standalone SEO & LLM-crawlable whitepaper pages)
+ * 1. /dispatches/[id].html (Static standalone SEO & LLM-crawlable whitepaper pages with Answer-First formatting & Supervisory Bridge)
  * 2. /dispatches/index.html (Comprehensive archival research directory)
  * 3. /llms.txt (Emerging global standard for LLMs / AI Search engines like Perplexity, SearchGPT, Claude)
  * 4. /llms-full.txt (Full-context edition for deep-context AI models)
@@ -22,6 +22,10 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 
 const INTELLIGENCE_PATH = path.join(ROOT_DIR, 'intelligence.json');
+const DATA_INTELLIGENCE_PATH = path.join(ROOT_DIR, 'data', 'intelligence.json');
+const INTELLIGENCE_JS_PATH = path.join(ROOT_DIR, 'intelligence.js');
+const DATA_INTELLIGENCE_JS_PATH = path.join(ROOT_DIR, 'data', 'intelligence.js');
+
 const DISPATCHES_DIR = path.join(ROOT_DIR, 'dispatches');
 const SITEMAP_PATH = path.join(ROOT_DIR, 'sitemap.xml');
 const ROBOTS_PATH = path.join(ROOT_DIR, 'robots.txt');
@@ -38,6 +42,17 @@ const episodes = intelligence.episodes || [];
 
 console.log(`[SEO Engine] Loaded ${episodes.length} episodes from intelligence.json`);
 
+// Sync data files to ensure zero drift
+try {
+  fs.writeFileSync(DATA_INTELLIGENCE_PATH, JSON.stringify(intelligence, null, 2), 'utf8');
+  const jsData = `/* AI LING ADVISORY — Think Tank & Intelligence Static Dataset */\nwindow.PEARL_INTELLIGENCE = ${JSON.stringify(intelligence)};\n`;
+  fs.writeFileSync(INTELLIGENCE_JS_PATH, jsData, 'utf8');
+  fs.writeFileSync(DATA_INTELLIGENCE_JS_PATH, jsData, 'utf8');
+  console.log('[SEO Engine] Synchronized intelligence data across js and json targets.');
+} catch (syncErr) {
+  console.warn('[SEO Engine] Note on data sync:', syncErr.message);
+}
+
 function escapeHtml(str) {
   if (!str) return '';
   return str
@@ -53,6 +68,23 @@ function cleanText(str) {
   return str.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+function getPrimaryFocus(ep) {
+  const text = `${ep.id} ${ep.title} ${(ep.tags || []).join(' ')}`.toLowerCase();
+  if (text.includes('hkma') || text.includes('b1/15c') || text.includes('a.r.t.')) {
+    return 'HKMA A.R.T. Framework (B1/15C) Baseline';
+  }
+  if (text.includes('schedule 7') || text.includes('negative proof') || text.includes('algorithmic trading')) {
+    return 'Negative Proof (Schedule 7 Exemption)';
+  }
+  if (text.includes('pcpd') || text.includes('cap. 486') || text.includes('data drift') || text.includes('personal data') || text.includes('pii')) {
+    return 'CRM / Personal Data Drift Check (PCPD)';
+  }
+  if (text.includes('sfc') || text.includes('24ec55') || text.includes('26ec32') || text.includes('type 4') || text.includes('type 9')) {
+    return 'SFC Type 4/9 Research Copilot';
+  }
+  return 'SFC Type 4/9 Research Copilot';
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. GENERATE INDIVIDUAL DISPATCH PAGES (/dispatches/[id].html)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -61,8 +93,12 @@ episodes.forEach((ep, index) => {
   const prevEp = index < episodes.length - 1 ? episodes[index + 1] : null;
   const nextEp = index > 0 ? episodes[index - 1] : null;
 
+  const primaryFocus = getPrimaryFocus(ep);
+  const focusParam = encodeURIComponent(primaryFocus);
+
   const titleEsc = escapeHtml(ep.title);
   const subtitleEsc = escapeHtml(cleanText(ep.subtitle || ep.summary || ''));
+  const summaryEsc = escapeHtml(cleanText(ep.summary || ep.subtitle || ''));
   const dateStr = ep.date || '2026-10-25';
   const url = `https://www.ailingadvisory.com/dispatches/${ep.id}.html`;
   const tags = ep.tags || ['Agentic AI', 'Model Risk'];
@@ -111,44 +147,105 @@ episodes.forEach((ep, index) => {
             ${bodyHtml}
           </div>
         </section>`;
+
+      // Inject Hong Kong Supervisory Impact & Conversion Bridge directly after Section 1
+      if (sIdx === 0) {
+        sectionsHtml += `
+        <!-- Inline Hong Kong Supervisory Impact & Conversion Bridge -->
+        <div class="my-8 p-6 bg-gradient-to-r from-navy-card via-midnight to-navy-card border border-cyan-500/40 rounded-sm shadow-xl space-y-3">
+            <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>Hong Kong Supervisory Compliance Bridge</span>
+            </div>
+            <h4 class="text-white font-bold font-mono text-base">
+                Operationalising This Architecture Under Hong Kong Regulation
+            </h4>
+            <p class="text-xs text-slate-300 font-light leading-relaxed">
+                Deploying agentic pipelines, MCP firewalls, or LLM copilots in Hong Kong requires mandatory compliance across SFC Circulars 24EC55 &amp; 26EC32, HKMA B1/15C (A.R.T. Framework), and PCPD Model Data Protection rules.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span class="text-[11px] font-mono text-emerald-400">
+                    ✓ 100% Local In-VPC Compilation • Zero Cloud Egress • Sub-10ms
+                </span>
+                <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0 shadow-md">
+                    Get Your First Compilation Free →
+                </a>
+            </div>
+        </div>`;
+      }
     });
   }
 
+  // Generate FAQ entities for JSON-LD FAQPage Schema
+  const faqEntities = (ep.sections || []).slice(0, 6).map(sec => ({
+    "@type": "Question",
+    "name": sec.title.includes('?') ? sec.title : `What are the key compliance requirements regarding ${sec.title}?`,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": cleanText(sec.content || '').slice(0, 350) + (cleanText(sec.content || '').length > 350 ? '...' : '')
+    }
+  }));
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": ep.title,
-    "description": cleanText(ep.subtitle || ep.summary || ''),
-    "datePublished": ep.date,
-    "dateModified": ep.date,
-    "author": {
-      "@type": "Organization",
-      "name": "AI LING ADVISORY LIMITED",
-      "url": "https://www.ailingadvisory.com/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "AI LING ADVISORY LIMITED",
-      "url": "https://www.ailingadvisory.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.ailingadvisory.com/logo-full.svg"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": url
-    },
-    "keywords": tags.join(', '),
-    "wordCount": wordCount,
-    ...(audioUrl ? {
-      "audio": {
-        "@type": "AudioObject",
-        "contentUrl": audioUrl,
-        "duration": durationFormatted,
-        "name": `${ep.title} (Executive Audio Briefing)`
-      }
-    } : {})
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "headline": ep.title,
+        "description": cleanText(ep.subtitle || ep.summary || ''),
+        "datePublished": ep.date,
+        "dateModified": ep.date,
+        "author": {
+          "@type": "Organization",
+          "name": "AI LING ADVISORY LIMITED",
+          "url": "https://www.ailingadvisory.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI LING ADVISORY LIMITED",
+          "url": "https://www.ailingadvisory.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.ailingadvisory.com/logo-full.svg"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": url
+        },
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "Securities and Futures Commission",
+            "sameAs": "https://en.wikipedia.org/wiki/Securities_and_Futures_Commission"
+          },
+          {
+            "@type": "Thing",
+            "name": "Hong Kong Monetary Authority",
+            "sameAs": "https://en.wikipedia.org/wiki/Hong_Kong_Monetary_Authority"
+          },
+          {
+            "@type": "Thing",
+            "name": "Privacy Commissioner for Personal Data (Hong Kong)",
+            "sameAs": "https://en.wikipedia.org/wiki/Privacy_Commissioner_for_Personal_Data"
+          }
+        ],
+        "keywords": tags.join(', '),
+        "wordCount": wordCount,
+        ...(audioUrl ? {
+          "audio": {
+            "@type": "AudioObject",
+            "contentUrl": audioUrl,
+            "duration": durationFormatted,
+            "name": `${ep.title} (Executive Audio Briefing)`
+          }
+        } : {})
+      },
+      ...(faqEntities.length > 0 ? [{
+        "@type": "FAQPage",
+        "mainEntity": faqEntities
+      }] : [])
+    ]
   };
 
   const pageHtml = `<!DOCTYPE html>
@@ -259,7 +356,7 @@ episodes.forEach((ep, index) => {
             </nav>
 
             <div class="flex items-center gap-3">
-                <a href="../contact.html?ref=${ep.id}" class="btn-cyan px-5 py-2 text-xs font-mono uppercase tracking-wider rounded-sm shadow-md">
+                <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="btn-cyan px-5 py-2 text-xs font-mono uppercase tracking-wider rounded-sm shadow-md">
                     Get First Compilation Free
                 </a>
             </div>
@@ -301,7 +398,7 @@ episodes.forEach((ep, index) => {
                     <p class="text-[11px] text-slate-300 font-light leading-relaxed">
                         Complimentary regulatory compilation mapping SFC, HKMA, PCPD &amp; IA requirements to unified controls and negative proofs.
                     </p>
-                    <a href="../contact.html?ref=${ep.id}" class="w-full block text-center btn-cyan py-2.5 text-xs font-mono uppercase tracking-wider rounded-sm">
+                    <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="w-full block text-center btn-cyan py-2.5 text-xs font-mono uppercase tracking-wider rounded-sm">
                         Get First Compilation Free →
                     </a>
                 </div>
@@ -335,6 +432,22 @@ episodes.forEach((ep, index) => {
                     </div>
                 </header>
 
+                <!-- Answer-First Supervisory Executive Summary (Optimized for Google AI Overviews & PerplexityBot Citations) -->
+                <div class="my-6 p-6 bg-navy-card/90 border-l-4 border-cyan-400 border-y border-r border-white/10 rounded-sm space-y-3 font-sans shadow-xl">
+                    <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                        <span>Supervisory Executive Summary &amp; Definitive Citation Block</span>
+                    </div>
+                    <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+                        <strong>Executive Answer:</strong> ${summaryEsc}
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 text-xs font-mono text-slate-400 border-t border-white/10">
+                        <div><span class="text-slate-500">Statutory Framework:</span> <span class="text-cyan-300 font-bold">${escapeHtml(tags[0] || 'Hong Kong Financial AI')}</span></div>
+                        <div><span class="text-slate-500">Regulatory Focus:</span> <span class="text-white font-bold">${escapeHtml(primaryFocus)}</span></div>
+                        <div><span class="text-slate-500">Supervisory Status:</span> <span class="text-emerald-400 font-bold">In-VPC Compliant</span></div>
+                    </div>
+                </div>
+
                 ${audioUrl ? `
                 <!-- Audio Briefing Player -->
                 <div class="p-6 bg-navy-card/80 border border-cyan-500/30 rounded-sm space-y-3">
@@ -357,6 +470,22 @@ episodes.forEach((ep, index) => {
                 <!-- Body Sections -->
                 <div class="space-y-12">
                     ${sectionsHtml}
+                </div>
+
+                <!-- Bottom Conversion Intake Strip -->
+                <div class="my-8 p-6 bg-navy-card/80 border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs shadow-lg">
+                    <div class="space-y-1 text-center sm:text-left">
+                        <div class="text-cyan-400 font-bold flex items-center justify-center sm:justify-start gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span>Ready to deploy this architecture under Hong Kong supervision?</span>
+                        </div>
+                        <p class="text-slate-400 text-[11px] font-sans">
+                            Request a complimentary first regulatory compilation for your team under bilateral Mutual NDA.
+                        </p>
+                    </div>
+                    <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold shrink-0 shadow-md">
+                        Request Free Compilation →
+                    </a>
                 </div>
 
                 <!-- Institutional Lead Generation Conversion Card -->
@@ -391,7 +520,7 @@ episodes.forEach((ep, index) => {
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                        <a href="../contact.html?ref=${ep.id}" class="w-full sm:w-auto btn-cyan px-8 py-3.5 text-xs font-mono uppercase tracking-wider text-center">
+                        <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="w-full sm:w-auto btn-cyan px-8 py-3.5 text-xs font-mono uppercase tracking-wider text-center">
                             Get Your First Compilation Free →
                         </a>
                         <div class="text-xs font-mono text-slate-400 text-center sm:text-right">
@@ -609,7 +738,15 @@ console.log(`[SEO Engine] Successfully generated /dispatches/index.html archive 
 // 3. GENERATE /llms.txt (Standard for AI Search / LLM Crawlers)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const topWhitepapersList = episodes.slice(0, 15).map(e => 
+const cornerstoneIds = ['alt-2026-hkma-art', 'alt-2026-sfc-genai-cyber', 'alt-2026-sfc-schedule7', 'alt-2026-pcpd-data-drift'];
+const cornerstonePapers = episodes.filter(e => cornerstoneIds.includes(e.id));
+const nonCornerstonePapers = episodes.filter(e => !cornerstoneIds.includes(e.id));
+
+const cornerstoneList = cornerstonePapers.map(e => 
+  `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${cleanText(e.subtitle || e.summary || '')}`
+).join('\n');
+
+const topWhitepapersList = nonCornerstonePapers.slice(0, 12).map(e => 
   `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${cleanText(e.subtitle || e.summary || '').slice(0, 140)}...`
 ).join('\n');
 
@@ -657,6 +794,9 @@ const llmsTxtContent = `# AI LING ADVISORY — PEARL: Policy Engine for the AI R
    - Guideline on Enterprise Cybersecurity (GL20).
    - Guidelines GL14 and GL22.
 
+## Flagship Hong Kong Regulatory Cornerstone Whitepapers
+${cornerstoneList}
+
 ## Frontier AI Governance Think Tank (Research Vault)
 AI LING ADVISORY publishes daily executive briefings and deep research whitepapers for CROs, CISOs, and General Counsel. The full archive of ${episodes.length} whitepapers is accessible at https://www.ailingadvisory.com/dispatches/index.html.
 
@@ -695,22 +835,22 @@ fs.writeFileSync(LLMS_FULL_PATH, llmsFullTxtContent, 'utf8');
 console.log(`[SEO Engine] Successfully generated /llms-full.txt`);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. GENERATE EXPANDED /sitemap.xml (All Core Pages + 40+ Dispatches)
+// 5. GENERATE EXPANDED /sitemap.xml (All Core Pages + All Dispatches)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const coreUrls = [
-  { loc: 'https://www.ailingadvisory.com/', lastmod: '2026-10-25', changefreq: 'daily', priority: '1.0' },
-  { loc: 'https://www.ailingadvisory.com/about.html', lastmod: '2026-10-25', changefreq: 'monthly', priority: '0.7' },
-  { loc: 'https://www.ailingadvisory.com/contact.html', lastmod: '2026-10-25', changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://www.ailingadvisory.com/sample-executive-summary.html', lastmod: '2026-10-25', changefreq: 'weekly', priority: '0.9' },
-  { loc: 'https://www.ailingadvisory.com/dispatches/index.html', lastmod: episodes[0]?.date || '2026-10-25', changefreq: 'daily', priority: '0.9' },
+  { loc: 'https://www.ailingadvisory.com/', lastmod: '2026-11-08', changefreq: 'daily', priority: '1.0' },
+  { loc: 'https://www.ailingadvisory.com/about.html', lastmod: '2026-11-08', changefreq: 'monthly', priority: '0.7' },
+  { loc: 'https://www.ailingadvisory.com/contact.html', lastmod: '2026-11-08', changefreq: 'monthly', priority: '0.8' },
+  { loc: 'https://www.ailingadvisory.com/sample-executive-summary.html', lastmod: '2026-11-08', changefreq: 'weekly', priority: '0.9' },
+  { loc: 'https://www.ailingadvisory.com/dispatches/index.html', lastmod: episodes[0]?.date || '2026-11-08', changefreq: 'daily', priority: '0.9' },
 ];
 
 const dispatchUrls = episodes.map(ep => ({
   loc: `https://www.ailingadvisory.com/dispatches/${ep.id}.html`,
-  lastmod: ep.date || '2026-10-25',
+  lastmod: ep.date || '2026-11-08',
   changefreq: 'weekly',
-  priority: '0.8'
+  priority: cornerstoneIds.includes(ep.id) ? '0.9' : '0.8'
 }));
 
 const allUrls = [...coreUrls, ...dispatchUrls];
