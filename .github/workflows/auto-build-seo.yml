@@ -7,6 +7,7 @@ on:
     paths:
       - 'intelligence.json'
       - 'data/intelligence.json'
+      - 'data/cornerstone-dispatches.json'
       - 'scripts/build-seo-engine.mjs'
   workflow_dispatch:
 
@@ -34,7 +35,7 @@ jobs:
         run: |
           git config --global user.name "AILingAdvisory-SEO-Bot"
           git config --global user.email "bot@ailingadvisory.com"
-          git add dispatches/ sitemap.xml robots.txt llms.txt llms-full.txt
+          git add dispatches/ sitemap.xml robots.txt llms.txt llms-full.txt data/
           if git diff --staged --quiet; then
             echo "No SEO changes to commit."
           else

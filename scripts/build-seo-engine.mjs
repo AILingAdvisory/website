@@ -21,6 +21,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
 
+const CORNERSTONES_PATH = path.join(ROOT_DIR, 'data', 'cornerstone-dispatches.json');
 const INTELLIGENCE_PATH = path.join(ROOT_DIR, 'intelligence.json');
 const DATA_INTELLIGENCE_PATH = path.join(ROOT_DIR, 'data', 'intelligence.json');
 const INTELLIGENCE_JS_PATH = path.join(ROOT_DIR, 'intelligence.js');
@@ -35,20 +36,36 @@ const LLMS_FULL_PATH = path.join(ROOT_DIR, 'llms-full.txt');
 // Ensure output directories exist
 fs.mkdirSync(DISPATCHES_DIR, { recursive: true });
 
-// Load intelligence data
+// Load intelligence data & protected regulatory cornerstones
 const intelligenceRaw = fs.readFileSync(INTELLIGENCE_PATH, 'utf8');
 const intelligence = JSON.parse(intelligenceRaw);
-const episodes = intelligence.episodes || [];
 
-console.log(`[SEO Engine] Loaded ${episodes.length} episodes from intelligence.json`);
+const CORNERSTONE_IDS = ['alt-2026-hkma-art', 'alt-2026-sfc-genai-cyber', 'alt-2026-sfc-schedule7', 'alt-2026-pcpd-data-drift'];
+const cornerstones = fs.existsSync(CORNERSTONES_PATH) 
+  ? JSON.parse(fs.readFileSync(CORNERSTONES_PATH, 'utf8')) 
+  : [];
+const dailyEpisodes = intelligence.episodes || [];
+
+// Deterministically merge: cornerstones are ALWAYS pinned to the top of catalogue, sitemap & llms.txt
+const episodes = [
+  ...cornerstones,
+  ...dailyEpisodes.filter(e => !cornerstones.some(c => c.id === e.id))
+];
+
+console.log(`[SEO Engine] Loaded ${cornerstones.length} protected cornerstones and ${dailyEpisodes.length} daily episodes (${episodes.length} total).`);
+
+const mergedIntelligence = {
+  ...intelligence,
+  episodes
+};
 
 // Sync data files to ensure zero drift
 try {
-  fs.writeFileSync(DATA_INTELLIGENCE_PATH, JSON.stringify(intelligence, null, 2), 'utf8');
-  const jsData = `/* AI LING ADVISORY — Think Tank & Intelligence Static Dataset */\nwindow.PEARL_INTELLIGENCE = ${JSON.stringify(intelligence)};\n`;
+  fs.writeFileSync(DATA_INTELLIGENCE_PATH, JSON.stringify(mergedIntelligence, null, 2), 'utf8');
+  const jsData = `/* AI LING ADVISORY — Think Tank & Intelligence Static Dataset */\nwindow.PEARL_INTELLIGENCE = ${JSON.stringify(mergedIntelligence)};\n`;
   fs.writeFileSync(INTELLIGENCE_JS_PATH, jsData, 'utf8');
   fs.writeFileSync(DATA_INTELLIGENCE_JS_PATH, jsData, 'utf8');
-  console.log('[SEO Engine] Synchronized intelligence data across js and json targets.');
+  console.log('[SEO Engine] Synchronized merged intelligence data across js and json targets.');
 } catch (syncErr) {
   console.warn('[SEO Engine] Note on data sync:', syncErr.message);
 }
@@ -152,7 +169,7 @@ episodes.forEach((ep, index) => {
       if (sIdx === 0) {
         sectionsHtml += `
         <!-- Inline Hong Kong Supervisory Impact & Conversion Bridge -->
-        <div class="my-8 p-6 bg-gradient-to-r from-navy-card via-midnight to-navy-card border border-cyan-500/40 rounded-sm shadow-xl space-y-3">
+        <div class="my-8 p-6 bg-gradient-to-r from-navy-card via-midnight to-navy-card border border-cyan-500/40 rounded-sm shadow-xl space-y-4">
             <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold">
                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                 <span>Hong Kong Supervisory Compliance Bridge</span>
@@ -169,6 +186,13 @@ episodes.forEach((ep, index) => {
                 </span>
                 <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0 shadow-md w-full sm:w-auto text-center">
                     Get Your First Compilation Free →
+                </a>
+            </div>
+            <!-- Tiered Conversion Strip (Low-Friction Secondary Asset Preview) -->
+            <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                <span class="text-slate-300 text-[11px]">Need immediate sign-off material for your Risk Committee?</span>
+                <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 underline font-bold shrink-0 transition-colors">
+                    Inspect 1-Page Board-Ready Memo Sample →
                 </a>
             </div>
         </div>`;
@@ -435,14 +459,14 @@ episodes.forEach((ep, index) => {
                     </div>
                 </header>
 
-                <!-- Answer-First Supervisory Executive Summary (Optimized for Google AI Overviews & PerplexityBot Citations) -->
-                <div class="my-6 p-6 bg-navy-card/90 border-l-4 border-cyan-400 border-y border-r border-white/10 rounded-sm space-y-3 font-sans shadow-xl">
-                    <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold">
-                        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                        <span>Supervisory Executive Summary &amp; Definitive Citation Block</span>
+                <!-- Answer-First Supervisory Executive Summary (Statutory Ground Truth) — GEO/AEO Optimization -->
+                <div class="my-6 p-5 sm:p-6 bg-cyan-950/40 border-l-4 border-cyan-400 border-y border-r border-white/10 rounded-r-sm space-y-3 font-sans shadow-xl">
+                    <div class="flex items-center gap-2 text-cyan-300 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">
+                        <span>⚡</span>
+                        <span>Supervisory Executive Summary (Statutory Ground Truth)</span>
                     </div>
-                    <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
-                        <strong>Executive Answer:</strong> ${summaryEsc}
+                    <p class="text-xs sm:text-sm md:text-base text-slate-200 leading-relaxed font-sans font-normal">
+                        ${summaryEsc}
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 text-xs font-mono text-slate-400 border-t border-white/10">
                         <div><span class="text-slate-500">Statutory Framework:</span> <span class="text-cyan-300 font-bold">${escapeHtml(tags[0] || 'Hong Kong Financial AI')}</span></div>
@@ -473,6 +497,14 @@ episodes.forEach((ep, index) => {
                 <!-- Body Sections -->
                 <div class="space-y-12">
                     ${sectionsHtml}
+                </div>
+
+                <!-- Tiered Conversion Strip (Low-Friction Secondary Asset Preview) -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-white/[0.03] border border-white/10 rounded-sm text-xs font-mono">
+                    <span class="text-slate-300">Need immediate sign-off material for your Risk Committee?</span>
+                    <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 underline font-bold shrink-0 transition-colors">
+                        Inspect 1-Page Board-Ready Memo Sample →
+                    </a>
                 </div>
 
                 <!-- Bottom Conversion Intake Strip -->
@@ -523,9 +555,14 @@ episodes.forEach((ep, index) => {
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                        <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="w-full sm:w-auto btn-cyan px-8 py-3.5 text-xs font-mono uppercase tracking-wider text-center">
-                            Get Your First Compilation Free →
-                        </a>
+                        <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                            <a href="../contact.html?ref=${ep.id}&focus=${focusParam}" class="w-full sm:w-auto btn-cyan px-8 py-3.5 text-xs font-mono uppercase tracking-wider text-center">
+                                Get Your First Compilation Free →
+                            </a>
+                            <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono underline font-bold px-2 py-1 text-center transition-colors">
+                                Inspect 1-Page Board-Ready Memo Sample →
+                            </a>
+                        </div>
                         <div class="text-xs font-mono text-slate-400 text-center sm:text-right">
                             Direct Executive Desk: <a href="mailto:contact@AILingAdvisory.com" class="text-cyan-400 hover:underline">contact@AILingAdvisory.com</a>
                         </div>
@@ -580,11 +617,21 @@ const directoryItemsHtml = episodes.map((ep, i) => {
   const titleEsc = escapeHtml(ep.title);
   const subtitleEsc = escapeHtml(cleanText(ep.subtitle || ep.summary || ''));
   const tags = (ep.tags || []).slice(0, 3);
+  const isCornerstone = CORNERSTONE_IDS.includes(ep.id);
+  const badgeHtml = isCornerstone ? `
+    <span class="px-2 py-0.5 bg-cyan-950/80 border border-cyan-400/50 rounded text-cyan-300 text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+      Cornerstone Whitepaper
+    </span>` : '';
+
   return `
-    <article class="p-6 bg-navy-card/80 border border-white/10 hover:border-cyan-500/50 rounded-sm transition-all group flex flex-col justify-between">
+    <article class="p-6 bg-navy-card/80 border ${isCornerstone ? 'border-cyan-500/40 shadow-lg shadow-cyan-950/30' : 'border-white/10'} hover:border-cyan-500/60 rounded-sm transition-all group flex flex-col justify-between">
       <div class="space-y-3">
         <div class="flex items-center justify-between text-xs font-mono">
-          <span class="text-cyan-400 font-bold">${ep.date}</span>
+          <div class="flex items-center gap-2">
+            <span class="text-cyan-400 font-bold">${ep.date}</span>
+            ${badgeHtml}
+          </div>
           <span class="text-slate-400">${ep.durationFormatted || '25:00'}</span>
         </div>
         <h2 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
@@ -741,7 +788,7 @@ console.log(`[SEO Engine] Successfully generated /dispatches/index.html archive 
 // 3. GENERATE /llms.txt (Standard for AI Search / LLM Crawlers)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const cornerstoneIds = ['alt-2026-hkma-art', 'alt-2026-sfc-genai-cyber', 'alt-2026-sfc-schedule7', 'alt-2026-pcpd-data-drift'];
+const cornerstoneIds = CORNERSTONE_IDS;
 const cornerstonePapers = episodes.filter(e => cornerstoneIds.includes(e.id));
 const nonCornerstonePapers = episodes.filter(e => !cornerstoneIds.includes(e.id));
 
