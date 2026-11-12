@@ -37,8 +37,19 @@ const LLMS_FULL_PATH = path.join(ROOT_DIR, 'llms-full.txt');
 fs.mkdirSync(DISPATCHES_DIR, { recursive: true });
 
 // Load intelligence data & protected regulatory cornerstones
-const intelligenceRaw = fs.readFileSync(INTELLIGENCE_PATH, 'utf8');
-const intelligence = JSON.parse(intelligenceRaw);
+let intelligence = { series: "AI LING Frontier AI Governance Think Tank", episodes: [] };
+try {
+  if (fs.existsSync(INTELLIGENCE_PATH)) {
+    intelligence = JSON.parse(fs.readFileSync(INTELLIGENCE_PATH, 'utf8'));
+  }
+} catch (parseErr) {
+  console.warn('[SEO Engine] Warning: Failed to parse root intelligence.json, attempting fallback:', parseErr.message);
+  if (fs.existsSync(DATA_INTELLIGENCE_PATH)) {
+    try {
+      intelligence = JSON.parse(fs.readFileSync(DATA_INTELLIGENCE_PATH, 'utf8'));
+    } catch (_) {}
+  }
+}
 
 const CORNERSTONE_IDS = ['alt-2026-hkma-art', 'alt-2026-sfc-genai-cyber', 'alt-2026-sfc-schedule7', 'alt-2026-pcpd-data-drift'];
 const cornerstones = fs.existsSync(CORNERSTONES_PATH) 
@@ -56,6 +67,7 @@ console.log(`[SEO Engine] Loaded ${cornerstones.length} protected cornerstones a
 
 const mergedIntelligence = {
   ...intelligence,
+  totalEpisodes: episodes.length,
   episodes
 };
 
@@ -82,7 +94,36 @@ function escapeHtml(str) {
 
 function cleanText(str) {
   if (!str) return '';
-  return str.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  return str
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[\x27\x22\u2018\u201c]?\s*深度洞见\s*·\s*艾聆呈献\s*AILingAdvisory\.com\s*[\x27\x22\u2019\u201d]?/gi, '')
+    .replace(/Overview\s*(&amp;|&)\s*The[^\n\r.]+\.?/gi, '')
+    .replace(/[\r\n]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getExecutiveSummary(ep) {
+  if (ep.summary && ep.summary.trim()) {
+    return cleanText(ep.summary);
+  }
+  const sections = ep.sections || [];
+  for (const sec of sections) {
+    const rawContent = sec.content || '';
+    const lines = rawContent.split('\n').map(l => cleanText(l)).filter(l =>
+      l.length > 70 &&
+      !l.includes('______') &&
+      !/^[A-Za-z\s/&,–-]{1,40}:/.test(l) &&
+      !l.startsWith('Executive Summary')
+    );
+    if (lines.length > 0) {
+      const prose = lines.find(l => l.length > 90 && l.endsWith('.')) || lines[0];
+      if (prose && prose.length > 60) {
+        return prose;
+      }
+    }
+  }
+  return cleanText(ep.subtitle || '').replace(/\.{3,}$/, '').trim();
 }
 
 function getPrimaryFocus(ep) {
@@ -99,7 +140,7 @@ function getPrimaryFocus(ep) {
   if (text.includes('sfc') || text.includes('24ec55') || text.includes('26ec32') || text.includes('type 4') || text.includes('type 9')) {
     return 'SFC Type 4/9 Research Copilot';
   }
-  return 'SFC Type 4/9 Research Copilot';
+  return 'Enterprise Financial AI Governance & Containment Baseline';
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -115,7 +156,7 @@ episodes.forEach((ep, index) => {
 
   const titleEsc = escapeHtml(ep.title);
   const subtitleEsc = escapeHtml(cleanText(ep.subtitle || ep.summary || ''));
-  const summaryEsc = escapeHtml(cleanText(ep.summary || ep.subtitle || ''));
+  const summaryEsc = escapeHtml(getExecutiveSummary(ep));
   const dateStr = ep.date || '2026-10-25';
   const url = `https://www.ailingadvisory.com/dispatches/${ep.id}.html`;
   const tags = ep.tags || ['Agentic AI', 'Model Risk'];
