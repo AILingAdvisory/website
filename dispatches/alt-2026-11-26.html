@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Writes the Shield: Inside Cisco-OpenAI Shirudo | AI LING Think Tank</title>
+    <meta name="description" content="Welcome to this strategic cybersecurity executive briefing examining a groundbreaking open-source collaboration between Cisco and OpenAI: Shirudo, a new runtime sec...">
+    <meta name="keywords" content="Agentic Security, Cyber Resilience, Financial AI Compliance, Model Risk Management Hong Kong, SFC GenAI, HKMA B1/15C ART Framework, AI LING ADVISORY">
+    <link rel="canonical" href="https://www.ailingadvisory.com/dispatches/alt-2026-11-26.html">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ailingadvisory.com/dispatches/alt-2026-11-26.html">
+    <meta property="og:title" content="AI Writes the Shield: Inside Cisco-OpenAI Shirudo | AI LING Think Tank">
+    <meta property="og:description" content="Welcome to this strategic cybersecurity executive briefing examining a groundbreaking open-source collaboration between Cisco and OpenAI: Shirudo, a new runtime sec...">
+    <meta property="og:image" content="https://www.ailingadvisory.com/logo-full.svg">
+    <meta property="article:published_time" content="2026-11-26">
+    <meta property="article:author" content="AI LING ADVISORY LIMITED">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.ailingadvisory.com/dispatches/alt-2026-11-26.html">
+    <meta name="twitter:title" content="AI Writes the Shield: Inside Cisco-OpenAI Shirudo | AI LING Think Tank">
+    <meta name="twitter:description" content="Welcome to this strategic cybersecurity executive briefing examining a groundbreaking open-source collaboration between Cisco and OpenAI: Shirudo, a new runtime sec...">
+    <meta name="twitter:image" content="https://www.ailingadvisory.com/logo-full.svg">
+
+    <!-- JSON-LD Structured Data for Search Engines & LLMs -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "headline": "AI Writes the Shield: Inside Cisco-OpenAI Shirudo",
+      "description": "Welcome to this strategic cybersecurity executive briefing examining a groundbreaking open-source collaboration between Cisco and OpenAI: Shirudo, a new runtime sec...",
+      "datePublished": "2026-11-26",
+      "dateModified": "2026-11-26",
+      "author": {
+        "@type": "Organization",
+        "name": "AI LING ADVISORY LIMITED",
+        "url": "https://www.ailingadvisory.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AI LING ADVISORY LIMITED",
+        "url": "https://www.ailingadvisory.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.ailingadvisory.com/logo-full.svg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.ailingadvisory.com/dispatches/alt-2026-11-26.html"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Securities and Futures Commission",
+          "sameAs": "https://en.wikipedia.org/wiki/Securities_and_Futures_Commission"
+        },
+        {
+          "@type": "Thing",
+          "name": "Hong Kong Monetary Authority",
+          "sameAs": "https://en.wikipedia.org/wiki/Hong_Kong_Monetary_Authority"
+        },
+        {
+          "@type": "Thing",
+          "name": "Privacy Commissioner for Personal Data (Hong Kong)",
+          "sameAs": "https://en.wikipedia.org/wiki/Privacy_Commissioner_for_Personal_Data"
+        }
+      ],
+      "keywords": "Agentic Security, Cyber Resilience",
+      "wordCount": 1772,
+      "audio": {
+        "@type": "AudioObject",
+        "contentUrl": "https://audio.ailingadvisory.com/episodes/2026-11-26_Cisco-OpenAI-Shirudo-AI-Security-Shields-eBPF.m4a",
+        "duration": "22:36",
+        "name": "AI Writes the Shield: Inside Cisco-OpenAI Shirudo (Executive Audio Briefing)"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding Executive Overview?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI Writes the Shield Before the Patch: Inside Cisco and OpenAI's Shirudo, Signed eBPF Runtimes, and Production Change Governance ________________ Publication Date: November 26, 2026 Classification: Enterprise Strategic Intelligence / AI-Assisted Runtime Defense, Linux Kernel eBPF & Production Change Governance Primary Corporate Focals: Cisco System..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding The Asymmetric Speed of AI Discovery vs. Enterprise Maintenance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In late 2026, frontier cyber models from OpenAI (GPT-6 Cyber), Google DeepMind (Gemini 4 Carbon), and Cohere (Cohere Cyber) routinely uncover high-severity zero-days in days rather than months, while autonomous exploitation frameworks weaponize reachable flaws in as little as 11 minutes. Against this backdrop, traditional enterprise patch managemen..."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding Agentic Shield Synthesis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI agents ingest a vulnerability disclosure + reproducer and generate targeted eBPF or Java bytecode guards. Blocks exploitation of one specific flaw (e.g., Java4Shell Base64 decoder on live Elasticsearch) without restarting the process. Addresses cataloged disclosures rather than uncataloged zero-day behaviors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding Registry Pull & Post-Quantum Signing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shields are signed with post-quantum cryptographic keys and pulled from a verified registry rather than pushed by local agents. Proves exact authorship and prevents tampering between shield generation and host enforcement. Signing proves provenance and integrity, not functional correctness across customer workloads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding Human Operator Approval Gate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shields remain staged until pre-enforcement tests pass and a human operator explicitly approves activation. Addresses the 54% CISO concern over opaque autonomous changes to production infrastructure. Proving an exploit is blocked is easy; proving zero legitimate traffic breaks remains hard."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the key compliance requirements regarding TPM 2.0 Hardware Attestation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every shield load and state transition is recorded inside a Trusted Platform Module (TPM 2.0) register. Provides tamper-evident offline audit logs for post-incident forensics and regulatory compliance. Requires TPM 2.0 hardware and a patched Linux kernel across target hosts."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#070b14',
+                        'navy-card': '#0c1322',
+                        cyan: { 400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2' },
+                        emerald: { 400: '#34d399', 500: '#10b981' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #070b14; color: #F8FAFC; -webkit-font-smoothing: antialiased; }
+        .bg-regtech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .btn-cyan {
+            background-color: #06b6d4;
+            color: #070b14;
+            font-weight: 700;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-cyan:hover {
+            background-color: #22d3ee;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.3);
+        }
+        html, body { overflow-x: hidden; }
+        .min-w-0 { min-width: 0 !important; }
+        .max-w-full { max-width: 100% !important; }
+    </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-midnight overflow-x-hidden bg-regtech-grid font-sans text-slate-100">
+
+    <!-- Global Navigation Header -->
+    <header class="h-20 flex items-center border-b border-white/5 bg-midnight/90 backdrop-blur-md sticky top-0 z-[100]">
+        <div class="max-w-[90rem] mx-auto w-full px-6 md:px-12 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <svg class="w-8 h-8 rounded-sm shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform flex-shrink-0" viewBox="0 0 256 256" fill="none">
+                    <rect width="256" height="256" rx="56" fill="#070b14" />
+                    <rect width="254" height="254" x="1" y="1" rx="55" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+                    <path d="M 128 42 L 52 204 L 144 204" stroke="#06b6d4" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M 136 56 L 204 204" stroke="#ffffff" stroke-width="28" stroke-linecap="round" />
+                </svg>
+                <div>
+                    <span class="text-sm font-black tracking-[0.2em] uppercase text-white">
+                        AI LING <span class="text-cyan-400 font-bold">ADVISORY</span>
+                    </span>
+                    <span class="text-[10px] text-slate-400 block font-mono -mt-1 tracking-wider uppercase">
+                        THINK TANK INTELLIGENCE
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-[11px] font-mono tracking-widest uppercase text-slate-300">
+                <a href="../index.html#dilemma" class="hover:text-cyan-400 transition-colors">The Dilemma</a>
+                <a href="../index.html#deliverables" class="hover:text-cyan-400 transition-colors">Deliverables</a>
+                <a href="../index.html#comparison" class="hover:text-cyan-400 transition-colors">Comparison</a>
+                <a href="./index.html" class="text-cyan-400 font-bold">Think Tank Vault</a>
+                <a href="../about.html" class="hover:text-cyan-400 transition-colors">About</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="../contact.html?ref=alt-2026-11-26&focus=Enterprise%20Financial%20AI%20Governance%20%26%20Containment%20Baseline" class="btn-cyan px-5 py-2 text-xs font-mono uppercase tracking-wider rounded-sm shadow-md">
+                    Get First Compilation Free
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-6 md:px-12 py-12">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 flex items-center gap-2 text-xs font-mono text-slate-400">
+            <a href="../index.html" class="hover:text-white transition-colors">Home</a>
+            <span>/</span>
+            <a href="./index.html" class="hover:text-white transition-colors">Think Tank</a>
+            <span>/</span>
+            <span class="text-cyan-400">2026-11-26</span>
+        </nav>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-start min-w-0 w-full">
+            <!-- Left Column: Table of Contents & Sticky Intake Widget (3 cols) -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-28 space-y-6">
+                <!-- TOC -->
+                <div class="p-5 bg-navy-card/60 border border-white/10 rounded-sm space-y-3 font-mono text-xs">
+                    <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold border-b border-white/10 pb-2">
+                        Whitepaper Outline
+                    </div>
+                    <ul class="space-y-1 max-h-80 overflow-y-auto pr-1">
+                        
+        <li>
+          <a href="#sec-1" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            1. Executive Overview
+          </a>
+        </li>
+        <li>
+          <a href="#sec-2" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            2. The Asymmetric Speed of AI Discovery vs. Enterprise Maintenance
+          </a>
+        </li>
+        <li>
+          <a href="#sec-3" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            3. Agentic Shield Synthesis
+          </a>
+        </li>
+        <li>
+          <a href="#sec-4" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            4. Registry Pull &amp; Post-Quantum Signing
+          </a>
+        </li>
+        <li>
+          <a href="#sec-5" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            5. Human Operator Approval Gate
+          </a>
+        </li>
+        <li>
+          <a href="#sec-6" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            6. TPM 2.0 Hardware Attestation
+          </a>
+        </li>
+        <li>
+          <a href="#sec-7" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            7. Scheduled Shield Retirement
+          </a>
+        </li>
+        <li>
+          <a href="#sec-8" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            8. Validated Proof Points: Java4Shell &amp; PHP
+          </a>
+        </li>
+        <li>
+          <a href="#sec-9" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            9. The CrowdStrike July 2024 Lesson: &quot;Blocking Exploit&quot; vs. &quot;Breaking Nothing&quot;
+          </a>
+        </li>
+        <li>
+          <a href="#sec-10" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            10. Signed eBPF and the Battle for Kernel Control
+          </a>
+        </li>
+        <li>
+          <a href="#sec-11" class="hover:text-cyan-400 block py-1 border-l-2 border-transparent hover:border-cyan-400 pl-2 transition-colors truncate text-slate-400 text-xs font-mono">
+            11. Disclosures With Shields Attached: A New Supply Chain
+          </a>
+        </li>
+                    </ul>
+                </div>
+
+                <!-- Sticky Lead Capture Mini Card -->
+                <div class="p-5 bg-gradient-to-br from-navy-card to-midnight border border-cyan-500/30 rounded-sm space-y-3">
+                    <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider block">
+                        Enterprise Pilot
+                    </span>
+                    <h3 class="text-sm font-bold text-white font-mono leading-snug">
+                        Operationalise this architecture in your stack.
+                    </h3>
+                    <p class="text-[11px] text-slate-300 font-light leading-relaxed">
+                        Complimentary regulatory compilation mapping SFC, HKMA, PCPD &amp; IA requirements to unified controls and negative proofs.
+                    </p>
+                    <a href="../contact.html?ref=alt-2026-11-26&focus=Enterprise%20Financial%20AI%20Governance%20%26%20Containment%20Baseline" class="w-full block text-center btn-cyan py-2.5 text-xs font-mono uppercase tracking-wider rounded-sm">
+                        Get First Compilation Free →
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content Area (9 cols) -->
+            <article class="lg:col-span-9 space-y-8 min-w-0 w-full">
+                <!-- Article Header -->
+                <header class="space-y-4 border-b border-white/10 pb-8">
+                    <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+                        <span class="px-2.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-bold">
+                            2026-11-26
+                        </span>
+                        <span class="text-slate-400">•</span>
+                        <span class="text-slate-300">22:36 Audio Briefing</span>
+                        <span class="text-slate-400">•</span>
+                        <span class="text-slate-300">7 Min Read (1772 words)</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        AI Writes the Shield: Inside Cisco-OpenAI Shirudo
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-cyan-300/90 font-light leading-relaxed font-sans">
+                        Welcome to this strategic cybersecurity executive briefing examining a groundbreaking open-source collaboration between Cisco and OpenAI: Shirudo, a new runtime sec...
+                    </p>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Agentic Security</span><span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">Cyber Resilience</span>
+                    </div>
+                </header>
+
+                <!-- Answer-First Supervisory Executive Summary (Statutory Ground Truth) — GEO/AEO Optimization -->
+                <div class="my-6 p-5 sm:p-6 bg-cyan-950/40 border-l-4 border-cyan-400 border-y border-r border-white/10 rounded-r-sm space-y-3 font-sans shadow-xl">
+                    <div class="flex items-center gap-2 text-cyan-300 font-mono text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">
+                        <span>⚡</span>
+                        <span>Supervisory Executive Summary (Statutory Ground Truth)</span>
+                    </div>
+                    <p class="text-xs sm:text-sm md:text-base text-slate-200 leading-relaxed font-sans font-normal">
+                        In late November 2026, networking and security giant Cisco Systems and frontier AI lab OpenAI jointly launched Shirudo (Japanese for &quot;shield&quot;), an open-source, BSD-licensed runtime security project enabling autonomous AI agents to write, test, and deploy signed, temporary security shields that block active exploitation on running Linux workloads before a formal software patch lands—without restarting production services. Analyzed in depth by The Futurum Group, Shirudo represents an agent-oriented rewrite of Tetragon, the extended Berkeley Packet Filter (eBPF) runtime security engine originally open-sourced by Isovalent (acquired by Cisco) in 2022.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 text-xs font-mono text-slate-400 border-t border-white/10">
+                        <div><span class="text-slate-500">Statutory Framework:</span> <span class="text-cyan-300 font-bold">Agentic Security</span></div>
+                        <div><span class="text-slate-500">Regulatory Focus:</span> <span class="text-white font-bold">Enterprise Financial AI Governance &amp; Containment Baseline</span></div>
+                        <div><span class="text-slate-500">Supervisory Status:</span> <span class="text-emerald-400 font-bold">In-VPC Compliant</span></div>
+                    </div>
+                </div>
+
+                
+                <!-- Audio Briefing Player -->
+                <div class="p-6 bg-navy-card/80 border border-cyan-500/30 rounded-sm space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono">
+                        <span class="text-cyan-400 font-bold flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            EXECUTIVE AUDIO BRIEFING (22:36)
+                        </span>
+                        <a href="https://audio.ailingadvisory.com/episodes/2026-11-26_Cisco-OpenAI-Shirudo-AI-Security-Shields-eBPF.m4a" download class="text-slate-400 hover:text-white transition-colors">
+                            Download Audio ⬇
+                        </a>
+                    </div>
+                    <audio controls class="w-full accent-cyan-400" preload="metadata">
+                        <source src="https://audio.ailingadvisory.com/episodes/2026-11-26_Cisco-OpenAI-Shirudo-AI-Security-Shields-eBPF.m4a" type="audio/mp4">
+                        <source src="https://audio.ailingadvisory.com/episodes/2026-11-26_Cisco-OpenAI-Shirudo-AI-Security-Shields-eBPF.m4a" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
+                <!-- Body Sections -->
+                <div class="space-y-12">
+                    
+        <section id="sec-1" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">01</span>
+            <span>Executive Overview</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">AI Writes the Shield Before the Patch: Inside Cisco and OpenAI's Shirudo, Signed eBPF Runtimes, and Production Change Governance
+________________
+Publication Date: November 26, 2026
+Classification: Enterprise Strategic Intelligence / AI-Assisted Runtime Defense, Linux Kernel eBPF & Production Change Governance
+Primary Corporate Focals: Cisco Systems, Inc. (NASDAQ: CSCO), OpenAI, Inc.
+Open-Source Project: Shirudo (BSD-Licensed Pre-Release Agentic Runtime Rewrite of Tetragon)
+Primary Analysis Source: The Futurum Group — Cisco and OpenAI's Shirudo Lets AI Write the Shield Before the Patch (November 24, 2026)
+Key Technology Standards: Linux eBPF, Java Bytecode Hot-Shielding, Post-Quantum Cryptographic Signing, TPM 2.0 Attestation, DORA, EU NIS2, NIST SSDF
+Executive Summary
+________________
+In late November 2026, networking and security giant Cisco Systems and frontier AI lab OpenAI jointly launched Shirudo (Japanese for "shield"), an open-source, BSD-licensed runtime security project enabling autonomous AI agents to write, test, and deploy signed, temporary security shields that block active exploitation on running Linux workloads before a formal software patch lands—without restarting production services. Analyzed in depth by The Futurum Group, Shirudo represents an agent-oriented rewrite of Tetragon, the extended Berkeley Packet Filter (eBPF) runtime security engine originally open-sourced by Isovalent (acquired by Cisco) in 2022.
+The strategic catalyst behind Shirudo is the widening gap between machine-speed vulnerability discovery and human-speed enterprise patching. Earlier in November 2026, AI-assisted researchers at Calif uncovered a critical remote code execution flaw in OpenJDK ("Java4Shell") using an OpenAI cyber model, prompting same-day upstream patching. Yet for enterprise infrastructure teams, shipping the upstream fix is only the starting line: thousands of internal Jira, Jenkins, Keycloak, and Elasticsearch servers running affected Java runtimes still must be inventoried, tested, scheduled for maintenance windows, and restarted. Shirudo bridges that dangerous exposure window by instructing AI agents to synthesize narrow, reversible shields—expressed in kernel-level eBPF or application-level Java bytecode—that block a single exploit path on a live process while keeping applications online.
+However, entrusting autonomous AI agents with live production changes introduces profound operational and governance challenges. Grounded in Futurum Research's 1H 2026 Cybersecurity Decision-Makers Survey (N=929)—where 54% of respondents voiced concern that software vendors are embedding autonomous agents without giving enterprises sufficient visibility—Shirudo pairs AI shield generation with strict cryptographic plumbing: post-quantum signing keys, human operator approval gates, and Trusted Platform Module (TPM 2.0) attestation. Yet as Futurum analyst Fernando Montenegro warns, enforcing signed-only eBPF loaders directly impacts incumbent Linux security sensors (such as Falco, Cilium, Sysdig, Aqua, and CrowdStrike), forcing Chief Information Security Officers (CISOs) to confront a pivotal architectural question: who holds the kernel signing keys, and who takes responsibility when an AI-written shield breaks production?
+The Exposure Window Crisis: Why Upstream Patches No Longer Protect Production
+________________</p>
+          </div>
+        </section>
+        <!-- Inline Hong Kong Supervisory Impact & Conversion Bridge -->
+        <div class="my-8 p-6 bg-gradient-to-r from-navy-card via-midnight to-navy-card border border-cyan-500/40 rounded-sm shadow-xl space-y-4">
+            <div class="flex items-center gap-2 text-cyan-400 font-mono text-[11px] uppercase tracking-wider font-bold">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>Hong Kong Supervisory Compliance Bridge</span>
+            </div>
+            <h4 class="text-white font-bold font-mono text-base">
+                Operationalising This Architecture Under Hong Kong Regulation
+            </h4>
+            <p class="text-xs text-slate-300 font-light leading-relaxed">
+                Deploying agentic pipelines, MCP firewalls, or LLM copilots in Hong Kong requires mandatory compliance across SFC Circulars 24EC55 &amp; 26EC32, HKMA B1/15C (A.R.T. Framework), and PCPD Model Data Protection rules.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 min-w-0 w-full">
+                <span class="text-[11px] font-mono text-emerald-400 text-center sm:text-left break-words">
+                    ✓ 100% Local In-VPC Compilation • Zero Cloud Egress • Sub-10ms
+                </span>
+                <a href="../contact.html?ref=alt-2026-11-26&focus=Enterprise%20Financial%20AI%20Governance%20%26%20Containment%20Baseline" class="btn-cyan px-6 py-2.5 text-xs font-mono uppercase tracking-wider font-bold shrink-0 shadow-md w-full sm:w-auto text-center">
+                    Get Your First Compilation Free →
+                </a>
+            </div>
+            <!-- Tiered Conversion Strip (Low-Friction Secondary Asset Preview) -->
+            <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
+                <span class="text-slate-300 text-[11px]">Need immediate sign-off material for your Risk Committee?</span>
+                <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 underline font-bold shrink-0 transition-colors">
+                    Inspect 1-Page Board-Ready Memo Sample →
+                </a>
+            </div>
+        </div>
+        <section id="sec-2" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">02</span>
+            <span>The Asymmetric Speed of AI Discovery vs. Enterprise Maintenance</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">In late 2026, frontier cyber models from OpenAI (GPT-6 Cyber), Google DeepMind (Gemini 4 Carbon), and Cohere (Cohere Cyber) routinely uncover high-severity zero-days in days rather than months, while autonomous exploitation frameworks weaponize reachable flaws in as little as 11 minutes. Against this backdrop, traditional enterprise patch management suffers from a structural bottleneck:
+* Inventory & Restart Latency: Even when an upstream maintainer issues a same-day fix—as seen with OpenJDK's Java4Shell—large enterprises operate sprawling fleets of stateful Java, PHP, and Linux workloads where unplanned restarts disrupt revenue-generating services and require multi-week change-control approvals.
+* Why Legacy Virtual Patching Failed to Scale: Function-level virtual patching (hot-patching running processes without full binary upgrades) has existed conceptually for over a decade, yet never reached mainstream adoption because writing, testing, and warranting custom shields for every CVE across heterogeneous estates was prohibitively expensive for human security teams. AI collapses the cost of authoring the shield—shifting the bottleneck entirely to validation, trust, and lifecycle governance.
+Technical Architecture: How Shirudo Shields Live Workloads
+________________
+Unlike broad intrusion prevention signatures or speculative behavioral anomaly blockers, Shirudo is intentionally narrow, deterministic, and tied to specific disclosed vulnerabilities:
+Architectural Component
+	Underlying Technical Mechanism
+	Security & Operational Purpose
+	Current Prerequisites & Constraints</p>
+          </div>
+        </section>
+        <section id="sec-3" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">03</span>
+            <span>Agentic Shield Synthesis</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">AI agents ingest a vulnerability disclosure + reproducer and generate targeted eBPF or Java bytecode guards.
+	Blocks exploitation of one specific flaw (e.g., Java4Shell Base64 decoder on live Elasticsearch) without restarting the process.
+	Addresses cataloged disclosures rather than uncataloged zero-day behaviors.</p>
+          </div>
+        </section>
+        <section id="sec-4" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">04</span>
+            <span>Registry Pull &amp; Post-Quantum Signing</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">Shields are signed with post-quantum cryptographic keys and pulled from a verified registry rather than pushed by local agents.
+	Proves exact authorship and prevents tampering between shield generation and host enforcement.
+	Signing proves provenance and integrity, not functional correctness across customer workloads.</p>
+          </div>
+        </section>
+        <section id="sec-5" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">05</span>
+            <span>Human Operator Approval Gate</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">Shields remain staged until pre-enforcement tests pass and a human operator explicitly approves activation.
+	Addresses the 54% CISO concern over opaque autonomous changes to production infrastructure.
+	Proving an exploit is blocked is easy; proving zero legitimate traffic breaks remains hard.</p>
+          </div>
+        </section>
+        <section id="sec-6" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">06</span>
+            <span>TPM 2.0 Hardware Attestation</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">Every shield load and state transition is recorded inside a Trusted Platform Module (TPM 2.0) register.
+	Provides tamper-evident offline audit logs for post-incident forensics and regulatory compliance.
+	Requires TPM 2.0 hardware and a patched Linux kernel across target hosts.</p>
+          </div>
+        </section>
+        <section id="sec-7" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">07</span>
+            <span>Scheduled Shield Retirement</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">Narrow temporary shields are designed to be unloaded cleanly once permanent OS/app patches land.
+	Prevents accumulation of unmaintained kernel hooks and conflicting runtime hot-patches.
+	Requires strict change-control ownership and testing of the unload/retirement path.</p>
+          </div>
+        </section>
+        <section id="sec-8" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">08</span>
+            <span>Validated Proof Points: Java4Shell &amp; PHP</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">In controlled testing published alongside the November 23 launch, Cisco and OpenAI demonstrated Shirudo blocking both a recent PHP vulnerability and the high-profile Java4Shell remote code execution flaw in OpenJDK. An AI agent operating through Shirudo generated a targeted guard for the vulnerable Base64 decoder and attached it directly to a running Elasticsearch process, causing the live server to reject the exploit payload while continuing to serve legitimate search requests uninterrupted.
+Three Strategic Governance Tensions Exposed by Shirudo
+________________</p>
+          </div>
+        </section>
+        <section id="sec-9" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">09</span>
+            <span>The CrowdStrike July 2024 Lesson: &quot;Blocking Exploit&quot; vs. &quot;Breaking Nothing&quot;</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">Enterprise security teams already run third-party code they did not write in production every day—antivirus signatures, IPS rules, and endpoint content updates—and the July 2024 global outage demonstrated the devastating blast radius when an unvetted runtime update goes wrong. Cisco notes that a Shirudo shield graduates to enforcement only when automated tests confirm it is safe. Yet while confirming that a shield stops a known exploit reproducer is straightforward, mathematically proving it will never break an edge-case production transaction is far harder—which is precisely why human operator approval remains mandatory.</p>
+          </div>
+        </section>
+        <section id="sec-10" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">10</span>
+            <span>Signed eBPF and the Battle for Kernel Control</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">A critical architectural consequence flagged by Futurum involves kernel eBPF exclusivity. On an enforcing Shirudo host, only signed loaders are permitted to install eBPF programs. As a result, existing Linux runtime security and networking tools—including Falco, Cilium, Sysdig, Aqua Security, CrowdStrike, and Microsoft eBPF sensors—cannot run unmodified alongside enforcing Shirudo kernels. Establishing who holds the root eBPF signing keys across enterprise Linux fleets will become a major architectural power struggle across cloud-native security vendors.</p>
+          </div>
+        </section>
+        <section id="sec-11" class="pt-6 border-t border-white/5 space-y-4">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-baseline gap-2.5 font-sans">
+            <span class="text-xs font-mono text-cyan-400 font-bold">11</span>
+            <span>Disclosures With Shields Attached: A New Supply Chain</span>
+          </h2>
+          <div class="prose prose-invert max-w-none text-slate-300">
+            <p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">OpenAI signaled an ambitious long-term vision: shipping tested, signed Shirudo shields alongside vulnerability disclosures. If CVE Numbering Authorities (CNAs) or frontier labs begin bundling an advisory, a reproducer, and a ready-to-load shield together, enterprises will face an entirely new software supply chain to govern—deciding which third-party signing keys to trust and who assumes liability if an upstream-supplied shield disrupts business-critical software. Noticeably, this also places frontier labs on both sides of the exposure window: an OpenAI cyber model helped discover Java4Shell, and OpenAI now co-develops the runtime shield alongside Cisco (which participates in both OpenAI's Daybreak and Anthropic's Project Glasswing).
+Global GRC, Governance, and Regulatory Compliance
+________________
+* EU DORA & NIS2 Change Management Controls: Financial institutions under DORA face strict mandates regarding ICT change management (Article 9) and operational resilience testing. Deploying AI-written runtime shields satisfies DORA's demand for rapid mitigation of actively exploited vulnerabilities—provided institutions keep formal change-control ownership, pre-deployment staging tests, and TPM-backed audit logs.
+* EU Cyber Resilience Act (CRA) Active Exploitation Reporting: Since September 2026, manufacturers have faced mandatory reporting obligations for actively exploited vulnerabilities. Temporary signed shields offer a verifiable compensating control while permanent firmware or software updates undergo customer rollout.
+* EU AI Act Article 14 (Human Oversight): Shirudo's deliberate design—requiring explicit human operator sign-off before an AI-authored shield enters blocking mode—provides a textbook technical implementation of mandatory human-in-the-loop governance over high-impact infrastructure automation.
+CISO & Platform Engineering Implementation Playbook
+________________
+Before permitting any AI-written runtime shield near production workloads, CISOs, VP Infrastructure leaders, and Change Advisory Boards (CABs) should execute a disciplined 60-day readiness assessment:
+Phase 1: Hardware, Kernel & eBPF Sensor Audit (Days 1–20)
+* Inventory Linux Kernel & TPM 2.0 Readiness: Audit production Linux fleets to quantify how many hosts run supported kernels and TPM 2.0 hardware capable of enforcing signed eBPF attestation.
+* Check eBPF Sensor Conflicts: Map all existing eBPF-dependent security and networking tools (Cilium, Falco, CrowdStrike, Sysdig, Aqua) to ensure signed-loader policies will not blind existing SOC telemetry or break CNI networking.
+Phase 2: Establish a "Shield Lane" in Change Control (Days 21–40)
+* Define Key Custody & Approval Ownership: Decide explicitly who controls internal shield signing keys, which external vendor signers (if any) are allowlisted, and which human engineering/SOC leaders hold authority to approve shield activation.
+* Assign Every Shield an Owner and Expiration Date: Never let temporary virtual patches become permanent technical debt. Every activated shield must carry a named owner, a linked CVE/ticket ID, and an automated retirement deadline triggered when the permanent patch lands.
+Phase 3: Test Retirement as Rigorously as Enforcement (Days 41–60)
+* Lab-Test Load and Unload Paths: In staging environments, validate not only that a shield blocks the exploit reproducer without hurting latency, but also that unloading/retiring the shield executes cleanly without crashing or destabilizing live processes.
+* Establish Vendor Liability Terms: Clarify contractual accountability with commercial security vendors (such as Cisco Live Protect or Isovalent enterprise offerings) regarding service-level remedies if a vendor-supplied AI shield causes an operational outage.
+Conclusion & Industry Outlook
+________________
+Cisco and OpenAI's launch of Shirudo marks a defining milestone in enterprise cybersecurity: the transition of AI from generating threat advisories to directly authoring production-grade runtime defenses. By making temporary shields narrow, reversible, post-quantum signed, and TPM-attested, Shirudo demonstrates a credible, disciplined first rung for trusting AI with live infrastructure changes.
+Yet as frontier labs position themselves on both sides of the vulnerability exposure window—accelerating both zero-day discovery and runtime shield generation—enterprise governance must remain anchored in human accountability. Organizations that establish strict signing-key custody, resolve eBPF sensor conflicts early, and treat AI-written shields with the same rigor as production code deployments will close the zero-day exposure gap without repeating the painful lessons of unvetted runtime updates.</p>
+          </div>
+        </section>
+                </div>
+
+                <!-- Tiered Conversion Strip (Low-Friction Secondary Asset Preview) -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-white/[0.03] border border-white/10 rounded-sm text-xs font-mono">
+                    <span class="text-slate-300">Need immediate sign-off material for your Risk Committee?</span>
+                    <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 underline font-bold shrink-0 transition-colors">
+                        Inspect 1-Page Board-Ready Memo Sample →
+                    </a>
+                </div>
+
+                <!-- Bottom Conversion Intake Strip -->
+                <div class="my-8 p-6 bg-navy-card/80 border border-white/10 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs shadow-lg min-w-0 w-full">
+                    <div class="space-y-1 text-center sm:text-left min-w-0">
+                        <div class="text-cyan-400 font-bold flex items-center justify-center sm:justify-start gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span>Ready to deploy this architecture under Hong Kong supervision?</span>
+                        </div>
+                        <p class="text-slate-400 text-[11px] font-sans">
+                            Request a complimentary first regulatory compilation for your team under bilateral Mutual NDA.
+                        </p>
+                    </div>
+                    <a href="../contact.html?ref=alt-2026-11-26&focus=Enterprise%20Financial%20AI%20Governance%20%26%20Containment%20Baseline" class="btn-cyan px-6 py-2.5 uppercase tracking-wider font-bold shrink-0 shadow-md w-full sm:w-auto text-center">
+                        Request Free Compilation →
+                    </a>
+                </div>
+
+                <!-- Institutional Lead Generation Conversion Card -->
+                <section class="mt-16 p-8 sm:p-10 bg-gradient-to-br from-navy-card via-midnight to-navy-card border border-cyan-500/40 rounded-sm space-y-6 shadow-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-cyan-950/60 border border-cyan-500/40 rounded text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider">
+                        <span>⚡</span>
+                        <span>Institutional Assurance &amp; Regulatory Compilation</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
+                            Operationalise This Research in Your Financial AI Stack.
+                        </h2>
+                        <p class="text-sm text-slate-300 font-light leading-relaxed">
+                            AI LING ADVISORY compiles these frontier regulatory principles and containment safeguards into deterministic 100% local or In-VPC control baselines. If your team has an AI project waiting for compliance approval, your first regulatory compilation is on us under bilateral Mutual NDA.
+                        </p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-3 gap-4 font-mono text-xs text-slate-300 border-y border-white/10 py-5">
+                        <div>
+                            <div class="text-cyan-400 font-bold">✓ Dual-Format Matrix</div>
+                            <div class="text-slate-400 text-[11px]">RFC 4180 CSV + Jira Acceptance</div>
+                        </div>
+                        <div>
+                            <div class="text-emerald-400 font-bold">✓ Negative Proof</div>
+                            <div class="text-slate-400 text-[11px]">Eliminate scope bloat day 1</div>
+                        </div>
+                        <div>
+                            <div class="text-white font-bold">✓ Attested Hash</div>
+                            <div class="text-slate-400 text-[11px]">SHA-256 for Board &amp; Regulators</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                        <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                            <a href="../contact.html?ref=alt-2026-11-26&focus=Enterprise%20Financial%20AI%20Governance%20%26%20Containment%20Baseline" class="w-full sm:w-auto btn-cyan px-8 py-3.5 text-xs font-mono uppercase tracking-wider text-center">
+                                Get Your First Compilation Free →
+                            </a>
+                            <a href="../sample-executive-summary.html" class="text-cyan-400 hover:text-cyan-300 text-xs font-mono underline font-bold px-2 py-1 text-center transition-colors">
+                                Inspect 1-Page Board-Ready Memo Sample →
+                            </a>
+                        </div>
+                        <div class="text-xs font-mono text-slate-400 text-center sm:text-right">
+                            Direct Executive Desk: <a href="mailto:contact@AILingAdvisory.com" class="text-cyan-400 hover:underline">contact@AILingAdvisory.com</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Next / Prev Article Navigation -->
+                <nav class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs w-full min-w-0">
+                    
+                    <a href="./alt-2026-11-25.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 min-w-0 max-w-full text-left group transition-colors">
+                        <span class="text-slate-500 text-[10px] uppercase block mb-1">← Previous Briefing</span>
+                        <span class="text-slate-200 group-hover:text-cyan-300 font-bold block truncate">Poisoned at the Prompt: Search APIs Feed Malware</span>
+                    </a>
+
+                    
+                    <a href="./alt-2026-pcpd-data-drift.html" class="p-4 bg-white/[0.02] border border-white/10 hover:border-cyan-400 rounded-sm w-full sm:w-1/2 min-w-0 max-w-full text-right group transition-colors">
+                        <span class="text-slate-500 text-[10px] uppercase block mb-1">Next Briefing →</span>
+                        <span class="text-slate-200 group-hover:text-cyan-300 font-bold block truncate">PCPD Model Personal Data Protection Framework: Mitigating Day-2 Compliance Drift in Financial Desks</span>
+                    </a>
+                </nav>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 py-12 border-t border-white/10 bg-[#050811] font-mono text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                © 2026 AI LING ADVISORY LIMITED. Unit 2904-05, 29/F, Universal Trade Centre, Central, Hong Kong SAR.
+            </div>
+            <div class="flex gap-6">
+                <a href="../index.html" class="hover:text-cyan-400 transition-colors">Home</a>
+                <a href="./index.html" class="hover:text-cyan-400 transition-colors">Think Tank Vault</a>
+                <a href="../about.html" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="../contact.html" class="hover:text-cyan-400 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
