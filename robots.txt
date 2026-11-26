@@ -1,11 +1,18 @@
 User-agent: *
 Allow: /
 
-# Explicit AI and Answer Engine Indexing
+# Traditional Search Engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Explicit AI Answer Engine & Real-Time Web Search Crawlers
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: GPTBot
@@ -14,13 +21,18 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Applebot
+User-agent: Google-Extended
 Allow: /
 
-# LLM Discovery Standards
-# Reference https://www.ailingadvisory.com/llms.txt for model context
+# LLM Discovery & Syndication Standards
+# Context Index: https://www.ailingadvisory.com/llms.txt
+# Full Context:  https://www.ailingadvisory.com/llms-full.txt
+# RSS / Podcast: https://www.ailingadvisory.com/feed.xml
 
 Sitemap: https://www.ailingadvisory.com/sitemap.xml

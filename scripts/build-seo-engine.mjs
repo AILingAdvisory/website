@@ -32,6 +32,8 @@ const SITEMAP_PATH = path.join(ROOT_DIR, 'sitemap.xml');
 const ROBOTS_PATH = path.join(ROOT_DIR, 'robots.txt');
 const LLMS_PATH = path.join(ROOT_DIR, 'llms.txt');
 const LLMS_FULL_PATH = path.join(ROOT_DIR, 'llms-full.txt');
+const FEED_PATH = path.join(ROOT_DIR, 'feed.xml');
+const OG_IMAGE_URL = 'https://www.ailingadvisory.com/images/og-preview.png';
 
 // Ensure output directories exist
 fs.mkdirSync(DISPATCHES_DIR, { recursive: true });
@@ -82,9 +84,15 @@ try {
   console.warn('[SEO Engine] Note on data sync:', syncErr.message);
 }
 
+const latestEpisodeDate = episodes
+  .map(e => e.date)
+  .filter(d => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d))
+  .sort()
+  .pop() || new Date().toISOString().slice(0, 10);
+
 function escapeHtml(str) {
   if (!str) return '';
-  return str
+  return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -92,38 +100,291 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
+function escapeXml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function stripPodcastIntro(str) {
+  if (!str) return '';
+  let s = str
+    .replace(/[\x27\x22\u2018\u201c]?\s*深度洞见\s*·\s*艾聆呈献\s*AILingAdvisory\.com\s*[\x27\x22\u2019\u201d]?/gi, '')
+    .replace(/^Welcome to (?:this|our)\s+[^.!?:]{8,140}?\b(?:examining|analyzing|analysing|exploring|covering|unpacking|dissecting|breaking down|detailing)\s+/i, '')
+    .replace(/^In this\s+[^.!?:]{4,90}?\b(?:briefing|episode|dispatch|report),?\s+we\s+(?:examine|analyze|analyse|explore|unpack|break down)\s+/i, '')
+    .trim();
+  if (s.length > 1) {
+    s = s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  return s;
+}
+
 function cleanText(str) {
   if (!str) return '';
-  return str
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/[\x27\x22\u2018\u201c]?\s*深度洞见\s*·\s*艾聆呈献\s*AILingAdvisory\.com\s*[\x27\x22\u2019\u201d]?/gi, '')
-    .replace(/Overview\s*(&amp;|&)\s*The[^\n\r.]+\.?/gi, '')
-    .replace(/[\r\n]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const stripped = stripPodcastIntro(
+    String(str)
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/_{4,}/g, ' ')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/Overview\s*(&amp;|&)\s*The[^\n\r.]+\.?/gi, '')
+      .replace(/[\r\n\t]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  );
+  return stripped;
+}
+
+function truncateClean(str, maxLen) {
+  if (!str || str.length <= maxLen) return str || '';
+  const slice = str.slice(0, maxLen - 1);
+  const lastPeriod = Math.max(slice.lastIndexOf('. '), slice.lastIndexOf('; '));
+  if (lastPeriod >= Math.floor(maxLen * 0.58)) {
+    return slice.slice(0, lastPeriod + 1).trim();
+  }
+  const lastSpace = slice.lastIndexOf(' ');
+  return (lastSpace > 40 ? slice.slice(0, lastSpace) : slice).replace(/[,;:\-–—]+$/, '').trim() + '…';
 }
 
 function getExecutiveSummary(ep) {
   if (ep.summary && ep.summary.trim()) {
-    return cleanText(ep.summary);
+    const cleaned = cleanText(ep.summary);
+    if (cleaned.length > 50 && !/^Welcome to/i.test(cleaned)) {
+      return truncateClean(cleaned, 340);
+    }
   }
   const sections = ep.sections || [];
   for (const sec of sections) {
     const rawContent = sec.content || '';
-    const lines = rawContent.split('\n').map(l => cleanText(l)).filter(l =>
-      l.length > 70 &&
-      !l.includes('______') &&
-      !/^[A-Za-z\s/&,–-]{1,40}:/.test(l) &&
-      !l.startsWith('Executive Summary')
-    );
+    const lines = rawContent
+      .split(/\n+/)
+      .map(l => cleanText(l.replace(/^[*•\-]\s+/, '')))
+      .filter(l =>
+        l.length > 75 &&
+        !l.includes('____') &&
+        !/^(?:Publication Date|Classification|Primary|Prepared for|Target Audience|Document Ref|Executive Summary|Executive Overview|Table of Contents)\b/i.test(l) &&
+        !/^[A-Za-z0-9\s/&,–-]{1,42}:$/.test(l)
+      );
     if (lines.length > 0) {
-      const prose = lines.find(l => l.length > 90 && l.endsWith('.')) || lines[0];
-      if (prose && prose.length > 60) {
-        return prose;
+      const prose = lines.find(l => l.length >= 100 && /[.!?]$/.test(l)) || lines[0];
+      if (prose && prose.length > 65) {
+        return truncateClean(prose, 340);
       }
     }
   }
-  return cleanText(ep.subtitle || '').replace(/\.{3,}$/, '').trim();
+  return truncateClean(cleanText(ep.subtitle || ep.title || '').replace(/\.{3,}$/, ''), 260);
+}
+
+function getMetaDescription(ep) {
+  const full = getExecutiveSummary(ep);
+  return truncateClean(full, 158);
+}
+
+function formatInlineMarkdown(escapedText) {
+  return escapedText
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+    .replace(/`([^`\n]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono text-xs text-cyan-300">$1</code>');
+}
+
+function buildHtmlTable(headers, rows) {
+  const ths = headers
+    .map(h => `<th class="p-3 text-left text-cyan-300 font-bold whitespace-nowrap">${formatInlineMarkdown(escapeHtml(h))}</th>`)
+    .join('');
+  const trs = rows
+    .map(cols => {
+      const tds = cols
+        .map((c, idx) => `<td class="p-3 align-top ${idx === 0 ? 'text-white font-semibold' : 'text-slate-300 font-light'}">${formatInlineMarkdown(escapeHtml(c))}</td>`)
+        .join('');
+      return `<tr class="hover:bg-white/[0.02]">${tds}</tr>`;
+    })
+    .join('\n');
+  return `<div class="my-6 overflow-x-auto border border-white/10 rounded-sm bg-navy-card/50">
+  <table class="w-full text-left text-xs sm:text-sm font-sans">
+    <thead class="bg-midnight/90 border-b border-white/10 font-mono text-[11px] uppercase tracking-wider">
+      <tr>${ths}</tr>
+    </thead>
+    <tbody class="divide-y divide-white/5">
+      ${trs}
+    </tbody>
+  </table>
+</div>`;
+}
+
+function normalizeEpisodeSections(rawSections, preserveCustomHtml = false) {
+  if (!Array.isArray(rawSections) || rawSections.length === 0) return [];
+  const normalized = [];
+  let i = 0;
+  while (i < rawSections.length) {
+    const sec = { ...rawSections[i] };
+    if ((!preserveCustomHtml || !sec.contentHtml) && typeof sec.content === 'string') {
+      const lines = sec.content.replace(/\r\n/g, '\n').split('\n');
+      while (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+      let tabTailStart = lines.length;
+      while (tabTailStart > 0 && /^\t/.test(lines[tabTailStart - 1])) {
+        tabTailStart--;
+      }
+      if (tabTailStart < lines.length && tabTailStart > 0) {
+        const headerFirst = lines[tabTailStart - 1].trim();
+        const headerRest = lines.slice(tabTailStart).map(l => l.replace(/^\t+/, '').trim()).filter(Boolean);
+        const headers = [headerFirst, ...headerRest];
+        if (headers.length >= 2 && headers.length <= 6 && headerFirst.length > 0 && headerFirst.length <= 70) {
+          const tableRows = [];
+          let j = i + 1;
+          while (j < rawSections.length) {
+            const candidate = rawSections[j];
+            if ((preserveCustomHtml && candidate.contentHtml) || !candidate.content) break;
+            const cLines = candidate.content.replace(/\r\n/g, '\n').split('\n').filter(l => l.trim().length > 0);
+            const tabCount = cLines.filter(l => /^\t/.test(l)).length;
+            if (tabCount >= 1 && cLines.length === headers.length - 1) {
+              tableRows.push([candidate.title.trim(), ...cLines.map(l => l.replace(/^\t+/, '').trim())]);
+              j++;
+            } else {
+              break;
+            }
+          }
+          if (tableRows.length >= 2) {
+            sec.content = lines.slice(0, tabTailStart - 1).join('\n').trim();
+            sec._reconstructedTable = { headers, rows: tableRows };
+            normalized.push(sec);
+            i = j;
+            continue;
+          }
+        }
+      }
+    }
+    normalized.push(sec);
+    i++;
+  }
+  return normalized;
+}
+
+function renderSectionBody(sec, preserveCustomHtml = false) {
+  if (preserveCustomHtml && sec.contentHtml) {
+    return sec.contentHtml;
+  }
+  const raw = (sec.content || '').replace(/\r\n/g, '\n');
+  const lines = raw.split('\n');
+  const blocks = [];
+  let listType = null;
+  let listItems = [];
+  let metaRows = [];
+
+  const flushList = () => {
+    if (listItems.length > 0) {
+      const tag = listType === 'ol' ? 'ol' : 'ul';
+      const cls = listType === 'ol' ? 'list-decimal' : 'list-disc';
+      blocks.push(`<${tag} class="${cls} pl-5 my-4 space-y-2.5 text-sm sm:text-base text-slate-200 font-light leading-7">\n${listItems.join('\n')}\n</${tag}>`);
+      listItems = [];
+      listType = null;
+    }
+  };
+
+  const flushMeta = () => {
+    if (metaRows.length > 0) {
+      const cells = metaRows
+        .map(([k, v]) => `<div class="p-2.5 bg-midnight/80 border border-white/5 rounded-sm"><span class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 block">${escapeHtml(k)}</span><span class="text-xs text-slate-200 font-sans">${escapeHtml(v)}</span></div>`)
+        .join('');
+      blocks.push(`<div class="grid sm:grid-cols-2 gap-2.5 my-4">${cells}</div>`);
+      metaRows = [];
+    }
+  };
+
+  for (let idx = 0; idx < lines.length; idx++) {
+    const line = lines[idx];
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushList();
+      flushMeta();
+      continue;
+    }
+    if (/^_{4,}$/.test(trimmed)) {
+      flushList();
+      flushMeta();
+      blocks.push('<hr class="border-white/10 my-5">');
+      continue;
+    }
+
+    // Subheading followed immediately by an underscore divider line
+    const nextTrimmed = (lines[idx + 1] || '').trim();
+    if (/^_{4,}$/.test(nextTrimmed) && trimmed.length <= 120 && !/^[*•\-]\s+/.test(trimmed)) {
+      flushList();
+      flushMeta();
+      blocks.push(`<h3 class="text-lg sm:text-xl font-bold text-white tracking-tight mt-7 mb-3 font-sans border-b border-white/10 pb-2">${formatInlineMarkdown(escapeHtml(trimmed))}</h3>`);
+      idx++; // skip the divider line
+      continue;
+    }
+
+    // Inline tab-separated table block
+    if (idx + 1 < lines.length && /^\t/.test(lines[idx + 1]) && !/^\t/.test(line)) {
+      flushList();
+      flushMeta();
+      const cells = [trimmed];
+      while (idx + 1 < lines.length && /^\t/.test(lines[idx + 1])) {
+        idx++;
+        cells.push(lines[idx].replace(/^\t+/, '').trim());
+      }
+      blocks.push(`<div class="my-4 p-4 bg-navy-card/60 border border-white/10 rounded-sm space-y-1.5 text-sm text-slate-200"><div class="font-bold text-white">${formatInlineMarkdown(escapeHtml(cells[0]))}</div>${cells.slice(1).map(c => `<div class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">${formatInlineMarkdown(escapeHtml(c))}</div>`).join('')}</div>`);
+      continue;
+    }
+
+    // Structured metadata rows at top of Executive Overview
+    const metaMatch = trimmed.match(/^(Publication Date|Classification|Primary Entities|Target Audience|Supervisory Scope|Jurisdiction):\s+(.+)$/i);
+    if (metaMatch) {
+      flushList();
+      metaRows.push([metaMatch[1], metaMatch[2]]);
+      continue;
+    }
+    flushMeta();
+
+    // Unordered bullet list
+    const ulMatch = trimmed.match(/^[*•\-]\s+(.+)$/);
+    if (ulMatch) {
+      if (listType && listType !== 'ul') flushList();
+      listType = 'ul';
+      const itemBody = ulMatch[1];
+      const colonIdx = itemBody.indexOf(': ');
+      let rendered;
+      if (colonIdx > 2 && colonIdx <= 65 && !itemBody.slice(0, colonIdx).includes('**')) {
+        rendered = `<strong class="text-white font-semibold">${escapeHtml(itemBody.slice(0, colonIdx + 1))}</strong> ${formatInlineMarkdown(escapeHtml(itemBody.slice(colonIdx + 2)))}`;
+      } else {
+        rendered = formatInlineMarkdown(escapeHtml(itemBody));
+      }
+      listItems.push(`  <li>${rendered}</li>`);
+      continue;
+    }
+
+    // Ordered numbered list
+    const olMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+    if (olMatch) {
+      if (listType && listType !== 'ol') flushList();
+      listType = 'ol';
+      const itemBody = olMatch[1];
+      const colonIdx = itemBody.indexOf(': ');
+      let rendered;
+      if (colonIdx > 2 && colonIdx <= 65 && !itemBody.slice(0, colonIdx).includes('**')) {
+        rendered = `<strong class="text-white font-semibold">${escapeHtml(itemBody.slice(0, colonIdx + 1))}</strong> ${formatInlineMarkdown(escapeHtml(itemBody.slice(colonIdx + 2)))}`;
+      } else {
+        rendered = formatInlineMarkdown(escapeHtml(itemBody));
+      }
+      listItems.push(`  <li>${rendered}</li>`);
+      continue;
+    }
+
+    flushList();
+    blocks.push(`<p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">${formatInlineMarkdown(escapeHtml(trimmed))}</p>`);
+  }
+
+  flushList();
+  flushMeta();
+
+  if (sec._reconstructedTable) {
+    blocks.push(buildHtmlTable(sec._reconstructedTable.headers, sec._reconstructedTable.rows));
+  }
+
+  return blocks.join('\n');
 }
 
 function getPrimaryFocus(ep) {
@@ -154,23 +415,28 @@ episodes.forEach((ep, index) => {
   const primaryFocus = getPrimaryFocus(ep);
   const focusParam = encodeURIComponent(primaryFocus);
 
+  const isCornerstone = CORNERSTONE_IDS.includes(ep.id);
   const titleEsc = escapeHtml(ep.title);
-  const subtitleEsc = escapeHtml(cleanText(ep.subtitle || ep.summary || ''));
-  const summaryEsc = escapeHtml(getExecutiveSummary(ep));
-  const dateStr = ep.date || '2026-10-25';
+  const summaryText = getExecutiveSummary(ep);
+  const metaDescText = getMetaDescription(ep);
+  const subtitleEsc = escapeHtml(summaryText);
+  const metaDescEsc = escapeHtml(metaDescText);
+  const summaryEsc = escapeHtml(summaryText);
+  const dateStr = ep.date || latestEpisodeDate;
   const url = `https://www.ailingadvisory.com/dispatches/${ep.id}.html`;
   const tags = ep.tags || ['Agentic AI', 'Model Risk'];
-  const audioUrl = ep.audioUrl || '';
+  const audioUrl = (!isCornerstone && ep.audioUrl) ? ep.audioUrl : '';
   const durationFormatted = ep.durationFormatted || '25:00';
   const wordCount = ep.wordCount || 2500;
   const readTimeMin = ep.readTimeMin || 10;
 
-  // Render sections
+  // Normalize split tables & render semantic sections (preserve hand-crafted HTML on cornerstones only)
+  const normalizedSections = normalizeEpisodeSections(ep.sections || [], isCornerstone);
   let sectionsHtml = '';
   let outlineHtml = '';
 
-  if (ep.sections && ep.sections.length > 0) {
-    ep.sections.forEach((sec, sIdx) => {
+  if (normalizedSections.length > 0) {
+    normalizedSections.forEach((sec, sIdx) => {
       const secTitleEsc = escapeHtml(sec.title);
       const secId = `sec-${sIdx + 1}`;
       
@@ -181,19 +447,7 @@ episodes.forEach((ep, index) => {
           </a>
         </li>`;
 
-      let bodyHtml = '';
-      if (sec.contentHtml) {
-        bodyHtml = sec.contentHtml;
-      } else {
-        const paragraphs = (sec.content || '').split(/\n\n+/).filter(Boolean);
-        bodyHtml = paragraphs.map(p => {
-          const trimmed = p.trim();
-          if (trimmed.startsWith('___') || trimmed === '________________') {
-            return '<hr class="border-white/10 my-6">';
-          }
-          return `<p class="text-sm sm:text-base text-slate-200 leading-7 my-3.5 font-light">${escapeHtml(trimmed)}</p>`;
-        }).join('\n');
-      }
+      const bodyHtml = renderSectionBody(sec, isCornerstone);
 
       sectionsHtml += `
         <section id="${secId}" class="pt-6 border-t border-white/5 space-y-4">
@@ -241,13 +495,13 @@ episodes.forEach((ep, index) => {
     });
   }
 
-  // Generate FAQ entities for JSON-LD FAQPage Schema
-  const faqEntities = (ep.sections || []).slice(0, 6).map(sec => ({
+  // Generate FAQ entities for JSON-LD FAQPage Schema (from normalized sections only)
+  const faqEntities = normalizedSections.slice(0, 6).map(sec => ({
     "@type": "Question",
     "name": sec.title.includes('?') ? sec.title : `What are the key compliance requirements regarding ${sec.title}?`,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": cleanText(sec.content || '').slice(0, 350) + (cleanText(sec.content || '').length > 350 ? '...' : '')
+      "text": truncateClean(cleanText(sec.content || ''), 350)
     }
   }));
 
@@ -257,7 +511,8 @@ episodes.forEach((ep, index) => {
       {
         "@type": "TechArticle",
         "headline": ep.title,
-        "description": cleanText(ep.subtitle || ep.summary || ''),
+        "description": metaDescText,
+        "image": OG_IMAGE_URL,
         "datePublished": ep.date,
         "dateModified": ep.date,
         "author": {
@@ -271,7 +526,7 @@ episodes.forEach((ep, index) => {
           "url": "https://www.ailingadvisory.com/",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://www.ailingadvisory.com/logo-full.svg"
+            "url": OG_IMAGE_URL
           }
         },
         "mainEntityOfPage": {
@@ -319,17 +574,22 @@ episodes.forEach((ep, index) => {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${titleEsc} | AI LING Think Tank</title>
-    <meta name="description" content="${subtitleEsc}">
+    <meta name="description" content="${metaDescEsc}">
     <meta name="keywords" content="${tags.join(', ')}, Financial AI Compliance, Model Risk Management Hong Kong, SFC GenAI, HKMA B1/15C ART Framework, AI LING ADVISORY">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="${url}">
+    <link rel="alternate" type="application/rss+xml" title="AI LING Think Tank &amp; Executive Audio Briefings" href="https://www.ailingadvisory.com/feed.xml">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="${url}">
     <meta property="og:title" content="${titleEsc} | AI LING Think Tank">
-    <meta property="og:description" content="${subtitleEsc}">
-    <meta property="og:image" content="https://www.ailingadvisory.com/logo-full.svg">
+    <meta property="og:description" content="${metaDescEsc}">
+    <meta property="og:image" content="${OG_IMAGE_URL}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="article:published_time" content="${dateStr}">
     <meta property="article:author" content="AI LING ADVISORY LIMITED">
 
@@ -337,8 +597,8 @@ episodes.forEach((ep, index) => {
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="${url}">
     <meta name="twitter:title" content="${titleEsc} | AI LING Think Tank">
-    <meta name="twitter:description" content="${subtitleEsc}">
-    <meta name="twitter:image" content="https://www.ailingadvisory.com/logo-full.svg">
+    <meta name="twitter:description" content="${metaDescEsc}">
+    <meta name="twitter:image" content="${OG_IMAGE_URL}">
 
     <!-- JSON-LD Structured Data for Search Engines & LLMs -->
     <script type="application/ld+json">
@@ -480,8 +740,7 @@ episodes.forEach((ep, index) => {
                         <span class="px-2.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-bold">
                             ${dateStr}
                         </span>
-                        <span class="text-slate-400">•</span>
-                        <span class="text-slate-300">${durationFormatted} Audio Briefing</span>
+                        ${audioUrl ? `<span class="text-slate-400">•</span><span class="text-slate-300">${durationFormatted} Audio Briefing</span>` : `<span class="text-slate-400">•</span><span class="text-emerald-400 font-bold">Cornerstone Technical Guide</span>`}
                         <span class="text-slate-400">•</span>
                         <span class="text-slate-300">${readTimeMin} Min Read (${wordCount} words)</span>
                     </div>
@@ -494,9 +753,19 @@ episodes.forEach((ep, index) => {
                         ${subtitleEsc}
                     </p>
 
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2 pt-2">
-                        ${tags.map(t => `<span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">${escapeHtml(t)}</span>`).join('')}
+                    <!-- Tags & Dark-Social Sharing Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                        <div class="flex flex-wrap gap-2">
+                            ${tags.map(t => `<span class="text-[10px] font-mono px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-300">${escapeHtml(t)}</span>`).join('')}
+                        </div>
+                        <div class="flex items-center gap-2 font-mono text-[11px]">
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-sm bg-white/5 hover:bg-cyan-500/15 border border-white/10 hover:border-cyan-400/50 text-slate-200 hover:text-cyan-300 transition-colors">
+                                Share on LinkedIn ↗
+                            </a>
+                            <button type="button" onclick="navigator.clipboard && navigator.clipboard.writeText('${url}').then(() => { this.textContent = '✓ Link Copied'; setTimeout(() => { this.textContent = 'Copy Citation Link'; }, 2000); })" class="px-3 py-1.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 text-slate-300 hover:text-white transition-colors cursor-pointer">
+                                Copy Citation Link
+                            </button>
+                        </div>
                     </div>
                 </header>
 
@@ -656,7 +925,7 @@ console.log(`[SEO Engine] Successfully generated ${episodes.length} individual d
 
 const directoryItemsHtml = episodes.map((ep, i) => {
   const titleEsc = escapeHtml(ep.title);
-  const subtitleEsc = escapeHtml(cleanText(ep.subtitle || ep.summary || ''));
+  const subtitleEsc = escapeHtml(getExecutiveSummary(ep));
   const tags = (ep.tags || []).slice(0, 3);
   const isCornerstone = CORNERSTONE_IDS.includes(ep.id);
   const badgeHtml = isCornerstone ? `
@@ -673,7 +942,7 @@ const directoryItemsHtml = episodes.map((ep, i) => {
             <span class="text-cyan-400 font-bold">${ep.date}</span>
             ${badgeHtml}
           </div>
-          <span class="text-slate-400">${ep.durationFormatted || '25:00'}</span>
+          <span class="text-slate-400">${isCornerstone ? 'Technical Guide' : (ep.durationFormatted || '25:00')}</span>
         </div>
         <h2 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
           <a href="./${ep.id}.html">${titleEsc}</a>
@@ -702,7 +971,9 @@ const archivePageHtml = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frontier AI Governance Think Tank Vault | AI LING ADVISORY</title>
     <meta name="description" content="Explore ${episodes.length}+ executive research whitepapers and audio briefings on autonomous agent security, runtime confinement, LLM jailbreaks, and Hong Kong SFC & HKMA supervisory compliance.">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://www.ailingadvisory.com/dispatches/index.html">
+    <link rel="alternate" type="application/rss+xml" title="AI LING Think Tank &amp; Executive Audio Briefings" href="https://www.ailingadvisory.com/feed.xml">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 
     <!-- Open Graph -->
@@ -710,7 +981,16 @@ const archivePageHtml = `<!DOCTYPE html>
     <meta property="og:url" content="https://www.ailingadvisory.com/dispatches/index.html">
     <meta property="og:title" content="Frontier AI Governance Think Tank Vault | AI LING ADVISORY">
     <meta property="og:description" content="Explore ${episodes.length}+ executive research whitepapers on autonomous agent security and Hong Kong financial AI compliance.">
-    <meta property="og:image" content="https://www.ailingadvisory.com/logo-full.svg">
+    <meta property="og:image" content="${OG_IMAGE_URL}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Frontier AI Governance Think Tank Vault | AI LING ADVISORY">
+    <meta name="twitter:description" content="Explore ${episodes.length}+ executive research whitepapers on autonomous agent security and Hong Kong financial AI compliance.">
+    <meta name="twitter:image" content="${OG_IMAGE_URL}">
 
     <!-- JSON-LD CollectionPage -->
     <script type="application/ld+json">
@@ -787,6 +1067,7 @@ const archivePageHtml = `<!DOCTYPE html>
                 </div>
             </a>
             <div class="flex items-center gap-4">
+                <a href="../feed.xml" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono uppercase text-emerald-400 hover:text-emerald-300 border border-emerald-500/30 bg-emerald-950/40 px-3 py-1.5 rounded-sm">RSS / Podcast</a>
                 <a href="../index.html" class="text-xs font-mono uppercase text-slate-300 hover:text-cyan-400">← Back to Overview</a>
                 <a href="../contact.html" class="btn-cyan px-5 py-2 text-xs font-mono uppercase tracking-wider rounded-sm">Get First Compilation Free</a>
             </div>
@@ -834,11 +1115,11 @@ const cornerstonePapers = episodes.filter(e => cornerstoneIds.includes(e.id));
 const nonCornerstonePapers = episodes.filter(e => !cornerstoneIds.includes(e.id));
 
 const cornerstoneList = cornerstonePapers.map(e => 
-  `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${cleanText(e.subtitle || e.summary || '')}`
+  `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${getExecutiveSummary(e)}`
 ).join('\n');
 
 const topWhitepapersList = nonCornerstonePapers.slice(0, 12).map(e => 
-  `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${cleanText(e.subtitle || e.summary || '').slice(0, 140)}...`
+  `- [${e.title}](https://www.ailingadvisory.com/dispatches/${e.id}.html): (${e.date}) ${truncateClean(getExecutiveSummary(e), 180)}`
 ).join('\n');
 
 const llmsTxtContent = `# AI LING ADVISORY — PEARL: Policy Engine for the AI Regulatory Landscape
@@ -889,7 +1170,7 @@ const llmsTxtContent = `# AI LING ADVISORY — PEARL: Policy Engine for the AI R
 ${cornerstoneList}
 
 ## Frontier AI Governance Think Tank (Research Vault)
-AI LING ADVISORY publishes daily executive briefings and deep research whitepapers for CROs, CISOs, and General Counsel. The full archive of ${episodes.length} whitepapers is accessible at https://www.ailingadvisory.com/dispatches/index.html.
+AI LING ADVISORY publishes daily executive briefings and deep research whitepapers for CROs, CISOs, and General Counsel. The full archive of ${episodes.length} whitepapers is accessible at https://www.ailingadvisory.com/dispatches/index.html and syndicated via RSS / Podcast feed at https://www.ailingadvisory.com/feed.xml.
 
 Key recent research dispatches:
 ${topWhitepapersList}
@@ -912,7 +1193,7 @@ console.log(`[SEO Engine] Successfully generated /llms.txt`);
 // ─────────────────────────────────────────────────────────────────────────────
 
 const allWhitepapersList = episodes.map(e => 
-  `### ${e.title} (${e.date})\n- URL: https://www.ailingadvisory.com/dispatches/${e.id}.html\n- Tags: ${(e.tags || []).join(', ')}\n- Synopsis: ${cleanText(e.subtitle || e.summary || '')}\n`
+  `### ${e.title} (${e.date})\n- URL: https://www.ailingadvisory.com/dispatches/${e.id}.html\n- Tags: ${(e.tags || []).join(', ')}\n- Synopsis: ${getExecutiveSummary(e)}\n`
 ).join('\n');
 
 const llmsFullTxtContent = `${llmsTxtContent}
@@ -930,16 +1211,16 @@ console.log(`[SEO Engine] Successfully generated /llms-full.txt`);
 // ─────────────────────────────────────────────────────────────────────────────
 
 const coreUrls = [
-  { loc: 'https://www.ailingadvisory.com/', lastmod: '2026-11-08', changefreq: 'daily', priority: '1.0' },
-  { loc: 'https://www.ailingadvisory.com/about.html', lastmod: '2026-11-08', changefreq: 'monthly', priority: '0.7' },
-  { loc: 'https://www.ailingadvisory.com/contact.html', lastmod: '2026-11-08', changefreq: 'monthly', priority: '0.8' },
-  { loc: 'https://www.ailingadvisory.com/sample-executive-summary.html', lastmod: '2026-11-08', changefreq: 'weekly', priority: '0.9' },
-  { loc: 'https://www.ailingadvisory.com/dispatches/index.html', lastmod: episodes[0]?.date || '2026-11-08', changefreq: 'daily', priority: '0.9' },
+  { loc: 'https://www.ailingadvisory.com/', lastmod: latestEpisodeDate, changefreq: 'daily', priority: '1.0' },
+  { loc: 'https://www.ailingadvisory.com/about.html', lastmod: '2026-11-09', changefreq: 'monthly', priority: '0.7' },
+  { loc: 'https://www.ailingadvisory.com/contact.html', lastmod: '2026-11-09', changefreq: 'monthly', priority: '0.8' },
+  { loc: 'https://www.ailingadvisory.com/sample-executive-summary.html', lastmod: '2026-11-09', changefreq: 'weekly', priority: '0.9' },
+  { loc: 'https://www.ailingadvisory.com/dispatches/index.html', lastmod: latestEpisodeDate, changefreq: 'daily', priority: '0.9' },
 ];
 
 const dispatchUrls = episodes.map(ep => ({
   loc: `https://www.ailingadvisory.com/dispatches/${ep.id}.html`,
-  lastmod: ep.date || '2026-11-08',
+  lastmod: ep.date || latestEpisodeDate,
   changefreq: 'weekly',
   priority: cornerstoneIds.includes(ep.id) ? '0.9' : '0.8'
 }));
@@ -957,20 +1238,96 @@ ${allUrls.map(u => `  <url>
 </urlset>`;
 
 fs.writeFileSync(SITEMAP_PATH, sitemapXml, 'utf8');
-console.log(`[SEO Engine] Successfully generated /sitemap.xml with ${allUrls.length} total URLs`);
+console.log(`[SEO Engine] Successfully generated /sitemap.xml with ${allUrls.length} total URLs (latest: ${latestEpisodeDate})`);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 6. UPDATE /robots.txt
+// 6. GENERATE /feed.xml (RSS 2.0 + Apple Podcasts / Spotify Audio Feed)
+// ─────────────────────────────────────────────────────────────────────────────
+
+function toRfc2822(dateStr) {
+  const d = new Date(`${dateStr || latestEpisodeDate}T08:00:00+08:00`);
+  return isNaN(d.getTime()) ? new Date().toUTCString() : d.toUTCString();
+}
+
+const seenAudioUrls = new Set();
+const rssEpisodes = nonCornerstonePapers
+  .filter(ep => {
+    if (!ep.audioUrl || seenAudioUrls.has(ep.audioUrl)) return false;
+    seenAudioUrls.add(ep.audioUrl);
+    return true;
+  })
+  .slice(0, 50);
+
+const feedItemsXml = rssEpisodes.map(ep => {
+  const itemUrl = `https://www.ailingadvisory.com/dispatches/${ep.id}.html`;
+  const summary = getExecutiveSummary(ep);
+  const estBytes = Math.max(1024000, Math.round((ep.duration || 1200) * 16000));
+  return `    <item>
+      <title>${escapeXml(ep.title)}</title>
+      <link>${itemUrl}</link>
+      <guid isPermaLink="true">${itemUrl}</guid>
+      <pubDate>${toRfc2822(ep.date)}</pubDate>
+      <description>${escapeXml(summary)}</description>
+      <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
+      <itunes:subtitle>${escapeXml(truncateClean(summary, 150))}</itunes:subtitle>
+      <itunes:summary>${escapeXml(summary)}</itunes:summary>
+      <itunes:duration>${escapeXml(ep.durationFormatted || '20:00')}</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <enclosure url="${escapeXml(ep.audioUrl)}" length="${estBytes}" type="audio/mp4" />
+    </item>`;
+}).join('\n');
+
+const feedXml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI LING Think Tank — Financial AI Governance &amp; Security Briefings</title>
+    <link>https://www.ailingadvisory.com/dispatches/index.html</link>
+    <atom:link href="https://www.ailingadvisory.com/feed.xml" rel="self" type="application/rss+xml" />
+    <language>en-hk</language>
+    <copyright>© 2026 AI LING ADVISORY LIMITED. Hong Kong SAR.</copyright>
+    <lastBuildDate>${toRfc2822(latestEpisodeDate)}</lastBuildDate>
+    <description>Daily executive audio briefings and technical whitepapers on frontier AI security, Model Risk Management, and Hong Kong SFC, HKMA (A.R.T. Framework), IA, and PCPD compliance.</description>
+    <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
+    <itunes:summary>Deterministic AI regulatory intelligence and executive cybersecurity briefings for Hong Kong financial institutions, CROs, CISOs, and General Counsel.</itunes:summary>
+    <itunes:owner>
+      <itunes:name>AI LING ADVISORY LIMITED</itunes:name>
+      <itunes:email>contact@AILingAdvisory.com</itunes:email>
+    </itunes:owner>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:category text="Business">
+      <itunes:category text="Investing" />
+    </itunes:category>
+    <itunes:category text="Technology" />
+    <itunes:image href="${OG_IMAGE_URL}" />
+${feedItemsXml}
+  </channel>
+</rss>
+`;
+
+fs.writeFileSync(FEED_PATH, feedXml, 'utf8');
+console.log(`[SEO Engine] Successfully generated /feed.xml with ${rssEpisodes.length} audio briefings`);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 7. UPDATE /robots.txt (Full Search & AI Answer Engine Coverage)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const robotsTxtContent = `User-agent: *
 Allow: /
 
-# Explicit AI and Answer Engine Indexing
+# Traditional Search Engines
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Explicit AI Answer Engine & Real-Time Web Search Crawlers
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: GPTBot
@@ -979,14 +1336,19 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: Applebot
+User-agent: Google-Extended
 Allow: /
 
-# LLM Discovery Standards
-# Reference https://www.ailingadvisory.com/llms.txt for model context
+# LLM Discovery & Syndication Standards
+# Context Index: https://www.ailingadvisory.com/llms.txt
+# Full Context:  https://www.ailingadvisory.com/llms-full.txt
+# RSS / Podcast: https://www.ailingadvisory.com/feed.xml
 
 Sitemap: https://www.ailingadvisory.com/sitemap.xml
 `;
@@ -994,4 +1356,4 @@ Sitemap: https://www.ailingadvisory.com/sitemap.xml
 fs.writeFileSync(ROBOTS_PATH, robotsTxtContent, 'utf8');
 console.log(`[SEO Engine] Successfully updated /robots.txt`);
 
-console.log(`\n[SEO Engine] Done! Complete SEO and LLM infrastructure generated.`);
+console.log(`\n[SEO Engine] Done! Complete SEO, RSS, and LLM infrastructure generated.`);

@@ -35,10 +35,15 @@ jobs:
         run: |
           git config --global user.name "AILingAdvisory-SEO-Bot"
           git config --global user.email "bot@ailingadvisory.com"
-          git add dispatches/ sitemap.xml robots.txt llms.txt llms-full.txt data/
+          git add dispatches/ sitemap.xml robots.txt llms.txt llms-full.txt feed.xml data/
           if git diff --staged --quiet; then
             echo "No SEO changes to commit."
           else
-            git commit -m "ci(seo): auto-compile dispatch pages, llms.txt, and sitemap [skip ci]"
+            git commit -m "ci(seo): auto-compile dispatch pages, feed.xml, llms.txt, and sitemap [skip ci]"
             git push origin main
           fi
+
+      - name: Notify IndexNow (Bing & ChatGPT Search Instant Indexing)
+        run: |
+          sleep 15
+          node scripts/ping-indexnow.mjs || true
