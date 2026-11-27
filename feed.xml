@@ -8,7 +8,7 @@
     <atom:link href="https://www.ailingadvisory.com/feed.xml" rel="self" type="application/rss+xml" />
     <language>en-hk</language>
     <copyright>© 2026 AI LING ADVISORY LIMITED. Hong Kong SAR.</copyright>
-    <lastBuildDate>Thu, 26 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 27 Nov 2026 00:00:00 GMT</lastBuildDate>
     <description>Daily executive audio briefings and technical whitepapers on frontier AI security, Model Risk Management, and Hong Kong SFC, HKMA (A.R.T. Framework), IA, and PCPD compliance.</description>
     <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
     <itunes:summary>Deterministic AI regulatory intelligence and executive cybersecurity briefings for Hong Kong financial institutions, CROs, CISOs, and General Counsel.</itunes:summary>
@@ -22,6 +22,19 @@
     </itunes:category>
     <itunes:category text="Technology" />
     <itunes:image href="https://www.ailingadvisory.com/images/og-preview.png" />
+    <item>
+      <title>Feb 2027 Cutoff: Google Locks Down AI Agents</title>
+      <link>https://www.ailingadvisory.com/dispatches/alt-2026-11-27.html</link>
+      <guid isPermaLink="true">https://www.ailingadvisory.com/dispatches/alt-2026-11-27.html</guid>
+      <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+      <description>On November 26, 2026, Google announced sweeping architectural and contractual security mandates governing how external and internal artificial intelligence agents interact with Google Workspace and Google Cloud infrastructure.</description>
+      <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
+      <itunes:subtitle>On November 26, 2026, Google announced sweeping architectural and contractual security mandates governing how external and internal artificial…</itunes:subtitle>
+      <itunes:summary>On November 26, 2026, Google announced sweeping architectural and contractual security mandates governing how external and internal artificial intelligence agents interact with Google Workspace and Google Cloud infrastructure.</itunes:summary>
+      <itunes:duration>21:52</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <enclosure url="https://audio.ailingadvisory.com/episodes/2026-11-27_Google-Workspace-MCP-CLI-Agent-Mandate.m4a" length="20992000" type="audio/mp4" />
+    </item>
     <item>
       <title>AI Writes the Shield: Inside Cisco-OpenAI Shirudo</title>
       <link>https://www.ailingadvisory.com/dispatches/alt-2026-11-26.html</link>
@@ -658,19 +671,6 @@
       <itunes:duration>60:03</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <enclosure url="https://audio.ailingadvisory.com/episodes/2026-10-08_Cryptographic-Context-Injection-Copilot-CLI-Developer-Exfiltration.m4a" length="57648000" type="audio/mp4" />
-    </item>
-    <item>
-      <title>The N-Day Trap: How AI Weaponizes Known Flaws</title>
-      <link>https://www.ailingadvisory.com/dispatches/alt-2026-10-07.html</link>
-      <guid isPermaLink="true">https://www.ailingadvisory.com/dispatches/alt-2026-10-07.html</guid>
-      <pubDate>Wed, 07 Oct 2026 00:00:00 GMT</pubDate>
-      <description>The N-Day Acceleration Crisis: How AI Patch-Diffing Doubled Exploitation Rates, the 96,000 CVE Surge, and the Collapse of Enterprise Patching Windows</description>
-      <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
-      <itunes:subtitle>The N-Day Acceleration Crisis: How AI Patch-Diffing Doubled Exploitation Rates, the 96,000 CVE Surge, and the Collapse of Enterprise Patching Windows</itunes:subtitle>
-      <itunes:summary>The N-Day Acceleration Crisis: How AI Patch-Diffing Doubled Exploitation Rates, the 96,000 CVE Surge, and the Collapse of Enterprise Patching Windows</itunes:summary>
-      <itunes:duration>51:20</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <enclosure url="https://audio.ailingadvisory.com/episodes/2026-10-07_N-Day-Acceleration-Crisis-AI-Patch-Diffing-CVE-Surge.m4a" length="49280000" type="audio/mp4" />
     </item>
   </channel>
 </rss>
