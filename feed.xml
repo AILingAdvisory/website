@@ -8,7 +8,7 @@
     <atom:link href="https://www.ailingadvisory.com/feed.xml" rel="self" type="application/rss+xml" />
     <language>en-hk</language>
     <copyright>© 2026 AI LING ADVISORY LIMITED. Hong Kong SAR.</copyright>
-    <lastBuildDate>Fri, 27 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 00:00:00 GMT</lastBuildDate>
     <description>Daily executive audio briefings and technical whitepapers on frontier AI security, Model Risk Management, and Hong Kong SFC, HKMA (A.R.T. Framework), IA, and PCPD compliance.</description>
     <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
     <itunes:summary>Deterministic AI regulatory intelligence and executive cybersecurity briefings for Hong Kong financial institutions, CROs, CISOs, and General Counsel.</itunes:summary>
@@ -22,6 +22,19 @@
     </itunes:category>
     <itunes:category text="Technology" />
     <itunes:image href="https://www.ailingadvisory.com/images/og-preview.png" />
+    <item>
+      <title>81% Use AI, 0% Autonomous: The Pen Test Paradox</title>
+      <link>https://www.ailingadvisory.com/dispatches/alt-2026-11-28.html</link>
+      <guid isPermaLink="true">https://www.ailingadvisory.com/dispatches/alt-2026-11-28.html</guid>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+      <description>AI and the Future of Threat-Led Penetration Testing: Capability, Control, and Credible Assurance</description>
+      <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
+      <itunes:subtitle>AI and the Future of Threat-Led Penetration Testing: Capability, Control, and Credible Assurance</itunes:subtitle>
+      <itunes:summary>AI and the Future of Threat-Led Penetration Testing: Capability, Control, and Credible Assurance</itunes:summary>
+      <itunes:duration>15:29</itunes:duration>
+      <itunes:explicit>false</itunes:explicit>
+      <enclosure url="https://audio.ailingadvisory.com/episodes/2026-11-28_AI-Threat-Led-Penetration-Testing.m4a" length="14864000" type="audio/mp4" />
+    </item>
     <item>
       <title>Feb 2027 Cutoff: Google Locks Down AI Agents</title>
       <link>https://www.ailingadvisory.com/dispatches/alt-2026-11-27.html</link>
@@ -658,19 +671,6 @@
       <itunes:duration>52:33</itunes:duration>
       <itunes:explicit>false</itunes:explicit>
       <enclosure url="https://audio.ailingadvisory.com/episodes/2026-10-09_Containing-Runaway-AI-AWS-Strands-Box-Dogwood-Policy-Engine.m4a" length="50448000" type="audio/mp4" />
-    </item>
-    <item>
-      <title>The 28-Second Heist: How Copilot Leaked Secrets</title>
-      <link>https://www.ailingadvisory.com/dispatches/alt-2026-10-08.html</link>
-      <guid isPermaLink="true">https://www.ailingadvisory.com/dispatches/alt-2026-10-08.html</guid>
-      <pubDate>Thu, 08 Oct 2026 00:00:00 GMT</pubDate>
-      <description>Cryptographic Context Injection (CCI): Deconstructing the 28-Second Secret Exfiltration in GitHub Copilot CLI and the Enterprise Developer Endpoint Threat Surface</description>
-      <itunes:author>AI LING ADVISORY LIMITED</itunes:author>
-      <itunes:subtitle>Cryptographic Context Injection (CCI): Deconstructing the 28-Second Secret Exfiltration in GitHub Copilot CLI and the Enterprise Developer Endpoint…</itunes:subtitle>
-      <itunes:summary>Cryptographic Context Injection (CCI): Deconstructing the 28-Second Secret Exfiltration in GitHub Copilot CLI and the Enterprise Developer Endpoint Threat Surface</itunes:summary>
-      <itunes:duration>60:03</itunes:duration>
-      <itunes:explicit>false</itunes:explicit>
-      <enclosure url="https://audio.ailingadvisory.com/episodes/2026-10-08_Cryptographic-Context-Injection-Copilot-CLI-Developer-Exfiltration.m4a" length="57648000" type="audio/mp4" />
     </item>
   </channel>
 </rss>
